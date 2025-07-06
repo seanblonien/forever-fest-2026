@@ -8,6 +8,9 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    formats: ['image/webp', 'image/avif'],
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 }
 
