@@ -1,20 +1,20 @@
 interface CitySkylineProps {
-  width?: number
-  height?: number
-  className?: string
+  width?: number;
+  height?: number;
+  className?: string;
 }
 
-export default function CitySkyline({ 
-  width = 400, 
-  height = 60, 
-  className = "" 
+export default function CitySkyline({
+  width = 400,
+  height = 60,
+  className = ''
 }: CitySkylineProps) {
   return (
     <div className={`flex justify-center ${className}`}>
-      <svg 
-        width={width} 
-        height={height} 
-        viewBox={`0 0 ${width} ${height}`} 
+      <svg
+        width={width}
+        height={height}
+        viewBox={`0 0 ${width} ${height}`}
         className="text-white fill-current opacity-40"
       >
         <rect x="20" y="30" width="12" height="30" />
@@ -44,5 +44,5 @@ export default function CitySkyline({
         <rect x="378" y="28" width="12" height="32" />
       </svg>
     </div>
-  )
+  );
 }

@@ -1,27 +1,34 @@
-import Image from "next/image"
+import Image from 'next/image';
 
 interface HeaderProps {
-  className?: string
+  className?: string;
 }
 
 export default function Header({
-  className = ""
+  className = ''
 }: HeaderProps) {
   return (
-    <div className={`text-center mb-8 ${className}`}>
+    <div className={`text-center ${className}`}>
       {/* Sean & Eva Skyline Logo */}
-      <div className="flex justify-center mb-6">
-        <div className="w-64 h-auto">
+      <div className="flex justify-center">
+        {/*
+          1. Parent must be 'relative'.
+          2. Parent needs a defined height or aspect ratio.
+             Here, we're setting a fixed height for demonstration.
+             Consider using 'aspect-ratio' property if you know the image's ratio.
+        */}
+        <div className="relative w-full max-h-32" style={{ aspectRatio: '512 / 204' }}>
           <Image
             src="/sean_and_eva_skyline.svg"
             alt="Sean & Eva with city skyline"
-            width={301}
-            height={127}
-            className="w-full h-auto opacity-80"
+            fill
+            className="opacity-80"
+            style={{ objectFit: 'contain' }}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority
           />
         </div>
       </div>
     </div>
-  )
+  );
 }

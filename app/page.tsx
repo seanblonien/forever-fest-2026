@@ -1,29 +1,18 @@
 import {
-  Navigation,
-  Header,
-  DiscoBalls,
-  MainTitle,
   CitySkyline,
-  EventDetails,
-  Description,
   CountdownTimer,
-  RSVPButton,
-} from "@/components/home"
+  Description,
+  DiscoBalls,
+  EventDetails,
+  MainTitle,
+  RSVPButton
+} from '@/components/home';
+import PageLayout from '@/components/shared/PageLayout';
 
 export default function ForeverFestPage() {
-
   return (
-    <div
-      className="min-h-screen"
-      style={{
-        background: "linear-gradient(180deg, #101048 0%, #DE1ACE 100%)",
-      }}
-    >
-      <Header />
-      <Navigation />
-
-      {/* Main Content */}
-      <div className="container mx-auto px-4 text-center relative">
+    <PageLayout>
+      <div className="text-center relative">
         <DiscoBalls />
 
         <MainTitle />
@@ -34,6 +23,6 @@ export default function ForeverFestPage() {
         <CountdownTimer />
         <RSVPButton />
       </div>
-    </div>
-  )
+    </PageLayout>
+  );
 }

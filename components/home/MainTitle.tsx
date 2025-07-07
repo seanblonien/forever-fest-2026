@@ -1,19 +1,19 @@
-import Image from "next/image"
+import Image from 'next/image';
 
 interface MainTitleProps {
-  title?: string
-  subtitle?: string
-  coupleImageSrc?: string
-  coupleImageAlt?: string
-  className?: string
+  title?: string;
+  subtitle?: string;
+  coupleImageSrc?: string;
+  coupleImageAlt?: string;
+  className?: string;
 }
 
 export default function MainTitle({
-  title = "FOREVER FEST",
-  subtitle = "Presents",
-  coupleImageSrc = "/placeholder.svg?height=240&width=192",
-  coupleImageAlt = "Sean and Eva",
-  className = ""
+  title = 'FOREVER FEST',
+  subtitle = 'Presents',
+  coupleImageSrc = '/placeholder.svg?height=240&width=192',
+  coupleImageAlt = 'Sean and Eva',
+  className = ''
 }: MainTitleProps) {
   return (
     <div className={className}>
@@ -27,7 +27,7 @@ export default function MainTitle({
         <h1
           className="text-6xl md:text-8xl lg:text-9xl font-black text-transparent bg-clip-text mb-6"
           style={{
-            backgroundImage: "linear-gradient(45deg, #DE1ACE, #FCADE7, #DE1ACE)",
+            backgroundImage: 'linear-gradient(45deg, #DE1ACE, #FCADE7, #DE1ACE)'
           }}
         >
           {title}
@@ -47,5 +47,5 @@ export default function MainTitle({
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -10,7 +10,7 @@ This directory contains modular components for the Forever Fest home page. Each 
 
 ### Content Components
 - **`Navigation`** - Top navigation bar with menu items
-- **`Header`** - Couple names and city skyline header
+- **`Header`** - Sean & Eva logo with city skyline (uses external SVG)
 - **`DiscoBalls`** - Decorative disco ball elements positioned absolutely
 - **`MainTitle`** - Main "Forever Fest" title with couple photo overlay
 - **`CitySkyline`** - Bottom city skyline decoration
@@ -60,8 +60,8 @@ Each component accepts props for customization:
 // Custom navigation items
 <Navigation className="custom-nav-styles" />
 
-// Custom couple names
-<Header coupleNames="JOHN & JANE" />
+// Custom header styling
+<Header className="custom-header-styles" />
 
 // Custom event details
 <EventDetails 

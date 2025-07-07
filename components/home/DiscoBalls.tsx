@@ -1,10 +1,10 @@
-import { Sparkles, Globe } from "lucide-react"
+import { Sparkles, Globe } from 'lucide-react';
 
 interface DiscoBallsProps {
-  className?: string
+  className?: string;
 }
 
-export default function DiscoBalls({ className = "" }: DiscoBallsProps) {
+export default function DiscoBalls({ className = '' }: DiscoBallsProps) {
   return (
     <div className={`absolute inset-0 pointer-events-none ${className}`}>
       <div className="absolute top-10 left-10 md:left-20">
@@ -23,5 +23,5 @@ export default function DiscoBalls({ className = "" }: DiscoBallsProps) {
         <Sparkles className="w-5 h-5 text-white absolute -top-2 -right-2" />
       </div>
     </div>
-  )
+  );
 }
