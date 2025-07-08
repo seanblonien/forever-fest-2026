@@ -1,6 +1,6 @@
-import { DiscoBallsIcon } from '@/components/icons/DiscoBallsIcon';
+import { DiscoBallsSvg } from '@/components/svgs/DiscoBallsSvg';
 import Image from 'next/image';
-import { TitleSvg } from '../icons';
+import { TitleSvg } from '../svgs';
 
 type MainTitleProps = {
   className?: string;
@@ -25,7 +25,7 @@ export function MainTitle({
           />
 
           {/* Title SVG - Positioned above the photo */}
-          <div className="absolute -top-16 md:-top-20 lg:-top-24 left-1/2 transform -translate-x-1/2 w-full">
+          <div className="absolute left-1/2 transform -translate-x-1/2 w-full">
             <div className="relative w-full h-48 md:h-64 lg:h-80">
               <TitleSvg className="w-full h-full object-contain" />
             </div>
@@ -34,7 +34,7 @@ export function MainTitle({
           {/* Disco Balls SVG - Overlaid to surround the photo with larger size */}
           <div className="absolute inset-0 -m-16 md:-m-24 lg:-m-32">
             <div className="relative w-full h-full scale-125 md:scale-150 lg:scale-175">
-              <DiscoBallsIcon className="w-full h-full object-contain" />
+              <DiscoBallsSvg className="w-full h-full object-contain" />
             </div>
           </div>
         </div>
