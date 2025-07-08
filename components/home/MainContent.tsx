@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 
-interface MainContentProps {
+type MainContentProps = {
   children: ReactNode;
   className?: string;
-}
+};
 
 export default function MainContent({
   children,

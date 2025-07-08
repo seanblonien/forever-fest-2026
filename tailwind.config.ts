@@ -21,6 +21,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         'league-gothic': ['var(--font-league-gothic)', 'League Gothic', 'Arial Black', 'sans-serif'],
+        'alex-brush': ['var(--font-alex-brush)', 'Alex Brush', 'cursive'],
       },
       colors: {
         'penn-blue': '#101048',

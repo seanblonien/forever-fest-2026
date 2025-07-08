@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-interface NavigationProps {
+type NavigationProps = {
   className?: string;
-}
+};
 
 export default function Navigation({ className = '' }: NavigationProps) {
   const navItems = [

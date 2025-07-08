@@ -1,4 +1,4 @@
-interface EventDetailsProps {
+type EventDetailsProps = {
   month?: string;
   year?: string;
   day?: string;
@@ -8,7 +8,7 @@ interface EventDetailsProps {
   city?: string;
   attire?: string;
   className?: string;
-}
+};
 
 export default function EventDetails({
   month = 'MARCH',

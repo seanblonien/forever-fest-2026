@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 
-interface HomePageLayoutProps {
+type HomePageLayoutProps = {
   children: ReactNode;
   className?: string;
-}
+};
 
 export default function HomePageLayout({
   children,

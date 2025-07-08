@@ -1,10 +1,10 @@
 import { Button } from '@/components/ui/button';
 
-interface RSVPButtonProps {
+type RSVPButtonProps = {
   text?: string;
   onClick?: () => void;
   className?: string;
-}
+};
 
 export default function RSVPButton({
   text = 'RSVP',

@@ -1,8 +1,8 @@
 import Image from 'next/image';
 
-interface CitySkylineProps {
+type CitySkylineProps = {
   className?: string;
-}
+};
 
 export default function CitySkyline({
   className = '',

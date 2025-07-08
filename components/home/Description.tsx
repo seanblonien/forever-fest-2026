@@ -1,8 +1,8 @@
-interface DescriptionProps {
+type DescriptionProps = {
   mainText?: string[];
   rsvpNote?: string;
   className?: string;
-}
+};
 
 export default function Description({
   mainText = [

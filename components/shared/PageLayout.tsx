@@ -1,9 +1,9 @@
 import { Header, Navigation } from '@/components/home';
 
-interface PageLayoutProps {
+type PageLayoutProps = {
   children: React.ReactNode;
   className?: string;
-}
+};
 
 export default function PageLayout({ children, className = '' }: PageLayoutProps) {
   return (

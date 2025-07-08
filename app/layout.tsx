@@ -2,13 +2,22 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
-import { League_Gothic } from 'next/font/google';
+import { Alex_Brush, League_Gothic } from 'next/font/google';
+import { cn } from '../lib/utils';
 import './globals.css';
 
-const leagueGothic = League_Gothic({
+const boldFont = League_Gothic({
+  weight: '400',
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-league-gothic',
+});
+
+const cursiveFont = Alex_Brush({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-alex-brush',
 });
 
 export const metadata: Metadata = {
@@ -74,8 +83,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark" style={{ colorScheme: 'dark' }} suppressHydrationWarning>
-      <body className={leagueGothic.variable}>
+    <html lang="en" className={cn(boldFont.variable, cursiveFont.variable, boldFont.className, 'dark')} style={{ colorScheme: 'dark' }} suppressHydrationWarning>
+      <body>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           {children}
           <Analytics />

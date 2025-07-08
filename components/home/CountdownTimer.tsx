@@ -2,17 +2,17 @@
 
 import { useEffect, useState } from 'react';
 
-interface TimeLeft {
+type TimeLeft = {
   days: number;
   hours: number;
   minutes: number;
   seconds: number;
-}
+};
 
-interface CountdownTimerProps {
+type CountdownTimerProps = {
   initialTime?: TimeLeft;
   className?: string;
-}
+};
 
 export default function CountdownTimer({
   initialTime = {

@@ -5,6 +5,6 @@ export { default as EventDetails } from './EventDetails';
 export { default as Header } from './Header';
 export { default as HomePageLayout } from './HomePageLayout';
 export { default as MainContent } from './MainContent';
-export { default as MainTitle } from './MainTitle';
+export * from './MainTitle';
 export { default as Navigation } from './Navigation';
 export { default as RSVPButton } from './RSVPButton';

@@ -19,9 +19,9 @@ type Action
     | { type: 'DISMISS_TOAST'; toastId?: string }
     | { type: 'REMOVE_TOAST'; toastId?: string };
 
-interface State {
+type State = {
   toasts: ToasterToast[];
-}
+};
 
 let count = 0;
 const genId = () => (++count).toString();
