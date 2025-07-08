@@ -7,7 +7,7 @@ interface MainContentProps {
 
 export default function MainContent({
   children,
-  className = ''
+  className = '',
 }: MainContentProps) {
   return (
     <div className={`container mx-auto px-4 text-center relative ${className}`}>

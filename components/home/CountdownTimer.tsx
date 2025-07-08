@@ -19,9 +19,9 @@ export default function CountdownTimer({
     days: 265,
     hours: 19,
     minutes: 37,
-    seconds: 7
+    seconds: 7,
   },
-  className = ''
+  className = '',
 }: CountdownTimerProps) {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(initialTime);
 
@@ -48,7 +48,7 @@ export default function CountdownTimer({
     { value: timeLeft.days, label: 'DAYS' },
     { value: timeLeft.hours, label: 'HOURS' },
     { value: timeLeft.minutes, label: 'MINUTES' },
-    { value: timeLeft.seconds, label: 'SECONDS' }
+    { value: timeLeft.seconds, label: 'SECONDS' },
   ];
 
   return (

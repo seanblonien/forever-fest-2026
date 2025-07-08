@@ -5,7 +5,7 @@ interface HeaderProps {
 }
 
 export default function Header({
-  className = ''
+  className = '',
 }: HeaderProps) {
   return (
     <div className={`text-center ${className}`}>

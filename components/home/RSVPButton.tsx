@@ -9,7 +9,7 @@ interface RSVPButtonProps {
 export default function RSVPButton({
   text = 'RSVP',
   onClick,
-  className = ''
+  className = '',
 }: RSVPButtonProps) {
   return (
     <div className={`pb-12 ${className}`}>

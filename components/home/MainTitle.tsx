@@ -13,7 +13,7 @@ export default function MainTitle({
   subtitle = 'Presents',
   coupleImageSrc = '/placeholder.svg?height=240&width=192',
   coupleImageAlt = 'Sean and Eva',
-  className = ''
+  className = '',
 }: MainTitleProps) {
   return (
     <div className={className}>

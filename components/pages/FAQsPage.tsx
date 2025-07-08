@@ -1,20 +1,20 @@
 const faqs = [
   {
     question: 'When is the wedding?',
-    answer: 'Forever Fest 2026 - Date TBD'
+    answer: 'Forever Fest 2026 - Date TBD',
   },
   {
     question: 'Where is the wedding?',
-    answer: 'Location details coming soon...'
+    answer: 'Location details coming soon...',
   },
   {
     question: 'What should I wear?',
-    answer: 'Dress code information coming soon...'
+    answer: 'Dress code information coming soon...',
   },
   {
     question: 'Will there be accommodations nearby?',
-    answer: 'Hotel recommendations and booking information coming soon...'
-  }
+    answer: 'Hotel recommendations and booking information coming soon...',
+  },
 ];
 
 export default function FAQsPage() {

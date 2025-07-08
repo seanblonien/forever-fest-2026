@@ -11,11 +11,11 @@ export default function Navigation({ className = '' }: NavigationProps) {
     { label: 'RSVP', href: '/rsvp' },
     { label: 'REGISTRY', href: '/registry' },
     { label: 'FAQS', href: '/faqs' },
-    { label: 'TRAVEL', href: '/travel' }
+    { label: 'TRAVEL', href: '/travel' },
   ];
 
   return (
-    <nav className={`flex justify-center items-center py-6 px-4 ${className}`}>
+    <nav className={`flex justify-center items-center pb-6 px-4 ${className}`}>
       <div className="max-w-[600px] w-full">
         {/* Steel pink border above links */}
         <div className="border-t border-[#DE1ACE] mb-4"></div>

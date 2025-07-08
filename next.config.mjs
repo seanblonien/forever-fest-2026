@@ -10,8 +10,8 @@ const nextConfig = {
     unoptimized: true,
     formats: ['image/webp', 'image/avif'],
     dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;',
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;

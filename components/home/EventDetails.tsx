@@ -19,7 +19,7 @@ export default function EventDetails({
   address = 'Dallas, TX, 75207',
   city = '',
   attire = 'Funky Formal',
-  className = ''
+  className = '',
 }: EventDetailsProps) {
   return (
     <div className={`grid md:grid-cols-2 gap-8 mb-12 text-white ${className}`}>

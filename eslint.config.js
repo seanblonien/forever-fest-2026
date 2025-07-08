@@ -26,44 +26,29 @@ export default tseslint.config(
     semi: true,
     jsx: true,
     braceStyle: '1tbs',
-    commaDangle: 'never',
-    arrowParens: true
+    commaDangle: 'always-multiline',
+    arrowParens: true,
   }),
 
-  // React configuration for all JS/TS files
+  // Combined React and custom configuration for all JS/TS files
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
     plugins: {
       'react': reactPlugin,
-      'react-hooks': hooksPlugin
+      'react-hooks': hooksPlugin,
     },
     rules: {
       ...reactPlugin.configs['jsx-runtime'].rules,
       ...hooksPlugin.configs.recommended.rules,
-      'object-curly-spacing': ['error', 'always']
-    },
-    settings: {
-      react: {
-        version: 'detect'
-      }
-    }
-  },
-
-  // Custom stylistic overrides for specific file patterns
-  {
-    files: ['**/*.{js,jsx,ts,tsx}'],
-    rules: {
-      // Additional stylistic preferences
+      // Custom stylistic preferences (only rules not already handled by stylistic config)
       '@stylistic/max-len': ['error', {
         code: 100,
         ignoreUrls: true,
         ignoreStrings: true,
-        ignoreTemplateLiterals: true
+        ignoreTemplateLiterals: true,
       }],
-      '@stylistic/object-curly-spacing': ['error', 'always'],
       '@stylistic/array-bracket-spacing': ['error', 'never'],
-      '@stylistic/comma-dangle': ['error', 'never'],
-      '@stylistic/trailing-comma': 'off',
+      // Custom TypeScript rules
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
@@ -73,13 +58,18 @@ export default tseslint.config(
           caughtErrorsIgnorePattern: '^_',
           destructuredArrayIgnorePattern: '^_',
           varsIgnorePattern: '^_',
-          ignoreRestSiblings: true
-        }
-      ]
-    }
+          ignoreRestSiblings: true,
+        },
+      ],
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
   },
   // Ignore patterns
   {
-    ignores: ['.next/*', 'node_modules/*']
-  }
+    ignores: ['.next/*', 'node_modules/*'],
+  },
 );

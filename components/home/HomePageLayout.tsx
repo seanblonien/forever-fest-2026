@@ -7,7 +7,7 @@ interface HomePageLayoutProps {
 
 export default function HomePageLayout({
   children,
-  className = ''
+  className = '',
 }: HomePageLayoutProps) {
   return (
     <div className={`min-h-screen bg-forever-fest-gradient ${className}`}>

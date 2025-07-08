@@ -44,15 +44,15 @@ const reducer = (state: State, action: Action): State => {
     case 'ADD_TOAST':
       return {
         ...state,
-        toasts: [action.toast, ...state.toasts].slice(0, TOAST_LIMIT)
+        toasts: [action.toast, ...state.toasts].slice(0, TOAST_LIMIT),
       };
 
     case 'UPDATE_TOAST':
       return {
         ...state,
         toasts: state.toasts.map((t) =>
-          t.id === action.toast.id ? { ...t, ...action.toast } : t
-        )
+          t.id === action.toast.id ? { ...t, ...action.toast } : t,
+        ),
       };
 
     case 'DISMISS_TOAST': {
@@ -67,8 +67,8 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         toasts: state.toasts.map((t) =>
-          t.id === toastId || !toastId ? { ...t, open: false } : t
-        )
+          t.id === toastId || !toastId ? { ...t, open: false } : t,
+        ),
       };
     }
 
@@ -77,7 +77,7 @@ const reducer = (state: State, action: Action): State => {
         ...state,
         toasts: action.toastId
           ? state.toasts.filter((t) => t.id !== action.toastId)
-          : []
+          : [],
       };
   }
 };
@@ -107,8 +107,8 @@ const toast = ({ ...props }: Toast) => {
       open: true,
       onOpenChange: (open) => {
         if (!open) dismiss();
-      }
-    }
+      },
+    },
   });
 
   return { id, dismiss, update };
@@ -128,7 +128,7 @@ const useToast = () => {
   return {
     ...state,
     toast,
-    dismiss: (toastId?: string) => dispatch({ type: 'DISMISS_TOAST', toastId })
+    dismiss: (toastId?: string) => dispatch({ type: 'DISMISS_TOAST', toastId }),
   };
 };
 
