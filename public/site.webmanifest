@@ -1,0 +1,18 @@
+{
+  "name": "Forever Fest 2026 - Sean & Eva's Wedding",
+  "short_name": "Forever Fest 2026",
+  "description": "Join Sean & Eva as they celebrate their love at Forever Fest 2026!",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#101048",
+  "background_color": "#101048",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/"
+}

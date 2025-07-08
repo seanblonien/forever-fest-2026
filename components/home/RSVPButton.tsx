@@ -16,11 +16,7 @@ export default function RSVPButton({
       <Button
         size="lg"
         onClick={onClick}
-        className="text-2xl md:text-3xl font-black px-12 py-6 rounded-lg border-4 border-black hover:scale-105 transition-transform"
-        style={{
-          backgroundColor: '#DE1ACE',
-          color: '#101048'
-        }}
+        className="text-2xl md:text-3xl font-black px-12 py-6 rounded-lg border-4 border-black bg-steel-pink text-penn-blue hover:scale-105 transition-transform"
       >
         {text}
       </Button>

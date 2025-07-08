@@ -24,10 +24,10 @@ export default function EventDetails({
   return (
     <div className={`grid md:grid-cols-2 gap-8 mb-12 text-white ${className}`}>
       <div className="text-left md:text-right">
-        <div className="text-6xl md:text-8xl font-black mb-2" style={{ color: '#FCADE7' }}>
+        <div className="text-6xl md:text-8xl font-black mb-2 text-lavender-pink">
           {month}
         </div>
-        <div className="text-6xl md:text-8xl font-black" style={{ color: '#FCADE7' }}>
+        <div className="text-6xl md:text-8xl font-black text-lavender-pink">
           {year}
           <span className="text-4xl md:text-6xl italic font-light text-white">
             {day}

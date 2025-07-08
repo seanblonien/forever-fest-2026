@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface TimeLeft {
   days: number;
@@ -57,19 +57,12 @@ export default function CountdownTimer({
         {timeItems.map((item, index) => (
           <div
             key={index}
-            className="rounded-lg p-4"
-            style={{ backgroundColor: '#FDF0DA' }}
+            className="rounded-lg p-4 bg-papaya-whip"
           >
-            <div
-              className="text-3xl md:text-4xl font-black"
-              style={{ color: '#D14600' }}
-            >
+            <div className="text-3xl md:text-4xl font-black text-syracuse-orange">
               {item.value.toString().padStart(2, '0')}
             </div>
-            <div
-              className="text-sm md:text-base font-bold"
-              style={{ color: '#DE1ACE' }}
-            >
+            <div className="text-sm md:text-base font-bold text-steel-pink">
               {item.label}
             </div>
           </div>

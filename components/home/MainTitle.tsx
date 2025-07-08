@@ -24,12 +24,7 @@ export default function MainTitle({
 
       {/* Forever Fest Title */}
       <div className="relative mb-8">
-        <h1
-          className="text-6xl md:text-8xl lg:text-9xl font-black text-transparent bg-clip-text mb-6"
-          style={{
-            backgroundImage: 'linear-gradient(45deg, #DE1ACE, #FCADE7, #DE1ACE)'
-          }}
-        >
+        <h1 className="text-6xl md:text-8xl lg:text-9xl font-black text-transparent bg-clip-text bg-forever-fest-title-gradient mb-6">
           {title}
         </h1>
 

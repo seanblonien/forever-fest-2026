@@ -7,15 +7,10 @@ interface PageLayoutProps {
 
 export default function PageLayout({ children, className = '' }: PageLayoutProps) {
   return (
-    <div
-      className={`min-h-screen ${className}`}
-      style={{
-        background: 'linear-gradient(180deg, #101048 0%, #DE1ACE 100%)'
-      }}
-    >
+    <div className={`min-h-screen bg-forever-fest-gradient ${className}`}>
       <Header />
       <Navigation />
-      
+
       {/* Main Content */}
       <div className="container mx-auto px-4">
         {children}
