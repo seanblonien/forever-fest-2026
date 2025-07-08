@@ -32,7 +32,7 @@ export default tseslint.config(
 
   // Combined React and custom configuration for all JS/TS files
   {
-    files: ['**/*.{js,jsx,ts,tsx}'],
+    files: ['**/*.{js,jsx,mjs,ts,tsx}'],
     plugins: {
       'react': reactPlugin,
       'react-hooks': hooksPlugin,

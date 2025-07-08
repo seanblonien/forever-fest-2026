@@ -1,30 +1,31 @@
-# Wireframe from mockup
+# Forever Fest 2026
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/sean-bloniens-projects/forever-fest-2026)
+[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev)
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/sean-bloniens-projects/v0-wireframe-from-mockup)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/mnlAftUg5U3)
+Sean & Eva's wedding website for Forever Fest 2026, featuring RSVP functionality, travel information, our story, and more.
 
-## Overview
+## Tech Stack
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+- Next.js 15
+- React 19
+- TypeScript
+- Radix UI for accessible components
+- Tailwind CSS
+- Framer Motion for animations
+- ESLint
+- Vercel Analytics & Speed Insights
+- Deployed on Vercel
 
-## Deployment
+## Development
 
-Your project is live at:
+```sh
+# Install dependencies
+pnpm install
 
-**[https://vercel.com/sean-bloniens-projects/v0-wireframe-from-mockup](https://vercel.com/sean-bloniens-projects/v0-wireframe-from-mockup)**
+# Run development server
+pnpm dev
 
-## Build your app
-
-Continue building your app on:
-
-**[https://v0.dev/chat/projects/mnlAftUg5U3](https://v0.dev/chat/projects/mnlAftUg5U3)**
-
-## How It Works
-
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+# Run linter with auto-fix
+pnpm lint
+```
