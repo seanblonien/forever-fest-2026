@@ -1,43 +1,51 @@
 import Image from 'next/image';
 
 interface MainTitleProps {
-  title?: string;
-  subtitle?: string;
-  coupleImageSrc?: string;
-  coupleImageAlt?: string;
   className?: string;
 }
 
 export default function MainTitle({
-  title = 'FOREVER FEST',
-  subtitle = 'Presents',
-  coupleImageSrc = '/placeholder.svg?height=240&width=192',
-  coupleImageAlt = 'Sean and Eva',
   className = '',
 }: MainTitleProps) {
   return (
     <div className={className}>
-      {/* Presents Text */}
-      <div className="text-white text-xl md:text-2xl font-light italic mb-4">
-        {subtitle}
-      </div>
 
-      {/* Forever Fest Title */}
-      <div className="relative mb-8">
-        <h1 className="text-6xl md:text-8xl lg:text-9xl font-black text-transparent bg-clip-text bg-forever-fest-title-gradient mb-6">
-          {title}
-        </h1>
+      {/* Main Title Section with layered images */}
+      <div className="relative my-8 flex items-center justify-center">
+        {/* Couple Photo - Base layer */}
+        <div className="relative w-64 h-80 md:w-80 md:h-96 lg:w-96 lg:h-[480px]">
+          <Image
+            src="/sean_and_eva_banner_photo.png"
+            alt="Sean and Eva"
+            fill
+            className="object-cover rounded-lg"
+            priority
+          />
 
-        {/* Couple Photo */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-32 h-40 md:w-48 md:h-60 bg-gray-300 rounded-lg overflow-hidden shadow-2xl">
-            <Image
-              src={coupleImageSrc}
-              alt={coupleImageAlt}
-              width={192}
-              height={240}
-              className="w-full h-full object-cover"
-            />
+          {/* Title SVG - Positioned above the photo */}
+          <div className="absolute -top-16 md:-top-20 lg:-top-24 left-1/2 transform -translate-x-1/2 w-full">
+            <div className="relative w-full h-48 md:h-64 lg:h-80">
+              <Image
+                src="/title.svg"
+                alt="Forever Fest Title"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+          </div>
+
+          {/* Disco Balls SVG - Overlaid to surround the photo with larger size */}
+          <div className="absolute inset-0 -m-16 md:-m-24 lg:-m-32">
+            <div className="relative w-full h-full scale-125 md:scale-150 lg:scale-175">
+              <Image
+                src="/disco_balls.svg"
+                alt="Disco Balls Decoration"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
           </div>
         </div>
       </div>

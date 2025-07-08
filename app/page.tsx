@@ -2,7 +2,6 @@ import {
   CitySkyline,
   CountdownTimer,
   Description,
-  DiscoBalls,
   EventDetails,
   MainTitle,
   RSVPButton,
@@ -13,7 +12,6 @@ export default function ForeverFestPage() {
   return (
     <PageLayout>
       <div className="text-center relative">
-        <DiscoBalls />
 
         <MainTitle />
         <CitySkyline className="mb-8 mt-20" />
