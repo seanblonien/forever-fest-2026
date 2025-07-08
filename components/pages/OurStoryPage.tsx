@@ -7,7 +7,8 @@ export default function OurStoryPage() {
           Coming soon... The beautiful story of Sean and Eva's journey together.
         </p>
         <p>
-          This page will feature their love story, how they met, and the moments that led to their engagement.
+          This page will feature their love story, how they met, and the moments that led to their
+          engagement.
         </p>
       </div>
     </div>

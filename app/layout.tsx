@@ -1,5 +1,15 @@
+import { ThemeProvider } from '@/components/theme-provider';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
+import { League_Gothic } from 'next/font/google';
 import './globals.css';
+
+const leagueGothic = League_Gothic({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-league-gothic'
+});
 
 export const metadata: Metadata = {
   title: 'Forever Fest 2026 - Sean & Eva\'s Wedding',
@@ -65,7 +75,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={leagueGothic.variable}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+          {children}
+          <Analytics />
+          <SpeedInsights />
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

@@ -1,23 +1,23 @@
-export default function FAQsPage() {
-  const faqs = [
-    {
-      question: "When is the wedding?",
-      answer: "Forever Fest 2026 - Date TBD"
-    },
-    {
-      question: "Where is the wedding?",
-      answer: "Location details coming soon..."
-    },
-    {
-      question: "What should I wear?",
-      answer: "Dress code information coming soon..."
-    },
-    {
-      question: "Will there be accommodations nearby?",
-      answer: "Hotel recommendations and booking information coming soon..."
-    }
-  ];
+const faqs = [
+  {
+    question: 'When is the wedding?',
+    answer: 'Forever Fest 2026 - Date TBD'
+  },
+  {
+    question: 'Where is the wedding?',
+    answer: 'Location details coming soon...'
+  },
+  {
+    question: 'What should I wear?',
+    answer: 'Dress code information coming soon...'
+  },
+  {
+    question: 'Will there be accommodations nearby?',
+    answer: 'Hotel recommendations and booking information coming soon...'
+  }
+];
 
+export default function FAQsPage() {
   return (
     <div className="text-center text-white py-12">
       <h1 className="text-4xl md:text-6xl font-bold mb-8">FAQs</h1>

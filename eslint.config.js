@@ -39,7 +39,8 @@ export default tseslint.config(
     },
     rules: {
       ...reactPlugin.configs['jsx-runtime'].rules,
-      ...hooksPlugin.configs.recommended.rules
+      ...hooksPlugin.configs.recommended.rules,
+      'object-curly-spacing': ['error', 'always']
     },
     settings: {
       react: {
