@@ -1,6 +1,6 @@
-import { StyleProps } from '../../lib';
+import {StyleProps} from '../../lib';
 
-export function DiscoBallsSvg({ className }: StyleProps) {
+export function DiscoBallsSvg({className}: StyleProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

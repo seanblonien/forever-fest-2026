@@ -1,6 +1,41 @@
-import { StyleProps } from '../../lib';
+import {CSSProperties} from 'react';
+import {StyleProps} from '../../lib';
 
-export function TitleSvg({ className }: StyleProps) {
+// Reusable style objects
+const baseLeagueGothicStyle: CSSProperties = {
+  fontFamily: 'var(--font-league-gothic), \'League Gothic\', Arial, sans-serif',
+  fontVariationSettings: '\'wdth\' 100',
+};
+
+const pinkFillStyle: CSSProperties = {
+  fill: '#de1ace',
+};
+
+const lightPinkFillStyle: CSSProperties = {
+  fill: '#fcade7',
+};
+
+const largeTextStyle: CSSProperties = {
+  ...baseLeagueGothicStyle,
+  fontSize: '372.77px',
+};
+
+const mediumTextStyle: CSSProperties = {
+  ...baseLeagueGothicStyle,
+  fontSize: '263.47px',
+};
+
+const smallTextStyle: CSSProperties = {
+  ...baseLeagueGothicStyle,
+  fontSize: '138.96px',
+};
+
+const alexBrushStyle: CSSProperties = {
+  fontFamily: 'var(--font-alex-brush), \'Alex Brush\', cursive',
+  fontSize: '52.07px',
+};
+
+export function TitleSvg({className}: StyleProps) {
   return (
     <svg
       id="Layer_2"
@@ -9,90 +44,100 @@ export function TitleSvg({ className }: StyleProps) {
       viewBox="0 0 797.77 518.64"
       className={className}
     >
-      <defs>
-        <style>
-          {`
-            .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6 {
-              font-family: var(--font-league-gothic), 'League Gothic', Arial, sans-serif;
-              font-variation-settings: 'wdth' 100;
-            }
-
-            .cls-1, .cls-3, .cls-5 {
-              fill: #de1ace;
-            }
-
-            .cls-1, .cls-4 {
-              font-size: 138.96px;
-            }
-
-            .cls-7 {
-              font-family: var(--font-alex-brush), 'Alex Brush', cursive;
-              font-size: 52.07px;
-            }
-
-            .cls-7, .cls-2, .cls-4, .cls-6 {
-              fill: #fcade7;
-            }
-
-            .cls-2, .cls-5 {
-              font-size: 372.77px;
-            }
-
-            .cls-3, .cls-6 {
-              font-size: 263.47px;
-            }
-          `}
-        </style>
-      </defs>
       <g id="presents">
         <g>
           <g>
-            <text className="cls-5" transform="translate(11.02 425.45)">
+            <text
+              style={{...largeTextStyle, ...pinkFillStyle}}
+              transform="translate(11.02 425.45)"
+            >
               <tspan x="0" y="0">F</tspan>
             </text>
-            <text className="cls-3" transform="translate(121.73 318.15)">
+            <text
+              style={{...mediumTextStyle, ...pinkFillStyle}}
+              transform="translate(121.73 318.15)"
+            >
               <tspan x="0" y="0">O</tspan>
             </text>
-            <text className="cls-1" transform="translate(206.83 219.08)">
+            <text
+              style={{...smallTextStyle, ...pinkFillStyle}}
+              transform="translate(206.83 219.08)"
+            >
               <tspan x="0" y="0">R</tspan>
             </text>
-            <text className="cls-1" transform="translate(260.32 219.08)">
+            <text
+              style={{...smallTextStyle, ...pinkFillStyle}}
+              transform="translate(260.32 219.08)"
+            >
               <tspan x="0" y="0">EVER</tspan>
             </text>
-            <text className="cls-1" transform="translate(500.2 219.08)">
+            <text
+              style={{...smallTextStyle, ...pinkFillStyle}}
+              transform="translate(500.2 219.08)"
+            >
               <tspan x="0" y="0">FE</tspan>
             </text>
-            <text className="cls-3" transform="translate(580.68 320.26)">
+            <text
+              style={{...mediumTextStyle, ...pinkFillStyle}}
+              transform="translate(580.68 320.26)"
+            >
               <tspan x="0" y="0">S</tspan>
             </text>
-            <text className="cls-5" transform="translate(674.02 425.45)">
+            <text
+              style={{...largeTextStyle, ...pinkFillStyle}}
+              transform="translate(674.02 425.45)"
+            >
               <tspan x="0" y="0">T</tspan>
             </text>
           </g>
           <g>
-            <text className="cls-2" transform="translate(0 410.88)">
+            <text
+              style={{...largeTextStyle, ...lightPinkFillStyle}}
+              transform="translate(0 410.88)"
+            >
               <tspan x="0" y="0">F</tspan>
             </text>
-            <text className="cls-6" transform="translate(110.71 303.58)">
+            <text
+              style={{...mediumTextStyle, ...lightPinkFillStyle}}
+              transform="translate(110.71 303.58)"
+            >
               <tspan x="0" y="0">O</tspan>
             </text>
-            <text className="cls-4" transform="translate(195.81 204.51)">
+            <text
+              style={{...smallTextStyle, ...lightPinkFillStyle}}
+              transform="translate(195.81 204.51)"
+            >
               <tspan x="0" y="0">R</tspan>
             </text>
-            <text className="cls-4" transform="translate(249.3 204.51)">
+            <text
+              style={{...smallTextStyle, ...lightPinkFillStyle}}
+              transform="translate(249.3 204.51)"
+            >
               <tspan x="0" y="0">EVER</tspan>
             </text>
-            <text className="cls-4" transform="translate(489.18 204.51)">
+            <text
+              style={{...smallTextStyle, ...lightPinkFillStyle}}
+              transform="translate(489.18 204.51)"
+            >
               <tspan x="0" y="0">FE</tspan>
             </text>
-            <text className="cls-6" transform="translate(569.66 305.69)">
+            <text
+              style={{...mediumTextStyle, ...lightPinkFillStyle}}
+              transform="translate(569.66 305.69)"
+            >
               <tspan x="0" y="0">S</tspan>
             </text>
-            <text className="cls-2" transform="translate(663.01 410.87)">
+            <text
+              style={{...largeTextStyle, ...lightPinkFillStyle}}
+              transform="translate(663.01 410.87)"
+            >
               <tspan x="0" y="0">T</tspan>
             </text>
           </g>
-          <text className="cls-7" transform="translate(304.3 57.41) scale(.84 1)">
+          <text
+            style={{...alexBrushStyle, ...lightPinkFillStyle}}
+            transform="translate(304.3 57.41) scale(.84 1)"
+          >
             <tspan x="0" y="0">Presents</tspan>
           </text>
         </g>

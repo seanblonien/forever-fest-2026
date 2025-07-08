@@ -1,9 +1,9 @@
-import { ThemeProvider } from '@/components/theme-provider';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import type { Metadata } from 'next';
-import { Alex_Brush, League_Gothic } from 'next/font/google';
-import { cn } from '../lib/utils';
+import {ThemeProvider} from '@/components/theme-provider';
+import {Analytics} from '@vercel/analytics/react';
+import {SpeedInsights} from '@vercel/speed-insights/next';
+import type {Metadata} from 'next';
+import {Alex_Brush, League_Gothic} from 'next/font/google';
+import {cn} from '../lib/utils';
 import './globals.css';
 
 const boldFont = League_Gothic({
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   title: 'Forever Fest 2026 - Sean & Eva\'s Wedding',
   description: 'Join Sean & Eva as they celebrate their love at Forever Fest 2026! Save the date for an unforgettable wedding celebration.',
   keywords: ['wedding', 'Forever Fest 2026', 'Sean and Eva', 'wedding celebration', 'save the date'],
-  authors: [{ name: 'Sean & Eva' }],
+  authors: [{name: 'Sean & Eva'}],
   creator: 'Sean & Eva',
   publisher: 'Forever Fest 2026',
   formatDetection: {
@@ -83,7 +83,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn(boldFont.variable, cursiveFont.variable, boldFont.className, 'dark')} style={{ colorScheme: 'dark' }} suppressHydrationWarning>
+    <html lang="en" className={cn(boldFont.variable, cursiveFont.variable, boldFont.className, 'dark')} style={{colorScheme: 'dark'}} suppressHydrationWarning>
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           {children}

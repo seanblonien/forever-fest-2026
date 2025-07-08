@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 
 type TimeLeft = {
   days: number;
@@ -29,13 +29,13 @@ export default function CountdownTimer({
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev.seconds > 0) {
-          return { ...prev, seconds: prev.seconds - 1 };
+          return {...prev, seconds: prev.seconds - 1};
         } else if (prev.minutes > 0) {
-          return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
+          return {...prev, minutes: prev.minutes - 1, seconds: 59};
         } else if (prev.hours > 0) {
-          return { ...prev, hours: prev.hours - 1, minutes: 59, seconds: 59 };
+          return {...prev, hours: prev.hours - 1, minutes: 59, seconds: 59};
         } else if (prev.days > 0) {
-          return { ...prev, days: prev.days - 1, hours: 23, minutes: 59, seconds: 59 };
+          return {...prev, days: prev.days - 1, hours: 23, minutes: 59, seconds: 59};
         }
         return prev;
       });
@@ -45,10 +45,10 @@ export default function CountdownTimer({
   }, []);
 
   const timeItems = [
-    { value: timeLeft.days, label: 'DAYS' },
-    { value: timeLeft.hours, label: 'HOURS' },
-    { value: timeLeft.minutes, label: 'MINUTES' },
-    { value: timeLeft.seconds, label: 'SECONDS' },
+    {value: timeLeft.days, label: 'DAYS'},
+    {value: timeLeft.hours, label: 'HOURS'},
+    {value: timeLeft.minutes, label: 'MINUTES'},
+    {value: timeLeft.seconds, label: 'SECONDS'},
   ];
 
   return (

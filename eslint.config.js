@@ -48,6 +48,7 @@ export default tseslint.config(
         ignoreTemplateLiterals: true,
       }],
       '@stylistic/array-bracket-spacing': ['error', 'never'],
+      '@stylistic/object-curly-spacing': ['error', 'never'],
       // Custom TypeScript rules
       '@typescript-eslint/no-unused-vars': [
         'error',
