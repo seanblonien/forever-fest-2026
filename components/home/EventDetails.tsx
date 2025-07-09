@@ -10,7 +10,7 @@ type EventDetailsProps = {
   className?: string;
 };
 
-export default function EventDetails({
+export function EventDetails({
   month = 'MARCH',
   year = '2026',
   day = '28',

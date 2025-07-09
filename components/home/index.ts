@@ -1,10 +1,9 @@
-export {default as CitySkyline} from './CitySkyline';
-export {default as CountdownTimer} from './CountdownTimer';
-export {default as Description} from './Description';
-export {default as EventDetails} from './EventDetails';
-export {default as Header} from './Header';
-export {default as HomePageLayout} from './HomePageLayout';
-export {default as MainContent} from './MainContent';
+export * from './CitySkyline';
+export * from './CountdownTimer';
+export * from './Description';
+export * from './EventDetails';
+export * from './Header';
+export * from './HomePageLayout';
 export * from './MainTitle';
-export {default as Navigation} from './Navigation';
-export {default as RSVPButton} from './RSVPButton';
+export * from './Navigation';
+export * from './RSVPButton';

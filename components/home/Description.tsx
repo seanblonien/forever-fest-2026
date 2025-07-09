@@ -4,7 +4,7 @@ type DescriptionProps = {
   className?: string;
 };
 
-export default function Description({
+export function Description({
   mainText = [
     'We\'re getting married! From the dance floor to forever,',
     'we would love for you to join us celebrate our love.',

@@ -4,7 +4,7 @@ type CitySkylineProps = {
   className?: string;
 };
 
-export default function CitySkyline({
+export function CitySkyline({
   className = '',
 }: CitySkylineProps) {
   return (

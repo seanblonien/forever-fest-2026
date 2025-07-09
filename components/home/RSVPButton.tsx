@@ -6,7 +6,7 @@ type RSVPButtonProps = {
   className?: string;
 };
 
-export default function RSVPButton({
+export function RSVPButton({
   text = 'RSVP',
   onClick,
   className = '',

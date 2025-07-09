@@ -1,7 +1,7 @@
 import {StyleProps} from '../../lib';
 import {SkylineHeaderSvg} from '../svgs';
 
-export default function Header({
+export function Header({
   className = '',
 }: StyleProps) {
   return (

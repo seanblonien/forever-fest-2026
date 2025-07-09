@@ -1,5 +1,5 @@
 import eslint from '@eslint/js';
-import { flatConfig } from '@next/eslint-plugin-next';
+import {flatConfig} from '@next/eslint-plugin-next';
 import stylistic from '@stylistic/eslint-plugin';
 import reactPlugin from 'eslint-plugin-react';
 import hooksPlugin from 'eslint-plugin-react-hooks';

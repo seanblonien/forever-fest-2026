@@ -5,7 +5,7 @@ type HomePageLayoutProps = {
   className?: string;
 };
 
-export default function HomePageLayout({
+export function HomePageLayout({
   children,
   className = '',
 }: HomePageLayoutProps) {

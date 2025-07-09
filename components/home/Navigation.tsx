@@ -11,7 +11,7 @@ const navItems = [
   {label: 'TRAVEL', href: '/travel'},
 ];
 
-export default function Navigation({className = ''}: StyleProps) {
+export function Navigation({className = ''}: StyleProps) {
   return (
     <nav className={`flex justify-center items-center pb-6 px-4 ${className}`}>
       <div className="max-w-[600px] w-full">

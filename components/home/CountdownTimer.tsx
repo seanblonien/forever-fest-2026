@@ -14,7 +14,7 @@ type CountdownTimerProps = {
   className?: string;
 };
 
-export default function CountdownTimer({
+export function CountdownTimer({
   initialTime = {
     days: 265,
     hours: 19,
