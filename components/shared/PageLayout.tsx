@@ -12,9 +12,7 @@ export default function PageLayout({children, className = ''}: PageLayoutProps) 
       <Navigation />
 
       {/* Main Content */}
-      <div className="container mx-auto px-4">
-        {children}
-      </div>
+      {children}
     </div>
   );
 }

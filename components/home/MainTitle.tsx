@@ -12,33 +12,32 @@ export function MainTitle({
   return (
     <div className={className}>
       {/* Main Title Section with layered images */}
-      <div className="relative my-12 flex items-center justify-center min-h-[600px] md:min-h-[700px] lg:min-h-[800px]">
-
-        {/* Disco Balls SVG - Background layer */}
-        <div className="absolute inset-0 flex items-center justify-center z-10">
-          <div className="w-[500px] h-[500px] md:w-[650px] md:h-[650px] lg:w-[800px] lg:h-[800px]">
-            <DiscoBallsSvg className="w-full h-full object-contain" />
-          </div>
-        </div>
-
+      <div className="relative py-12 flex items-center justify-center">
         {/* Couple Photo - Middle layer */}
-        <div className="relative w-64 h-80 md:w-80 md:h-96 lg:w-96 lg:h-[480px] z-20 mt-12 md:mt-16 lg:mt-20">
-          <Image
-            src="/sean_and_eva_banner_photo.png"
-            alt="Sean and Eva"
-            fill
-            className="object-cover rounded-lg"
-            priority
-          />
+        <div className="relative">
+          <div className="relative w-64 h-80 z-10 mt-24">
+            <Image
+              src="/sean_and_eva_banner_photo.png"
+              alt="Sean and Eva"
+              fill
+              className="object-cover rounded-lg"
+              priority
+            />
+          </div>
         </div>
 
         {/* Title SVG - Top layer */}
-        <div className="absolute top-8 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30">
-          <div className="w-64 h-48 md:w-80 md:h-64 lg:w-96 lg:h-80">
-            <TitleSvg className="w-full h-full object-contain" />
+        <div className="absolute -top-4 bottom-0 left-0 right-0 m-auto z-30 pointer-events-none">
+          <div className="max-w-[600px] mx-auto">
+            <TitleSvg className="max-w-full max-h-full object-contain" />
           </div>
         </div>
-
+        {/* Disco Balls SVG - Background layer */}
+        <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+          <div className="w-full max-w-[800px] -mt-[170px] -mx-16">
+            <DiscoBallsSvg className="w-full h-full object-contain" />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -12,7 +12,6 @@ export default function ForeverFestPage() {
   return (
     <PageLayout>
       <div className="text-center relative">
-
         <MainTitle />
         <CitySkyline className="mb-8 mt-20" />
 

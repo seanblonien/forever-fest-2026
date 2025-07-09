@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import {SkylineSvg} from '@/components/svgs/SkylineSvg';
 
 type CitySkylineProps = {
   className?: string;
@@ -9,15 +9,8 @@ export function CitySkyline({
 }: CitySkylineProps) {
   return (
     <div className={`flex justify-center ${className}`}>
-      <div className="w-full max-w-[600px] opacity-40">
-        <Image
-          src="/skyline.svg"
-          alt="City skyline silhouette"
-          width={1344.93}
-          height={327.28}
-          className="w-full h-auto"
-          priority
-        />
+      <div className="w-full max-w-[600px]">
+        <SkylineSvg className="w-full h-auto" />
       </div>
     </div>
   );

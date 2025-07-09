@@ -13,13 +13,13 @@ const navItems = [
 
 export function Navigation({className = ''}: StyleProps) {
   return (
-    <nav className={`flex justify-center items-center pb-6 px-4 ${className}`}>
+    <nav className={`flex justify-center items-center pb-2 z-[100] ${className}`}>
       <div className="max-w-[600px] w-full">
         {/* Steel pink border above links */}
         <div className="border-t border-[#DE1ACE] pb-1"></div>
 
         {/* Navigation links */}
-        <div className="flex justify-between text-[#DE1ACE] font-bold text-sm md:text-base">
+        <div className="flex justify-between text-[#DE1ACE] font-bold text-sm md:text-base px-4">
           {navItems.map((item) => item
             ? (
                 <Link
