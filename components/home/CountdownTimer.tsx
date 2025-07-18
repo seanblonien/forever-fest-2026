@@ -15,7 +15,7 @@ function CountdownBox({value, label}: {value: number; label: string}) {
       <div className="text-3xl md:text-4xl font-black text-syracuse-orange">
         {value.toString().padStart(2, '0')}
       </div>
-      <div className="text-sm md:text-base font-bold text-steel-pink">
+      <div className="text-sm md:text-base text-steel-pink">
         {label}
       </div>
     </div>

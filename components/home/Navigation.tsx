@@ -19,7 +19,7 @@ export function Navigation({className = ''}: StyleProps) {
         <div className="border-t border-[#DE1ACE] pb-1"></div>
 
         {/* Navigation links */}
-        <div className="flex justify-between text-[#DE1ACE] font-bold text-sm md:text-base px-4">
+        <div className="flex justify-between text-[#DE1ACE] text-sm md:text-base px-4">
           {navItems.map((item) => item
             ? (
                 <Link

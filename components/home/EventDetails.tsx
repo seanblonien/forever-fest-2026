@@ -21,10 +21,10 @@ export function EventDetails() {
 
       {/* Right Column - Event Details */}
       <div className="flex-1 flex flex-col justify-center text-left space-y-2 text-lavender-pink mt-8 md:mt-0">
-        <div className="text-3xl md:text-4xl font-bold">6:00 PM-11:00 PM</div>
+        <div className="text-3xl md:text-4xl">6:00 PM-11:00 PM</div>
         <div className="text-xl md:text-2xl">DEC on Dragon 1414 Dragon St</div>
         <div className="text-xl md:text-2xl">Dallas, TX, 75207</div>
-        <div className="text-xl md:text-2xl font-semibold">
+        <div className="text-xl md:text-2xl">
           Attire: Funky Formal
         </div>
       </div>
