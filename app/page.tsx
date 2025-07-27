@@ -5,7 +5,7 @@ import {
   Description,
   EventDetails,
   MainTitle,
-  RSVPButton
+  RSVPButton,
 } from '@/components/home';
 import PageLayout from '@/components/shared/PageLayout';
 

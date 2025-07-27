@@ -20,7 +20,7 @@ const faqs = [
 export default function FAQsPage() {
   return (
     <div className="text-center text-white py-12">
-      <h1 className="text-4xl md:text-6xl mb-8">FAQs</h1>
+      <h1 className="text-4xl md:text-6xl mb-8 font-league-gothic">FAQs</h1>
       <div className="max-w-4xl mx-auto space-y-6">
         <p className="text-lg md:text-xl mb-12">
           Frequently asked questions about Forever Fest 2026
@@ -28,7 +28,7 @@ export default function FAQsPage() {
         <div className="space-y-6 text-left">
           {faqs.map((faq, index) => (
             <div key={index} className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
-              <h3 className="text-xl mb-3">{faq.question}</h3>
+              <h3 className="text-xl mb-3 font-league-gothic">{faq.question}</h3>
               <p className="text-lg">{faq.answer}</p>
             </div>
           ))}

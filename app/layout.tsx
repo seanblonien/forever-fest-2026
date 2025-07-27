@@ -83,7 +83,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn(boldFont.variable, cursiveFont.variable, boldFont.className, 'dark')} style={{colorScheme: 'dark'}} suppressHydrationWarning>
+    <html lang="en" className={cn(boldFont.variable, cursiveFont.variable, 'dark')} style={{colorScheme: 'dark'}} suppressHydrationWarning>
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           {children}

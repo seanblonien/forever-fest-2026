@@ -1,7 +1,7 @@
 export default function CalendarEmbed() {
   return (
     <div className="py-8">
-      <h2 className="text-4xl font-bold text-papaya-whip mb-2">
+      <h2 className="text-4xl font-bold font-league-gothic text-papaya-whip mb-2">
         Save the Date
       </h2>
       <div className="max-w-[600px] mx-auto">

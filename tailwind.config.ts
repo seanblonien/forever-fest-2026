@@ -18,6 +18,10 @@ const config: Config = {
         '2xl': '1400px',
       },
     },
+    fontFamily: {
+      // Set Arial as the default font family for all text
+      'sans': ['Arial', 'Helvetica', 'sans-serif'],
+    },
     extend: {
       fontFamily: {
         'league-gothic': ['var(--font-league-gothic)', 'League Gothic', 'Arial Black', 'sans-serif'],

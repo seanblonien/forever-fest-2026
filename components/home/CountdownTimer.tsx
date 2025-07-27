@@ -12,10 +12,10 @@ type TimeLeft = {
 function CountdownBox({value, label}: {value: number; label: string}) {
   return (
     <div className="rounded-lg p-2 md:p-4 bg-papaya-whip">
-      <div className="text-3xl md:text-4xl font-black text-syracuse-orange">
+      <div className="text-3xl md:text-4xl font-black text-syracuse-orange font-league-gothic">
         {value.toString().padStart(2, '0')}
       </div>
-      <div className="text-sm md:text-base text-steel-pink">
+      <div className="text-sm md:text-base text-steel-pink font-league-gothic">
         {label}
       </div>
     </div>

@@ -1,7 +1,7 @@
 export function EventDetails() {
   // Shared event details component
   const EventInfo = () => (
-    <div className="flex flex-col space-y-2 text-lavender-pink text-center md:text-left">
+    <div className="flex flex-col space-y-2 text-lavender-pink text-center md:text-left font-league-gothic">
       <div className="text-4xl">6:00 PM-11:00 PM</div>
       <div className="text-2xl">DEC on Dragon 1414 Dragon St</div>
       <div className="text-2xl">Dallas, TX, 75207</div>
@@ -14,7 +14,7 @@ export function EventDetails() {
       {/* Date Section - responsive layout */}
       <div className="flex-1 text-center md:text-left md:relative mb-6 md:mb-0">
         {/* Mobile: Single line date */}
-        <div className="md:hidden text-6xl font-black text-lavender-pink">
+        <div className="md:hidden text-6xl font-black text-lavender-pink font-league-gothic">
           MARCH
           {' '}
           <span className="font-alex-brush text-7xl text-white">28th</span>
@@ -27,10 +27,10 @@ export function EventDetails() {
           <div className="absolute top-[40px] -right-10 text-9xl font-alex-brush text-white z-10">
             28th
           </div>
-          <div className="text-8xl font-black mb-2 text-lavender-pink">
+          <div className="text-8xl font-black mb-2 text-lavender-pink font-league-gothic">
             MARCH
           </div>
-          <div className="text-8xl font-black text-lavender-pink">
+          <div className="text-8xl font-black text-lavender-pink font-league-gothic">
             2026
           </div>
         </div>
