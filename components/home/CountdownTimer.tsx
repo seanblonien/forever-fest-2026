@@ -59,7 +59,7 @@ export function CountdownTimer() {
   }, []);
 
   return (
-    <div className="mb-12 px-2">
+    <div className="mb-12 px-2 max-w-[600px] mx-auto">
       <div className="grid grid-cols-4 gap-2 md:gap-4 max-w-2xl mx-auto">
         <CountdownBox value={timeLeft.days} label="DAYS" />
         <CountdownBox value={timeLeft.hours} label="HOURS" />

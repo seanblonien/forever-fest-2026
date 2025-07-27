@@ -1,10 +1,11 @@
 import {
+  CalendarEmbed,
   CitySkyline,
   CountdownTimer,
   Description,
   EventDetails,
   MainTitle,
-  RSVPButton,
+  RSVPButton
 } from '@/components/home';
 import PageLayout from '@/components/shared/PageLayout';
 
@@ -19,6 +20,7 @@ export default function ForeverFestPage() {
         <Description />
         <CountdownTimer />
         <RSVPButton />
+        <CalendarEmbed />
       </div>
     </PageLayout>
   );
