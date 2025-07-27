@@ -11,7 +11,7 @@ type TimeLeft = {
 
 function CountdownBox({value, label}: {value: number; label: string}) {
   return (
-    <div className="rounded-lg p-4 bg-papaya-whip">
+    <div className="rounded-lg p-2 md:p-4 bg-papaya-whip">
       <div className="text-3xl md:text-4xl font-black text-syracuse-orange">
         {value.toString().padStart(2, '0')}
       </div>
@@ -59,8 +59,8 @@ export function CountdownTimer() {
   }, []);
 
   return (
-    <div className="mb-12">
-      <div className="grid grid-cols-4 gap-4 max-w-2xl mx-auto">
+    <div className="mb-12 px-2">
+      <div className="grid grid-cols-4 gap-2 md:gap-4 max-w-2xl mx-auto">
         <CountdownBox value={timeLeft.days} label="DAYS" />
         <CountdownBox value={timeLeft.hours} label="HOURS" />
         <CountdownBox value={timeLeft.minutes} label="MINUTES" />
