@@ -4,11 +4,11 @@ import {StyleProps} from '../../lib';
 const navItems = [
   {label: 'HOME', href: '/'},
   {label: 'OUR STORY', href: '/our-story'},
-  {label: 'RSVP', href: '/rsvp'},
-  null,
   {label: 'REGISTRY', href: '/registry'},
+  null,
   {label: 'FAQS', href: '/faqs'},
   {label: 'TRAVEL', href: '/travel'},
+  {label: 'RSVP', href: '/rsvp'},
 ];
 
 export function Navigation({className = ''}: StyleProps) {
@@ -19,7 +19,7 @@ export function Navigation({className = ''}: StyleProps) {
         <div className="border-t border-[#DE1ACE] pb-1"></div>
 
         {/* Navigation links */}
-        <div className="flex justify-between text-[#DE1ACE] text-sm md:text-base px-4">
+        <div className="flex justify-between text-[#DE1ACE] text-xl px-2 md:px-4 font-league-gothic">
           {navItems.map((item) => item
             ? (
                 <Link

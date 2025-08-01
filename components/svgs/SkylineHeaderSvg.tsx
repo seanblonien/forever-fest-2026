@@ -25,7 +25,7 @@ export function SkylineHeaderSvg({className}: StyleProps) {
         <text
           transform="translate(70.71 114.42)"
           style={{
-            fontFamily: 'LeagueGothic-Regular, \'League Gothic\'',
+            fontFamily: 'var(--font-league-gothic), \'League Gothic\', Arial, sans-serif',
             fontSize: '49.64px',
             fontVariationSettings: '\'wdth\' 100',
           }}

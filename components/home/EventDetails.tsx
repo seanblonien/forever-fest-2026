@@ -1,32 +1,47 @@
 export function EventDetails() {
+  // Shared event details component
+  const EventInfo = () => (
+    <div className="flex flex-col space-y-2 text-lavender-pink text-center md:text-left font-league-gothic">
+      <div className="text-4xl">6:00 PM-11:00 PM</div>
+      <div className="text-2xl">DEC on Dragon 1414 Dragon St</div>
+      <div className="text-2xl">Dallas, TX, 75207</div>
+      <div className="text-2xl">Attire: Funky Formal</div>
+    </div>
+  );
+
   return (
-    <div className="flex flex-col md:flex-row max-w-[600px] mx-auto mb-12 text-white md:items-stretch">
-      {/* Left Column - Date */}
-      <div className="flex-1 text-left relative">
-        {/* Absolutely positioned "28" in Alex Brush font - right aligned */}
-        <div className="absolute top-[40px] right-0 text-9xl font-alex-brush text-white z-10">
-          28
+    <div className="flex flex-col md:flex-row max-w-[600px] mx-auto px-4 mb-12 text-white items-center md:items-stretch">
+      {/* Date Section - responsive layout */}
+      <div className="flex-1 text-center md:text-left md:relative mb-6 md:mb-0">
+        {/* Mobile: Single line date */}
+        <div className="md:hidden text-6xl font-black text-lavender-pink font-league-gothic">
+          MARCH
+          {' '}
+          <span className="font-alex-brush text-7xl text-white">28th</span>
+          {' '}
+          2026
         </div>
 
-        <div className="text-6xl md:text-8xl font-black mb-2 text-lavender-pink">
-          MARCH
-        </div>
-        <div className="text-6xl md:text-8xl font-black text-lavender-pink">
-          2026
+        {/* Desktop: Stacked date with absolute positioned "28" */}
+        <div className="hidden md:block">
+          <div className="absolute top-[40px] -right-10 text-9xl font-alex-brush text-white z-10">
+            28th
+          </div>
+          <div className="text-8xl font-black mb-2 text-lavender-pink font-league-gothic">
+            MARCH
+          </div>
+          <div className="text-8xl font-black text-lavender-pink font-league-gothic">
+            2026
+          </div>
         </div>
       </div>
 
-      {/* Vertical separator line */}
+      {/* Vertical separator line - desktop only */}
       <div className="hidden md:block w-px bg-lavender-pink mx-8"></div>
 
-      {/* Right Column - Event Details */}
-      <div className="flex-1 flex flex-col justify-center text-left space-y-2 text-lavender-pink mt-8 md:mt-0">
-        <div className="text-3xl md:text-4xl">6:00 PM-11:00 PM</div>
-        <div className="text-xl md:text-2xl">DEC on Dragon 1414 Dragon St</div>
-        <div className="text-xl md:text-2xl">Dallas, TX, 75207</div>
-        <div className="text-xl md:text-2xl">
-          Attire: Funky Formal
-        </div>
+      {/* Event Details Section */}
+      <div className="flex-1 flex flex-col justify-center">
+        <EventInfo />
       </div>
     </div>
   );

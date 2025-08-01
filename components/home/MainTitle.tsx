@@ -17,7 +17,7 @@ export function MainTitle({
         <div className="relative">
           <div className="relative w-64 h-80 z-10 mt-24">
             <Image
-              src="/sean_and_eva_banner_photo.png"
+              src="/sean_and_eva_banner_photo.webp"
               alt="Sean and Eva"
               fill
               className="object-cover rounded-lg"

@@ -1,3 +1,4 @@
+export {default as CalendarEmbed} from './CalendarEmbed';
 export * from './CitySkyline';
 export * from './CountdownTimer';
 export * from './Description';
