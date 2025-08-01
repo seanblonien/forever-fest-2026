@@ -4,11 +4,11 @@ import {StyleProps} from '../../lib';
 const navItems = [
   {label: 'HOME', href: '/'},
   {label: 'OUR STORY', href: '/our-story'},
-  {label: 'RSVP', href: '/rsvp'},
-  null,
   {label: 'REGISTRY', href: '/registry'},
+  null,
   {label: 'FAQS', href: '/faqs'},
   {label: 'TRAVEL', href: '/travel'},
+  {label: 'RSVP', href: '/rsvp'},
 ];
 
 export function Navigation({className = ''}: StyleProps) {

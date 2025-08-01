@@ -20,7 +20,7 @@ const config: Config = {
     },
     fontFamily: {
       // Set Arial as the default font family for all text
-      'sans': ['Arial', 'Helvetica', 'sans-serif'],
+      sans: ['Arial', 'Helvetica', 'sans-serif'],
     },
     extend: {
       fontFamily: {

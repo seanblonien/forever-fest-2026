@@ -7,7 +7,6 @@ import {cn} from '../lib/utils';
 import './globals.css';
 
 const boldFont = League_Gothic({
-  weight: '400',
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-league-gothic',
@@ -43,7 +42,7 @@ export const metadata: Metadata = {
     siteName: 'Forever Fest 2026',
     images: [
       {
-        url: '/sean_and_eva_banner_photo.png',
+        url: '/sean_and_eva_banner_photo.webp',
         width: 1200,
         height: 630,
         alt: 'Sean & Eva - Forever Fest 2026',
@@ -56,7 +55,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Forever Fest 2026 - Sean & Eva\'s Wedding',
     description: 'Join Sean & Eva as they celebrate their love at Forever Fest 2026! Save the date for an unforgettable wedding celebration.',
-    images: ['/sean_and_eva_banner_photo.png'],
+    images: ['/sean_and_eva_banner_photo.webp'],
   },
   robots: {
     index: true,
