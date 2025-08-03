@@ -1,9 +1,9 @@
+export {default as CalendarEmbed} from './CalendarEmbedDynamic';
 export * from './CitySkyline';
 export * from './CountdownTimer';
 export * from './Description';
 export * from './EventDetails';
 export * from './Header';
-export * from './HomePageLayout';
 export * from './MainTitle';
 export * from './Navigation';
 export * from './RSVPButton';

@@ -1,4 +1,5 @@
 import {
+  CalendarEmbed,
   CitySkyline,
   CountdownTimer,
   Description,
@@ -19,6 +20,7 @@ export default function ForeverFestPage() {
         <Description />
         <CountdownTimer />
         <RSVPButton />
+        <CalendarEmbed />
       </div>
     </PageLayout>
   );

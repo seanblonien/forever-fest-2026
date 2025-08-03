@@ -1,5 +1,5 @@
 import eslint from '@eslint/js';
-import {flatConfig} from '@next/eslint-plugin-next';
+import nextPlugin from '@next/eslint-plugin-next';
 import stylistic from '@stylistic/eslint-plugin';
 import reactPlugin from 'eslint-plugin-react';
 import hooksPlugin from 'eslint-plugin-react-hooks';
@@ -16,8 +16,15 @@ export default tseslint.config(
   ...tseslint.configs.stylistic,
 
   // Next.js recommended rules
-  flatConfig.recommended,
-  flatConfig.coreWebVitals,
+  {
+    plugins: {
+      '@next/next': nextPlugin,
+    },
+    rules: {
+      ...nextPlugin.configs.recommended.rules,
+      ...nextPlugin.configs['core-web-vitals'].rules,
+    },
+  },
 
   // Apply stylistic rules with customized settings
   stylistic.configs.customize({
