@@ -20,7 +20,7 @@ export default function CalendarEmbed() {
       </h2>
 
       <LazyLoad
-        importFn={() =>
+        importFnAction={() =>
           import('./CalendarEmbed').then((module) => ({
             default: module.CalendarEmbedContent,
           }))}

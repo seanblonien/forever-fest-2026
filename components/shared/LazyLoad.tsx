@@ -7,7 +7,7 @@ type LazyLoadProps = {
    * Function that returns a dynamic import promise
    * @example () => import('./HeavyComponent')
    */
-  importFn: () => Promise<{default: React.ComponentType<any>}>;
+  importFnAction: () => Promise<{default: React.ComponentType}>;
 
   /**
    * Fallback component to show while loading
@@ -17,7 +17,7 @@ type LazyLoadProps = {
   /**
    * Props to pass to the lazy-loaded component
    */
-  componentProps?: Record<string, any>;
+  componentProps?: Record<string, unknown>;
 
   /**
    * CSS classes for the container
@@ -55,7 +55,7 @@ type LazyLoadProps = {
  * @example Basic usage:
  * ```tsx
  * <LazyLoad
- *   importFn={() => import('./HeavyComponent')}
+ *   importFnAction={() => import('./HeavyComponent')}
  *   fallback={<div>Loading...</div>}
  *   componentProps={{ title: 'Hello' }}
  *   rootMargin="100px"
@@ -65,7 +65,7 @@ type LazyLoadProps = {
  * @example With named export:
  * ```tsx
  * <LazyLoad
- *   importFn={() =>
+ *   importFnAction={() =>
  *     import('./MyComponent').then(module => ({
  *       default: module.MyNamedComponent
  *     }))
@@ -77,16 +77,18 @@ type LazyLoadProps = {
  * @example Eager loading (no intersection observer):
  * ```tsx
  * <LazyLoad
- *   importFn={() => import('./Component')}
+ *   importFnAction={() => import('./Component')}
  *   eager={true}
  * />
  * ```
  */
 export function LazyLoad({
-  importFn,
-  fallback = <div className="animate-pulse bg-white/10 rounded-lg p-8 flex items-center justify-center">
-    <span className="text-white/60">Loading...</span>
-  </div>,
+  importFnAction,
+  fallback = (
+    <div className="animate-pulse bg-white/10 rounded-lg p-8 flex items-center justify-center">
+      <span className="text-white/60">Loading...</span>
+    </div>
+  ),
   componentProps = {},
   className = '',
   rootMargin = '200px',
@@ -102,7 +104,7 @@ export function LazyLoad({
   });
 
   // Create the lazy component only when needed
-  const LazyComponent = shouldLoad ? lazy(importFn) : null;
+  const LazyComponent = shouldLoad ? lazy(importFnAction) : null;
 
   return (
     <div ref={containerRef} className={className}>
