@@ -14,16 +14,16 @@ export function MainTitle({
       {/* Main Title Section with layered images */}
       <div className="relative py-12 flex items-center justify-center">
         {/* Couple Photo - Middle layer */}
-        <div className="relative">
-          <div className="relative w-64 h-80 z-10 mt-24">
-            <Image
-              src="/sean_and_eva_banner_photo.webp"
-              alt="Sean and Eva"
-              fill
-              className="object-cover rounded-lg"
-              priority
-            />
-          </div>
+        <div className="relative z-10 pt-14 md:pt-24">
+          <Image
+            src="/sean_and_eva_banner_photo.webp"
+            alt="Sean and Eva"
+            width={256}
+            height={320}
+            sizes="(max-width: 640px) 192px, (max-width: 768px) 224px, 256px"
+            className="rounded-lg w-48 sm:w-56 md:w-64 h-auto"
+            priority
+          />
         </div>
 
         {/* Title SVG - Top layer */}
@@ -34,7 +34,7 @@ export function MainTitle({
         </div>
         {/* Disco Balls SVG - Background layer */}
         <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-          <div className="w-full max-w-[800px] -mt-[170px] -mx-16">
+          <div className="w-full max-w-[800px] -mt-[180px] md:-mt-[240px] -mx-16">
             <DiscoBallsSvg className="w-full h-full object-contain" />
           </div>
         </div>

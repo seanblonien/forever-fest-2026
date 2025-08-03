@@ -1,5 +1,5 @@
 import {
-  CalendarEmbed,
+  CalendarEmbedDynamic,
   CitySkyline,
   CountdownTimer,
   Description,
@@ -20,7 +20,7 @@ export default function ForeverFestPage() {
         <Description />
         <CountdownTimer />
         <RSVPButton />
-        <CalendarEmbed />
+        <CalendarEmbedDynamic isShowTitle />
       </div>
     </PageLayout>
   );

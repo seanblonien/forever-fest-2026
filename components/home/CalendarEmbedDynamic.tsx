@@ -1,7 +1,6 @@
 'use client';
 import {LazyLoad} from '@/components/shared';
 
-// Custom loading placeholder for the calendar
 function CalendarLoadingPlaceholder() {
   return (
     <div className="max-w-[600px] height-[294px] flex justify-center items-center">
@@ -12,22 +11,27 @@ function CalendarLoadingPlaceholder() {
   );
 }
 
-export default function CalendarEmbed() {
+type CalendarEmbedDynamicProps = {
+  isShowTitle?: boolean;
+};
+
+export const CalendarEmbedDynamic: React.FC<CalendarEmbedDynamicProps> = ({isShowTitle}) => {
   return (
     <div className="py-8 flex flex-col items-center">
-      <h2 className="text-4xl font-bold font-league-gothic text-papaya-whip mb-2">
-        Save the Date
-      </h2>
+      {isShowTitle && (
+        <h2 className="text-4xl font-bold font-league-gothic text-papaya-whip mb-2">
+          Save the Date
+        </h2>
+      )}
 
       <LazyLoad
         importFnAction={() =>
-          import('./CalendarEmbed').then((module) => ({
+          import('./CalendarEmbedContent').then((module) => ({
             default: module.CalendarEmbedContent,
           }))}
         fallback={<CalendarLoadingPlaceholder />}
         rootMargin="200px"
-        loadDelay={100}
       />
     </div>
   );
-}
+};
