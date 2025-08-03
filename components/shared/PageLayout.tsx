@@ -6,7 +6,7 @@ type PageLayoutProps = {
 
 export default function PageLayout({children}: PageLayoutProps) {
   return (
-    <div className={`min-h-screen bg-forever-fest-gradient`}>
+    <div className="min-h-screen bg-forever-fest-gradient">
       <Header />
       <Navigation />
 
