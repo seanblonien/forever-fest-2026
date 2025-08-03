@@ -1,7 +1,7 @@
-import CalendarEmbedDynamic from '@/components/home/CalendarEmbedDynamic';
 import MapLinks from '@/components/MapLinks';
 import {ExternalLink, Plane, ShoppingBag} from 'lucide-react';
 import Link from 'next/link';
+import {CalendarEmbedDynamic} from '../home';
 
 // Travel Link Component
 function TravelLink() {

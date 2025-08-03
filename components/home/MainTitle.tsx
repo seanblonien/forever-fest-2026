@@ -14,16 +14,15 @@ export function MainTitle({
       {/* Main Title Section with layered images */}
       <div className="relative py-12 flex items-center justify-center">
         {/* Couple Photo - Middle layer */}
-        <div className="relative">
-          <div className="relative w-64 h-80 z-10 mt-24">
-            <Image
-              src="/sean_and_eva_banner_photo.webp"
-              alt="Sean and Eva"
-              fill
-              className="object-cover rounded-lg"
-              priority
-            />
-          </div>
+        <div className="relative z-10 mt-14 md:mt-24">
+          <Image
+            src="/sean_and_eva_banner_photo.webp"
+            alt="Sean and Eva"
+            width={256}
+            height={320}
+            className="object-cover rounded-lg max-w-full h-auto w-48 sm:w-56 md:w-64"
+            priority
+          />
         </div>
 
         {/* Title SVG - Top layer */}

@@ -1,7 +1,7 @@
 'use client';
 import {useEffect, useRef, useState} from 'react';
 
-interface UseInViewLazyLoadOptions {
+type UseInViewLazyLoadOptions = {
   /**
    * Root margin for the intersection observer
    * @default '200px'
@@ -22,21 +22,21 @@ interface UseInViewLazyLoadOptions {
    * @default false
    */
   triggerImmediately?: boolean;
-}
+};
 
 /**
  * Hook for lazy loading components when they enter the viewport
- * 
+ *
  * @param options Configuration options for the intersection observer
  * @returns Object containing ref to attach to container, loading states, and manual trigger
- * 
+ *
  * @example
  * ```tsx
  * const { containerRef, isInView, shouldLoad } = useInViewLazyLoad({
  *   rootMargin: '100px',
  *   loadDelay: 200
  * });
- * 
+ *
  * return (
  *   <div ref={containerRef}>
  *     {shouldLoad ? <HeavyComponent /> : <Placeholder />}
@@ -49,7 +49,7 @@ export function useInViewLazyLoad(options: UseInViewLazyLoadOptions = {}) {
     rootMargin = '200px',
     threshold = 0,
     loadDelay = 100,
-    triggerImmediately = false
+    triggerImmediately = false,
   } = options;
 
   const [isInView, setIsInView] = useState(triggerImmediately);
@@ -64,27 +64,27 @@ export function useInViewLazyLoad(options: UseInViewLazyLoadOptions = {}) {
       return;
     }
 
+    let timeoutId: NodeJS.Timeout | null = null;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsInView(true);
-          
+
           // Add delay before triggering load
-          const timeoutId = setTimeout(() => {
+          timeoutId = setTimeout(() => {
             setShouldLoad(true);
           }, loadDelay);
 
           // Cleanup observer once loading is triggered
           observer.disconnect();
           observerRef.current = null;
-
-          return () => clearTimeout(timeoutId);
         }
       },
       {
         rootMargin,
-        threshold
-      }
+        threshold,
+      },
     );
 
     observerRef.current = observer;
@@ -94,6 +94,9 @@ export function useInViewLazyLoad(options: UseInViewLazyLoadOptions = {}) {
     }
 
     return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
       observer.disconnect();
       observerRef.current = null;
     };
@@ -113,6 +116,6 @@ export function useInViewLazyLoad(options: UseInViewLazyLoadOptions = {}) {
     containerRef,
     isInView,
     shouldLoad,
-    triggerLoad
+    triggerLoad,
   };
 }
