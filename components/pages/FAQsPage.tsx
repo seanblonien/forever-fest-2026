@@ -19,9 +19,9 @@ const faqs = [
 
 export default function FAQsPage() {
   return (
-    <div className="text-center text-white py-12">
+    <div className="w-full max-w-[600px] mx-auto text-center text-white pt-6 pb-12 px-2 md:px-0">
       <h1 className="text-4xl md:text-6xl mb-8 font-league-gothic">FAQs</h1>
-      <div className="max-w-4xl mx-auto space-y-6">
+      <div className="space-y-6">
         <p className="text-lg md:text-xl mb-12">
           Frequently asked questions about Forever Fest 2026
         </p>
