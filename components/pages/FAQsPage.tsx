@@ -1,4 +1,4 @@
-import {CalendarEmbedContent} from '@/components/home/CalendarEmbed';
+import CalendarEmbedDynamic from '@/components/home/CalendarEmbedDynamic';
 import MapLinks from '@/components/MapLinks';
 import {ExternalLink, Plane, ShoppingBag} from 'lucide-react';
 import Link from 'next/link';
@@ -42,7 +42,7 @@ const faqs: FAQ[] = [
   {
     question: 'When is the wedding?',
     answer: 'Forever Fest 2026 will take place on Friday, March 28th, 2026 from 6:00 PM to 11:00 PM CST.',
-    component: <CalendarEmbedContent />,
+    component: <CalendarEmbedDynamic />,
   },
   {
     question: 'Where is the wedding?',

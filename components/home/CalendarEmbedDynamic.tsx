@@ -26,7 +26,6 @@ export default function CalendarEmbed() {
           }))}
         fallback={<CalendarLoadingPlaceholder />}
         rootMargin="200px"
-        loadDelay={100}
       />
     </div>
   );
