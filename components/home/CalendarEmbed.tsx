@@ -12,10 +12,12 @@ export function CalendarEmbedContent() {
         location="DEC on Dragon, 1414 Dragon St, Dallas, TX 75207"
         startDate="2026-03-28"
         endDate="2026-03-28"
+        buttonsList
         startTime="18:00"
         endTime="23:00"
         timeZone="America/Chicago"
         buttonStyle="default"
+        hideBackground={true}
       >
       </AddToCalendarButton>
     </div>
