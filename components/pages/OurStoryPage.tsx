@@ -1,4 +1,7 @@
 import Image from 'next/image';
+import Zoom from 'react-medium-image-zoom';
+import 'react-medium-image-zoom/dist/styles.css';
+import '../../styles/zoom-custom.css';
 
 // Timeline data structure
 type TimelineItem = {
@@ -164,14 +167,26 @@ export default function OurStoryPage() {
                 {(item.photos?.length ?? 0) > 0 && (
                   <div className={item.grid ? 'columns-2 gap-4' : 'space-y-4'}>
                     {item.photos!.map((photo) => (
-                      <Image
+                      <Zoom
                         key={photo.id}
-                        src={photo.src}
-                        alt={photo.alt}
-                        width={item.grid ? 300 : 600}
-                        height={item.grid ? 200 : 400}
-                        className={`rounded-lg ${item.grid ? 'mb-4' : ''}`}
-                      />
+                        a11yNameButtonZoom="Click to enlarge photo"
+                        a11yNameButtonUnzoom="Close enlarged photo"
+                      >
+                        <Image
+                          src={photo.src}
+                          alt={photo.alt}
+                          width={item.grid ? 300 : 600}
+                          height={item.grid ? 200 : 400}
+                          className={`rounded-lg min-w-full ${item.grid ? 'mb-4' : ''}`}
+                          style={{
+                            objectFit: 'cover',
+                            display: 'block',
+                            maxWidth: '100%',
+                          }}
+                          sizes="(max-width: 768px) 90vw, (max-width: 1200px) 80vw"
+                          priority={false}
+                        />
+                      </Zoom>
                     ))}
                   </div>
                 )}

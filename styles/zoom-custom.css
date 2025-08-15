@@ -1,0 +1,37 @@
+/* Custom styles for react-medium-image-zoom */
+
+/* Semi-transparent background overlay */
+[data-rmiz-modal-overlay] {
+  background-color: rgba(0, 0, 0, 0.6) !important; /* Semi-transparent black */
+}
+
+/* Custom transition duration */
+[data-rmiz-modal-overlay] {
+  transition: background-color 0.3s ease-in-out !important;
+}
+
+/* Custom close button styling */
+[data-rmiz-btn-unzoom] {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+[data-rmiz-btn-unzoom]:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Custom image styling in zoom - allow proper scaling */
+[data-rmiz-modal-img] {
+  border-radius: 8px !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2) !important;
+  /* Remove size constraints to allow proper scaling */
+  max-width: calc(100vw - 16px) !important;
+  max-height: calc(96vh - 16px) !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+  margin: 8px !important;
+}
+
+/* Minimal custom styling to avoid conflicts */
