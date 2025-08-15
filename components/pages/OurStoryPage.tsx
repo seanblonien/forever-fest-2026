@@ -96,14 +96,14 @@ const timelineData: TimelineItem[] = [
     label: 'Rave Life! 🕺💃',
     grid: true,
     photos: [
-      {id: 11, src: '/fest1.webp', alt: ''},
-      {id: 12, src: '/fest2.webp', alt: ''},
-      {id: 13, src: '/fest3.webp', alt: ''},
-      {id: 14, src: '/fest4.webp', alt: ''},
-      {id: 15, src: '/fest5.webp', alt: ''},
-      {id: 16, src: '/fest6.webp', alt: ''},
-      {id: 17, src: '/fest7.webp', alt: ''},
-      {id: 18, src: '/fest8.webp', alt: ''},
+      {id: 11, src: '/fest1.webp', alt: 'Eva and Sean at Bass Canyon 2023'},
+      {id: 12, src: '/fest2.webp', alt: 'Eva and Seanat at Lights All Night 2023'},
+      {id: 13, src: '/fest3.webp', alt: 'Eva and Sean at ECC 2024'},
+      {id: 14, src: '/fest4.webp', alt: 'Eva and Sean at Svdden Death concert 2024'},
+      {id: 15, src: '/fest5.webp', alt: 'Eva and Sean at Shaq Bass All Stars 2023'},
+      {id: 16, src: '/fest6.webp', alt: 'Eva and Sean at Bonnaroo 20024'},
+      {id: 17, src: '/fest7.webp', alt: 'Eva and Sean at Freaky Deaky 2023'},
+      {id: 18, src: '/fest8.webp', alt: 'Eva and Sean at Lost Lands 2024'},
     ],
   },
   {
@@ -111,8 +111,8 @@ const timelineData: TimelineItem[] = [
     date: 'Dec 28th, 2024',
     label: 'Sean proposes at LAN 2024 💍',
     photos: [
-      {id: 19, src: '/fest9.webp', alt: 'Sean and Eva with the "she said yes" totem right after the proposal in the Marauda moshpit'},
-      {id: 20, src: '/fest10.webp', alt: 'Sean and Eva kissing surrounded the disco balls and mirrors with "Lights All Night" in the background'},
+      {id: 19, src: '/fest9.webp', alt: 'Sean and Eva with the "she said yes" totem right after the proposal in the Marauda moshpit at LAN 2024'},
+      {id: 20, src: '/fest10.webp', alt: 'Sean and Eva kissing surrounded the disco balls and mirrors with "Lights All Night" in the background at LAN 2024'},
     ],
   },
   {
@@ -120,15 +120,15 @@ const timelineData: TimelineItem[] = [
     date: 'February 9th, 2024',
     label: 'Engagement party celebration',
     photos: [
-      {id: 21, src: '/engage1.webp', alt: ''},
-      {id: 22, src: '/engage2.webp', alt: ''},
-      {id: 23, src: '/engage3.webp', alt: ''},
+      {id: 21, src: '/engage1.webp', alt: 'Eva and Sean with the Blonien family'},
+      {id: 22, src: '/engage2.webp', alt: 'Eva and Sean with the extended Melendez family'},
+      {id: 23, src: '/engage3.webp', alt: 'Eva and Sean with friends'},
     ],
   },
   {
     id: 13,
     date: 'March 28th, 2026',
-    label: 'Forever Fest 2026!',
+    label: '➡️ Forever Fest 2026!',
   },
 ];
 
