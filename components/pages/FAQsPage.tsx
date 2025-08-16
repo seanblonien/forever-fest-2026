@@ -41,7 +41,7 @@ const faqs: FAQ[] = [
   // Essential Event Details
   {
     question: 'When is the wedding?',
-    answer: 'Forever Fest 2026 will take place on Friday, March 28th, 2026 from 6:00 PM to 11:00 PM CST.',
+    answer: 'Forever Fest 2026 will take place on Saturday, March 28th, 2026 from 6:00 PM to 11:00 PM CST.',
     component: <CalendarEmbedDynamic />,
   },
   {
@@ -72,15 +72,19 @@ const faqs: FAQ[] = [
   // Guest Experience & Expectations
   {
     question: 'What should I wear?',
-    answer: 'The attire is Funky Formal! Think formal wear with a fun, creative twist that matches the festive spirit of Forever Fest.',
+    answer: 'The attire is Funky Semi-Formal! Think semi-formal wear with a fun, creative twist that matches the festive spirit of Forever Fest. Eclectic colors, bold prints, and unique accessories are all welcome. Color suits and colorful dresses would be awesome!',
   },
   {
-    question: 'Will there be food and drinks available?',
-    answer: 'Absolutely! We\'ve got a delicious meal planned for the reception with a cocktail hour as well. plenty of drink options. If you have any dietary restrictions, please let us know in advance.',
+    question: 'Will there be food there?',
+    answer: 'Absolutely! We\'ve got a delicious buffet meal planned for the reception with a cocktail hour with hors d\'oeuvres as well. If you have any dietary restrictions, please let us know in advance in the RSVP form.',
+  },
+  {
+    question: 'Will there be drinks or a bar?',
+    answer: 'Yes! There will be a bar at the reception and the cocktail hour. We are planning to cover everyone\'s drinks for the cocktail hour reception up until a cap is reached, after which the bar will be a cash bar that you can pay for at your own discretion.',
   },
   {
     question: 'Can I take photos/videos during the ceremony?',
-    answer: 'Yes you can! We will have a photographer to capture the important moments, but when the wedding party is walking up or down the aisle, feel free to take photos or videos. Please do so in as respectful manner to not interrupt the ceremony (i.e. no flash).',
+    answer: 'Yes you can! We will have a photographer to capture the important moments, but when the wedding party is walking up or down the aisle, feel free to take photos or videos. Please do so in as respectful manner to not interrupt the ceremony (i.e. no flash). Go wild during the reception with capturing media! #ForeverFest2026',
   },
 
   // RSVP & Guest Management
