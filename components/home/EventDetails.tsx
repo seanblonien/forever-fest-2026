@@ -1,11 +1,9 @@
 export function EventDetails() {
-  // Shared event details component
+  // High-level event info component
   const EventInfo = () => (
     <div className="flex flex-col space-y-2 text-lavender-pink text-center md:text-left font-league-gothic">
-      <div className="text-4xl">6:00 PM-11:00 PM</div>
-      <div className="text-2xl">DEC on Dragon 1414 Dragon St</div>
-      <div className="text-2xl">Dallas, TX, 75207</div>
-      <div className="text-2xl">Attire: Funky Semi-Formal</div>
+      <div className="text-4xl">Dallas, Texas</div>
+      <div className="text-lg opacity-80">DEC on Dragon</div>
     </div>
   );
 

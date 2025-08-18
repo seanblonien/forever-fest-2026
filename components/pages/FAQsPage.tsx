@@ -61,7 +61,7 @@ const faqs: FAQ[] = [
   },
   {
     question: 'Are the ceremony and reception indoors or outdoors?',
-    answer: 'The ceremony and reception will take place outside on the rooftop of DEC on Dragon. It has a cover on it in case it rains, otherwise, but if it is a beautiful day, we will have the roof open. If it is cold, there is also heating lamps as well. We will work with the venue to make sure the weather does not affect celebrating our big day!',
+    answer: 'Our ceremony and reception will take place on the rooftop of DEC on Dragon, an outdoor venue designed for comfort in any weather. It features a retractable roof for open-air enjoyment on clear days, with the option to close it for rain. Heating lamps will also be provided for cooler temperatures. Rest assured, we\'ve planned with the venue to ensure a wonderful celebration, come rain or shine!',
   },
   {
     question: 'I am coming from out of town, where can I stay?',
@@ -73,6 +73,7 @@ const faqs: FAQ[] = [
   {
     question: 'What should I wear?',
     answer: 'The attire is Funky Semi-Formal! Think semi-formal wear with a fun, creative twist that matches the festive spirit of Forever Fest. Eclectic colors, bold prints, and unique accessories are all welcome. Color suits and colorful dresses would be awesome!',
+    component: <p className="text-lg">Moodboard with examples coming soon...</p>,
   },
   {
     question: 'Will there be food there?',
@@ -95,13 +96,6 @@ const faqs: FAQ[] = [
   {
     question: 'What should I do if I need to change my RSVP?',
     answer: 'Life happens! If you need to make any changes to your RSVP, please let us know as soon as possible by text or email so that we can plan accordingly.',
-  },
-
-  // Gifts & Registry
-  {
-    question: 'Where can I find your wedding registry?',
-    answer: 'You can find links to our registries in the Registry section of this website. Your presence is the best gift we could ask for, but we truly appreciate your generosity!',
-    component: <RegistryLink />,
   },
 ];
 
