@@ -117,11 +117,11 @@ const timelineData: TimelineItem[] = [
   },
   {
     id: 12,
-    date: 'February 9th, 2024',
+    date: 'February 9th, 2025',
     label: 'Engagement party celebration',
     photos: [
       {id: 21, src: '/engage1.webp', alt: 'Eva and Sean with the Blonien family'},
-      {id: 22, src: '/engage2.webp', alt: 'Eva and Sean with the extended Melendez family'},
+      {id: 24, src: '/engage4.webp', alt: 'Eva and Sean with both of their families'},
       {id: 23, src: '/engage3.webp', alt: 'Eva and Sean with friends'},
     ],
   },
