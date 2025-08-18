@@ -11,8 +11,12 @@ export function RSVPButton() {
       <a href="https://form.jotform.com/251896494421062" target="_blank" rel="noopener noreferrer">
         <Button
           size="lg"
-          className="text-2xl md:text-3xl font-black mt-4 y-6 rounded-lg border border-black
-           bg-papaya-whip text-penn-blue hover:scale-105 transition-transform"
+          className="text-2xl md:text-3xl font-black mt-4 py-6 rounded-lg
+           bg-gradient-to-r from-penn-blue to-steel-pink text-white
+           border-2 border-white
+           animate-pulse-glow animate-float
+           hover:scale-120
+           transition-all duration-500 ease-out"
         >
           Address Collection Form
         </Button>

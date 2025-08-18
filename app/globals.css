@@ -30,6 +30,34 @@ body {
   .alex-brush-svg {
     font-family: var(--font-alex-brush), 'Alex Brush', cursive;
   }
+
+  /* Custom pulsing glow animation for RSVP button */
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(184, 21, 158, 0.6), 0 0 40px rgba(184, 21, 158, 0.4), 0 0 60px rgba(184, 21, 158, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(184, 21, 158, 0.8), 0 0 60px rgba(184, 21, 158, 0.6), 0 0 90px rgba(184, 21, 158, 0.4);
+    }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* Subtle floating animation for extra attention */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-3px);
+    }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
 }
 
 /* Minimal CSS variables - only what's needed for shadcn/ui components */
