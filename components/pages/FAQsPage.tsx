@@ -1,5 +1,5 @@
 import MapLinks from '@/components/MapLinks';
-import {ExternalLink, Plane, ShoppingBag} from 'lucide-react';
+import {ExternalLink, Pin, Plane} from 'lucide-react';
 import Link from 'next/link';
 import {CalendarEmbedDynamic} from '../home';
 
@@ -17,17 +17,19 @@ function TravelLink() {
   );
 }
 
-// Registry Link Component
-function RegistryLink() {
+// Pinterest Moodboard Link Component
+function PinterestMoodboardLink() {
   return (
-    <Link
-      href="/registry"
+    <a
+      href="https://pin.it/hICCCXKqj"
+      target="_blank"
+      rel="noopener noreferrer"
       className="inline-flex items-center justify-center gap-3 bg-white/20 hover:bg-white/30 transition-colors duration-200 rounded-lg p-4 group text-lg font-league-gothic"
     >
-      <ShoppingBag className="w-5 h-5 text-white group-hover:scale-110 transition-transform duration-200" />
-      <span>View Registry</span>
+      <Pin className="w-5 h-5 text-white group-hover:scale-110 transition-transform duration-200" />
+      <span>Pinterest Moodboard</span>
       <ExternalLink className="w-4 h-4 text-white/70 group-hover:text-white transition-colors duration-200" />
-    </Link>
+    </a>
   );
 }
 
@@ -71,9 +73,9 @@ const faqs: FAQ[] = [
 
   // Guest Experience & Expectations
   {
-    question: 'What should I wear?',
-    answer: 'The attire is Funky Semi-Formal! Think semi-formal wear with a fun, creative twist that matches the festive spirit of Forever Fest. Eclectic colors, bold prints, and unique accessories are all welcome. Color suits and colorful dresses would be awesome!',
-    component: <p className="text-lg">Moodboard with examples coming soon...</p>,
+    question: 'What is the dress code?',
+    answer: 'Funky Semi-Formal Attire! Think semi-formal wear with a fun, creative twist that matches the festive spirit of Forever Fest. Eclectic colors, bold prints, and unique accessories are all welcome. Colorful suits and dresses are great, but you can also wear whatever makes you feel your best in semi-formal attire.',
+    component: <PinterestMoodboardLink />,
   },
   {
     question: 'Will there be food there?',
@@ -94,9 +96,18 @@ const faqs: FAQ[] = [
     answer: 'We love that you want to bring someone to celebrate with us! However, due to space constraints, we\'ve limited the guest list to those specifically invited. If you have questions about your invite, please reach out.',
   },
   {
-    question: 'What should I do if I need to change my RSVP?',
-    answer: 'Life happens! If you need to make any changes to your RSVP, please let us know as soon as possible by text or email so that we can plan accordingly.',
+    question: 'Are kids invited?',
+    answer: 'To ensure everyone can fully immerse themselves in the festival vibes, we\'re making this an adults-only event. Time for the big kids to play!',
   },
+  {
+    question: 'How can I change/update my address?',
+    answer: 'If you have already submitted the address collection form, you can check your email from Jotform with the edit link to edit/update your address. Simply search for "Response received for Forever Fest 2026: Address Collection" as the subject line, and the "Edit Link" will be in the email. Or, you can text or email Sean/Eva at any time.',
+  },
+  // {
+  //   question: 'What should I do if I need to change my RSVP?',
+  //   answer: 'Life happens! If you need to make any changes to your RSVP, please
+  // let us know as soon as possible by text or email so that we can plan accordingly.',
+  // },
 ];
 
 export default function FAQsPage() {
@@ -104,13 +115,10 @@ export default function FAQsPage() {
     <div className="w-full max-w-[600px] mx-auto text-center text-white pt-6 pb-12 px-2 md:px-0">
       <h1 className="text-4xl md:text-6xl mb-8 font-league-gothic">FAQs</h1>
       <div className="space-y-6">
-        <p className="text-lg md:text-xl mb-12">
-          Frequently asked questions about Forever Fest 2026
-        </p>
         <div className="space-y-6 text-left">
           {faqs.map((faq, index) => (
             <div key={index} className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
-              <h3 className="text-xl mb-3 font-league-gothic">{faq.question}</h3>
+              <h3 className="text-xl mb-3 font-bold">{faq.question}</h3>
               <p className="text-lg mb-4">{faq.answer}</p>
               {faq.component && (
                 <div className="mt-4 flex justify-center">
