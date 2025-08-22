@@ -20,7 +20,7 @@ const timelineData: TimelineItem[] = [
   {
     id: 1,
     date: 'Dec 29th, 2022',
-    label: 'First night we met, LAN 2022',
+    label: 'First night we met, Lights All Night 2022',
     photos: [
       {id: 1, src: '/timeline1.webp', alt: 'LAN group photo 2022'},
     ],
@@ -109,7 +109,7 @@ const timelineData: TimelineItem[] = [
   {
     id: 11,
     date: 'Dec 28th, 2024',
-    label: 'Sean proposes at LAN 2024 💍',
+    label: 'Sean proposes at Lights All Night 2024 💍',
     photos: [
       {id: 19, src: '/fest9.webp', alt: 'Sean and Eva with the "she said yes" totem right after the proposal in the Marauda moshpit at LAN 2024'},
       {id: 20, src: '/fest10.webp', alt: 'Sean and Eva kissing surrounded the disco balls and mirrors with "Lights All Night" in the background at LAN 2024'},
