@@ -78,12 +78,12 @@ const faqs: FAQ[] = [
     component: <PinterestMoodboardLink />,
   },
   {
-    question: 'Will there be food there?',
+    question: 'Will there be food at the reception?',
     answer: 'Absolutely! We\'ve got a delicious buffet meal planned for the reception with a cocktail hour with hors d\'oeuvres as well. If you have any dietary restrictions, please let us know in advance in the RSVP form.',
   },
   {
-    question: 'Will there be drinks or a bar?',
-    answer: 'Yes! There will be a bar at the reception and the cocktail hour. We are planning to cover everyone\'s drinks for the cocktail hour reception up until a cap is reached, after which the bar will be a cash bar that you can pay for at your own discretion.',
+    question: 'Will there be drinks?',
+    answer: 'Yes! There will be a bar at the reception and the cocktail hour. We are planning to cover everyone\'s drinks for the cocktail hour reception up until a limit is reached, after which the bar will be a cash bar that you can pay for at your own discretion.',
   },
   {
     question: 'Can I take photos/videos during the ceremony?',
