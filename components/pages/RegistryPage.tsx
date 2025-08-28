@@ -14,7 +14,7 @@ export default function RegistryPage() {
         <div className="bg-white/10 backdrop-blur-sm rounded-lg p-8">
           <h3 className="text-2xl mb-4 font-league-gothic">Online Registry</h3>
           <a
-            href="https://www.myregistry.com/wedding-website/sean-blonien-and-eva-melendez-dallas-tx/4938687/welcomemessage"
+            href="https://www.myregistry.com/giftlist/forever-fest"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-3 bg-white/20 hover:bg-white/30 transition-colors duration-200 rounded-lg p-6 group text-xl font-league-gothic"
