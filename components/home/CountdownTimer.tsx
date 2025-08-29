@@ -1,19 +1,27 @@
 'use client';
 
+import {addDays, addHours, addMinutes, addMonths, differenceInDays, differenceInHours, differenceInMinutes, differenceInMonths, differenceInSeconds} from 'date-fns';
 import {useEffect, useState} from 'react';
 
 type TimeLeft = {
+  months: number;
   days: number;
   hours: number;
   minutes: number;
   seconds: number;
 };
 
-function CountdownBox({value, label}: {value: number; label: string}) {
+function CountdownBox({
+  value,
+  label,
+}: {
+  value: number;
+  label: string;
+}) {
   return (
-    <div className="rounded-lg p-2 md:p-4 bg-papaya-whip">
+    <div className="rounded-lg py-2 px-1 md:p-4 bg-papaya-whip">
       <div className="text-3xl md:text-4xl font-black text-syracuse-orange font-league-gothic">
-        {value.toString().padStart(2, '0')}
+        {value.toString()}
       </div>
       <div className="text-sm md:text-base text-steel-pink font-league-gothic">
         {label}
@@ -24,6 +32,7 @@ function CountdownBox({value, label}: {value: number; label: string}) {
 
 export function CountdownTimer() {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
+    months: 0,
     days: 0,
     hours: 0,
     minutes: 0,
@@ -38,14 +47,28 @@ export function CountdownTimer() {
       const difference = targetDate.getTime() - now.getTime();
 
       if (difference > 0) {
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+        // Calculate months remaining
+        const months = differenceInMonths(targetDate, now);
 
-        setTimeLeft({days, hours, minutes, seconds});
+        // Calculate remaining days after removing months
+        const afterMonths = addMonths(now, months);
+        const days = differenceInDays(targetDate, afterMonths);
+
+        // Calculate remaining hours after removing full days
+        const afterDays = addDays(afterMonths, days);
+        const hours = differenceInHours(targetDate, afterDays);
+
+        // Calculate remaining minutes after removing full hours
+        const afterHours = addHours(afterDays, hours);
+        const minutes = differenceInMinutes(targetDate, afterHours);
+
+        // Calculate remaining seconds after removing full minutes
+        const afterMinutes = addMinutes(afterHours, minutes);
+        const seconds = differenceInSeconds(targetDate, afterMinutes);
+
+        setTimeLeft({months, days, hours, minutes, seconds});
       } else {
-        setTimeLeft({days: 0, hours: 0, minutes: 0, seconds: 0});
+        setTimeLeft({months: 0, days: 0, hours: 0, minutes: 0, seconds: 0});
       }
     };
 
@@ -60,7 +83,8 @@ export function CountdownTimer() {
 
   return (
     <div className="mb-12 px-2 max-w-[600px] mx-auto">
-      <div className="grid grid-cols-4 gap-2 md:gap-4 max-w-2xl mx-auto">
+      <div className="grid grid-cols-5 gap-2 md:gap-4 max-w-3xl mx-auto">
+        <CountdownBox value={timeLeft.months} label="MONTHS" />
         <CountdownBox value={timeLeft.days} label="DAYS" />
         <CountdownBox value={timeLeft.hours} label="HOURS" />
         <CountdownBox value={timeLeft.minutes} label="MINUTES" />
