@@ -49,6 +49,13 @@ const config: Config = {
           foreground: 'hsl(var(--popover-foreground))',
         },
       },
+      // Custom animations
+      rotate: {
+        360: '360deg',
+      },
+      transitionDuration: {
+        houseBpm: '468ms',
+      },
     },
   },
   // Keep tailwindcss-animate for shadcn/ui components

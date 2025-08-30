@@ -1,6 +1,10 @@
+'use client';
+
 import MapLinks from '@/components/MapLinks';
-import {ExternalLink, Pin, Plane} from 'lucide-react';
+import {useRouteHash} from '@/hooks';
+import {ExternalLink, LinkIcon, Pin, Plane} from 'lucide-react';
 import Link from 'next/link';
+import {useState} from 'react';
 import {CalendarEmbedDynamic} from '../home';
 
 // Travel Link Component
@@ -33,13 +37,90 @@ function PinterestMoodboardLink() {
   );
 }
 
-type FAQ = {
+// Function to generate URL-friendly slugs from questions
+function generateSlug(question: string): string {
+  return question
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
+    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
+    .trim();
+}
+
+type QuestionProps = {
+  question: string;
+  answer: string;
+  component?: React.ReactNode;
+  highlightedId: string | null;
+};
+
+function IndividualFAQ({question, answer, component, highlightedId}: QuestionProps) {
+  const [copiedTooltip, setCopiedTooltip] = useState(false);
+  const slug = generateSlug(question);
+  const isHighlighted = highlightedId === slug;
+
+  const copyLinkToClipboard = () => {
+    const url = `${window.location.origin}${window.location.pathname}#${slug}`;
+    navigator.clipboard.writeText(url);
+
+    // Show tooltip
+    setCopiedTooltip(true);
+
+    // Hide tooltip after 1.5 seconds
+    setTimeout(() => {
+      setCopiedTooltip(false);
+    }, 1500);
+  };
+
+  return (
+    <div
+      id={slug}
+      className={`bg-white/10 backdrop-blur-sm rounded-lg p-6 transition-all duration-500 group/question ${
+        isHighlighted
+          ? 'ring-2 ring-[#DE1ACE] shadow-lg shadow-[#DE1ACE]/50 bg-white/20'
+          : ''
+      }`}
+    >
+      <div className="flex items-center justify-between mb-3">
+        <h3
+          className="text-xl font-bold flex-1 cursor-pointer group-hover/question:underline transition-all duration-200"
+          onClick={copyLinkToClipboard}
+          title="Copy link to this question"
+        >
+          {question}
+        </h3>
+        <div className="relative">
+          <button
+            onClick={copyLinkToClipboard}
+            className="ml-3 p-1 rounded hover:bg-white/10 transition-all duration-200 opacity-0 group-hover/question:opacity-100"
+            title="Copy link to this question"
+          >
+            <LinkIcon className="w-4 h-4 text-white/60 hover:text-white transition-colors duration-200" />
+          </button>
+          {copiedTooltip && (
+            <div className="absolute -top-8 -left-4 bg-[#DE1ACE]/90 text-white text-sm px-3 py-2 rounded-lg whitespace-nowrap z-10 shadow-lg transition-opacity duration-300 animate-in fade-in-0">
+              Link copied!
+            </div>
+          )}
+        </div>
+      </div>
+      <p className="text-lg mb-4">{answer}</p>
+      {component && (
+        <div className="mt-4 flex justify-center">
+          {component}
+        </div>
+      )}
+    </div>
+  );
+}
+
+type FAQData = {
   question: string;
   answer: string;
   component?: React.ReactNode;
 };
 
-const faqs: FAQ[] = [
+const faqs: FAQData[] = [
   // Essential Event Details
   {
     question: 'When is the wedding?',
@@ -111,21 +192,21 @@ const faqs: FAQ[] = [
 ];
 
 export default function FAQsPage() {
+  const {currentHash} = useRouteHash();
+
   return (
     <div className="w-full max-w-[600px] mx-auto text-center text-white pt-6 pb-12 px-2 md:px-0">
       <h1 className="text-4xl md:text-6xl mb-8 font-league-gothic">FAQs</h1>
       <div className="space-y-6">
         <div className="space-y-6 text-left">
           {faqs.map((faq, index) => (
-            <div key={index} className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
-              <h3 className="text-xl mb-3 font-bold">{faq.question}</h3>
-              <p className="text-lg mb-4">{faq.answer}</p>
-              {faq.component && (
-                <div className="mt-4 flex justify-center">
-                  {faq.component}
-                </div>
-              )}
-            </div>
+            <IndividualFAQ
+              key={index}
+              question={faq.question}
+              answer={faq.answer}
+              component={faq.component}
+              highlightedId={currentHash}
+            />
           ))}
         </div>
       </div>

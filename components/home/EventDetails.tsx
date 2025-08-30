@@ -1,16 +1,13 @@
-export function EventDetails() {
-  // High-level event info component
-  const EventInfo = () => (
-    <div className="flex flex-col space-y-2 text-lavender-pink text-center md:text-left font-league-gothic">
-      <div className="text-4xl">Dallas, Texas</div>
-      <div className="text-lg opacity-80">DEC on Dragon</div>
-    </div>
-  );
+import Link from 'next/link';
 
+export function EventDetails() {
   return (
     <div className="flex flex-col md:flex-row max-w-[600px] mx-auto px-4 mb-12 text-white items-center md:items-stretch">
       {/* Date Section - responsive layout */}
-      <div className="flex-1 text-center md:text-left md:relative mb-6 md:mb-0">
+      <Link
+        href="/faqs#when-is-the-wedding"
+        className="flex-1 text-center md:text-left md:relative mb-6 md:mb-0 cursor-pointer"
+      >
         {/* Mobile: Single line date */}
         <div className="md:hidden text-6xl font-black text-lavender-pink font-league-gothic">
           MARCH
@@ -32,14 +29,20 @@ export function EventDetails() {
             2026
           </div>
         </div>
-      </div>
+      </Link>
 
       {/* Vertical separator line - desktop only */}
       <div className="hidden md:block w-px bg-lavender-pink mx-8"></div>
 
       {/* Event Details Section */}
       <div className="flex-1 flex flex-col justify-center">
-        <EventInfo />
+        <Link
+          href="/faqs#where-is-the-wedding"
+          className="flex flex-col space-y-2 text-lavender-pink text-center md:text-left font-league-gothic cursor-pointer"
+        >
+          <div className="text-4xl">Dallas, Texas</div>
+          <div className="text-lg opacity-80">DEC on Dragon</div>
+        </Link>
       </div>
     </div>
   );

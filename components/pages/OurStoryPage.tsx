@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
 import '../../styles/zoom-custom.css';
@@ -9,6 +10,7 @@ type TimelineItem = {
   date: string;
   label: string;
   grid?: boolean;
+  dateLink?: string;
   photos?: {
     id: number;
     src: string;
@@ -129,6 +131,7 @@ const timelineData: TimelineItem[] = [
     id: 13,
     date: 'March 28th, 2026',
     label: '➡️ Forever Fest 2026!',
+    dateLink: '/faqs#when-is-the-wedding',
   },
 ];
 
@@ -156,21 +159,15 @@ export default function OurStoryPage() {
 
         {/* Timeline Items */}
         <div className="space-y-12">
-          {timelineData.map((item) => (
-            <div key={item.id} className="relative">
-              {/* Disco Ball Point - precisely centered on the vertical line */}
-              <div className="absolute -left-4 top-4 w-0 h-0 flex items-center justify-center -translate-x-1/2">
-                <span className="text-2xl leading-none">🪩</span>
-              </div>
-
-              {/* Content */}
-              <div className="ml-4">
+          {timelineData.map((item) => {
+            const content = (
+              <>
                 {/* Date and Label */}
                 <div className="mb-4">
-                  <h3 className="text-2xl font-alex-brush text-papaya-whip mb-1">
+                  <h3 className="text-2xl font-alex-brush mb-1 transition-transform duration-300 hover:scale-[1.2] origin-left">
                     {item.date}
                   </h3>
-                  <h4 className="text-xl font-league-gothic text-papaya-whip">
+                  <h4 className="text-xl font-league-gothic transition-transform duration-300 hover:scale-[1.2] origin-left">
                     {item.label}
                   </h4>
                 </div>
@@ -202,9 +199,31 @@ export default function OurStoryPage() {
                     ))}
                   </div>
                 )}
+              </>
+            );
+
+            return (
+              <div key={item.id} className="relative">
+                {/* Disco Ball Point - precisely centered on the vertical line */}
+                <div className="absolute -left-4 top-4 w-0 h-0 flex items-center justify-center -translate-x-1/2">
+                  <span className="text-3xl leading-none cursor-pointer transition-transform duration-houseBpm hover:scale-150 hover:rotate-360 active:scale-150 active:rotate-360">🪩</span>
+                </div>
+
+                {/* Content */}
+                <div className="ml-4">
+                  {item.dateLink
+                    ? (
+                        <Link href={item.dateLink} className="block hover:opacity-80 transition-opacity duration-200">
+                          {content}
+                        </Link>
+                      )
+                    : (
+                        content
+                      )}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>
