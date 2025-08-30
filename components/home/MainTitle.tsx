@@ -2,15 +2,9 @@ import {DiscoBallsSvg} from '@/components/svgs/DiscoBallsSvg';
 import Image from 'next/image';
 import {TitleSvg} from '../svgs';
 
-type MainTitleProps = {
-  className?: string;
-};
-
-export function MainTitle({
-  className = '',
-}: MainTitleProps) {
+export function MainTitle() {
   return (
-    <div className={className}>
+    <>
       {/* Main Title Section with layered images */}
       <div className="relative py-12 flex items-center justify-center">
         {/* Couple Photo - Middle layer */}
@@ -39,6 +33,6 @@ export function MainTitle({
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

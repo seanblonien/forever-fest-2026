@@ -15,6 +15,7 @@ type TimelineItem = {
     id: number;
     src: string;
     alt: string;
+    priority?: boolean;
   }[];
 };
 
@@ -24,7 +25,7 @@ const timelineData: TimelineItem[] = [
     date: 'Dec 29th, 2022',
     label: 'First night we met, Lights All Night 2022',
     photos: [
-      {id: 1, src: '/timeline1.webp', alt: 'LAN group photo 2022'},
+      {id: 1, src: '/timeline1.webp', alt: 'LAN group photo 2022', priority: true},
     ],
   },
   {
@@ -193,7 +194,7 @@ export default function OurStoryPage() {
                             maxWidth: '100%',
                           }}
                           sizes="(max-width: 768px) 90vw, (max-width: 1200px) 80vw"
-                          priority={false}
+                          priority={photo?.priority ?? false}
                         />
                       </Zoom>
                     ))}
