@@ -21,6 +21,7 @@ const nextConfig: NextConfig = withBundleAnalyzer({
     removeConsole: process.env.NODE_ENV === 'production',
   },
   poweredByHeader: false,
+  reactStrictMode: true,
   // Add cache headers for static assets
   async headers() {
     return [
