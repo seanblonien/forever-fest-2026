@@ -6,6 +6,7 @@ const withBundleAnalyzer = Analyzer({
 });
 
 const nextConfig: NextConfig = withBundleAnalyzer({
+  cacheComponents: true,
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -16,9 +17,7 @@ const nextConfig: NextConfig = withBundleAnalyzer({
     contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;',
   },
   compiler: {
-    // Remove React properties
     reactRemoveProperties: true,
-    // Remove console.log in production builds
     removeConsole: process.env.NODE_ENV === 'production',
   },
   poweredByHeader: false,
@@ -69,14 +68,10 @@ const nextConfig: NextConfig = withBundleAnalyzer({
   },
   reactCompiler: true,
   experimental: {
+    turbopackFileSystemCacheForDev: true,
     optimizePackageImports: [
       'lucide-react',
       'date-fns',
-      '@radix-ui/react-dialog',
-      '@radix-ui/react-alert-dialog',
-      '@radix-ui/react-toast',
-      '@radix-ui/react-tooltip',
-      '@radix-ui/react-label',
       '@radix-ui/react-slot',
       'class-variance-authority',
       'clsx',
