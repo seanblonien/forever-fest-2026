@@ -37,7 +37,6 @@
       "mode": "auto"
     }
   ],
-  "eslint.experimental.useFlatConfig": true,
   // Editor settings that work well with ESLint
   "editor.tabSize": 2,
   "editor.insertSpaces": true,

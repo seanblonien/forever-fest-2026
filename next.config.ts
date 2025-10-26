@@ -6,9 +6,6 @@ const withBundleAnalyzer = Analyzer({
 });
 
 const nextConfig: NextConfig = withBundleAnalyzer({
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -70,9 +67,8 @@ const nextConfig: NextConfig = withBundleAnalyzer({
       },
     ];
   },
+  reactCompiler: true,
   experimental: {
-    // reactCompiler: true,
-    // taint: true,
     optimizePackageImports: [
       'lucide-react',
       'date-fns',
