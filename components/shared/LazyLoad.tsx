@@ -1,18 +1,12 @@
 'use client';
-import {useInViewLazyLoad} from '@/hooks/useInViewLazyLoad';
-import {lazy, ReactNode, Suspense} from 'react';
+import { lazy, ReactNode, Suspense } from 'react';
+import { useInViewLazyLoad } from '@/hooks/useInViewLazyLoad';
 
 type LazyLoadProps = {
   /**
-   * Function that returns a dynamic import promise
-   * @example () => import('./HeavyComponent')
+   * CSS classes for the container
    */
-  importFnAction: () => Promise<{default: React.ComponentType}>;
-
-  /**
-   * Fallback component to show while loading
-   */
-  fallback?: ReactNode;
+  className?: string;
 
   /**
    * Props to pass to the lazy-loaded component
@@ -20,9 +14,27 @@ type LazyLoadProps = {
   componentProps?: Record<string, unknown>;
 
   /**
-   * CSS classes for the container
+   * Fallback component to show while loading
    */
-  className?: string;
+  fallback?: ReactNode;
+
+  /**
+   * Function that returns a dynamic import promise
+   * @example () => import('./HeavyComponent')
+   */
+  importFnAction: () => Promise<{ default: React.ComponentType }>;
+
+  /**
+   * Load immediately without waiting for viewport
+   * @default false
+   */
+  isEager?: boolean;
+
+  /**
+   * Delay before loading (ms)
+   * @default 100
+   */
+  loadDelay?: number;
 
   /**
    * Root margin for intersection observer
@@ -35,18 +47,6 @@ type LazyLoadProps = {
    * @default 0
    */
   threshold?: number;
-
-  /**
-   * Delay before loading (ms)
-   * @default 100
-   */
-  loadDelay?: number;
-
-  /**
-   * Load immediately without waiting for viewport
-   * @default false
-   */
-  eager?: boolean;
 };
 
 /**
@@ -82,25 +82,25 @@ type LazyLoadProps = {
  * />
  * ```
  */
-export function LazyLoad({
-  importFnAction,
+export const LazyLoad = ({
+  className = '',
+  componentProps = {},
   fallback = (
-    <div className="animate-pulse bg-white/10 rounded-lg p-8 flex items-center justify-center">
-      <span className="text-white/60">Loading...</span>
+    <div className='animate-pulse bg-white/10 rounded-lg p-8 flex items-center justify-center'>
+      <span className='text-white/60'>Loading...</span>
     </div>
   ),
-  componentProps = {},
-  className = '',
+  importFnAction,
+  isEager = false,
+  loadDelay = 100,
   rootMargin = '200px',
   threshold = 0,
-  loadDelay = 100,
-  eager = false,
-}: LazyLoadProps) {
-  const {containerRef, shouldLoad} = useInViewLazyLoad({
+}: LazyLoadProps) => {
+  const { containerRef, shouldLoad } = useInViewLazyLoad({
     rootMargin,
     threshold,
     loadDelay,
-    triggerImmediately: eager,
+    isTriggerImmediately: isEager,
   });
 
   // Create the lazy component only when needed
@@ -119,4 +119,4 @@ export function LazyLoad({
           )}
     </div>
   );
-}
+};

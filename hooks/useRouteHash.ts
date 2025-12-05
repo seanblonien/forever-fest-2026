@@ -1,6 +1,5 @@
 'use client';
-
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 
 type UseRouteHashOptions = {
   /**
@@ -13,7 +12,7 @@ type UseRouteHashOptions = {
    * Whether to automatically clear the highlight after the duration
    * @default true
    */
-  autoClear?: boolean;
+  isAutoClear?: boolean;
 };
 
 /**
@@ -22,8 +21,8 @@ type UseRouteHashOptions = {
  * @param options Configuration options for the hook
  * @returns Object containing the current hash value and a function to manually set it
  */
-export function useRouteHash(options: UseRouteHashOptions = {}) {
-  const {highlightDuration = 3000, autoClear = true} = options;
+export const useRouteHash = (options: UseRouteHashOptions = {}) => {
+  const { highlightDuration = 3000, isAutoClear = true } = options;
   const [currentHash, setCurrentHash] = useState<string | null>(null);
 
   useEffect(() => {
@@ -34,7 +33,7 @@ export function useRouteHash(options: UseRouteHashOptions = {}) {
         setCurrentHash(hash);
 
         // Remove highlight after specified duration if autoClear is enabled
-        if (autoClear) {
+        if (isAutoClear) {
           setTimeout(() => setCurrentHash(null), highlightDuration);
         }
       } else {
@@ -52,7 +51,7 @@ export function useRouteHash(options: UseRouteHashOptions = {}) {
     return () => {
       window.removeEventListener('hashchange', handleHashChange);
     };
-  }, [highlightDuration, autoClear]);
+  }, [highlightDuration, isAutoClear]);
 
   /**
    * Manually set the current hash value
@@ -66,4 +65,4 @@ export function useRouteHash(options: UseRouteHashOptions = {}) {
     currentHash,
     setHash,
   };
-}
+};

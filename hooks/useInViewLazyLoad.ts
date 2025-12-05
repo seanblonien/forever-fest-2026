@@ -1,7 +1,17 @@
 'use client';
-import {useEffect, useRef, useState} from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 type UseInViewLazyLoadOptions = {
+  /**
+   * Whether to trigger loading immediately (useful for testing)
+   * @default false
+   */
+  isTriggerImmediately?: boolean;
+  /**
+   * Delay before triggering the load (in milliseconds)
+   * @default 100
+   */
+  loadDelay?: number;
   /**
    * Root margin for the intersection observer
    * @default '200px'
@@ -12,16 +22,6 @@ type UseInViewLazyLoadOptions = {
    * @default 0
    */
   threshold?: number;
-  /**
-   * Delay before triggering the load (in milliseconds)
-   * @default 100
-   */
-  loadDelay?: number;
-  /**
-   * Whether to trigger loading immediately (useful for testing)
-   * @default false
-   */
-  triggerImmediately?: boolean;
 };
 
 /**
@@ -44,21 +44,22 @@ type UseInViewLazyLoadOptions = {
  * );
  * ```
  */
-export function useInViewLazyLoad(options: UseInViewLazyLoadOptions = {}) {
+export const useInViewLazyLoad = (options: UseInViewLazyLoadOptions = {}) => {
   const {
+    isTriggerImmediately = false,
+    loadDelay = 100,
     rootMargin = '200px',
     threshold = 0,
-    loadDelay = 100,
-    triggerImmediately = false,
   } = options;
 
-  const [isInView, setIsInView] = useState(triggerImmediately);
-  const [shouldLoad, setShouldLoad] = useState(triggerImmediately);
+  const [isInView, setIsInView] = useState(isTriggerImmediately);
+  const [shouldLoad, setShouldLoad] = useState(isTriggerImmediately);
   const containerRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
-    if (triggerImmediately) {
+    if (isTriggerImmediately) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- Intentional
       setIsInView(true);
       setShouldLoad(true);
       return;
@@ -100,7 +101,7 @@ export function useInViewLazyLoad(options: UseInViewLazyLoadOptions = {}) {
       observer.disconnect();
       observerRef.current = null;
     };
-  }, [rootMargin, threshold, loadDelay, triggerImmediately]);
+  }, [rootMargin, threshold, loadDelay, isTriggerImmediately]);
 
   // Manual trigger function for testing or special cases
   const triggerLoad = () => {
@@ -118,4 +119,4 @@ export function useInViewLazyLoad(options: UseInViewLazyLoadOptions = {}) {
     shouldLoad,
     triggerLoad,
   };
-}
+};

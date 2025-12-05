@@ -1,123 +1,120 @@
 'use client';
 
-import MapLinks from '@/components/MapLinks';
-import {useRouteHash} from '@/hooks';
-import {ExternalLink, LinkIcon, Pin, Plane} from 'lucide-react';
+import { ExternalLink, LinkIcon, Pin, Plane } from 'lucide-react';
 import Link from 'next/link';
-import {useState} from 'react';
-import {CalendarEmbedDynamic} from '../home';
+import { useState } from 'react';
+import { useRouteHash } from '@/hooks';
+import MapLinks from '@/components/MapLinks';
+import { CalendarEmbedDynamic } from '../home';
 
 // Travel Link Component
-function TravelLink() {
-  return (
-    <Link
-      href="/travel"
-      className="inline-flex items-center justify-center gap-3 bg-white/20 hover:bg-white/30 transition-colors duration-200 rounded-lg p-4 group text-lg font-league-gothic"
-    >
-      <Plane className="w-5 h-5 text-white group-hover:scale-110 transition-transform duration-200" />
-      <span>Visit Travel Page</span>
-      <ExternalLink className="w-4 h-4 text-white/70 group-hover:text-white transition-colors duration-200" />
-    </Link>
-  );
-}
+const TravelLink = () => (
+  <Link
+    className='inline-flex items-center justify-center gap-3 bg-white/20 hover:bg-white/30 transition-colors duration-200 rounded-lg p-4 group text-lg font-league-gothic'
+    href='/travel'
+  >
+    <Plane className='w-5 h-5 text-white group-hover:scale-110 transition-transform duration-200' />
+    <span>Visit Travel Page</span>
+    <ExternalLink className='w-4 h-4 text-white/70 group-hover:text-white transition-colors duration-200' />
+  </Link>
+);
 
 // Pinterest Moodboard Link Component
-function PinterestMoodboardLink() {
-  return (
-    <a
-      href="https://pin.it/hICCCXKqj"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="inline-flex items-center justify-center gap-3 bg-white/20 hover:bg-white/30 transition-colors duration-200 rounded-lg p-4 group text-lg font-league-gothic"
-    >
-      <Pin className="w-5 h-5 text-white group-hover:scale-110 transition-transform duration-200" />
-      <span>Pinterest Moodboard</span>
-      <ExternalLink className="w-4 h-4 text-white/70 group-hover:text-white transition-colors duration-200" />
-    </a>
-  );
-}
+const PinterestMoodboardLink = () => (
+  <a
+    className='inline-flex items-center justify-center gap-3 bg-white/20 hover:bg-white/30 transition-colors duration-200 rounded-lg p-4 group text-lg font-league-gothic'
+    href='https://pin.it/hICCCXKqj'
+    rel='noopener noreferrer'
+    target='_blank'
+  >
+    <Pin className='w-5 h-5 text-white group-hover:scale-110 transition-transform duration-200' />
+    <span>Pinterest Moodboard</span>
+    <ExternalLink className='w-4 h-4 text-white/70 group-hover:text-white transition-colors duration-200' />
+  </a>
+);
 
 // Function to generate URL-friendly slugs from questions
-function generateSlug(question: string): string {
-  return question
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
-    .replace(/\s+/g, '-') // Replace spaces with hyphens
-    .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
-    .trim();
-}
+const generateSlug = (question: string) => question
+  .toLowerCase()
+  .replaceAll(/[^a-z0-9\s-]/g, '') // Remove special characters
+  .replaceAll(/\s+/g, '-') // Replace spaces with hyphens
+  .replaceAll(/-+/g, '-') // Replace multiple hyphens with single hyphen
+  .trim();
 
 type QuestionProps = {
-  question: string;
   answer: string;
   component?: React.ReactNode;
   highlightedId: string | null;
+  question: string;
 };
 
-function IndividualFAQ({question, answer, component, highlightedId}: QuestionProps) {
-  const [copiedTooltip, setCopiedTooltip] = useState(false);
+const IndividualFAQ = ({ answer, component, highlightedId, question }: QuestionProps) => {
+  const [hasCopiedTooltip, setHasCopiedTooltip] = useState(false);
   const slug = generateSlug(question);
   const isHighlighted = highlightedId === slug;
 
   const copyLinkToClipboard = () => {
     const url = `${window.location.origin}${window.location.pathname}#${slug}`;
-    navigator.clipboard.writeText(url);
+    void navigator.clipboard.writeText(url);
 
     // Show tooltip
-    setCopiedTooltip(true);
+    setHasCopiedTooltip(true);
 
     // Hide tooltip after 1.5 seconds
     setTimeout(() => {
-      setCopiedTooltip(false);
+      setHasCopiedTooltip(false);
     }, 1500);
   };
 
   return (
     <div
-      id={slug}
       className={`bg-white/10 backdrop-blur-sm rounded-lg p-6 transition-all duration-500 group/question ${
         isHighlighted
           ? 'ring-2 ring-[#DE1ACE] shadow-lg shadow-[#DE1ACE]/50 bg-white/20'
           : ''
       }`}
+      id={slug}
     >
-      <div className="flex items-center justify-between mb-3">
-        <h3
-          className="text-xl font-bold flex-1 cursor-pointer group-hover/question:underline transition-all duration-200"
-          onClick={copyLinkToClipboard}
-          title="Copy link to this question"
-        >
-          {question}
-        </h3>
-        <div className="relative">
+      <div className='flex items-center justify-between mb-3'>
+        <h3 className='text-xl font-bold flex-1'>
           <button
+            className='text-left cursor-pointer group-hover/question:underline transition-all duration-200'
+            title='Copy link to this question'
+            type='button'
             onClick={copyLinkToClipboard}
-            className="ml-3 p-1 rounded hover:bg-white/10 transition-all duration-200 opacity-0 group-hover/question:opacity-100"
-            title="Copy link to this question"
           >
-            <LinkIcon className="w-4 h-4 text-white/60 hover:text-white transition-colors duration-200" />
+            {question}
           </button>
-          {copiedTooltip && (
-            <div className="absolute -top-8 -left-4 bg-[#DE1ACE]/90 text-white text-sm px-3 py-2 rounded-lg whitespace-nowrap z-10 shadow-lg transition-opacity duration-300 animate-in fade-in-0">
+        </h3>
+        <div className='relative'>
+          <button
+            className='ml-3 p-1 rounded hover:bg-white/10 transition-all duration-200 opacity-0 group-hover/question:opacity-100'
+            title='Copy link to this question'
+            onClick={copyLinkToClipboard}
+          >
+            <LinkIcon className='w-4 h-4 text-white/60 hover:text-white transition-colors duration-200' />
+          </button>
+          {hasCopiedTooltip && (
+            <div className='absolute -top-8 -left-4 bg-[#DE1ACE]/90 text-white text-sm px-3 py-2 rounded-lg whitespace-nowrap z-10 shadow-lg transition-opacity duration-300 animate-in fade-in-0'>
               Link copied!
             </div>
           )}
         </div>
       </div>
-      <p className="text-lg mb-4">{answer}</p>
+      <p className='text-lg mb-4'>{answer}</p>
       {component && (
-        <div className="mt-4 flex justify-center">
+        <div className='mt-4 flex justify-center'>
           {component}
         </div>
       )}
     </div>
   );
-}
+};
 
 type FAQData = {
-  question: string;
   answer: string;
   component?: React.ReactNode;
+  question: string;
 };
 
 const faqs: FAQData[] = [
@@ -191,25 +188,25 @@ const faqs: FAQData[] = [
   // },
 ];
 
-export default function FAQsPage() {
-  const {currentHash} = useRouteHash();
+export const FaqPage: React.FC = () => {
+  const { currentHash } = useRouteHash();
 
   return (
-    <div className="w-full max-w-[600px] mx-auto text-center text-white pt-6 pb-12 px-2 md:px-0">
-      <h1 className="text-4xl md:text-6xl mb-8 font-league-gothic">FAQs</h1>
-      <div className="space-y-6">
-        <div className="space-y-6 text-left">
-          {faqs.map((faq, index) => (
+    <div className='w-full max-w-[600px] mx-auto text-center text-white pt-6 pb-12 px-2 md:px-0'>
+      <h1 className='text-4xl md:text-6xl mb-8 font-league-gothic'>FAQs</h1>
+      <div className='space-y-6'>
+        <div className='space-y-6 text-left'>
+          {faqs.map((faq) => (
             <IndividualFAQ
-              key={index}
-              question={faq.question}
+              key={`faq-${faq.question}`}
               answer={faq.answer}
               component={faq.component}
               highlightedId={currentHash}
+              question={faq.question}
             />
           ))}
         </div>
       </div>
     </div>
   );
-}
+};

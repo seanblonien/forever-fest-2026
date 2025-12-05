@@ -7,21 +7,20 @@ import {
   MainTitle,
   RSVPButton,
 } from '@/components/home';
-import PageLayout from '@/components/shared/PageLayout';
+import { PageLayout } from '@/components/shared/PageLayout';
 
-export default function ForeverFestPage() {
-  return (
-    <PageLayout>
-      <div className="text-center relative">
-        <MainTitle />
-        <CitySkyline />
+const ForeverFestPage: React.FC = () => (
+  <PageLayout>
+    <div className='text-center relative'>
+      <MainTitle />
+      <CitySkyline />
 
-        <EventDetails />
-        <Description />
-        <CountdownTimer />
-        <RSVPButton />
-        <CalendarEmbedDynamic isShowTitle />
-      </div>
-    </PageLayout>
-  );
-}
+      <EventDetails />
+      <Description />
+      <CountdownTimer />
+      <RSVPButton />
+      <CalendarEmbedDynamic isShowTitle />
+    </div>
+  </PageLayout>
+);
+export default ForeverFestPage;

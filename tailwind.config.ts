@@ -1,4 +1,4 @@
-import type {Config} from 'tailwindcss';
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
@@ -59,7 +59,7 @@ const config: Config = {
     },
   },
   // Keep tailwindcss-animate for shadcn/ui components
-  // eslint-disable-next-line @typescript-eslint/no-require-imports -- config file
+  // eslint-disable-next-line @typescript-eslint/no-require-imports, unicorn/prefer-module -- config file
   plugins: [require('tailwindcss-animate')],
 } satisfies Config;
 

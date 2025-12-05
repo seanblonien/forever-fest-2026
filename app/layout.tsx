@@ -1,18 +1,19 @@
-import {ThemeProvider} from '@/components/theme-provider';
-import {Analytics} from '@vercel/analytics/react';
-import {SpeedInsights} from '@vercel/speed-insights/next';
-import type {Metadata} from 'next';
-import {Alex_Brush, League_Gothic} from 'next/font/google';
-import {cn} from '../lib/utils';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Alex_Brush as AlexBrush, League_Gothic as LeagueGothic } from 'next/font/google';
+import type { Metadata } from 'next';
+import { ThemeProvider } from '@/components/theme-provider';
+import { ChildrenProps } from '../lib';
+import { cn } from '../lib/utils';
 import './globals.css';
 
-const boldFont = League_Gothic({
+const boldFont = LeagueGothic({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-league-gothic',
 });
 
-const cursiveFont = Alex_Brush({
+const cursiveFont = AlexBrush({
   weight: '400',
   subsets: ['latin'],
   display: 'swap',
@@ -23,12 +24,15 @@ export const metadata: Metadata = {
   title: 'Forever Fest 2026 - Sean & Eva\'s Wedding',
   description: 'Join Sean & Eva as they celebrate their love at Forever Fest 2026! Save the date for an unforgettable wedding celebration.',
   keywords: ['wedding', 'Forever Fest 2026', 'Sean and Eva', 'wedding celebration', 'save the date'],
-  authors: [{name: 'Sean & Eva'}],
+  authors: [{ name: 'Sean & Eva' }],
   creator: 'Sean & Eva',
   publisher: 'Forever Fest 2026',
   formatDetection: {
+    // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
     email: false,
+    // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
     address: false,
+    // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
     telephone: false,
   },
   metadataBase: new URL('https://foreverfest.wedding'),
@@ -58,10 +62,14 @@ export const metadata: Metadata = {
     images: ['/sean_and_eva_banner_photo.webp'],
   },
   robots: {
+    // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
     index: true,
+    // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
     follow: true,
     googleBot: {
+    // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
       'index': true,
+      // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
       'follow': true,
       'max-video-preview': -1,
       'max-image-preview': 'large',
@@ -78,25 +86,22 @@ export const metadata: Metadata = {
 
 export const viewport = {
   themeColor: [
-    {media: '(prefers-color-scheme: light)', color: '#fff'},
-    {media: '(prefers-color-scheme: dark)', color: '#101048'},
+    { media: '(prefers-color-scheme: light)', color: '#fff' },
+    { media: '(prefers-color-scheme: dark)', color: '#101048' },
   ],
 };
 
-export default function RootLayout({
+const RootLayout: React.FC<ChildrenProps> = ({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en" className={cn(boldFont.variable, cursiveFont.variable, 'dark')} style={{colorScheme: 'dark'}}>
-      <body suppressHydrationWarning>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          {children}
-          <Analytics />
-          <SpeedInsights />
-        </ThemeProvider>
-      </body>
-    </html>
-  );
-}
+}) => (
+  <html className={cn(boldFont.variable, cursiveFont.variable, 'dark')} lang='en' style={{ colorScheme: 'dark' }}>
+    <body suppressHydrationWarning>
+      <ThemeProvider disableTransitionOnChange enableSystem attribute='class' defaultTheme='dark'>
+        {children}
+        <Analytics />
+        <SpeedInsights />
+      </ThemeProvider>
+    </body>
+  </html>
+);
+export default RootLayout;

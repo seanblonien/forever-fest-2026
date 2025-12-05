@@ -1,12 +1,11 @@
 import Analyzer from '@next/bundle-analyzer';
-import type {NextConfig} from 'next';
+import type { NextConfig } from 'next';
 
 const withBundleAnalyzer = Analyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
 const nextConfig: NextConfig = withBundleAnalyzer({
-  cacheComponents: true,
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -20,8 +19,10 @@ const nextConfig: NextConfig = withBundleAnalyzer({
     reactRemoveProperties: true,
     removeConsole: process.env.NODE_ENV === 'production',
   },
+  reactCompiler: true,
   poweredByHeader: false,
   reactStrictMode: true,
+  cacheComponents: true,
   // Add cache headers for static assets
   async headers() {
     return [
@@ -67,9 +68,10 @@ const nextConfig: NextConfig = withBundleAnalyzer({
       },
     ];
   },
-  reactCompiler: true,
   experimental: {
     turbopackFileSystemCacheForDev: true,
+    optimizeCss: true,
+    cssChunking: true,
     optimizePackageImports: [
       'lucide-react',
       'date-fns',

@@ -1,2 +1,2 @@
 export * from './LazyLoad';
-export {default as PageLayout} from './PageLayout';
+export * from './PageLayout';
