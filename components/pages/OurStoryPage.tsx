@@ -1,3 +1,4 @@
+import { Route } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import Zoom from 'react-medium-image-zoom';
@@ -7,7 +8,7 @@ import '../../styles/zoom-custom.css';
 // Timeline data structure
 type TimelineItem = {
   date: string;
-  dateLink?: string;
+  dateLink?: Route;
   id: number;
   isGrid?: boolean;
   label: string;
@@ -216,9 +217,7 @@ export const OurStoryPage: React.FC = () => (
                         {content}
                       </Link>
                     )
-                  : (
-                      content
-                    )}
+                  : content}
               </div>
             </div>
           );

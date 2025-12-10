@@ -10,7 +10,7 @@ export const MainTitle = () => (
       <div className='relative z-10 pt-14 md:pt-24'>
         <Image
           priority
-          alt='Sean and Eva'
+          alt='Sean Blonien and Eva Melendez - Forever Fest 2026'
           className='rounded-lg w-48 sm:w-56 md:w-64 h-auto'
           height={320}
           sizes='(max-width: 640px) 192px, (max-width: 768px) 224px, 256px'

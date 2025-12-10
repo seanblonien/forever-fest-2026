@@ -19,10 +19,11 @@ const nextConfig: NextConfig = withBundleAnalyzer({
     reactRemoveProperties: true,
     removeConsole: process.env.NODE_ENV === 'production',
   },
-  reactCompiler: true,
   poweredByHeader: false,
+  typedRoutes: true,
+  reactCompiler: true,
   reactStrictMode: true,
-  cacheComponents: true,
+  // cacheComponents: true,
   // Add cache headers for static assets
   async headers() {
     return [
@@ -69,6 +70,7 @@ const nextConfig: NextConfig = withBundleAnalyzer({
     ];
   },
   experimental: {
+    taint: true,
     turbopackFileSystemCacheForDev: true,
     optimizeCss: true,
     cssChunking: true,

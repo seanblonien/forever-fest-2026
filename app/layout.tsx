@@ -22,10 +22,10 @@ const cursiveFont = AlexBrush({
 
 export const metadata: Metadata = {
   title: 'Forever Fest 2026 - Sean & Eva\'s Wedding',
-  description: 'Join Sean & Eva as they celebrate their love at Forever Fest 2026! Save the date for an unforgettable wedding celebration.',
-  keywords: ['wedding', 'Forever Fest 2026', 'Sean and Eva', 'wedding celebration', 'save the date'],
-  authors: [{ name: 'Sean & Eva' }],
-  creator: 'Sean & Eva',
+  description: 'Join Sean Blonien & Eva Melendez as they celebrate their love at Forever Fest 2026! Save the date for an unforgettable wedding celebration.',
+  keywords: ['wedding', 'Forever Fest 2026', 'Sean Blonien', 'Eva Melendez', 'Sean and Eva', 'Blonien Melendez wedding', 'wedding celebration', 'save the date', 'Dallas wedding'],
+  authors: [{ name: 'Sean Blonien' }, { name: 'Eva Melendez' }],
+  creator: 'Sean Blonien & Eva Melendez',
   publisher: 'Forever Fest 2026',
   formatDetection: {
     // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Forever Fest 2026 - Sean & Eva\'s Wedding',
-    description: 'Join Sean & Eva as they celebrate their love at Forever Fest 2026! Save the date for an unforgettable wedding celebration.',
+    description: 'Join Sean Blonien & Eva Melendez as they celebrate their love at Forever Fest 2026! Save the date for an unforgettable wedding celebration.',
     url: 'https://foreverfest.wedding',
     siteName: 'Forever Fest 2026',
     images: [
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
         url: '/sean_and_eva_banner_photo.webp',
         width: 1200,
         height: 630,
-        alt: 'Sean & Eva - Forever Fest 2026',
+        alt: 'Sean Blonien & Eva Melendez - Forever Fest 2026 Wedding',
       },
     ],
     locale: 'en_US',
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Forever Fest 2026 - Sean & Eva\'s Wedding',
-    description: 'Join Sean & Eva as they celebrate their love at Forever Fest 2026! Save the date for an unforgettable wedding celebration.',
+    description: 'Join Sean Blonien & Eva Melendez as they celebrate their love at Forever Fest 2026! Save the date for an unforgettable wedding celebration.',
     images: ['/sean_and_eva_banner_photo.webp'],
   },
   robots: {

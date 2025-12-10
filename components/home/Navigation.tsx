@@ -1,7 +1,8 @@
+import { Route } from 'next';
 import Link from 'next/link';
 import { StyleProps } from '../../lib';
 
-const navItems = [
+const navItems: ({ href: Route; label: string } | null)[] = [
   { label: 'HOME', href: '/' },
   { label: 'OUR STORY', href: '/our-story' },
   { label: 'TRAVEL', href: '/travel' },

@@ -114,9 +114,7 @@ export const LazyLoad = ({
               <LazyComponent {...componentProps} />
             </Suspense>
           )
-        : (
-            fallback
-          )}
+        : fallback}
     </div>
   );
 };
