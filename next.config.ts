@@ -74,6 +74,7 @@ const nextConfig: NextConfig = withBundleAnalyzer({
     turbopackFileSystemCacheForDev: true,
     optimizeCss: true,
     cssChunking: true,
+    inlineCss: true,
     optimizePackageImports: [
       'lucide-react',
       'date-fns',
