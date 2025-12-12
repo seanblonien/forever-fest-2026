@@ -1,10 +1,9 @@
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Alex_Brush as AlexBrush, League_Gothic as LeagueGothic } from 'next/font/google';
-import type { Metadata } from 'next';
 import { ThemeProvider } from '@/components/theme-provider';
-import { ChildrenProps } from '../lib';
-import { cn } from '../lib/utils';
+import { ChildrenProps, cn, PUBLIC_SITE_BASE_URL } from '@/lib';
+import type { Metadata } from 'next';
 import './globals.css';
 
 const boldFont = LeagueGothic({
@@ -35,14 +34,14 @@ export const metadata: Metadata = {
     // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
     telephone: false,
   },
-  metadataBase: new URL('https://foreverfest.wedding'),
+  metadataBase: new URL(PUBLIC_SITE_BASE_URL),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: 'Forever Fest 2026 - Sean & Eva\'s Wedding',
     description: 'Join Sean Blonien & Eva Melendez as they celebrate their love at Forever Fest 2026! Save the date for an unforgettable wedding celebration.',
-    url: 'https://foreverfest.wedding',
+    url: PUBLIC_SITE_BASE_URL,
     siteName: 'Forever Fest 2026',
     images: [
       {
