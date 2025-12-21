@@ -1,11 +1,6 @@
-import Analyzer from '@next/bundle-analyzer';
 import type { NextConfig } from 'next';
 
-const withBundleAnalyzer = Analyzer({
-  enabled: process.env.ANALYZE === 'true',
-});
-
-const nextConfig: NextConfig = withBundleAnalyzer({
+const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -84,6 +79,6 @@ const nextConfig: NextConfig = withBundleAnalyzer({
       'tailwind-merge',
     ],
   },
-});
+};
 
 export default nextConfig;
