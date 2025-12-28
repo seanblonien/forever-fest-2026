@@ -93,8 +93,8 @@ export const viewport = {
 const RootLayout: React.FC<ChildrenProps> = ({
   children,
 }) => (
-  <html className={cn(boldFont.variable, cursiveFont.variable, 'dark')} lang='en' style={{ colorScheme: 'dark' }}>
-    <body suppressHydrationWarning>
+  <html suppressHydrationWarning className={cn(boldFont.variable, cursiveFont.variable, 'dark')} lang='en' style={{ colorScheme: 'dark' }}>
+    <body>
       <ThemeProvider disableTransitionOnChange enableSystem attribute='class' defaultTheme='dark'>
         {children}
         <Analytics />

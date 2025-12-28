@@ -19,7 +19,15 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   reactStrictMode: true,
   // cacheComponents: true,
-  // Add cache headers for static assets
+  async redirects() {
+    return [
+      {
+        source: '/address',
+        destination: 'https://form.jotform.com/251896494421062',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
