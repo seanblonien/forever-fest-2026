@@ -11,6 +11,38 @@ type TimeLeft = {
   seconds: number;
 };
 
+const calculateTimeLeft = (): TimeLeft => {
+  // March 28th, 2026 at 6pm CST
+  const targetDate = new Date('2026-03-28T18:00:00-06:00');
+  const now = new Date();
+  const difference = targetDate.getTime() - now.getTime();
+
+  if (difference > 0) {
+    // Calculate months remaining
+    const months = differenceInMonths(targetDate, now);
+
+    // Calculate remaining days after removing months
+    const afterMonths = addMonths(now, months);
+    const days = differenceInDays(targetDate, afterMonths);
+
+    // Calculate remaining hours after removing full days
+    const afterDays = addDays(afterMonths, days);
+    const hours = differenceInHours(targetDate, afterDays);
+
+    // Calculate remaining minutes after removing full hours
+    const afterHours = addHours(afterDays, hours);
+    const minutes = differenceInMinutes(targetDate, afterHours);
+
+    // Calculate remaining seconds after removing full minutes
+    const afterMinutes = addMinutes(afterHours, minutes);
+    const seconds = differenceInSeconds(targetDate, afterMinutes);
+
+    return { months, days, hours, minutes, seconds };
+  }
+
+  return { months: 0, days: 0, hours: 0, minutes: 0, seconds: 0 };
+};
+
 const CountdownBox = ({
   label,
   value,
@@ -19,7 +51,7 @@ const CountdownBox = ({
   value: number;
 }) => (
   <div className='rounded-lg py-2 px-1 md:p-4 bg-papaya-whip'>
-    <div className='text-3xl md:text-4xl font-black text-syracuse-orange font-league-gothic'>
+    <div suppressHydrationWarning className='text-3xl md:text-4xl font-black text-syracuse-orange font-league-gothic'>
       {value.toString()}
     </div>
     <div className='text-sm md:text-base text-steel-pink font-league-gothic'>
@@ -29,52 +61,13 @@ const CountdownBox = ({
 );
 
 export const CountdownTimer = () => {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>({
-    months: 0,
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft);
 
   useEffect(() => {
-    const calculateTimeLeft = () => {
-      // March 28th, 2026 at 6pm CST
-      const targetDate = new Date('2026-03-28T18:00:00-06:00');
-      const now = new Date();
-      const difference = targetDate.getTime() - now.getTime();
-
-      if (difference > 0) {
-        // Calculate months remaining
-        const months = differenceInMonths(targetDate, now);
-
-        // Calculate remaining days after removing months
-        const afterMonths = addMonths(now, months);
-        const days = differenceInDays(targetDate, afterMonths);
-
-        // Calculate remaining hours after removing full days
-        const afterDays = addDays(afterMonths, days);
-        const hours = differenceInHours(targetDate, afterDays);
-
-        // Calculate remaining minutes after removing full hours
-        const afterHours = addHours(afterDays, hours);
-        const minutes = differenceInMinutes(targetDate, afterHours);
-
-        // Calculate remaining seconds after removing full minutes
-        const afterMinutes = addMinutes(afterHours, minutes);
-        const seconds = differenceInSeconds(targetDate, afterMinutes);
-
-        setTimeLeft({ months, days, hours, minutes, seconds });
-      } else {
-        setTimeLeft({ months: 0, days: 0, hours: 0, minutes: 0, seconds: 0 });
-      }
-    };
-
-    // Calculate immediately
-    calculateTimeLeft();
-
     // Update every second
-    const timer = setInterval(calculateTimeLeft, 1000);
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
 
     return () => clearInterval(timer);
   }, []);
