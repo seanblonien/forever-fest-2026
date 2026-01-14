@@ -1,39 +1,105 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  scroll-behavior: smooth;
-  background-color: #101048;
+@source '../*.{js,ts,jsx,tsx,mdx}';
+
+@theme {
+  --font-*: initial;
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-league-gothic:
+    var(--font-league-gothic), League Gothic, Arial Black, sans-serif;
+  --font-alex-brush: var(--font-alex-brush), Alex Brush, cursive;
+  --font-arial: Arial, Helvetica, sans-serif;
+
+  --color-penn-blue: #101048;
+  --color-syracuse-orange: #b83800;
+  --color-steel-pink: #b8159e;
+  --color-lavender-pink: #fcade7;
+  --color-papaya-whip: #fdf0da;
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --rotate-360: 360deg;
+
+  --transition-duration-houseBpm: 468ms;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility bg-forever-fest-gradient {
+  /* Forever Fest gradient backgrounds */
+  background: linear-gradient(180deg, #101048 0%, #de1ace 100%);
+}
+
+@utility bg-forever-fest-title-gradient {
+  /* Forever Fest title gradient */
+  background-image: linear-gradient(45deg, #de1ace, #fcade7, #de1ace);
+}
+
+@utility league-gothic-svg {
+  /* Make League Gothic available for SVG elements */
+  font-family:
+    var(--font-league-gothic), 'League Gothic', Arial, Helvetica, sans-serif;
+}
+
+@utility alex-brush-svg {
+  /* Make Alex Brush available for SVG elements */
+  font-family: var(--font-alex-brush), 'Alex Brush', cursive;
+}
+
+@utility animate-pulse-glow {
+  /* Custom pulsing glow animation for RSVP button */
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@utility animate-float {
+  /* Subtle floating animation for extra attention */
+  animation: float 3s ease-in-out infinite;
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    scroll-behavior: smooth;
+    background-color: #101048;
   }
+}
 
-  /* Forever Fest gradient backgrounds */
-  .bg-forever-fest-gradient {
-    background: linear-gradient(180deg, #101048 0%, #DE1ACE 100%);
-  }
-
-  /* Forever Fest title gradient */
-  .bg-forever-fest-title-gradient {
-    background-image: linear-gradient(45deg, #DE1ACE, #FCADE7, #DE1ACE);
-  }
-
-  /* Make League Gothic available for SVG elements */
-  .league-gothic-svg {
-    font-family: var(--font-league-gothic), 'League Gothic', Arial, Helvetica, sans-serif;
-  }
-
-  /* Make Alex Brush available for SVG elements */
-  .alex-brush-svg {
-    font-family: var(--font-alex-brush), 'Alex Brush', cursive;
-  }
-
-  /* Custom pulsing glow animation for RSVP button */
+@layer utilities {
   @keyframes pulse-glow {
     0%, 100% {
       box-shadow: 0 0 20px rgba(184, 21, 158, 0.6), 0 0 40px rgba(184, 21, 158, 0.4), 0 0 60px rgba(184, 21, 158, 0.2);
@@ -42,12 +108,6 @@ body {
       box-shadow: 0 0 30px rgba(184, 21, 158, 0.8), 0 0 60px rgba(184, 21, 158, 0.6), 0 0 90px rgba(184, 21, 158, 0.4);
     }
   }
-
-  .animate-pulse-glow {
-    animation: pulse-glow 2s ease-in-out infinite;
-  }
-
-  /* Subtle floating animation for extra attention */
   @keyframes float {
     0%, 100% {
       transform: translateY(0px);
@@ -55,10 +115,6 @@ body {
     50% {
       transform: translateY(-3px);
     }
-  }
-
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
   }
 }
 

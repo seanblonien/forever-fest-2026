@@ -9,7 +9,7 @@ export const TravelPage: React.FC = () => (
       </p>
 
       {/* Getting to Dallas by Air */}
-      <section className='bg-white/10 backdrop-blur-sm rounded-lg p-6 text-left'>
+      <section className='bg-white/10 backdrop-blur-xs rounded-lg p-6 text-left'>
         <h2 className='text-2xl mb-4 font-league-gothic text-center'>Getting to Dallas by Air</h2>
         <p className='mb-4'>
           Dallas is served by two major airports. We recommend comparing flights to both for
@@ -54,7 +54,7 @@ export const TravelPage: React.FC = () => (
       </section>
 
       {/* Getting to the Venue by Car */}
-      <section className='bg-white/10 backdrop-blur-sm rounded-lg p-6 text-left'>
+      <section className='bg-white/10 backdrop-blur-xs rounded-lg p-6 text-left'>
         <h2 className='text-2xl mb-4 font-league-gothic text-center'>Getting to the Venue by Car</h2>
 
         <div className='space-y-4'>
@@ -89,7 +89,7 @@ export const TravelPage: React.FC = () => (
       </section>
 
       {/* Hotel Block Details */}
-      <section className='bg-white/10 backdrop-blur-sm rounded-lg p-6 text-left'>
+      <section className='bg-white/10 backdrop-blur-xs rounded-lg p-6 text-left'>
         <h2 className='text-2xl mb-4 font-league-gothic text-center'>Hotel Block Details</h2>
         <p>Hotel recommendations and booking information coming soon...</p>
       </section>

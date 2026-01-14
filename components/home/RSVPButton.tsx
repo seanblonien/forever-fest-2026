@@ -11,7 +11,7 @@ export const RSVPButton = () => (
     <a href='https://form.jotform.com/251896494421062' rel='noopener noreferrer' target='_blank'>
       <Button
         className='text-2xl md:text-3xl font-black mt-4 py-6 rounded-lg
-           bg-gradient-to-r from-penn-blue to-steel-pink text-white
+           bg-linear-to-r from-penn-blue to-steel-pink text-white
            border-2 border-white
            animate-pulse-glow animate-float
            hover:scale-120

@@ -68,7 +68,7 @@ const IndividualFAQ = ({ answer, component, highlightedId, question }: QuestionP
 
   return (
     <div
-      className={`bg-white/10 backdrop-blur-sm rounded-lg p-6 transition-all duration-500 group/question ${
+      className={`bg-white/10 backdrop-blur-xs rounded-lg p-6 transition-all duration-500 group/question ${
         isHighlighted
           ? 'ring-2 ring-[#DE1ACE] shadow-lg shadow-[#DE1ACE]/50 bg-white/20'
           : ''
@@ -88,7 +88,7 @@ const IndividualFAQ = ({ answer, component, highlightedId, question }: QuestionP
         </h3>
         <div className='relative'>
           <button
-            className='ml-3 p-1 rounded hover:bg-white/10 transition-all duration-200 opacity-0 group-hover/question:opacity-100'
+            className='ml-3 p-1 rounded-sm hover:bg-white/10 transition-all duration-200 opacity-0 group-hover/question:opacity-100'
             title='Copy link to this question'
             onClick={copyLinkToClipboard}
           >
