@@ -1,7 +1,7 @@
 import MapLinks from '@/components/MapLinks';
 
 export const TravelPage: React.FC = () => (
-  <div className='w-full max-w-[600px] mx-auto text-center text-white pt-6 pb-12 px-2 md:px-0'>
+  <div className='w-full max-w-150 mx-auto text-center text-white pt-6 pb-12 px-2 md:px-0'>
     <h1 className='text-4xl md:text-6xl mb-8 font-league-gothic'>Travel</h1>
     <div className='space-y-8 text-lg md:text-xl'>
       <p>

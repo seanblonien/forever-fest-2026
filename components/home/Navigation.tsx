@@ -13,8 +13,8 @@ const navItems: ({ href: Route; label: string } | null)[] = [
 ];
 
 export const Navigation = ({ className = '' }: StyleProps) => (
-  <nav className={`flex justify-center items-center pb-2 z-[100] ${className}`}>
-    <div className='max-w-[600px] w-full'>
+  <nav className={`flex justify-center items-center pb-2 z-100 ${className}`}>
+    <div className='max-w-150 w-full'>
       {/* Steel pink border above links with subtle glow */}
       <div className='border-t border-steel-pink pb-1 shadow-[0_0_10px_rgba(184,21,158,0.3)]' />
 

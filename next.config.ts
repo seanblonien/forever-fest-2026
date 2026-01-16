@@ -26,6 +26,11 @@ const nextConfig: NextConfig = {
         destination: 'https://form.jotform.com/251896494421062',
         permanent: true,
       },
+      {
+        source: '/rsvp-form',
+        destination: 'https://form.jotform.com/253148903936161',
+        permanent: true,
+      },
     ];
   },
   async headers() {

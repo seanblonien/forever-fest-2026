@@ -2,7 +2,7 @@ import { Home } from 'lucide-react';
 import Link from 'next/link';
 
 export const NotFoundPage: React.FC = () => (
-  <div className='w-full max-w-[600px] mx-auto text-center text-white pt-6 pb-12 px-2 md:px-0'>
+  <div className='w-full max-w-150 mx-auto text-center text-white pt-6 pb-12 px-2 md:px-0'>
     <h1 className='text-4xl md:text-6xl mb-8 font-league-gothic'>404 Not Found</h1>
     <div className='max-w-4xl mx-auto space-y-6 text-lg md:text-xl'>
       <p className='text-2xl md:text-3xl font-league-gothic mb-6'>

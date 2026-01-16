@@ -138,7 +138,7 @@ const timelineData: TimelineItem[] = [
 ];
 
 export const OurStoryPage: React.FC = () => (
-  <div className='w-full max-w-[600px] mx-auto text-white pt-6 pb-12 px-2 md:px-0'>
+  <div className='w-full max-w-150 mx-auto text-white pt-6 pb-12 px-2 md:px-0'>
     <h1 className='text-4xl md:text-6xl mb-8 font-league-gothic text-center'>Our Story</h1>
 
     {/* How We Met Story */}
