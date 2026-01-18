@@ -1,4 +1,4 @@
-import { RSVPPage } from '@/components/pages';
+import { RsvpPage } from '@/components/pages';
 import { PageLayout } from '@/components/shared/PageLayout';
 import type { Metadata } from 'next';
 
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 const RSVP: React.FC = () => (
   <PageLayout>
-    <RSVPPage />
+    <RsvpPage />
   </PageLayout>
 );
 export default RSVP;
