@@ -5,8 +5,8 @@ import {
   Description,
   EventDetails,
   MainTitle,
-  RSVPButton,
 } from '@/components/home';
+import { QuickActions } from '@/components/home/QuickActions';
 import { PageLayout } from '@/components/shared/PageLayout';
 
 const ForeverFestPage: React.FC = () => (
@@ -18,8 +18,8 @@ const ForeverFestPage: React.FC = () => (
       <EventDetails />
       <Description />
       <CountdownTimer />
-      <RSVPButton />
       <CalendarEmbedDynamic isShowTitle />
+      <QuickActions />
     </div>
   </PageLayout>
 );

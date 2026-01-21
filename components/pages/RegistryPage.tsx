@@ -32,9 +32,9 @@ export const RegistryPage: React.FC = () => (
           <Heart className='w-6 h-6 text-pink-300' />
         </div>
         <p className='text-base md:text-lg'>
-          {`If you prefer not to shop online, in-person gifts at the wedding are absolutely welcome!
+          {`If you prefer not to shop online/pay fees, in-person gifts at the wedding are absolutely welcome!
           Cards, letters, or any heartfelt gesture you'd like to share with us on our special day
-          would mean the world to us.`}
+          would mean the world to us. 🫶`}
         </p>
       </div>
     </div>

@@ -120,8 +120,12 @@ type FAQData = {
 const faqs: FAQData[] = [
   // Essential Event Details
   {
+    question: 'Why is it called "Forever Fest"?',
+    answer: 'Festivals are at the core of Sean and Eva\'s relationship story (See "Our Story" page). Festivals and EDM culture have positively influenced Sean and Eva to be more creative, expressive, social, joyful, and connected, and so they want to bring some of that culture and energy to their wedding. "Forever Fest" is a manifestation of Sean and Eva\'s lifelong commitment together (i.e. "forever") combined with their desire to bring some of the festival/EDM culture to their wedding day (i.e. "fest").',
+  },
+  {
     question: 'When is the wedding?',
-    answer: 'Forever Fest 2026 will take place on Saturday, March 28th, 2026 from 6:00 PM to 11:00 PM CST.',
+    answer: 'Forever Fest 2026 will take place on Saturday, March 28th, 2026 from 6:00 PM to 11:00 PM CST. Add the event to your calendar using the buttons below ⬇️',
     component: <CalendarEmbedDynamic />,
   },
   {
@@ -145,14 +149,14 @@ const faqs: FAQData[] = [
   },
   {
     question: 'I am coming from out of town, where can I stay?',
-    answer: 'Yes! We\'ll be sharing hotel recommendations and booking information soon. Check back or visit our Travel page for updates.',
+    answer: 'Check out the Travel page for details and recommendations on where to stay.',
     component: <TravelLink />,
   },
 
   // Guest Experience & Expectations
   {
     question: 'What is the dress code?',
-    answer: 'Funky Semi-Formal Attire! Think semi-formal wear with a fun, creative twist that matches the festive spirit of Forever Fest. Eclectic colors, bold prints, and unique accessories are all welcome. Colorful suits and dresses are great, but you can also wear whatever makes you feel your best in semi-formal attire.',
+    answer: 'Funky Semi-Formal Attire! Think semi-formal wear with a fun, creative twist that matches the festive spirit of ✨ Forever Fest ✨. Eclectic colors, bold prints, and unique accessories are all welcome. Colorful suits and dresses are great, but you can also wear whatever makes you feel your best in semi-formal attire. Express yourself in whatever makes you feel confident! 😎',
     component: <PinterestMoodboardLink />,
   },
   {
@@ -161,7 +165,7 @@ const faqs: FAQData[] = [
   },
   {
     question: 'Will there be drinks?',
-    answer: 'Yes! There will be a bar at the reception and the cocktail hour. We are planning to cover everyone\'s drinks for the cocktail hour reception up until a limit is reached, after which the bar will be a cash bar that you can pay for at your own discretion.',
+    answer: 'Yes! There will be a bar at the reception and the cocktail hour. The cocktail hour drinks are covered by us, but the reception will have a cash bar that you can pay for at your own discretion.',
   },
   {
     question: 'Can I take photos/videos during the ceremony?',
@@ -171,21 +175,16 @@ const faqs: FAQData[] = [
   // RSVP & Guest Management
   {
     question: 'Can I bring a plus-one?',
-    answer: 'We love that you want to bring someone to celebrate with us! However, due to space constraints, we\'ve limited the guest list to those specifically invited. If you have questions about your invite, please reach out.',
+    answer: 'We love that you want to bring someone to celebrate with us! However, due to space constraints, we\'ve limited the guest list to those specifically invited. If your plus one\'s  name was not listed on the invitation, they are not invited. If you have questions about your invite, please reach out.',
   },
   {
     question: 'Are kids invited?',
     answer: 'To ensure everyone can fully immerse themselves in the festival vibes, we\'re making this an adults-only event. Time for the big kids to play!',
   },
   {
-    question: 'How can I change/update my address?',
-    answer: 'If you have already submitted the address collection form, you can check your email from Jotform with the edit link to edit/update your address. Simply search for "Response received for Forever Fest 2026: Address Collection" as the subject line, and the "Edit Link" will be in the email. Or, you can text or email Sean/Eva at any time.',
+    question: 'How can I update my RSVP?',
+    answer: 'If you already submitted the RSVP form, you can check your email from Jotform with the edit link to edit/update your RSVP. Simply search for "Response received for Forever Fest 2026" as the subject line, and the "Edit Link" will be in the email. Or, you can text or email Sean/Eva at any time.',
   },
-  // {
-  //   question: 'What should I do if I need to change my RSVP?',
-  //   answer: 'Life happens! If you need to make any changes to your RSVP, please
-  // let us know as soon as possible by text or email so that we can plan accordingly.',
-  // },
 ];
 
 export const FaqPage: React.FC = () => {

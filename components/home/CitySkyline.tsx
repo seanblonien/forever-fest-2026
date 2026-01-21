@@ -8,7 +8,7 @@ export const CitySkyline = ({
   className = '',
 }: CitySkylineProps) => (
   <div className={`flex justify-center ${className}`}>
-    <div className='w-full max-w-[600px]'>
+    <div className='w-full max-w-150'>
       <SkylineSvg className='w-full h-auto' />
     </div>
   </div>
