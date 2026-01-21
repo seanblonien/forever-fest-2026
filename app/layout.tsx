@@ -1,6 +1,8 @@
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Alex_Brush as AlexBrush, League_Gothic as LeagueGothic } from 'next/font/google';
+import { Header, Navigation } from '@/components/home';
+import Footer from '@/components/shared/Footer';
 import { ThemeProvider } from '@/components/theme-provider';
 import { ChildrenProps, cn, PUBLIC_SITE_BASE_URL } from '@/lib';
 import type { Metadata } from 'next';
@@ -96,7 +98,17 @@ const RootLayout: React.FC<ChildrenProps> = ({
   <html suppressHydrationWarning className={cn(boldFont.variable, cursiveFont.variable, 'dark')} lang='en' style={{ colorScheme: 'dark' }}>
     <body>
       <ThemeProvider disableTransitionOnChange enableSystem attribute='class' defaultTheme='dark'>
-        {children}
+        <div className='min-h-screen bg-forever-fest-gradient flex flex-col'>
+          <Header />
+          <Navigation />
+
+          {/* Main Content */}
+          <main className='flex-1'>
+            {children}
+          </main>
+
+          <Footer />
+        </div>
         <Analytics />
         <SpeedInsights />
       </ThemeProvider>

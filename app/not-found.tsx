@@ -1,5 +1,4 @@
 import { NotFoundPage } from '@/components/pages';
-import { PageLayout } from '@/components/shared/PageLayout';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -7,8 +6,6 @@ export const metadata: Metadata = {
 };
 
 const NotFound: React.FC = () => (
-  <PageLayout>
-    <NotFoundPage />
-  </PageLayout>
+  <NotFoundPage />
 );
 export default NotFound;

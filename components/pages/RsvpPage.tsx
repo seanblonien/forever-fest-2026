@@ -10,7 +10,7 @@ export const RsvpPage: React.FC = () => (
 
       {/* RSVP Form Button */}
       <div className='bg-white/10 backdrop-blur-xs rounded-lg p-8'>
-        <h3 className='text-2xl mb-4 font-league-gothic'>Complete Your RSVP</h3>
+        <h3 className='text-2xl mb-4 font-league-gothic'>Submit Your RSVP</h3>
         <a
           className='inline-flex items-center justify-center gap-3 bg-white/20 hover:bg-white/30 transition-colors duration-200 rounded-lg p-6 group text-xl font-league-gothic'
           href='/rsvp-form'
@@ -36,7 +36,7 @@ export const RsvpPage: React.FC = () => (
             <p className='font-semibold mb-2'>📅 RSVP Deadline</p>
             <p>
               Please RSVP by{' '}
-              <strong className='text-pink-300'>February 28th, 2026</strong>
+              <strong className='text-pink-300 animate-gentle-bounce inline-block'>February 28th, 2026</strong>
               {' '}
               to help us finalize our guest count and seating arrangements.
             </p>
