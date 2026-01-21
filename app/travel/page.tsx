@@ -28,7 +28,7 @@ const Travel: React.FC = () => (
             <p className='mb-4'>
               The venue is located in the
               {' '}
-              <a className='underline' href='https://maps.app.goo.gl/jj4joNDuV4Vve27q6'>Desican you migrate this @/Users/seanblonien/git/forever-fest-2026/components/pages/RsvpPage.tsx component to be/replace the corresponding page.tsx file to co-locaate all of the page logic in one place?gn District</a>
+              <a className='underline' href='https://maps.app.goo.gl/jj4joNDuV4Vve27q6'>Design District</a>
               {' '}
               of Dallas,
             </p>
