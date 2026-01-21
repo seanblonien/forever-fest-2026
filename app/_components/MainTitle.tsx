@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { DiscoBallsSvg } from '@/components/svgs/DiscoBallsSvg';
-import { TitleSvg } from '../svgs';
+import { TitleSvg } from '@/components/svgs';
 
 export const MainTitle = () => (
   <>
@@ -22,13 +22,13 @@ export const MainTitle = () => (
 
       {/* Title SVG - Top layer */}
       <div className='absolute -top-4 bottom-0 left-0 right-0 m-auto z-30 pointer-events-none'>
-        <div className='max-w-[600px] mx-auto'>
+        <div className='max-w-150 mx-auto'>
           <TitleSvg className='max-w-full max-h-full object-contain' />
         </div>
       </div>
       {/* Disco Balls SVG - Background layer */}
       <div className='absolute inset-0 flex items-center justify-center z-20 pointer-events-none'>
-        <div className='w-full max-w-[800px] -mt-[180px] md:-mt-[240px] -mx-16'>
+        <div className='w-full max-w-200 -mt-45 md:-mt-60 -mx-16'>
           <DiscoBallsSvg className='w-full h-full object-contain' />
         </div>
       </div>

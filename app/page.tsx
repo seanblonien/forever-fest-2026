@@ -5,8 +5,8 @@ import {
   Description,
   EventDetails,
   MainTitle,
-} from '@/components/home';
-import { QuickActions } from '@/components/home/QuickActions';
+  QuickActions,
+} from './_components';
 
 const ForeverFestPage: React.FC = () => (
   <div className='text-center relative'>

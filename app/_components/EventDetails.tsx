@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 export const EventDetails = () => (
-  <div className='flex flex-col md:flex-row max-w-[600px] mx-auto px-4 mb-12 text-white items-center md:items-stretch'>
+  <div className='flex flex-col md:flex-row max-w-150 mx-auto px-4 mb-12 text-white items-center md:items-stretch'>
     {/* Date Section - responsive layout */}
     <Link
       className='flex-1 text-center md:text-left md:relative mb-6 md:mb-0 cursor-pointer'
@@ -18,7 +18,7 @@ export const EventDetails = () => (
 
       {/* Desktop: Stacked date with absolute positioned "28" */}
       <div className='hidden md:block'>
-        <div className='absolute top-[40px] -right-10 text-9xl font-alex-brush text-white z-10'>
+        <div className='absolute top-10 -right-10 text-9xl font-alex-brush text-white z-10'>
           28th
         </div>
         <div className='text-8xl font-black mb-2 text-lavender-pink font-league-gothic'>

@@ -73,7 +73,7 @@ export const CountdownTimer = () => {
   }, []);
 
   return (
-    <div className='mb-12 px-2 max-w-[600px] mx-auto'>
+    <div className='mb-12 px-2 max-w-150 mx-auto'>
       <div className='grid grid-cols-5 gap-2 md:gap-4 max-w-3xl mx-auto'>
         <CountdownBox label='MONTHS' value={timeLeft.months} />
         <CountdownBox label='DAYS' value={timeLeft.days} />

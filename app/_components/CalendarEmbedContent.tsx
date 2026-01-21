@@ -3,7 +3,7 @@ import { AddToCalendarButton } from 'add-to-calendar-button-react';
 
 // This is the actual calendar component that will be loaded dynamically
 export const CalendarEmbedContent = () => (
-  <div className='max-w-[600px] height-[294px] flex justify-center items-center pb-4'>
+  <div className='max-w-150 height-[294px] flex justify-center items-center pb-4'>
     <AddToCalendarButton
       buttonsList
       hideBackground

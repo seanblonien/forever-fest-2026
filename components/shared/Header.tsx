@@ -1,4 +1,4 @@
-import { SkylineHeaderSvg } from '../svgs';
+import { SkylineHeaderSvg } from '@/components/svgs';
 
 export const Header = () => (
   <div className='flex justify-center'>
