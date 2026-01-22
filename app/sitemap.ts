@@ -2,7 +2,7 @@ import { PUBLIC_SITE_BASE_URL } from '@/lib';
 import type { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ['', '/our-story', '/travel', '/registry', '/faqs', '/rsvp'];
+  const routes = ['', '/our-story', '/schedule', '/travel', '/registry', '/faqs', '/rsvp'] as const;
 
   return routes.map((path) => ({
     url: `${PUBLIC_SITE_BASE_URL}${path}`,

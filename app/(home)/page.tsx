@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { CalendarEmbedDynamic } from '@/components/shared/CalendarEmbedDynamic';
 import {
   CitySkyline,
@@ -8,7 +9,14 @@ import {
   QuickActions,
 } from './_components';
 
-const ForeverFestPage: React.FC = () => (
+export const metadata: Metadata = {
+  title: 'Forever Fest 2026 - Sean & Eva\'s Wedding',
+  openGraph: {
+    title: 'Forever Fest 2026 - Sean & Eva\'s Wedding',
+  },
+};
+
+const HomePage: React.FC = () => (
   <>
     <MainTitle />
     <CitySkyline />
@@ -20,4 +28,4 @@ const ForeverFestPage: React.FC = () => (
     <QuickActions />
   </>
 );
-export default ForeverFestPage;
+export default HomePage;

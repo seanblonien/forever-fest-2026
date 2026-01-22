@@ -4,10 +4,13 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Forever Fest 2026 - Travel',
+  openGraph: {
+    title: 'Forever Fest 2026 - Travel',
+  },
 };
 
 // eslint-disable-next-line max-lines-per-function -- long page
-const Travel: React.FC = () => (
+const TravelPage: React.FC = () => (
   <div className='w-full max-w-150 mx-auto text-center text-white pt-6 pb-12 px-2 md:px-0'>
     <h1 className='text-4xl md:text-6xl mb-8 font-league-gothic'>Travel</h1>
     <div className='space-y-8 text-lg md:text-xl'>
@@ -153,4 +156,4 @@ const Travel: React.FC = () => (
   </div>
 );
 
-export default Travel;
+export default TravelPage;

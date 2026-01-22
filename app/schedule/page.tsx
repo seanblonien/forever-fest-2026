@@ -5,6 +5,9 @@ import type { ScheduleDay } from '@/lib/scheduleData';
 
 export const metadata: Metadata = {
   title: 'Forever Fest 2026 - Schedule',
+  openGraph: {
+    title: 'Forever Fest 2026 - Schedule',
+  },
 };
 
 type SimpleDayProps = {

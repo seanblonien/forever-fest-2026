@@ -4,9 +4,12 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Forever Fest 2026 - Registry',
+  openGraph: {
+    title: 'Forever Fest 2026 - Registry',
+  },
 };
 
-const Registry: React.FC = () => (
+const RegistryPage: React.FC = () => (
   <div className='w-full max-w-150 mx-auto text-center text-white pt-6 pb-12 px-2 md:px-0'>
     <h1 className='text-4xl md:text-6xl mb-8 font-league-gothic'>Registry</h1>
     <div className='space-y-8 text-lg md:text-xl'>
@@ -48,4 +51,4 @@ const Registry: React.FC = () => (
   </div>
 );
 
-export default Registry;
+export default RegistryPage;
