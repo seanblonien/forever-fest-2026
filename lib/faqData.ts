@@ -93,7 +93,7 @@ export const faqs: FAQData[] = [
   {
     category: 'experience',
     question: 'Can I take photos/videos during the ceremony?',
-    answer: 'Yes you can! We will have a photographer to capture the important moments, but when the wedding party is walking up or down the aisle, feel free to take photos or videos. Please do so in as respectful manner to not interrupt the ceremony (i.e. no flash). Go wild during the reception with capturing media! #ForeverFest2026',
+    answer: 'We will have a photographer to capture the important moments, so we politely ask to refrain from recording *until* the "I do" moment, after which you can record/take photos as much as you want. The goal is to be present in the ceremony with us, so that should be the focus. Go wild during the reception with capturing media! 📸 #ForeverFest2026',
   },
 
   // RSVP & Guests

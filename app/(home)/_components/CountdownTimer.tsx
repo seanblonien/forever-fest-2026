@@ -50,14 +50,14 @@ const CountdownBox = ({
   label: string;
   value: number;
 }) => (
-  <div className='rounded-lg py-2 px-1 md:p-4 bg-papaya-whip'>
-    <div suppressHydrationWarning className='text-3xl md:text-4xl font-black text-syracuse-orange font-league-gothic'>
-      {value.toString()}
-    </div>
-    <div className='text-sm md:text-base text-steel-pink font-league-gothic'>
+  <figure className='rounded-lg py-2 px-1 md:p-4 bg-papaya-whip text-center'>
+    <data suppressHydrationWarning className='block text-3xl md:text-4xl font-black text-syracuse-orange font-league-gothic' value={value}>
+      {value}
+    </data>
+    <figcaption className='text-sm md:text-base text-steel-pink font-league-gothic'>
       {label}
-    </div>
-  </div>
+    </figcaption>
+  </figure>
 );
 
 export const CountdownTimer = () => {

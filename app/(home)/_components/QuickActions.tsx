@@ -1,4 +1,4 @@
-import { Calendar, CircleHelp, Gift, MapPin } from 'lucide-react';
+import { Calendar, CalendarCheck, CircleHelp, MapPin } from 'lucide-react';
 import Link from 'next/link';
 
 import type { Route } from 'next';
@@ -60,6 +60,12 @@ export const QuickActions: React.FC = () => (
         label='RSVP Now'
       />
       <ActionCard
+        description='View the schedule'
+        href='/schedule'
+        icon={<CalendarCheck className='w-12 h-12 text-white' />}
+        label='Schedule'
+      />
+      <ActionCard
         description='Location, parking & directions'
         href='/travel'
         icon={<MapPin className='w-12 h-12 text-white' />}
@@ -70,12 +76,6 @@ export const QuickActions: React.FC = () => (
         href='/faqs'
         icon={<CircleHelp className='w-12 h-12 text-white' />}
         label='Got questions?'
-      />
-      <ActionCard
-        description='Find the perfect gift'
-        href='/registry'
-        icon={<Gift className='w-12 h-12 text-white' />}
-        label='Registry'
       />
     </div>
   </div>

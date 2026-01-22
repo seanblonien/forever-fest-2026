@@ -5,8 +5,8 @@ import { StyleProps } from '@/lib';
 const navItems: ({ href: Route; label: string } | null)[] = [
   { label: 'HOME', href: '/' },
   { label: 'OUR STORY', href: '/our-story' },
+  { label: 'SCHEDULE', href: '/schedule' },
   { label: 'TRAVEL', href: '/travel' },
-  null,
   { label: 'REGISTRY', href: '/registry' },
   { label: 'FAQS', href: '/faqs' },
   { label: 'RSVP', href: '/rsvp' },
