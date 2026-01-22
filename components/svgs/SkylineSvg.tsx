@@ -1,10 +1,11 @@
-import { StyleProps } from '../../lib';
+import { SvgProps } from '../../lib';
 
-export const SkylineSvg: React.FC<StyleProps> = ({ className }) => (
+export const SkylineSvg: React.FC<SvgProps> = (props) => (
   <svg
-    className={className}
+    aria-label='Outline of Dallas Skyline'
     viewBox='0 0 1344.93 327.28'
     xmlns='http://www.w3.org/2000/svg'
+    {...props}
   >
     <g fill='#fdf0da'>
       <g>

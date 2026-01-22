@@ -39,9 +39,9 @@ const ActionCard: React.FC<ActionCardProps> = ({
         {icon}
       </div>
       <div>
-        <h3 className='text-2xl md:text-3xl font-league-gothic text-white mb-1'>
+        <h2 className='text-2xl md:text-3xl font-league-gothic text-white mb-1'>
           {label}
-        </h3>
+        </h2>
         <p className='text-sm md:text-base text-white/80'>
           {description}
         </p>

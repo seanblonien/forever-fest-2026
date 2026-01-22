@@ -5,3 +5,5 @@ export type ChildrenProps = {
 export type StyleProps = {
   className?: string;
 };
+
+export type SvgProps = StyleProps;

@@ -15,6 +15,7 @@ export const CategoryTab: React.FC<CategoryTabProps> = ({ category, isActive, on
 
   return (
     <button
+      aria-label={`Show ${label} FAQs`}
       className={cn(
         'px-3 py-2 rounded-lg font-league-gothic text-base md:text-lg transition-all duration-200 cursor-pointer',
         'flex items-center gap-2.5 whitespace-nowrap',
@@ -27,7 +28,7 @@ export const CategoryTab: React.FC<CategoryTabProps> = ({ category, isActive, on
     >
       <span>{emoji}</span>
       <span>{label}</span>
-      <span className='text-sm opacity-70'>({count})</span>
+      <span className='text-sm'>({count})</span>
     </button>
   );
 };

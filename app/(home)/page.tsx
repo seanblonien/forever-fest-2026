@@ -1,5 +1,5 @@
+import { CalendarEmbedDynamic } from '@/components/shared/CalendarEmbedDynamic';
 import {
-  CalendarEmbedDynamic,
   CitySkyline,
   CountdownTimer,
   Description,
@@ -9,7 +9,7 @@ import {
 } from './_components';
 
 const ForeverFestPage: React.FC = () => (
-  <div className='text-center relative'>
+  <>
     <MainTitle />
     <CitySkyline />
 
@@ -18,6 +18,6 @@ const ForeverFestPage: React.FC = () => (
     <CountdownTimer />
     <CalendarEmbedDynamic isShowTitle />
     <QuickActions />
-  </div>
+  </>
 );
 export default ForeverFestPage;

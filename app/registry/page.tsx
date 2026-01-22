@@ -17,8 +17,9 @@ const Registry: React.FC = () => (
 
       {/* Universal Registry */}
       <div className='bg-white/10 backdrop-blur-xs rounded-lg p-8'>
-        <h3 className='text-2xl mb-4 font-league-gothic'>Online Registry</h3>
+        <h2 className='text-2xl mb-4 font-league-gothic'>Online Registry</h2>
         <a
+          aria-label='Go to MyRegistry.com registry page'
           className='inline-flex items-center justify-center gap-3 bg-white/20 hover:bg-white/30 transition-colors duration-200 rounded-lg p-6 group text-xl font-league-gothic'
           href='https://www.myregistry.com/giftlist/forever-fest'
           rel='noopener noreferrer'
@@ -34,7 +35,7 @@ const Registry: React.FC = () => (
       <div className='bg-white/10 backdrop-blur-xs rounded-lg p-8'>
         <div className='flex items-center justify-center gap-2 mb-4'>
           <Heart className='w-6 h-6 text-pink-300' />
-          <h3 className='text-2xl font-league-gothic'>In-Person Gifts</h3>
+          <h2 className='text-2xl font-league-gothic'>In-Person Gifts</h2>
           <Heart className='w-6 h-6 text-pink-300' />
         </div>
         <p className='text-base md:text-lg'>

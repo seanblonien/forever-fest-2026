@@ -21,7 +21,7 @@ const Travel: React.FC = () => (
 
         <div className='space-y-4'>
           <div>
-            <h3 className='text-xl mb-2 font-league-gothic'>Venue Address</h3>
+            <h2 className='text-xl mb-2 font-league-gothic'>Venue Address</h2>
             <p className='mb-2'>
               DEC on Dragon 1414 Dragon St, Dallas, TX 75207
             </p>
@@ -30,7 +30,7 @@ const Travel: React.FC = () => (
               {' '}
               <a className='underline' href='https://maps.app.goo.gl/jj4joNDuV4Vve27q6'>Design District</a>
               {' '}
-              of Dallas,
+              of Dallas.
             </p>
             <div className='flex justify-center'>
               <MapLinks />
@@ -38,7 +38,7 @@ const Travel: React.FC = () => (
           </div>
 
           <div>
-            <h3 className='text-xl mb-2 font-league-gothic'>Parking</h3>
+            <h2 className='text-xl mb-2 font-league-gothic'>Parking</h2>
             <p className='bg-green-600/20 border border-green-500/30 rounded-lg p-3'>
               <strong>Great news!</strong>
               {' '}
@@ -60,8 +60,9 @@ const Travel: React.FC = () => (
 
         <div className='space-y-4'>
           <div>
-            <h3 className='text-xl mb-2 font-league-gothic'>
+            <h2 className='text-xl mb-2 font-league-gothic'>
               <a
+                aria-label='Link to Dallas Love Field Website'
                 className='hover:text-[#DE1ACE] transition-colors duration-200'
                 href='https://www.dallas-lovefield.com/'
                 rel='noopener noreferrer'
@@ -69,7 +70,7 @@ const Travel: React.FC = () => (
               >
                 Dallas Love Field (DAL)
               </a>
-            </h3>
+            </h2>
             <ul className='list-disc list-inside space-y-1 ml-4'>
               <li>A smaller airport much closer to the venue (10-15 min drive).</li>
               <li>Primary airline: Southwest.</li>
@@ -77,8 +78,9 @@ const Travel: React.FC = () => (
           </div>
 
           <div>
-            <h3 className='text-xl mb-2 font-league-gothic'>
+            <h2 className='text-xl mb-2 font-league-gothic'>
               <a
+                aria-label='Link to DFW Website'
                 className='hover:text-[#DE1ACE] transition-colors duration-200'
                 href='https://www.dfwairport.com/'
                 rel='noopener noreferrer'
@@ -86,7 +88,7 @@ const Travel: React.FC = () => (
               >
                 Dallas/Fort Worth (DFW)
               </a>
-            </h3>
+            </h2>
             <ul className='list-disc list-inside space-y-1 ml-4'>
               <li>A large international airport with more flight options (20-30 min drive).</li>
               <li>Primary airline: American Airlines.</li>
@@ -107,6 +109,7 @@ const Travel: React.FC = () => (
             <strong>High-End:</strong>
             {' '}
             <a
+              aria-label='Link to Virgin Hotels Dallas on Google Maps'
               className='underline hover:text-[#DE1ACE] transition-colors duration-200'
               href='https://maps.app.goo.gl/qKtXoSY7QaZVB5C28'
               rel='noopener noreferrer'
@@ -120,6 +123,7 @@ const Travel: React.FC = () => (
             <strong>Mid-Range:</strong>
             {' '}
             <a
+              aria-label='Link to Hilton Anatole on Google Maps'
               className='underline hover:text-[#DE1ACE] transition-colors duration-200'
               href='https://maps.app.goo.gl/xSwBfLdxFy6mViWc9'
               rel='noopener noreferrer'
@@ -133,6 +137,7 @@ const Travel: React.FC = () => (
             <strong>Value:</strong>
             {' '}
             <a
+              aria-label='Link to Courtyard by Marriott Dallas Medical/Market Center on Google Maps'
               className='underline hover:text-[#DE1ACE] transition-colors duration-200'
               href='https://maps.app.goo.gl/J6QdA8MgzVvNgoC87'
               rel='noopener noreferrer'

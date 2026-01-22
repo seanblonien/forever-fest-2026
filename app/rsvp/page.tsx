@@ -16,8 +16,9 @@ const RSVP: React.FC = () => (
 
       {/* RSVP Form Button */}
       <div className='bg-white/10 backdrop-blur-xs rounded-lg p-8'>
-        <h3 className='text-2xl mb-4 font-league-gothic'>Submit Your RSVP</h3>
+        <h2 className='text-2xl mb-4 font-league-gothic'>Submit Your RSVP</h2>
         <a
+          aria-label='Link to RSVP form '
           className='inline-flex items-center justify-center gap-3 bg-white/20 hover:bg-white/30 transition-colors duration-200 rounded-lg p-6 group text-xl font-league-gothic'
           href='/rsvp-form'
           rel='noopener noreferrer'
@@ -33,7 +34,7 @@ const RSVP: React.FC = () => (
       <div className='bg-white/10 backdrop-blur-xs rounded-lg p-8'>
         <div className='flex items-center justify-center gap-2 mb-6'>
           <Heart className='w-6 h-6 text-pink-300' />
-          <h3 className='text-2xl font-league-gothic'>Important RSVP Information</h3>
+          <h2 className='text-2xl font-league-gothic'>Important RSVP Information</h2>
           <Heart className='w-6 h-6 text-pink-300' />
         </div>
         <div className='text-base md:text-lg space-y-6 text-left'>

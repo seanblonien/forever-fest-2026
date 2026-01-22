@@ -1,5 +1,5 @@
 import { CSSProperties } from 'react';
-import { StyleProps } from '../../lib';
+import { SvgProps } from '../../lib';
 
 // Reusable style objects
 const baseLeagueGothicStyle: CSSProperties = {
@@ -35,11 +35,12 @@ const alexBrushStyle: CSSProperties = {
   fontSize: '52.07px',
 };
 
-export const TitleSvg: React.FC<StyleProps> = ({ className }) => (
+export const TitleSvg: React.FC<SvgProps> = (props) => (
   <svg
-    className={className}
+    aria-label='Forever Fest Title'
     viewBox='0 0 797.77 518.64'
     xmlns='http://www.w3.org/2000/svg'
+    {...props}
   >
     <g>
       <g>

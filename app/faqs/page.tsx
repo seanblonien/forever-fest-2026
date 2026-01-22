@@ -7,7 +7,7 @@ import { useQueryParamState, useRouteHash } from '@/hooks';
 import { FAQ_CATEGORIES, faqs } from '@/lib/faqData';
 
 import type { FaqCategory, FaqComponentKey } from '@/lib/faqData';
-import { CalendarEmbedDynamic } from '../_components';
+import { CalendarEmbedDynamic } from '@/components/shared/CalendarEmbedDynamic';
 import { CategoryTab } from './CategoryTab';
 import { FaqLink } from './FaqLink';
 import { IndividualFaq } from './IndividualFaq';
