@@ -3,7 +3,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Alex_Brush as AlexBrush, League_Gothic as LeagueGothic } from 'next/font/google';
 import { Footer } from '@/components/shared/Footer';
 import { ThemeProvider } from '@/components/theme-provider';
-import { ChildrenProps, cn, OG_IMAGE, PUBLIC_SITE_BASE_URL } from '@/lib';
+import { ChildrenProps, cn, OPEN_GRAPH_DEFAULTS, PUBLIC_SITE_BASE_URL } from '@/lib';
 import type { Metadata } from 'next';
 import { Header } from '@/components/shared/Header';
 import { Navigation } from '@/components/shared/Navigation';
@@ -52,15 +52,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: PUBLIC_SITE_BASE_URL,
   },
-  openGraph: {
-    title: 'Forever Fest 2026 - Sean & Eva\'s Wedding',
-    description: 'Join Sean Blonien & Eva Melendez as they celebrate their love and lifelong marriage together at Forever Fest 2026!',
-    url: PUBLIC_SITE_BASE_URL,
-    siteName: 'Forever Fest 2026',
-    images: [OG_IMAGE],
-    locale: 'en_US',
-    type: 'website',
-  },
+  openGraph: OPEN_GRAPH_DEFAULTS,
   twitter: {
     card: 'summary_large_image',
     title: 'Forever Fest 2026 - Sean & Eva\'s Wedding',
