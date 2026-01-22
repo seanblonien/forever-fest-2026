@@ -3,10 +3,10 @@ import { ExternalLink, Heart, ShoppingBag } from 'lucide-react';
 import { Metadata } from 'next';
 import { createPageMetadata } from '@/lib';
 
-export const metadata: Metadata = createPageMetadata(
-  'Forever Fest 2026 - Registry',
-  'View the gift registry for Forever Fest 2026 - Sean & Eva\'s Wedding.',
-);
+export const metadata: Metadata = createPageMetadata({
+  title: 'Forever Fest 2026 - Registry',
+  description: 'View the gift registry for Forever Fest 2026 - Sean & Eva\'s Wedding.',
+});
 
 const RegistryPage: React.FC = () => (
   <div className='w-full max-w-150 mx-auto text-center text-white pt-6 pb-12 px-2 md:px-0'>

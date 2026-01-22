@@ -3,10 +3,10 @@ import MapLinks from '@/components/MapLinks';
 
 import { createPageMetadata } from '@/lib';
 
-export const metadata: Metadata = createPageMetadata(
-  'Forever Fest 2026 - Travel',
-  'Travel information and accommodations for Forever Fest 2026 - Sean & Eva\'s Wedding.',
-);
+export const metadata: Metadata = createPageMetadata({
+  title: 'Forever Fest 2026 - Travel',
+  description: 'Travel information and accommodations for Forever Fest 2026 - Sean & Eva\'s Wedding.',
+});
 
 // eslint-disable-next-line max-lines-per-function -- long page
 const TravelPage: React.FC = () => (
