@@ -1,13 +1,12 @@
+import { Metadata } from 'next';
 import MapLinks from '@/components/MapLinks';
 
-import type { Metadata } from 'next';
+import { createPageMetadata } from '@/lib';
 
-export const metadata: Metadata = {
-  title: 'Forever Fest 2026 - Travel',
-  openGraph: {
-    title: 'Forever Fest 2026 - Travel',
-  },
-};
+export const metadata: Metadata = createPageMetadata(
+  'Forever Fest 2026 - Travel',
+  'Travel information and accommodations for Forever Fest 2026 - Sean & Eva\'s Wedding.',
+);
 
 // eslint-disable-next-line max-lines-per-function -- long page
 const TravelPage: React.FC = () => (

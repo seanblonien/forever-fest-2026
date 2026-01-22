@@ -1,14 +1,13 @@
+import { Metadata } from 'next';
+import { createPageMetadata } from '@/lib';
 import { scheduleDays } from '@/lib/scheduleData';
 
-import type { Metadata } from 'next';
 import type { ScheduleDay } from '@/lib/scheduleData';
 
-export const metadata: Metadata = {
-  title: 'Forever Fest 2026 - Schedule',
-  openGraph: {
-    title: 'Forever Fest 2026 - Schedule',
-  },
-};
+export const metadata: Metadata = createPageMetadata(
+  'Forever Fest 2026 - Schedule',
+  'View the schedule of events for Forever Fest 2026 - Sean & Eva\'s Wedding celebration.',
+);
 
 type SimpleDayProps = {
   day: ScheduleDay;

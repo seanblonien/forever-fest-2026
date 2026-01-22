@@ -1,13 +1,12 @@
 import { ExternalLink, Heart, ShoppingBag } from 'lucide-react';
 
-import type { Metadata } from 'next';
+import { Metadata } from 'next';
+import { createPageMetadata } from '@/lib';
 
-export const metadata: Metadata = {
-  title: 'Forever Fest 2026 - Registry',
-  openGraph: {
-    title: 'Forever Fest 2026 - Registry',
-  },
-};
+export const metadata: Metadata = createPageMetadata(
+  'Forever Fest 2026 - Registry',
+  'View the gift registry for Forever Fest 2026 - Sean & Eva\'s Wedding.',
+);
 
 const RegistryPage: React.FC = () => (
   <div className='w-full max-w-150 mx-auto text-center text-white pt-6 pb-12 px-2 md:px-0'>

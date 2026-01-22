@@ -1,12 +1,11 @@
 import { Metadata } from 'next';
+import { createPageMetadata } from '@/lib';
 import { TimelineItem, TimelineItemData } from './TimelineItem';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: 'Forever Fest 2026 - Our Story',
-  openGraph: {
-    title: 'Forever Fest 2026 - Our Story',
-  },
-};
+  description: 'The story of how Sean & Eva met and fell in love.',
+});
 
 const timelineData: TimelineItemData[] = [
   {
