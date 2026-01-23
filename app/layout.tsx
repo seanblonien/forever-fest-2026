@@ -1,6 +1,5 @@
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Alex_Brush as AlexBrush, League_Gothic as LeagueGothic } from 'next/font/google';
+import { AnalyticsWrapper } from '@/components/shared/AnalyticsWrapper';
 import { Footer } from '@/components/shared/Footer';
 import { ThemeProvider } from '@/components/theme-provider';
 import { ChildrenProps, cn, OPEN_GRAPH_DEFAULTS, PUBLIC_SITE_BASE_URL } from '@/lib';
@@ -105,9 +104,8 @@ const RootLayout: React.FC<ChildrenProps> = ({
           </main>
 
           <Footer />
+          <AnalyticsWrapper />
         </div>
-        <Analytics />
-        <SpeedInsights />
       </ThemeProvider>
     </body>
   </html>

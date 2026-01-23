@@ -1,6 +1,5 @@
 'use client';
 
-import { addDays, addHours, addMinutes, addMonths, differenceInDays, differenceInHours, differenceInMinutes, differenceInMonths, differenceInSeconds } from 'date-fns';
 import { useEffect, useState } from 'react';
 
 type TimeLeft = {
@@ -18,26 +17,22 @@ const calculateTimeLeft = (): TimeLeft => {
   const difference = targetDate.getTime() - now.getTime();
 
   if (difference > 0) {
-    // Calculate months remaining
-    const months = differenceInMonths(targetDate, now);
+    // Calculate time units using native Date math
+    const totalSeconds = Math.floor(difference / 1000);
+    const totalMinutes = Math.floor(totalSeconds / 60);
+    const totalHours = Math.floor(totalMinutes / 60);
+    const totalDays = Math.floor(totalHours / 24);
 
-    // Calculate remaining days after removing months
-    const afterMonths = addMonths(now, months);
-    const days = differenceInDays(targetDate, afterMonths);
+    // Calculate months (approximate using 30.44 days average)
+    const months = Math.floor(totalDays / 30.44);
 
-    // Calculate remaining hours after removing full days
-    const afterDays = addDays(afterMonths, days);
-    const hours = differenceInHours(targetDate, afterDays);
+    // Calculate remaining time units
+    const remainingDays = totalDays - Math.floor(months * 30.44);
+    const hours = totalHours - (totalDays * 24);
+    const minutes = totalMinutes - (totalHours * 60);
+    const seconds = totalSeconds - (totalMinutes * 60);
 
-    // Calculate remaining minutes after removing full hours
-    const afterHours = addHours(afterDays, hours);
-    const minutes = differenceInMinutes(targetDate, afterHours);
-
-    // Calculate remaining seconds after removing full minutes
-    const afterMinutes = addMinutes(afterHours, minutes);
-    const seconds = differenceInSeconds(targetDate, afterMinutes);
-
-    return { months, days, hours, minutes, seconds };
+    return { months, days: remainingDays, hours, minutes, seconds };
   }
 
   return { months: 0, days: 0, hours: 0, minutes: 0, seconds: 0 };

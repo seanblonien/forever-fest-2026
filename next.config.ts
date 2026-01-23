@@ -85,7 +85,6 @@ const nextConfig: NextConfig = {
     inlineCss: true,
     optimizePackageImports: [
       'lucide-react',
-      'date-fns',
       '@radix-ui/react-slot',
       'class-variance-authority',
       'clsx',
