@@ -88,26 +88,26 @@ export const viewport = {
   ],
 };
 
-const RootLayout: React.FC<ChildrenProps> = ({
-  children,
-}) => (
-  <html suppressHydrationWarning className={cn(boldFont.variable, cursiveFont.variable, 'dark')} lang='en' style={{ colorScheme: 'dark' }}>
-    <body>
-      <ThemeProvider disableTransitionOnChange enableSystem attribute='class' defaultTheme='dark'>
-        <div className='min-h-screen bg-forever-fest-gradient flex flex-col'>
-          <Header />
-          <Navigation />
+function RootLayout({ children }: ChildrenProps) {
+  return (
+    <html suppressHydrationWarning className={cn(boldFont.variable, cursiveFont.variable, 'dark')} lang='en' style={{ colorScheme: 'dark' }}>
+      <body>
+        <ThemeProvider disableTransitionOnChange enableSystem attribute='class' defaultTheme='dark'>
+          <div className='min-h-screen bg-forever-fest-gradient flex flex-col'>
+            <Header />
+            <Navigation />
 
-          {/* Main Content */}
-          <main className='flex-1'>
-            {children}
-          </main>
+            {/* Main Content */}
+            <main className='flex-1'>
+              {children}
+            </main>
 
-          <Footer />
-          <AnalyticsWrapper />
-        </div>
-      </ThemeProvider>
-    </body>
-  </html>
-);
+            <Footer />
+            <AnalyticsWrapper />
+          </div>
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
 export default RootLayout;

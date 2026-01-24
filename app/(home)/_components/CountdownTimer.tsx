@@ -38,24 +38,26 @@ const calculateTimeLeft = (): TimeLeft => {
   return { months: 0, days: 0, hours: 0, minutes: 0, seconds: 0 };
 };
 
-const CountdownBox = ({
+function CountdownBox({
   label,
   value,
 }: {
   label: string;
   value: number;
-}) => (
-  <figure className='rounded-lg py-2 px-1 md:p-4 bg-papaya-whip text-center'>
-    <data suppressHydrationWarning className='block text-3xl md:text-4xl font-black text-syracuse-orange font-league-gothic' value={value}>
-      {value}
-    </data>
-    <figcaption className='text-sm md:text-base text-steel-pink font-league-gothic'>
-      {label}
-    </figcaption>
-  </figure>
-);
+}) {
+  return (
+    <figure className='rounded-lg py-2 px-1 md:p-4 bg-papaya-whip text-center'>
+      <data suppressHydrationWarning className='block text-3xl md:text-4xl font-black text-syracuse-orange font-league-gothic' value={value}>
+        {value}
+      </data>
+      <figcaption className='text-sm md:text-base text-steel-pink font-league-gothic'>
+        {label}
+      </figcaption>
+    </figure>
+  );
+}
 
-export const CountdownTimer = () => {
+export function CountdownTimer() {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft);
 
   useEffect(() => {
@@ -78,4 +80,4 @@ export const CountdownTimer = () => {
       </div>
     </div>
   );
-};
+}

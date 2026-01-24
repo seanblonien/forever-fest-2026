@@ -82,7 +82,7 @@ type LazyLoadProps = {
  * />
  * ```
  */
-export const LazyLoad = ({
+export function LazyLoad({
   className = '',
   componentProps = {},
   fallback = (
@@ -95,7 +95,7 @@ export const LazyLoad = ({
   loadDelay = 100,
   rootMargin = '200px',
   threshold = 0,
-}: LazyLoadProps) => {
+}: LazyLoadProps) {
   const { containerRef, shouldLoad } = useInViewLazyLoad({
     rootMargin,
     threshold,
@@ -117,4 +117,4 @@ export const LazyLoad = ({
         : fallback}
     </div>
   );
-};
+}

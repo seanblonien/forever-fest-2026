@@ -124,34 +124,36 @@ const timelineData: TimelineItemData[] = [
   },
 ];
 
-const OurStoryPage: React.FC = () => (
-  <div className='w-full max-w-150 mx-auto text-white pt-6 pb-12 px-2 md:px-0'>
-    <h1 className='text-4xl md:text-6xl mb-8 font-league-gothic text-center'>Our Story</h1>
+function OurStoryPage() {
+  return (
+    <div className='w-full max-w-150 mx-auto text-white pt-6 pb-12 px-2 md:px-0'>
+      <h1 className='text-4xl md:text-6xl mb-8 font-league-gothic text-center'>Our Story</h1>
 
-    {/* How We Met Story */}
-    <div className='mb-8 space-y-4'>
-      <p className='text-papaya-whip leading-relaxed text-justify'>
-        {'Eva had just moved back from LA, and was looking for a Rave Fam. She had enjoyed attending the Nocturnal EDM festival in Southern California, and wanted to find that same energy in Dallas. She went out to Green Light Social, a club in Deep Ellum known for dance music, to check it out. Eva spotted a tall man with an immaculate afro in the crowd and introduced herself to Jordyn Dent. Jordyn was Sean\'s roommate at the time, he told her about the ins and outs of the rave scene in Dallas and about the pre-game to the Lights All Night music festival that Sean was throwing. With an invite, Eva showed up to the pre-game in Sean and Jordyn\'s uptown apartment, and quickly stood out to Sean. He knew everyone at his party but this one new gorgeous girl. After chatting for a bit, Eva left early to get to LAN, but on the way out, Sean and Eva had a small yet memorable interaction in the hallway. Eva knew Sean had the LAN map and was the man with the plan, so she was the one who asked for his number. They hugged and briefly gazed into each other\'s eyes as Sean wore a flirty, big smile. There was a hint of curiosity and romance in the air as Eva exited.'}
-      </p>
+      {/* How We Met Story */}
+      <div className='mb-8 space-y-4'>
+        <p className='text-papaya-whip leading-relaxed text-justify'>
+          {'Eva had just moved back from LA, and was looking for a Rave Fam. She had enjoyed attending the Nocturnal EDM festival in Southern California, and wanted to find that same energy in Dallas. She went out to Green Light Social, a club in Deep Ellum known for dance music, to check it out. Eva spotted a tall man with an immaculate afro in the crowd and introduced herself to Jordyn Dent. Jordyn was Sean\'s roommate at the time, he told her about the ins and outs of the rave scene in Dallas and about the pre-game to the Lights All Night music festival that Sean was throwing. With an invite, Eva showed up to the pre-game in Sean and Jordyn\'s uptown apartment, and quickly stood out to Sean. He knew everyone at his party but this one new gorgeous girl. After chatting for a bit, Eva left early to get to LAN, but on the way out, Sean and Eva had a small yet memorable interaction in the hallway. Eva knew Sean had the LAN map and was the man with the plan, so she was the one who asked for his number. They hugged and briefly gazed into each other\'s eyes as Sean wore a flirty, big smile. There was a hint of curiosity and romance in the air as Eva exited.'}
+        </p>
 
-      <p className='text-papaya-whip leading-relaxed text-justify'>
-        {'The night was young, and the interactions at Lights All Night between Sean and Eva sparked a fire that has only grown since. They briefly connected in the world of technology and EDM music. A few weeks later, Sean built the confidence to ask Eva out on a date, and the rest was history. They both discovered their values of having a growth mind set and living life to the fullest amongst many other values and beliefs synced seamlessly. Enjoy our picture story timeline revealing how the connection between these two rave bae\'s progressed. We\'re pleased to have you witness the union of our love ❣️'}
-      </p>
-    </div>
+        <p className='text-papaya-whip leading-relaxed text-justify'>
+          {'The night was young, and the interactions at Lights All Night between Sean and Eva sparked a fire that has only grown since. They briefly connected in the world of technology and EDM music. A few weeks later, Sean built the confidence to ask Eva out on a date, and the rest was history. They both discovered their values of having a growth mind set and living life to the fullest amongst many other values and beliefs synced seamlessly. Enjoy our picture story timeline revealing how the connection between these two rave bae\'s progressed. We\'re pleased to have you witness the union of our love ❣️'}
+        </p>
+      </div>
 
-    {/* Timeline Container */}
-    <div className='relative pl-8'>
-      {/* Vertical Line - continuous line for entire timeline */}
-      <div className='absolute left-4 top-0 bottom-0 w-0.5 bg-papaya-whip' />
+      {/* Timeline Container */}
+      <div className='relative pl-8'>
+        {/* Vertical Line - continuous line for entire timeline */}
+        <div className='absolute left-4 top-0 bottom-0 w-0.5 bg-papaya-whip' />
 
-      {/* Timeline Items */}
-      <div className='space-y-12'>
-        {timelineData.map((item) => (
-          <TimelineItem key={item.id} item={item} />
-        ))}
+        {/* Timeline Items */}
+        <div className='space-y-12'>
+          {timelineData.map((item) => (
+            <TimelineItem key={item.id} item={item} />
+          ))}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+}
 
 export default OurStoryPage;

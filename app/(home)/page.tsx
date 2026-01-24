@@ -8,16 +8,18 @@ import {
   QuickActions,
 } from './_components';
 
-const HomePage: React.FC = () => (
-  <>
-    <MainTitle />
-    <CitySkyline />
+function HomePage() {
+  return (
+    <>
+      <MainTitle />
+      <CitySkyline />
 
-    <EventDetails />
-    <Description />
-    <CountdownTimer />
-    <CalendarEmbedDynamic isShowTitle />
-    <QuickActions />
-  </>
-);
+      <EventDetails />
+      <Description />
+      <CountdownTimer />
+      <CalendarEmbedDynamic isShowTitle />
+      <QuickActions />
+    </>
+  );
+}
 export default HomePage;

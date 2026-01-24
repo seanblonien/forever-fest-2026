@@ -25,7 +25,7 @@ type Props = {
   item: TimelineItemData;
 };
 
-export const TimelineItem: React.FC<Props> = ({ item }) => {
+export function TimelineItem({ item }: Props) {
   const content = (
     <>
       <div className='mb-4'>
@@ -83,4 +83,4 @@ export const TimelineItem: React.FC<Props> = ({ item }) => {
       </div>
     </div>
   );
-};
+}

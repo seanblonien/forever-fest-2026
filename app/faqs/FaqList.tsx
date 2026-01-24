@@ -22,7 +22,7 @@ type FaqListProps = {
   initialCategory: FaqCategory;
 };
 
-export const FaqList: React.FC<FaqListProps> = ({ initialCategory }) => {
+export function FaqList({ initialCategory }: FaqListProps) {
   const { currentHash } = useRouteHash();
   const [activeCategory, setActiveCategory] = useQueryParamState({
     defaultValue: initialCategory,
@@ -58,4 +58,4 @@ export const FaqList: React.FC<FaqListProps> = ({ initialCategory }) => {
       </div>
     </>
   );
-};
+}

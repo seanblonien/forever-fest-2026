@@ -1,7 +1,7 @@
-import { SvgProps } from '../../lib';
+import { StyleProps } from '../../lib';
 
 // eslint-disable-next-line max-lines-per-function -- in-line SVG
-export const DiscoBallsSvg: React.FC<SvgProps> = (props) => {
+export function DiscoBallsSvg(props: StyleProps) {
   const p1 = '#c992fa';
   const p2 = '#925ce8';
   const p3 = '#c644f1';
@@ -132,4 +132,4 @@ export const DiscoBallsSvg: React.FC<SvgProps> = (props) => {
     </svg>
 
   );
-};
+}

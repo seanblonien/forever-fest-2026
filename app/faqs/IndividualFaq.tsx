@@ -11,12 +11,12 @@ type IndividualFaqProps = {
   question: string;
 };
 
-export const IndividualFaq: React.FC<IndividualFaqProps> = ({
+export function IndividualFaq({
   answer,
   component,
   highlightedId,
   question,
-}) => {
+}: IndividualFaqProps) {
   const [hasCopiedTooltip, setHasCopiedTooltip] = useState(false);
   const slug = generateSlug(question);
   const isHighlighted = highlightedId === slug;
@@ -81,4 +81,4 @@ export const IndividualFaq: React.FC<IndividualFaqProps> = ({
       )}
     </article>
   );
-};
+}

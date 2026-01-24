@@ -8,7 +8,7 @@ type FaqLinkProps = {
   label: string;
 };
 
-export const FaqLink: React.FC<FaqLinkProps> = ({ href, icon: Icon, label }) => {
+export function FaqLink({ href, icon: Icon, label }: FaqLinkProps) {
   const isExternal = href.startsWith('http');
   const className =
     'inline-flex items-center justify-center gap-3 bg-white/20 hover:bg-white/30 transition-colors duration-200 rounded-lg p-4 group text-lg font-league-gothic';
@@ -34,4 +34,4 @@ export const FaqLink: React.FC<FaqLinkProps> = ({ href, icon: Icon, label }) => 
       {content}
     </Link>
   );
-};
+}

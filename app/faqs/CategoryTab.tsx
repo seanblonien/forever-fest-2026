@@ -8,7 +8,7 @@ type CategoryTabProps = {
   onClick: () => void;
 };
 
-export const CategoryTab: React.FC<CategoryTabProps> = ({ category, isActive, onClick }) => {
+export function CategoryTab({ category, isActive, onClick }: CategoryTabProps) {
   const { emoji, label } = CATEGORY_CONFIG[category];
   const count = getCategoryCount(category);
 
@@ -27,7 +27,11 @@ export const CategoryTab: React.FC<CategoryTabProps> = ({ category, isActive, on
     >
       <span>{emoji}</span>
       <span>{label}</span>
-      <span className='text-sm'>({count})</span>
+      <span className='text-sm'>
+        (
+        {count}
+        )
+      </span>
     </button>
   );
-};
+}

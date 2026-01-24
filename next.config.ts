@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   reactStrictMode: true,
   // cacheComponents: true,
-  async redirects() {
+  redirects() {
     return [
       {
         source: '/address',
@@ -33,7 +33,7 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  async headers() {
+  headers() {
     return [
       {
         // Cache JavaScript files for 1 year

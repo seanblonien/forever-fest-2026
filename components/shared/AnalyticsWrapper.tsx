@@ -10,9 +10,11 @@ const SpeedInsights = dynamic(
   { ssr: false },
 );
 
-export const AnalyticsWrapper: React.FC = () => (
-  <>
-    <Analytics />
-    <SpeedInsights />
-  </>
-);
+export function AnalyticsWrapper() {
+  return (
+    <>
+      <Analytics />
+      <SpeedInsights />
+    </>
+  );
+}
