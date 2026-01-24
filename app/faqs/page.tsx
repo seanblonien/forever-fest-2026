@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import { createPageMetadata } from '@/lib';
-
 import { FaqList } from './FaqList';
 
 export const metadata: Metadata = createPageMetadata({

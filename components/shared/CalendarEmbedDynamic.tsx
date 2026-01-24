@@ -13,7 +13,7 @@ const CalendarEmbedContent = dynamic(
   () => import('./CalendarEmbedContent').then((mod) => mod.CalendarEmbedContent),
   {
     loading: () => <CalendarLoadingPlaceholder />,
-    // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
+
     ssr: false,
   },
 );

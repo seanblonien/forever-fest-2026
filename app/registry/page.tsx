@@ -1,5 +1,4 @@
 import { ExternalLink, Heart, ShoppingBag } from 'lucide-react';
-
 import { Metadata } from 'next';
 import { createPageMetadata } from '@/lib';
 

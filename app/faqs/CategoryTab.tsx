@@ -1,6 +1,5 @@
 import { cn } from '@/lib';
 import { CATEGORY_CONFIG, getCategoryCount } from '@/lib/faqData';
-
 import type { FaqCategory } from '@/lib/faqData';
 
 type CategoryTabProps = {

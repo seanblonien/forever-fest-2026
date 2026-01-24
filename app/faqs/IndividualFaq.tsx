@@ -2,7 +2,6 @@
 
 import { LinkIcon } from 'lucide-react';
 import { useState } from 'react';
-
 import { generateSlug } from './utils';
 
 type IndividualFaqProps = {

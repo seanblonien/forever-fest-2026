@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import { createPageMetadata } from '@/lib';
 import { scheduleDays } from '@/lib/scheduleData';
-
 import type { ScheduleDay } from '@/lib/scheduleData';
 
 export const metadata: Metadata = createPageMetadata({

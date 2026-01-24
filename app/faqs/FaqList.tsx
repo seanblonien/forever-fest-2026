@@ -1,14 +1,11 @@
 'use client';
 
 import { Heart, Pin, Plane } from 'lucide-react';
-
 import MapLinks from '@/components/MapLinks';
 import { CalendarEmbedDynamic } from '@/components/shared/CalendarEmbedDynamic';
 import { useQueryParamState, useRouteHash } from '@/hooks';
 import { FAQ_CATEGORIES, faqs } from '@/lib/faqData';
-
 import type { FaqCategory, FaqComponentKey } from '@/lib/faqData';
-
 import { CategoryTab } from './CategoryTab';
 import { FaqLink } from './FaqLink';
 import { IndividualFaq } from './IndividualFaq';

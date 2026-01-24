@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import MapLinks from '@/components/MapLinks';
-
 import { createPageMetadata } from '@/lib';
 
 export const metadata: Metadata = createPageMetadata({

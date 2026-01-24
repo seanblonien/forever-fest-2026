@@ -1,6 +1,5 @@
 import { ExternalLink } from 'lucide-react';
 import Link from 'next/link';
-
 import type { LucideIcon } from 'lucide-react';
 
 type FaqLinkProps = {
