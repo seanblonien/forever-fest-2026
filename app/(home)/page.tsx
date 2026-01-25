@@ -1,4 +1,4 @@
-import { CalendarEmbedDynamic } from '@/components/shared/CalendarEmbedDynamic';
+import { CalendarEmbedDynamic } from '@/components/shared/calendar-embed-dynamic';
 import {
   CitySkyline,
   CountdownTimer,

@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { createPageMetadata } from '@/lib';
-import { TimelineItem, TimelineItemData } from './TimelineItem';
+import { TimelineItem, TimelineItemData } from './timeline-item';
 
 export const metadata: Metadata = createPageMetadata({
   title: 'Forever Fest 2026 - Our Story',

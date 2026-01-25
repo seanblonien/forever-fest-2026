@@ -1,14 +1,14 @@
 'use client';
 
 import { Heart, Pin, Plane } from 'lucide-react';
-import MapLinks from '@/components/MapLinks';
-import { CalendarEmbedDynamic } from '@/components/shared/CalendarEmbedDynamic';
+import MapLinks from '@/components/map-links';
+import { CalendarEmbedDynamic } from '@/components/shared/calendar-embed-dynamic';
 import { useQueryParamState, useRouteHash } from '@/hooks';
 import { FAQ_CATEGORIES, faqs } from '@/lib/faqData';
 import type { FaqCategory, FaqComponentKey } from '@/lib/faqData';
-import { CategoryTab } from './CategoryTab';
-import { FaqLink } from './FaqLink';
-import { IndividualFaq } from './IndividualFaq';
+import { CategoryTab } from './category-tab';
+import { FaqLink } from './faq-link';
+import { IndividualFaq } from './individual-faq';
 
 const FAQ_COMPONENT_MAP: Record<FaqComponentKey, React.ReactNode> = {
   'calendar': <CalendarEmbedDynamic />,

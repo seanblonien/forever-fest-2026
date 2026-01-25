@@ -1,7 +1,7 @@
 import { ExternalLink, MapPin } from 'lucide-react';
 import { Metadata } from 'next';
 import Image from 'next/image';
-import MapLinks from '@/components/MapLinks';
+import MapLinks from '@/components/map-links';
 import { createPageMetadata } from '@/lib';
 
 export const metadata: Metadata = createPageMetadata({
@@ -188,17 +188,17 @@ function TravelPage() {
                     sizes='(min-width: 768px) 240px, 100vw'
                     src={hotel.image}
                   />
-                  <div className='absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent' />
+                  <div className='absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent' />
                   <span className='absolute left-4 top-4 rounded-full border border-white/30 bg-black/40 px-3 py-1 text-[0.65rem] uppercase tracking-[0.3em] text-white'>
                     {hotel.tier}
                   </span>
                 </div>
-                <div className='flex flex-1 flex-col gap-4 p-6 text-[#101048]'>
+                <div className='flex flex-1 flex-col gap-4 p-6 text-penn-blue'>
                   <div>
                     <h3 className='text-2xl font-league-gothic'>{hotel.name}</h3>
-                    <p className='mt-2 text-sm text-[#101048]/70'>{hotel.description}</p>
+                    <p className='mt-2 text-sm text-penn-blue/70'>{hotel.description}</p>
                   </div>
-                  <div className='flex items-center gap-2 text-sm text-[#101048]/70'>
+                  <div className='flex items-center gap-2 text-sm text-penn-blue/70'>
                     <MapPin className='h-4 w-4 text-[#DE1ACE]' />
                     <span>{hotel.walk}</span>
                   </div>
@@ -206,7 +206,7 @@ function TravelPage() {
                     {hotel.highlights.map((highlight) => (
                       <span
                         key={highlight}
-                        className='rounded-full border border-[#DE1ACE]/20 bg-[#DE1ACE]/10 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-[#101048]/80'
+                        className='rounded-full border border-[#DE1ACE]/20 bg-[#DE1ACE]/10 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-penn-blue/80'
                       >
                         {highlight}
                       </span>

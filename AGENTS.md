@@ -2,35 +2,51 @@
 
 ## Project Overview
 
-Next.js 16 (App Router) + TypeScript (strict) + Tailwind CSS + pnpm (>=10) + Node >=24 + Vercel
+Next.js 16 (App Router) + React 19 + TypeScript (strict) + Tailwind CSS v4 + pnpm (>=10) + Node >=24 + Vercel
 
 ## Commands
 
 ```bash
-pnpm dev          # Start dev server (port 3000)
-pnpm build        # Production build
-pnpm lint         # Run ESLint (auto-fixes formatting issues)
-pnpm typecheck    # TypeScript type checking
-pnpm validate     # Both lint and typecheck
+pnpm dev           # Start dev server (port 3000)
+pnpm build         # Production build
+pnpm start         # Start production server
+pnpm prod          # Build + start
+pnpm analyze       # Next.js bundle analyzer
+pnpm lint          # ESLint with auto-fix (formatting lives here)
+pnpm typecheck     # TypeScript type checking
+pnpm validate      # lint + typecheck (runs concurrently)
 ```
 
-**Important**: Use `pnpm lint` CLI for all formatting - it handles quotes, semicolons, indentation, line length, etc. Don't manually format.
+Test commands
+- No test suite is configured yet, run `pnpm validate` only for typechecking, formatting, and linting
 
-## Conventions
+## Code Style Guidelines
+
+### Imports
+- Group imports with a blank line between groups.
+- Order: external packages, internal aliases (`@/`), type-only imports, styles.
+- Use `import type` for types.
+
+### Formatting and Linting
+- Rely on ESLint auto-fix for quotes, spacing, and line length.
+- `no-console` is allowed in lint, but Next.js strips console calls in production builds.
+
+### TypeScript
+- `strict` mode is on; keep types explicit.
+- Use `type` over `interface` for props and shapes.
 
 ### Naming
-- Files: `PascalCase.tsx` (components), `camelCase.ts` (utils/hooks), `lowercase` (Next.js files, configs)
-- Vars/functions: `camelCase`, Constants: `SCREAMING_SNAKE_CASE`, Components: `PascalCase`, Types: `PascalCase` + suffix (`Props`, `Options`)
+- Components: `PascalCase`.
+- Hooks: `useSomething` in `camelCase`.
+- Utilities/constants: `camelCase` and `SCREAMING_SNAKE_CASE`.
+- Files:
+  - Components: `kebab-case.tsx`
+  - Hooks/utils: `camelCase.ts`
+  - Next.js files/configs: lowercase
 
-### Import Order (blank lines between groups)
-1. External (React, Next.js, libraries)
-2. Internal (`@/components`, `@/lib`)
-3. Type-only (`import type`)
-4. Styles (CSS last)
-
-### Component Structure
-```
-'use client';  // if needed
+### Components
+```tsx
+'use client'; // only when needed
 
 import { ... } from '...';
 
@@ -40,41 +56,49 @@ const CONSTANT = 123;
 
 const SubComponent = ({ prop }: { prop: string }) => ( ... );
 
-export const Component: React.FC<Props> = ({ prop }) => {
+export function Component({ prop }: Props) => {
   const [state, setState] = useState(null);
-  
+
   const handleClick = () => { ... };
-  
+
   return ( ... );
 };
 ```
 
-### Export Style
-- Named exports for reusable components: `export const Button = () => { ... }`
-- Default exports for pages/layouts: `export default Page;`
+### Exports
+- Named exports for reusable components.
+- Default exports for Next.js pages/layouts.
 
 ### Server vs Client Components
-- Default: Server Components (no directive)
-- Use `'use client'` for: interactivity, browser APIs, client-side libraries
+- Server Components by default.
+- Add `'use client'` for interactivity, browser APIs, or client-only libraries.
 
-### TypeScript
-- Use `React.FC<Props>` for components
-- Prefer `type` over `interface` for object shapes/props
-- Explicit types for function parameters and returns
+### Styling
+- Tailwind CSS is the default styling system.
+- Use `cn()` from `@/lib/utils` for conditional class names.
+- Custom colors: `penn-blue`, `syracuse-orange`, `steel-pink`.
+- Custom fonts: `var(--font-league-gothic)`, `var(--font-alex-brush)`.
 
-### Tailwind
-- Custom colors: `penn-blue`, `syracuse-orange`, `steel-pink`
-- Custom fonts: `var(--font-league-gothic)`, `var(--font-alex-brush)`
-- Use `cn()` utility for conditional classes
-
-### Next.js
-- Export `metadata` object from pages (type: `Metadata`)
-- Use `next/image` with `priority` for above-fold images
-- Load fonts via `next/font/google` with CSS variables
+### Next.js Conventions
+- Export `metadata` (type `Metadata`) where appropriate.
+- Prefer `next/image` with `priority` for above-the-fold images.
+- Load fonts via `next/font/google` with CSS variables.
+- `typedRoutes` is enabled; keep route strings valid.
 
 ### Performance
-- React Compiler enabled (avoid manual memoization)
-- Lazy load with `React.lazy()` + `Suspense` or `useInViewLazyLoad` hook
+- React Compiler is enabled; avoid manual memoization unless proven necessary.
+- Use `React.lazy` + `Suspense` or `useInViewLazyLoad` for heavy UI.
+- Keep components small and data flow simple.
+
+### Error Handling
+- Prefer explicit guards and early returns over deep nesting.
+- Use typed errors in utilities; avoid throwing raw strings.
+- When dealing with async side effects in hooks, clean up in `useEffect`.
+- For missing or invalid data in pages, use Next.js error boundaries or `notFound()` when appropriate.
+
+### Accessibility
+- Use semantic HTML and aria attributes when needed (Radix components already help).
+- Ensure interactive elements are keyboard accessible.
 
 ## File Organization
 
@@ -92,7 +116,8 @@ public/           # Static assets
 styles/           # Global CSS
 ```
 
-## Notes
+## Additional Notes
 
-- Path alias: `@/*` → root
-- No test suite (add Vitest/Jest if needed)
+- Path alias: `@/*` -> repo root.
+- `next.config.ts` ignores TypeScript build errors; still keep code type-safe.
+- Use `pnpm validate` before shipping UI changes.

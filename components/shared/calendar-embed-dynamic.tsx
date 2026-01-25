@@ -12,7 +12,7 @@ function CalendarLoadingPlaceholder() {
 }
 
 const CalendarEmbedContent = dynamic(
-  () => import('./CalendarEmbedContent').then((mod) => mod.CalendarEmbedContent),
+  () => import('./calendar-embed-content').then((mod) => mod.CalendarEmbedContent),
   {
     loading: () => <CalendarLoadingPlaceholder />,
 

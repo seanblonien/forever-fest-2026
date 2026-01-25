@@ -16,21 +16,31 @@ function SimpleDay({ day }: SimpleDayProps) {
   return (
     <div className='mb-12 text-left'>
       <h2 className='text-3xl md:text-4xl font-league-gothic text-white tracking-wide'>
-        📅 {day.title}
+        📅
+        {' '}
+        {day.title}
       </h2>
       <p className='text-white/70 text-sm md:text-base tracking-wider mt-1'>
         {day.date.toUpperCase()}
       </p>
       {day.time && (
         <p className='text-steel-pink font-league-gothic text-xl md:text-2xl mt-1'>
-          🕒 {day.time}
+          🕒
+          {' '}
+          {day.time}
         </p>
       )}
 
       {day.venue && (
         <div className='mt-4 text-white/80 text-sm md:text-base'>
-          <p>📍 {day.venue.name}</p>
-          <p className='text-white/60'>🗺️ {day.venue.address}</p>
+          <p>
+            📍
+            {day.venue.name}
+          </p>
+          <p className='text-white/60'>
+            🗺️
+            {day.venue.address}
+          </p>
         </div>
       )}
 
@@ -53,7 +63,9 @@ function SimpleDay({ day }: SimpleDayProps) {
                   {event.title}
                 </p>
                 <p className='text-white/90 font-league-gothic text-lg mt-0.5'>
-                  ⏰ {timeDisplay}
+                  ⏰
+                  {' '}
+                  {timeDisplay}
                 </p>
                 {event.description && (
                   <p className='text-white/80 text-sm md:text-base mt-1 leading-relaxed max-w-xl'>

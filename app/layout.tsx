@@ -1,11 +1,11 @@
 import { Alex_Brush as AlexBrush, League_Gothic as LeagueGothic } from 'next/font/google';
-import { AnalyticsWrapper } from '@/components/shared/AnalyticsWrapper';
-import { Footer } from '@/components/shared/Footer';
+import { AnalyticsWrapper } from '@/components/shared/analytics-wrapper';
+import { Footer } from '@/components/shared/footer';
 import { ThemeProvider } from '@/components/theme-provider';
 import { ChildrenProps, cn, OPEN_GRAPH_DEFAULTS, PUBLIC_SITE_BASE_URL } from '@/lib';
 import type { Metadata } from 'next';
-import { Header } from '@/components/shared/Header';
-import { Navigation } from '@/components/shared/Navigation';
+import { Header } from '@/components/shared/header';
+import { Navigation } from '@/components/shared/navigation';
 import './globals.css';
 
 const boldFont = LeagueGothic({

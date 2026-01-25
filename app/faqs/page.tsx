@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { createPageMetadata } from '@/lib';
-import { FaqList } from './FaqList';
+import { FaqList } from './faq-list';
 
 export const metadata: Metadata = createPageMetadata({
   title: 'Forever Fest 2026 - FAQs',

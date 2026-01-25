@@ -1,4 +1,4 @@
-import { SkylineSvg } from '@/components/svgs/SkylineSvg';
+import { SkylineSvg } from '@/components/svgs/skyline-svg';
 
 export function CitySkyline() {
   return (

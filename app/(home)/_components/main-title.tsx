@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { DiscoBallsSvg } from '@/components/svgs/DiscoBallsSvg';
+import { DiscoBallsSvg } from '@/components/svgs/disco-balls-svg';
 import { TitleSvg } from '@/components/svgs';
 
 export function MainTitle() {
