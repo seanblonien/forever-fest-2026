@@ -1,5 +1,6 @@
 import { Alex_Brush as AlexBrush, League_Gothic as LeagueGothic } from 'next/font/google';
-import { AnalyticsWrapper } from '@/components/shared/analytics-wrapper';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Footer } from '@/components/shared/footer';
 import { ThemeProvider } from '@/components/theme-provider';
 import { ChildrenProps, cn, OPEN_GRAPH_DEFAULTS, PUBLIC_SITE_BASE_URL } from '@/lib';
@@ -103,7 +104,8 @@ function RootLayout({ children }: ChildrenProps) {
             </main>
 
             <Footer />
-            <AnalyticsWrapper />
+            <Analytics />
+            <SpeedInsights />
           </div>
         </ThemeProvider>
       </body>
