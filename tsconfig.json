@@ -29,6 +29,7 @@
     }
   },
   "include": [
+    "lib/*.js",
     "**/*.ts",
     "**/*.tsx",
     "postcss.config.mjs",
