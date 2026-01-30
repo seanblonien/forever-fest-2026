@@ -1,3 +1,20 @@
+export function CountdownTimer() {
+  return (
+    <div className='mb-12 px-2 max-w-150 mx-auto'>
+      <div className='rounded-lg py-6 px-4 md:py-8 md:px-8 bg-papaya-whip text-center max-w-xl mx-auto'>
+        <p className='text-2xl md:text-3xl font-league-gothic text-steel-pink mb-2'>
+          NEW DATE COMING SOON
+        </p>
+        <p className='text-base md:text-lg text-penn-blue/80'>
+          Stay tuned for updates!
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* eslint-disable @stylistic/max-len -- comment length */
+/*
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -81,3 +98,5 @@ export function CountdownTimer() {
     </div>
   );
 }
+*/
+/* eslint-enable @stylistic/max-len  */

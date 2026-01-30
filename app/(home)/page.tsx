@@ -1,11 +1,11 @@
-import { CalendarEmbedDynamic } from '@/components/shared/calendar-embed-dynamic';
+// POSTPONED: Uncomment CalendarEmbedDynamic import when new date is confirmed
+// import { CalendarEmbedDynamic } from '@/components/shared/calendar-embed-dynamic';
 import {
   CitySkyline,
   CountdownTimer,
   Description,
   EventDetails,
   MainTitle,
-  QuickActions,
 } from './_components';
 
 function HomePage() {
@@ -17,8 +17,9 @@ function HomePage() {
       <EventDetails />
       <Description />
       <CountdownTimer />
-      <CalendarEmbedDynamic isShowTitle />
-      <QuickActions />
+      {/* POSTPONED: Uncomment when new date is confirmed */}
+      {/* <CalendarEmbedDynamic isShowTitle /> */}
+      {/* <QuickActions /> */}
     </>
   );
 }

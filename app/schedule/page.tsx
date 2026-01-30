@@ -96,6 +96,12 @@ function SchedulePage() {
     <div className='w-full max-w-150 mx-auto text-center text-white pt-6 pb-12 px-2 md:px-0'>
       <h1 className='text-4xl md:text-6xl mb-4 font-league-gothic'>Schedule</h1>
 
+      <div className='bg-white/10 backdrop-blur-xs rounded-lg p-4 mb-8 text-base md:text-lg'>
+        <p className='text-white/90'>
+          📅 Exact dates are being finalized. Times and events will remain the same!
+        </p>
+      </div>
+
       <section className='text-left'>
         <WeekendTimeline />
       </section>

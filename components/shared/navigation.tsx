@@ -9,7 +9,8 @@ const navItems: ({ href: Route; label: string } | null)[] = [
   { label: 'TRAVEL', href: '/travel' },
   { label: 'REGISTRY', href: '/registry' },
   { label: 'FAQS', href: '/faqs' },
-  { label: 'RSVP', href: '/rsvp' },
+  // RSVP hidden until new date is confirmed
+  // { label: 'RSVP', href: '/rsvp' },
 ];
 
 export function Navigation({ className = '' }: StyleProps) {

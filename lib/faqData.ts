@@ -30,8 +30,11 @@ export const faqs: FAQData[] = [
   {
     category: 'event',
     question: 'When is the wedding?',
-    answer: 'Forever Fest 2026 will take place on Saturday, March 28th, 2026 from 6:00 PM to 11:00 PM CST. Add the event to your calendar using the buttons below ⬇️',
-    componentKey: 'calendar',
+    // POSTPONED: Uncomment original answer and componentKey when new date is confirmed
+    // answer: 'Forever Fest 2026 will take place on Saturday, March 28th, 2026 ' +
+    //   'from 6:00 PM to 11:00 PM CST. Add the event to your calendar using the buttons below ⬇️',
+    // componentKey: 'calendar',
+    answer: 'Forever Fest 2026 is happening later this year! We are currently finalizing the new date and will update everyone as soon as it\'s confirmed. Stay tuned!',
   },
   {
     category: 'event',

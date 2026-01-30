@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+// POSTPONED: Show "Date TBD" instead of March 28th until new date is confirmed
 export function EventDetails() {
   return (
     <div className='flex flex-col md:flex-row max-w-150 mx-auto px-4 mb-12 text-white items-center md:items-stretch'>
@@ -10,20 +11,20 @@ export function EventDetails() {
       >
         {/* Mobile: Single line date */}
         <div className='md:hidden text-6xl font-black text-lavender-pink font-league-gothic'>
-          MARCH
-          {' '}
-          <span className='font-alex-brush text-7xl text-white'>28th</span>
+          TBD
+          {/* {' '} */}
+          {/* <span className='font-alex-brush text-7xl text-white'>28th</span> */}
           {' '}
           2026
         </div>
 
         {/* Desktop: Stacked date with absolute positioned "28" */}
         <div className='hidden md:block'>
-          <div className='absolute top-10 -right-10 text-9xl font-alex-brush text-white z-10'>
+          {/* <div className='absolute top-10 -right-10 text-9xl font-alex-brush text-white z-10'>
             28th
-          </div>
+          </div> */}
           <div className='text-8xl font-black mb-2 text-lavender-pink font-league-gothic'>
-            MARCH
+            TBD
           </div>
           <div className='text-8xl font-black text-lavender-pink font-league-gothic'>
             2026

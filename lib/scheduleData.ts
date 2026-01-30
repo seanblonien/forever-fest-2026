@@ -20,9 +20,11 @@ export type ScheduleDay = {
   venue?: ScheduleVenue;
 };
 
+// POSTPONED: Change dates back to 'Friday, March 27th' and 'Saturday, March 28th' when new date is confirmed
 export const scheduleDays: ScheduleDay[] = [
   {
-    date: 'Friday, March 27th',
+    // POSTPONED: date: 'Friday, March 27th',
+    date: 'Friday (Date TBD)',
     title: 'Welcome Party',
     time: '7:30 PM - 10:00 PM',
     venue: {
@@ -34,7 +36,8 @@ export const scheduleDays: ScheduleDay[] = [
     events: [],
   },
   {
-    date: 'Saturday, March 28th',
+    // POSTPONED: date: 'Saturday, March 28th',
+    date: 'Saturday (Date TBD)',
     title: 'Wedding Day',
     venue: {
       name: 'DEC on Dragon',
