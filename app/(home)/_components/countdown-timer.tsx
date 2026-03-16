@@ -1,20 +1,3 @@
-export function CountdownTimer() {
-  return (
-    <div className='mb-12 px-2 max-w-150 mx-auto'>
-      <div className='rounded-lg py-6 px-4 md:py-8 md:px-8 bg-papaya-whip text-center max-w-xl mx-auto'>
-        <p className='text-2xl md:text-3xl font-league-gothic text-steel-pink mb-2'>
-          NEW DATE COMING SOON
-        </p>
-        <p className='text-base md:text-lg text-penn-blue/80'>
-          Stay tuned for updates!
-        </p>
-      </div>
-    </div>
-  );
-}
-
-/* eslint-disable @stylistic/max-len -- comment length */
-/*
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -28,8 +11,8 @@ type TimeLeft = {
 };
 
 const calculateTimeLeft = (): TimeLeft => {
-  // March 28th, 2026 at 6pm CST
-  const targetDate = new Date('2026-03-28T18:00:00-06:00');
+  // October 17th, 2026 at 6pm CDT
+  const targetDate = new Date('2026-10-17T18:00:00-05:00');
   const now = new Date();
   const difference = targetDate.getTime() - now.getTime();
 
@@ -88,6 +71,9 @@ export function CountdownTimer() {
 
   return (
     <div className='mb-12 px-2 max-w-150 mx-auto'>
+      <p className='mb-4 text-center text-2xl md:text-3xl font-league-gothic text-papaya-whip'>
+        Countdown to October 17, 2026
+      </p>
       <div className='grid grid-cols-5 gap-2 md:gap-4 max-w-3xl mx-auto'>
         <CountdownBox label='MONTHS' value={timeLeft.months} />
         <CountdownBox label='DAYS' value={timeLeft.days} />
@@ -98,5 +84,3 @@ export function CountdownTimer() {
     </div>
   );
 }
-*/
-/* eslint-enable @stylistic/max-len  */

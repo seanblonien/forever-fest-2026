@@ -10,12 +10,12 @@ export function CalendarEmbedContent() {
         hideBackground
         buttonStyle='default'
         description='Join us for our wedding celebration! Attire: Funky Semi-Formal'
-        endDate='2026-03-28'
+        endDate='2026-10-17'
         endTime='23:00'
         location='DEC on Dragon, 1414 Dragon St, Dallas, TX 75207'
         name="Forever Fest 2026 - Sean & Eva's Wedding"
         options={['Apple', 'Google', 'iCal', 'Outlook.com']}
-        startDate='2026-03-28'
+        startDate='2026-10-17'
         startTime='18:00'
         timeZone='America/Chicago'
       />

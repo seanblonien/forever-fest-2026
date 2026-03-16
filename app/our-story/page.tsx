@@ -118,7 +118,7 @@ const timelineData: TimelineItemData[] = [
   },
   {
     id: 13,
-    date: 'March 28th, 2026',
+    date: 'October 17th, 2026',
     label: '➡️ Forever Fest 2026!',
     dateLink: '/faqs#when-is-the-wedding',
   },

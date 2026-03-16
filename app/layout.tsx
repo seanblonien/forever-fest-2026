@@ -28,10 +28,10 @@ export const metadata: Metadata = {
   keywords: [
     'Forever Fest 2026',
     'Sean Blonien and Eva Melendez wedding',
-    'Dallas wedding March 2026',
+    'Dallas wedding October 2026',
     'DEC on Dragon wedding',
     'Dallas Design District wedding',
-    'March 28 2026 wedding',
+    'October 17 2026 wedding',
     'Texas wedding celebration',
     'Blonien Melendez wedding',
     'EDM wedding',
