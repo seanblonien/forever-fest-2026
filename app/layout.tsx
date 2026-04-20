@@ -2,11 +2,13 @@ import { Alex_Brush as AlexBrush, League_Gothic as LeagueGothic } from 'next/fon
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Footer } from '@/components/shared/footer';
-import { ThemeProvider } from '@/components/theme-provider';
-import { ChildrenProps, cn, OPEN_GRAPH_DEFAULTS, PUBLIC_SITE_BASE_URL } from '@/lib';
-import type { Metadata } from 'next';
 import { Header } from '@/components/shared/header';
 import { Navigation } from '@/components/shared/navigation';
+import { ThemeProvider } from '@/components/theme-provider';
+import { cn, OPEN_GRAPH_DEFAULTS, PUBLIC_SITE_BASE_URL } from '@/lib';
+import type { Metadata } from 'next';
+import type { ChildrenProps } from '@/lib';
+
 import './globals.css';
 
 const boldFont = LeagueGothic({
@@ -65,7 +67,7 @@ export const metadata: Metadata = {
     // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
     follow: true,
     googleBot: {
-    // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
+      // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
       'index': true,
       // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
       'follow': true,
@@ -73,11 +75,6 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
-  },
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/favicon.ico',
   },
   manifest: '/site.webmanifest',
 };

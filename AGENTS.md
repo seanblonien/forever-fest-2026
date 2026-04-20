@@ -1,24 +1,23 @@
-# AGENTS.md - Forever Fest 2026
-
 ## Project Overview
+
+This project is a static wedding website titled "Forever Fest 2026" for Sean & Eva's wedding site.
 
 Next.js 16 (App Router) + React 19 + TypeScript (strict) + Tailwind CSS v4 + pnpm (>=10) + Node >=24 + Vercel
 
 ## Commands
 
 ```bash
-pnpm dev           # Start dev server (port 3000)
 pnpm build         # Production build
-pnpm start         # Start production server
-pnpm prod          # Build + start
-pnpm analyze       # Next.js bundle analyzer
 pnpm lint          # ESLint with auto-fix (formatting lives here)
 pnpm typecheck     # TypeScript type checking
-pnpm validate      # lint + typecheck (runs concurrently)
+pnpm test:e2e      # Playwright smoke tests
+pnpm validate      # lint + typecheck + e2e smoke tests (runs concurrently)
 ```
 
 Test commands
-- No test suite is configured yet, run `pnpm validate` only for typechecking, formatting, and linting
+- Playwright smoke tests live in `tests/e2e/`.
+- `pnpm test:e2e` runs the smoke suite with Playwright.
+- `pnpm validate` runs lint, typecheck, and the e2e smoke suite.
 
 ## Code Style Guidelines
 
@@ -81,7 +80,8 @@ export function Component({ prop }: Props) => {
 
 ### Next.js Conventions
 - Export `metadata` (type `Metadata`) where appropriate.
-- Prefer `next/image` with `priority` for above-the-fold images.
+- Prefer `next/image` static imports for key local images when practical.
+- For above-the-fold images, prefer `fetchPriority='high'` or `preload` as appropriate.
 - Load fonts via `next/font/google` with CSS variables.
 - `typedRoutes` is enabled; keep route strings valid.
 
@@ -119,5 +119,5 @@ styles/           # Global CSS
 ## Additional Notes
 
 - Path alias: `@/*` -> repo root.
-- `next.config.ts` ignores TypeScript build errors; still keep code type-safe.
+- `next.config.ts` enforces build-time TypeScript safety.
 - Use `pnpm validate` before shipping UI changes.

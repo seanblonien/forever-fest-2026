@@ -26,5 +26,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# playwright
+test-results/
+playwright-report/
+
 # macos
 .DS_Store

@@ -20,7 +20,8 @@
     "start": "next start",
     "typecheck": "tsgo --noEmit",
     "lint": "eslint . --fix",
-    "validate": "concurrently -g -c auto pnpm:lint pnpm:typecheck"
+    "test:e2e": "playwright test",
+    "validate": "concurrently -g -c auto pnpm:lint pnpm:typecheck pnpm:test:e2e"
   },
   "dependencies": {
     "@radix-ui/react-slot": "1.2.4",
@@ -40,6 +41,7 @@
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^16.2.4",
+    "@playwright/test": "^1.59.1",
     "@seanblonien/eslint-config-react": "^1.0.19",
     "@tailwindcss/postcss": "^4.2.2",
     "@types/node": "^25.6.0",

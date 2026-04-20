@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import bannerPhoto from '@/public/sean_and_eva_banner_photo.webp';
 import { DiscoBallsSvg } from '@/components/svgs/disco-balls-svg';
 import { TitleSvg } from '@/components/svgs';
 
@@ -10,15 +11,12 @@ export function MainTitle() {
         {/* Couple Photo - Middle layer */}
         <div className='relative z-10 pt-14 md:pt-24'>
           <Image
-            preload
             alt='Sean Blonien and Eva Melendez - Forever Fest 2026'
             className='rounded-lg w-48 sm:w-56 md:w-64 h-auto'
             fetchPriority='high'
-            height={1714}
+            placeholder='blur'
             sizes='(max-width: 640px) 192px, (max-width: 768px) 224px, 256px'
-            src='/sean_and_eva_banner_photo.webp'
-            style={{ height: 'auto' }}
-            width={1142}
+            src={bannerPhoto}
           />
         </div>
 

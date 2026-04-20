@@ -1,8 +1,12 @@
 import { ExternalLink, MapPin } from 'lucide-react';
-import { Metadata } from 'next';
 import Image from 'next/image';
+import anatoleHotelImage from '@/public/hotels/anatole.jpg';
+import courtyardHotelImage from '@/public/hotels/courtyard.jpg';
+import virginHotelImage from '@/public/hotels/virgin.jpg';
 import MapLinks from '@/components/map-links';
 import { createPageMetadata } from '@/lib';
+import type { Metadata } from 'next';
+import type { StaticImageData } from 'next/image';
 
 export const metadata: Metadata = createPageMetadata({
   title: 'Forever Fest 2026 - Travel',
@@ -12,7 +16,7 @@ export const metadata: Metadata = createPageMetadata({
 type HotelOption = {
   description: string;
   highlights: string[];
-  image: string;
+  image: StaticImageData;
   link: string;
   name: string;
   tier: string;
@@ -25,7 +29,7 @@ const HOTEL_OPTIONS: HotelOption[] = [
     name: 'Virgin Hotels Dallas',
     walk: '18 min walk',
     link: 'https://maps.app.goo.gl/qKtXoSY7QaZVB5C28',
-    image: '/hotels/virgin.jpg',
+    image: virginHotelImage,
     description: 'Design-forward stay with a lively lobby and polished rooms near the Design District.',
     highlights: ['Walkable to venue', 'Upscale vibe', 'Great for weekend stays'],
   },
@@ -34,7 +38,7 @@ const HOTEL_OPTIONS: HotelOption[] = [
     name: 'Hilton Anatole',
     walk: '24 min walk',
     link: 'https://maps.app.goo.gl/xSwBfLdxFy6mViWc9',
-    image: '/hotels/anatole.jpg',
+    image: anatoleHotelImage,
     description: 'Full-service hotel with classic comfort and easy rideshare access to the venue.',
     highlights: ['Spacious rooms', 'Easy rideshare', 'Family friendly'],
   },
@@ -43,7 +47,7 @@ const HOTEL_OPTIONS: HotelOption[] = [
     name: 'Courtyard by Marriott Dallas Medical/Market Center',
     walk: '12 min walk',
     link: 'https://maps.app.goo.gl/J6QdA8MgzVvNgoC87',
-    image: '/hotels/courtyard.jpg',
+    image: courtyardHotelImage,
     description: 'Comfortable, streamlined option with the closest walk to the venue.',
     highlights: ['Closest walk', 'Great value'],
   },
@@ -185,6 +189,7 @@ function TravelPage() {
                     fill
                     alt={`${hotel.name} exterior illustration`}
                     className='object-cover transition duration-500 group-hover:scale-105'
+                    placeholder='blur'
                     sizes='(min-width: 768px) 240px, 100vw'
                     src={hotel.image}
                   />

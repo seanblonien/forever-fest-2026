@@ -2,13 +2,11 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   images: {
     unoptimized: false,
     formats: ['image/webp'],
-    dangerouslyAllowSVG: true,
-    contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;',
   },
   compiler: {
     reactRemoveProperties: true,

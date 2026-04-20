@@ -27,6 +27,8 @@ const eslintConfig = defineConfig([
     'node_modules/**',
     '*.tsbuildinfo',
     '.vercel/**',
+    'test-results/**',
+    'playwright-report/**',
   ]),
 ]);
 
