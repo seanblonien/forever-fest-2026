@@ -14,10 +14,11 @@ export function MainTitle() {
             alt='Sean Blonien and Eva Melendez - Forever Fest 2026'
             className='rounded-lg w-48 sm:w-56 md:w-64 h-auto'
             fetchPriority='high'
-            height={320}
+            height={1714}
             sizes='(max-width: 640px) 192px, (max-width: 768px) 224px, 256px'
             src='/sean_and_eva_banner_photo.webp'
-            width={256}
+            style={{ height: 'auto' }}
+            width={1142}
           />
         </div>
 

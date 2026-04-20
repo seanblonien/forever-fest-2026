@@ -36,32 +36,12 @@ const nextConfig: NextConfig = {
   headers() {
     return [
       {
-        // Cache JavaScript files for 1 year
-        source: '/_next/static/:path*.js',
+        // Cache public assets conservatively to avoid stale long-lived caches.
+        source: '/:path*.(ico|png|jpg|jpeg|gif|webp|avif|svg|woff|woff2|ttf|otf|eot|webm)',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        // Cache CSS files for 1 year
-        source: '/_next/static/:path*.css',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        // Cache static assets in public folder for 1 year
-        source: '/:path*.(ico|png|jpg|jpeg|gif|webp|avif|svg|woff|woff2|ttf|otf|eot)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            value: 'public, max-age=604800, stale-while-revalidate=86400',
           },
         ],
       },
