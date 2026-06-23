@@ -10,6 +10,14 @@ type TimeLeft = {
   seconds: number;
 };
 
+const INITIAL_TIME_LEFT: TimeLeft = {
+  days: 0,
+  hours: 0,
+  minutes: 0,
+  months: 0,
+  seconds: 0,
+};
+
 const calculateTimeLeft = (): TimeLeft => {
   // October 17th, 2026 at 6pm CDT
   const targetDate = new Date('2026-10-17T18:00:00-05:00');
@@ -35,7 +43,7 @@ const calculateTimeLeft = (): TimeLeft => {
     return { months, days: remainingDays, hours, minutes, seconds };
   }
 
-  return { months: 0, days: 0, hours: 0, minutes: 0, seconds: 0 };
+  return INITIAL_TIME_LEFT;
 };
 
 function CountdownBox({
@@ -47,7 +55,7 @@ function CountdownBox({
 }) {
   return (
     <figure className='rounded-lg py-2 px-1 md:p-4 bg-papaya-whip text-center'>
-      <data suppressHydrationWarning className='block text-3xl md:text-4xl font-black text-syracuse-orange font-league-gothic' value={value}>
+      <data className='block text-3xl md:text-4xl font-black text-syracuse-orange font-league-gothic' value={value}>
         {value}
       </data>
       <figcaption className='text-sm md:text-base text-steel-pink font-league-gothic'>
@@ -58,9 +66,11 @@ function CountdownBox({
 }
 
 export function CountdownTimer() {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft);
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>(INITIAL_TIME_LEFT);
 
   useEffect(() => {
+    setTimeLeft(calculateTimeLeft());
+
     // Update every second
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
