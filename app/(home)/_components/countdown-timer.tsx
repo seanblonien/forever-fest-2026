@@ -66,11 +66,9 @@ function CountdownBox({
 }
 
 export function CountdownTimer() {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>(INITIAL_TIME_LEFT);
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft);
 
   useEffect(() => {
-    setTimeLeft(calculateTimeLeft());
-
     // Update every second
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());

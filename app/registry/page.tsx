@@ -1,4 +1,4 @@
-import { ExternalLink, Heart, ShoppingBag } from 'lucide-react';
+import { ExternalLink, Heart, Mail, ShoppingBag } from 'lucide-react';
 import { Metadata } from 'next';
 import { createPageMetadata } from '@/lib';
 
@@ -31,6 +31,24 @@ function RegistryPage() {
             <span>MyRegistry.com</span>
             <ExternalLink className='w-4 h-4 text-white/70 group-hover:text-white transition-colors duration-200' />
           </a>
+        </div>
+
+        {/* Mailing Address */}
+        <div className='bg-white/10 backdrop-blur-xs rounded-lg p-8'>
+          <div className='flex items-center justify-center gap-2 mb-4'>
+            <Mail className='w-6 h-6 text-lavender-pink' />
+            <h2 className='text-2xl font-league-gothic'>Mail a Gift</h2>
+          </div>
+          <p className='text-base md:text-lg mb-5'>
+            Cards, letters, and mailed gifts are welcome here if that is easiest for you.
+          </p>
+          <address className='not-italic inline-block rounded-lg bg-white/10 px-6 py-4 text-base md:text-lg leading-relaxed'>
+            Sean & Eva
+            <br />
+            9211 Garland Rd APT 3412
+            <br />
+            Dallas, TX 75218
+          </address>
         </div>
 
         {/* In-Person Gifts Note */}
