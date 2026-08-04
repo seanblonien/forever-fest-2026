@@ -5,6 +5,7 @@ import {
   Description,
   EventDetails,
   MainTitle,
+  QuickActions,
 } from './_components';
 
 function HomePage() {
@@ -17,7 +18,7 @@ function HomePage() {
       <Description />
       <CountdownTimer />
       <CalendarEmbedDynamic isShowTitle />
-      {/* <QuickActions /> */}
+      <QuickActions />
     </>
   );
 }
