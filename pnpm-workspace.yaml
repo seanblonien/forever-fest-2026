@@ -6,3 +6,6 @@ onlyBuiltDependencies:
   - '@vercel/speed-insights'
   - sharp
   - unrs-resolver
+overrides:
+  # SonarJS currently loads removed TypeScript 7 APIs at startup.
+  'typescript@>=5.4.0': 6.0.3
