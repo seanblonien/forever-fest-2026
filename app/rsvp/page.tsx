@@ -1,4 +1,4 @@
-import { Calendar, ExternalLink, Heart } from 'lucide-react';
+import { ArrowRight, Calendar, Heart } from 'lucide-react';
 import type { Metadata } from 'next';
 import { createPageMetadata } from '@/lib';
 
@@ -13,22 +13,27 @@ function RsvpPage() {
       <h1 className='text-4xl md:text-6xl mb-8 font-league-gothic'>RSVP</h1>
       <div className='space-y-8 text-lg md:text-xl'>
         <p>
-          {'We can\'t wait to celebrate with you at Forever Fest 2026! Please let us know if you\'ll be joining us on October 17th.'}
+          {'We can\'t wait to celebrate with you at Forever Fest 2026! Please submit one RSVP for everyone in your invited party.'}
         </p>
 
-        <div className='bg-white/10 backdrop-blur-xs rounded-lg p-8'>
-          <h2 className='text-2xl mb-4 font-league-gothic'>Submit Your RSVP</h2>
+        <div className='rounded-2xl border border-white/20 bg-white/10 p-6 shadow-xl shadow-penn-blue/20 backdrop-blur-xs md:p-8'>
           <a
-            aria-label='Open the RSVP form in a new tab'
-            className='inline-flex items-center justify-center gap-3 bg-white/20 hover:bg-white/30 transition-colors duration-200 rounded-lg p-6 group text-xl font-league-gothic'
+            aria-label='RSVP for your party (opens in a new tab)'
+            className='group inline-flex w-full max-w-sm touch-manipulation items-center justify-center gap-3 rounded-xl bg-linear-to-r from-steel-pink to-syracuse-orange px-6 py-5 text-2xl font-league-gothic shadow-lg shadow-penn-blue/30 transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-penn-blue/40 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-lavender-pink focus-visible:ring-offset-4 focus-visible:ring-offset-penn-blue active:translate-y-0 motion-reduce:transform-none'
             href='/rsvp-form'
             rel='noopener noreferrer'
             target='_blank'
           >
-            <Calendar className='w-6 h-6 text-white group-hover:scale-110 transition-transform duration-200' />
-            <span>RSVP Form</span>
-            <ExternalLink className='w-4 h-4 text-white/70 group-hover:text-white transition-colors duration-200' />
+            <Calendar aria-hidden='true' className='size-6' />
+            <span>RSVP for Your Party</span>
+            <ArrowRight
+              aria-hidden='true'
+              className='size-5 transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transform-none'
+            />
           </a>
+          <p className='mt-4 text-sm text-white/75'>
+            Takes about 2 minutes · Opens the RSVP form
+          </p>
         </div>
 
         <div className='bg-white/10 backdrop-blur-xs rounded-lg p-8'>

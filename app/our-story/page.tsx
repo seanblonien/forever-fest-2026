@@ -4,7 +4,7 @@ import { TimelineItem, TimelineItemData } from './timeline-item';
 
 export const metadata: Metadata = createPageMetadata({
   title: 'Forever Fest 2026 - Our Story',
-  description: 'The story of how Sean & Eva met and fell in love.',
+  description: 'The story of how Eva Melendez and Sean Blonien met, fell in love, and created Forever Fest 2026.',
 });
 
 const timelineData: TimelineItemData[] = [
@@ -132,7 +132,7 @@ function OurStoryPage() {
       {/* How We Met Story */}
       <div className='mb-8 space-y-4'>
         <p className='text-papaya-whip leading-relaxed text-justify'>
-          {'Eva had just moved back from LA, and was looking for a Rave Fam. She had enjoyed attending the Nocturnal EDM festival in Southern California, and wanted to find that same energy in Dallas. She went out to Green Light Social, a club in Deep Ellum known for dance music, to check it out. Eva spotted a tall man with an immaculate afro in the crowd and introduced herself to Jordyn Dent. Jordyn was Sean\'s roommate at the time, he told her about the ins and outs of the rave scene in Dallas and about the pre-game to the Lights All Night music festival that Sean was throwing. With an invite, Eva showed up to the pre-game in Sean and Jordyn\'s uptown apartment, and quickly stood out to Sean. He knew everyone at his party but this one new gorgeous girl. After chatting for a bit, Eva left early to get to LAN, but on the way out, Sean and Eva had a small yet memorable interaction in the hallway. Eva knew Sean had the LAN map and was the man with the plan, so she was the one who asked for his number. They hugged and briefly gazed into each other\'s eyes as Sean wore a flirty, big smile. There was a hint of curiosity and romance in the air as Eva exited.'}
+          {'Eva Melendez had just moved back from LA and was looking for a Rave Fam. She had enjoyed attending the Nocturnal EDM festival in Southern California and wanted to find that same energy in Dallas. She went out to Green Light Social, a club in Deep Ellum known for dance music, to check it out. Eva spotted a tall man with an immaculate afro in the crowd and introduced herself to Jordyn Dent. Jordyn was Sean Blonien\'s roommate at the time, and he told her about the ins and outs of the rave scene in Dallas and the pre-game Sean was throwing for the Lights All Night music festival. With an invite, Eva showed up to the pre-game in Sean and Jordyn\'s Uptown apartment and quickly stood out to Sean. He knew everyone at his party except this one gorgeous new girl. After chatting for a bit, Eva left early to get to LAN, but on the way out, Sean and Eva had a small yet memorable interaction in the hallway. Eva knew Sean had the LAN map and was the man with the plan, so she was the one who asked for his number. They hugged and briefly gazed into each other\'s eyes as Sean wore a flirty, big smile. There was a hint of curiosity and romance in the air as Eva exited.'}
         </p>
 
         <p className='text-papaya-whip leading-relaxed text-justify'>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
 
 type TimeLeft = {
   days: number;
@@ -18,11 +18,31 @@ const INITIAL_TIME_LEFT: TimeLeft = {
   seconds: 0,
 };
 
-const calculateTimeLeft = (): TimeLeft => {
-  // October 17th, 2026 at 6pm CDT
-  const targetDate = new Date('2026-10-17T18:00:00-05:00');
-  const now = new Date();
-  const difference = targetDate.getTime() - now.getTime();
+// October 17th, 2026 at 6pm CDT
+const TARGET_TIME = new Date('2026-10-17T18:00:00-05:00').getTime();
+
+let clockTimestamp = 0;
+
+const subscribeToClock = (onStoreChange: () => void) => {
+  const updateCurrentTime = () => {
+    clockTimestamp = Date.now();
+    onStoreChange();
+  };
+
+  updateCurrentTime();
+  const timer = window.setInterval(updateCurrentTime, 1000);
+
+  return () => window.clearInterval(timer);
+};
+
+const getCurrentTime = () => clockTimestamp;
+
+const getServerTime = () => 0;
+
+const calculateTimeLeft = (currentTimestamp: number): TimeLeft => {
+  if (currentTimestamp === 0) return INITIAL_TIME_LEFT;
+
+  const difference = TARGET_TIME - currentTimestamp;
 
   if (difference > 0) {
     // Calculate time units using native Date math
@@ -66,16 +86,8 @@ function CountdownBox({
 }
 
 export function CountdownTimer() {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft);
-
-  useEffect(() => {
-    // Update every second
-    const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
+  const currentTimestamp = useSyncExternalStore(subscribeToClock, getCurrentTime, getServerTime);
+  const timeLeft = calculateTimeLeft(currentTimestamp);
 
   return (
     <div className='mb-12 px-2 max-w-150 mx-auto'>

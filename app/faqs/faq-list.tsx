@@ -1,6 +1,6 @@
 'use client';
 
-import { Heart, Pin, Plane } from 'lucide-react';
+import { CalendarCheck, Heart, Pin, Plane } from 'lucide-react';
 import MapLinks from '@/components/map-links';
 import { CalendarEmbedDynamic } from '@/components/shared/calendar-embed-dynamic';
 import { useQueryParamState, useRouteHash } from '@/hooks';
@@ -15,6 +15,7 @@ const FAQ_COMPONENT_MAP: Record<FaqComponentKey, React.ReactNode> = {
   'map': <MapLinks />,
   'our-story': <FaqLink href='/our-story' icon={Heart} label='Our Story Page' />,
   'pinterest': <FaqLink href='https://pin.it/hICCCXKqj' icon={Pin} label='Pinterest Moodboard' />,
+  'rsvp': <FaqLink href='/rsvp' icon={CalendarCheck} label='Visit RSVP Page' />,
   'travel': <FaqLink href='/travel' icon={Plane} label='Visit Travel Page' />,
 };
 

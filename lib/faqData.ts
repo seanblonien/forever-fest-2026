@@ -10,7 +10,7 @@ export const CATEGORY_CONFIG: Record<FaqCategory, { emoji: string; label: string
   rsvp: { emoji: '📝', label: 'RSVP & Guests' },
 };
 
-export type FaqComponentKey = 'calendar' | 'map' | 'our-story' | 'pinterest' | 'travel';
+export type FaqComponentKey = 'calendar' | 'map' | 'our-story' | 'pinterest' | 'rsvp' | 'travel';
 
 export type FAQData = {
   answer: string;
@@ -30,7 +30,7 @@ export const faqs: FAQData[] = [
   {
     category: 'event',
     question: 'When is the wedding?',
-    answer: 'Forever Fest 2026 will take place on Saturday, October 17th, 2026 from 6:00 PM to 11:00 PM CDT. Add the event to your calendar using the buttons below ⬇️',
+    answer: 'Forever Fest 2026 will take place on Saturday, October 17, 2026, from 6:00 PM to 11:00 PM CDT. Add the event to your calendar using the buttons below ⬇️',
     componentKey: 'calendar',
   },
   {
@@ -42,14 +42,14 @@ export const faqs: FAQData[] = [
   {
     category: 'event',
     question: 'What time should I arrive for the ceremony?',
-    answer: 'Please plan to arrive about 30 minutes before the ceremony starts at 6:00 PM to ensure you have time to settle in and find your seat.',
+    answer: 'Please arrive by 5:30 PM CDT so you have time to use the complimentary valet, settle in, and find your seat before the ceremony begins promptly at 6:00 PM.',
   },
 
   // Logistics
   {
     category: 'logistics',
     question: 'What do I do for parking?',
-    answer: 'There is free, complimentary valet parking available for all guests! Simply pull up to the address for DEC on dragon, and a valet will take care of the rest.',
+    answer: 'There is free, complimentary valet parking available for all guests! Simply pull up to DEC on Dragon, and a valet will take care of the rest.',
   },
   {
     category: 'logistics',
@@ -66,8 +66,8 @@ export const faqs: FAQData[] = [
   // Guest Experience
   {
     category: 'experience',
-    question: 'Do I need to wear my festival wristband? What if I forgot or lost it?',
-    answer: 'We do encourage you to wear your wristband (we will be wearing ours!) to share in the festival spirit with us, but it is not required. If you forget it or lost it, that\'s ok, we will not be checking them at the door. They are just for fun.',
+    question: 'Should I keep and wear my original festival wristband?',
+    answer: 'Yes—if you received a Forever Fest wristband with your original invitation, please keep it! We will not be mailing new wristbands. We encourage you to wear yours (we will be wearing ours!) to share in the festival spirit, but it is not required and we will not check wristbands at the door.',
   },
   {
     category: 'experience',
@@ -99,8 +99,20 @@ export const faqs: FAQData[] = [
   // RSVP & Guests
   {
     category: 'rsvp',
+    question: 'How do I RSVP?',
+    answer: 'Visit our RSVP page and submit one response for everyone in your invited party. The form takes about 2 minutes to complete.',
+    componentKey: 'rsvp',
+  },
+  {
+    category: 'rsvp',
+    question: 'Does the QR code from my original invitation still work?',
+    answer: 'Yes! If you received a QR code sheet with your original invitation, it still works for the updated celebration. For the quickest route, you can also use the RSVP page linked here.',
+    componentKey: 'rsvp',
+  },
+  {
+    category: 'rsvp',
     question: 'Can I bring a plus-one?',
-    answer: 'We love that you want to bring someone to celebrate with us! However, due to space constraints, we\'ve limited the guest list to those specifically invited. If your plus one\'s  name was not listed on the invitation, they are not invited. If you have questions about your invite, please reach out.',
+    answer: 'We love that you want to bring someone to celebrate with us! However, due to space constraints, we\'ve limited the guest list to those specifically invited. If your plus-one\'s name was not listed on the invitation, they are not invited. If you have questions about your invite, please reach out.',
   },
   {
     category: 'rsvp',
@@ -110,7 +122,7 @@ export const faqs: FAQData[] = [
   {
     category: 'rsvp',
     question: 'How can I update my RSVP?',
-    answer: 'If you already submitted the RSVP form, you can check your email from Jotform with the edit link to edit/update your RSVP. Simply search for "Response received for Forever Fest 2026" as the subject line, and the "Edit Link" will be in the email. Or, you can text or email Sean/Eva at any time.',
+    answer: 'If you already submitted the RSVP form, search your email for a Jotform confirmation with the subject "Response received for Forever Fest 2026," then use the "Edit Link" in that email. You can also text or email Sean or Eva for help at any time.',
   },
 ];
 
