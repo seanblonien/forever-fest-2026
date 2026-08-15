@@ -44,11 +44,18 @@ export const scheduleDays: ScheduleDay[] = [
       'The main event! Join us for our ceremony and celebration in the Dallas Design District.',
     events: [
       {
+        emoji: '🚗',
+        startTime: '5:30 PM',
+        title: 'Valet Opens',
+        description:
+          'Complimentary valet begins at 5:30 PM. Please arrive then to find your seat and settle in before the ceremony.',
+      },
+      {
         emoji: '💒',
         startTime: '6:00 PM',
         title: 'Ceremony',
         description:
-          'We\'ll say "I do" on the rooftop. Please arrive by 5:30 PM to find your seat and settle in before we begin. Complimentary valet parking is available.',
+          'We\'ll say "I do" on the rooftop. The ceremony begins promptly at 6:00 PM.',
       },
       {
         emoji: '🍸',

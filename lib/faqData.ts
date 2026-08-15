@@ -42,14 +42,14 @@ export const faqs: FAQData[] = [
   {
     category: 'event',
     question: 'What time should I arrive for the ceremony?',
-    answer: 'Please arrive by 5:30 PM CDT so you have time to use the complimentary valet, settle in, and find your seat before the ceremony begins promptly at 6:00 PM.',
+    answer: 'Complimentary valet begins at 5:30 PM CDT, so please arrive then to settle in and find your seat before the ceremony begins promptly at 6:00 PM.',
   },
 
   // Logistics
   {
     category: 'logistics',
     question: 'What do I do for parking?',
-    answer: 'There is free, complimentary valet parking available for all guests! Simply pull up to DEC on Dragon, and a valet will take care of the rest.',
+    answer: 'Free, complimentary valet parking begins at 5:30 PM CDT for all guests. Simply pull up to DEC on Dragon, and a valet will take care of the rest before the ceremony begins promptly at 6:00 PM.',
   },
   {
     category: 'logistics',
@@ -72,7 +72,7 @@ export const faqs: FAQData[] = [
   {
     category: 'experience',
     question: 'What is the dress code?',
-    answer: 'Funky Semi-Formal Attire! Think semi-formal wear with a fun, creative twist that matches the festive spirit of ✨ Forever Fest ✨. Eclectic colors, bold prints, and unique accessories are all welcome. Colorful suits and dresses are great, but you can also wear whatever makes you feel your best in semi-formal attire. Express yourself in whatever makes you feel confident! 😎',
+    answer: 'Funky Formal Attire! Think semi-formal wear with a fun, creative twist that matches the festive spirit of ✨ Forever Fest ✨. Eclectic colors, bold prints, and unique accessories are all welcome. Colorful suits and dresses are great, but you can also wear whatever makes you feel your best in semi-formal attire. Express yourself in whatever makes you feel confident! 😎',
     componentKey: 'pinterest',
   },
   {
