@@ -105,6 +105,12 @@ export const faqs: FAQData[] = [
   },
   {
     category: 'rsvp',
+    question: 'When is the RSVP deadline?',
+    answer: 'Please submit your RSVP by Sunday, September 20, 2026.',
+    componentKey: 'rsvp',
+  },
+  {
+    category: 'rsvp',
     question: 'Does the QR code from my original invitation still work?',
     answer: 'Yes! If you received a QR code sheet with your original invitation, it still works for the updated celebration. For the quickest route, you can also use the RSVP page linked here.',
     componentKey: 'rsvp',

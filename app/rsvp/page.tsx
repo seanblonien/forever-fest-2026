@@ -4,7 +4,7 @@ import { createPageMetadata } from '@/lib';
 
 export const metadata: Metadata = createPageMetadata({
   title: 'Forever Fest 2026 - RSVP',
-  description: 'RSVP to Forever Fest 2026 - Sean & Eva\'s Wedding celebration.',
+  description: 'RSVP by Sunday, September 20, 2026, for Forever Fest 2026 - Sean & Eva\'s Wedding celebration.',
 });
 
 function RsvpPage() {
@@ -43,6 +43,16 @@ function RsvpPage() {
             <Heart className='w-6 h-6 text-pink-300' />
           </div>
           <div className='text-base md:text-lg space-y-6 text-left'>
+            <div className='bg-white/10 rounded-lg p-4 border-l-4 border-syracuse-orange'>
+              <p className='font-semibold mb-2'>📅 RSVP Deadline</p>
+              <p>
+                Please submit your response by
+                {' '}
+                <strong>Sunday, September 20, 2026</strong>
+                .
+              </p>
+            </div>
+
             <div className='bg-white/10 rounded-lg p-4 border-l-4 border-blue-300'>
               <p className='font-semibold mb-2'>👥 Guest List</p>
               <p>
