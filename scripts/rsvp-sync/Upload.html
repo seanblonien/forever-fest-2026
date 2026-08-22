@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      * { box-sizing: border-box; }
+      :root { color-scheme: light; font-family: Arial, sans-serif; }
+      body { margin: 0; padding: 24px; color: #202124; }
+      h1 { font-size: 20px; margin: 0 0 8px; }
+      p { font-size: 13px; line-height: 1.45; margin: 0 0 16px; }
+      .drop-zone { align-items: center; border: 2px dashed #9aa0a6; border-radius: 8px; cursor: pointer; display: flex; flex-direction: column; justify-content: center; min-height: 136px; padding: 24px; text-align: center; width: 100%; }
+      .drop-zone strong { font-size: 16px; line-height: 1.35; }
+      .drop-zone span { font-size: 14px; line-height: 1.35; margin-top: 2px; }
+      .drop-zone:hover { background: #f8f9fa; }
+      .drop-zone.dragging { border-color: #1a73e8; background: #e8f0fe; }
+      .file-name { color: #5f6368; font-size: 12px; margin-top: 10px; max-width: 100%; min-height: 18px; overflow-wrap: anywhere; }
+      .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+      button { border: 0; border-radius: 4px; cursor: pointer; font-weight: 600; padding: 10px 16px; }
+      button:disabled { cursor: default; opacity: .45; }
+      .primary { background: #1a73e8; color: #fff; }
+      .secondary { background: #f1f3f4; color: #202124; }
+      .status { border-radius: 6px; display: none; font-size: 13px; margin-top: 18px; padding: 12px; white-space: pre-wrap; }
+      .status.error { background: #fce8e6; color: #a50e0e; display: block; }
+      .status.info { background: #e8f0fe; color: #174ea6; display: block; }
+      .status.success { background: #e6f4ea; color: #137333; display: block; }
+      .summary { border-collapse: collapse; display: none; font-size: 12px; margin-top: 18px; width: 100%; }
+      .summary th, .summary td { border-bottom: 1px solid #dadce0; padding: 7px 4px; text-align: left; }
+      .summary th { color: #5f6368; font-weight: 500; }
+      input[type=file] { display: none; }
+    </style>
+  </head>
+  <body>
+    <h1>Import RSVP CSV</h1>
+    <p>Choose the latest Jotform CSV export. Preview writes an audit tab only; Apply updates validated RSVP statuses after the preview succeeds.</p>
+
+    <label class="drop-zone" id="drop-zone" for="file-input">
+      <strong>Drop a CSV here</strong>
+      <span>or click to choose a file</span>
+      <div class="file-name" id="file-name">No file selected</div>
+    </label>
+    <input id="file-input" type="file" accept=".csv,text/csv">
+
+    <div class="actions">
+      <button class="primary" id="preview-button" disabled>Preview</button>
+      <button class="secondary" id="apply-button" disabled>Apply reviewed changes</button>
+    </div>
+
+    <div class="status" id="status"></div>
+    <table class="summary" id="summary">
+      <tbody id="summary-body"></tbody>
+    </table>
+
+    <script>
+      const fileInput = document.getElementById('file-input');
+      const fileName = document.getElementById('file-name');
+      const dropZone = document.getElementById('drop-zone');
+      const previewButton = document.getElementById('preview-button');
+      const applyButton = document.getElementById('apply-button');
+      const status = document.getElementById('status');
+      const summary = document.getElementById('summary');
+      const summaryBody = document.getElementById('summary-body');
+      let selectedFile = null;
+      let currentRunId = '';
+
+      const setStatus = (message, kind) => {
+        status.textContent = message;
+        status.className = `status ${kind}`;
+      };
+
+      const setBusy = (busy) => {
+        previewButton.disabled = busy || !selectedFile;
+        applyButton.disabled = busy || !currentRunId;
+      };
+
+      const chooseFile = (file) => {
+        selectedFile = file && file.name.toLowerCase().endsWith('.csv') ? file : null;
+        currentRunId = '';
+        applyButton.disabled = true;
+        summary.style.display = 'none';
+        fileName.textContent = selectedFile ? selectedFile.name : 'Choose a .csv file';
+        previewButton.disabled = !selectedFile;
+        if (!selectedFile && file) setStatus('Only .csv files are supported.', 'error');
+      };
+
+      fileInput.addEventListener('change', () => chooseFile(fileInput.files[0]));
+      ['dragenter', 'dragover'].forEach((eventName) => {
+        dropZone.addEventListener(eventName, (event) => {
+          event.preventDefault();
+          dropZone.classList.add('dragging');
+        });
+      });
+      ['dragleave', 'drop'].forEach((eventName) => {
+        dropZone.addEventListener(eventName, (event) => {
+          event.preventDefault();
+          dropZone.classList.remove('dragging');
+        });
+      });
+      dropZone.addEventListener('drop', (event) => chooseFile(event.dataTransfer.files[0]));
+
+      previewButton.addEventListener('click', () => {
+        if (!selectedFile) return;
+        setBusy(true);
+        setStatus('Reading and validating the CSV…', 'info');
+        const reader = new FileReader();
+        reader.onerror = () => {
+          setBusy(false);
+          setStatus('The selected file could not be read.', 'error');
+        };
+        reader.onload = () => {
+          google.script.run
+            .withSuccessHandler((result) => {
+              currentRunId = result.canApply ? result.runId : '';
+              setBusy(false);
+              const rows = [
+                ['Source rows', result.summary.sourceRows],
+                ['Unique parties', result.summary.uniqueParties],
+                ['Superseded rows', result.summary.supersededRows],
+                ['Matched parties', result.summary.matchedParties],
+                ['Skipped parties', result.summary.skippedParties],
+                ['Named attending', result.summary.proposedAttending],
+                ['Named declined', result.summary.proposedDeclined],
+                ['Changed cells', result.summary.changedCells],
+                ['Unchanged cells', result.summary.unchangedCells],
+                ['Unrepresented attendees', result.summary.unrepresentedAttendees],
+                ['Warnings', result.summary.warnings],
+                ['Errors', result.summary.errors],
+              ];
+              summaryBody.innerHTML = rows
+                .map(([label, value]) => `<tr><th>${label}</th><td>${value}</td></tr>`)
+                .join('');
+              summary.style.display = 'table';
+              setStatus(
+                result.canApply
+                  ? 'Preview complete. Review the RSVP Import tab, then apply the reviewed changes.'
+                  : 'Preview complete. There are no changed cells to apply.',
+                result.summary.errors > 0 ? 'error' : 'success',
+              );
+            })
+            .withFailureHandler((error) => {
+              currentRunId = '';
+              setBusy(false);
+              setStatus(error.message || String(error), 'error');
+            })
+            .previewRsvpCsv(String(reader.result), selectedFile.name);
+        };
+        reader.readAsText(selectedFile);
+      });
+
+      applyButton.addEventListener('click', () => {
+        if (!currentRunId) return;
+        setBusy(true);
+        setStatus('Revalidating the guest list and applying changes…', 'info');
+        google.script.run
+          .withSuccessHandler((result) => {
+            currentRunId = '';
+            setBusy(false);
+            setStatus(
+              `Applied ${result.changedCells} changes: ${result.attendingChanges} Attending and ${result.declinedChanges} Declined.`,
+              'success',
+            );
+          })
+          .withFailureHandler((error) => {
+            setBusy(false);
+            setStatus(error.message || String(error), 'error');
+          })
+          .applyRsvpPreview(currentRunId);
+      });
+    </script>
+  </body>
+</html>
