@@ -1,4 +1,5 @@
 import { CalendarEmbedDynamic } from '@/components/shared/calendar-embed-dynamic';
+import { WelcomePartyAnnouncement } from './_components/welcome-party-announcement';
 import {
   CitySkyline,
   CountdownTimer,
@@ -16,6 +17,7 @@ function HomePage() {
 
       <EventDetails />
       <Description />
+      <WelcomePartyAnnouncement />
       <CountdownTimer />
       <CalendarEmbedDynamic isShowTitle />
       <QuickActions />

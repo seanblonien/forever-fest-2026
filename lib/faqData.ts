@@ -42,14 +42,14 @@ export const faqs: FAQData[] = [
   {
     category: 'event',
     question: 'What time should I arrive for the ceremony?',
-    answer: 'Complimentary valet begins at 5:30 PM CDT, so please arrive then to settle in and find your seat before the ceremony begins promptly at 6:00 PM.',
+    answer: 'Aim to arrive around 5:30 PM CDT; a little earlier is welcome. Complimentary valet is provided. Please be seated before the ceremony begins promptly at 6:00 PM.',
   },
 
   // Logistics
   {
     category: 'logistics',
     question: 'What do I do for parking?',
-    answer: 'Free, complimentary valet parking begins at 5:30 PM CDT for all guests. Simply pull up to DEC on Dragon, and a valet will take care of the rest before the ceremony begins promptly at 6:00 PM.',
+    answer: 'Complimentary valet is available for all guests at DEC on Dragon. Aim to arrive around 5:30 PM CDT; a little earlier is welcome. Please be seated before the ceremony begins promptly at 6:00 PM.',
   },
   {
     category: 'logistics',
