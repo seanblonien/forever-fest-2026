@@ -22,7 +22,7 @@
 }
 
 /* Custom image styling in zoom - allow proper scaling */
-[data-rmiz-modal-img] {
+[data-rmiz-modal]:not(.welcome-party-zoom) [data-rmiz-modal-img] {
   border-radius: 8px !important;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2) !important;
   /* Remove size constraints to allow proper scaling */

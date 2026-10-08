@@ -16,7 +16,7 @@ test('home page loads the main navigation', async ({ page }) => {
   await expect(page).toHaveTitle(/Forever Fest 2026/i);
   await expect(page.getByRole('navigation')).toBeVisible();
   await expect(page.getByRole('link', { name: 'OUR STORY' })).toBeVisible();
-  await expect(page.getByRole('link', { name: 'RSVP' })).toBeVisible();
+  await expect(page.getByRole('navigation').getByRole('link', { name: 'RSVP' })).toBeVisible();
 });
 
 pageRoutes.forEach((route) => {

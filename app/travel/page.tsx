@@ -102,9 +102,9 @@ function TravelPage() {
               <p className='bg-green-600/20 border border-green-500/30 rounded-lg p-3'>
                 <strong>Great news!</strong>
                 {' '}
-                Free, complimentary valet parking begins at 5:30 PM for all guests. Simply pull up
-                to the address for DEC on Dragon, and a valet will take care of the rest before the
-                ceremony begins promptly at 6:00 PM.
+                Complimentary valet is available for all guests at DEC on Dragon. Aim to arrive
+                around 5:30 PM; a little earlier is welcome. Please be seated before the ceremony
+                begins promptly at 6:00 PM.
               </p>
             </div>
           </div>
