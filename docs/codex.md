@@ -39,7 +39,9 @@ or the deployed Google Sheet. Keep those distinctions in completion reports.
 Open **Settings → Codex Cloud → Environments** and create/select the environment for
 `seanblonien/forever-fest-2026`. Keep **Who can use → Only me**. Ask setup to use the
 runtime and commands above, and review its actual test output before **Publish**.
-Saving a draft does not publish a usable prepared filesystem.
+Saving a draft does not publish a usable prepared filesystem. The private
+`forever-fest-2026` environment was created and its PR branch passed fresh hosted
+setup, full validation and build on October 8, 2026; see the dated assessment.
 
 Use the install script to install the pinned package manager and run `pnpm agent:setup`.
 Use the start skill to read `AGENTS.md`, check the selected task checkout's manifest
@@ -60,7 +62,10 @@ travels with Git; personal skills on this laptop do not automatically sync.
 
 Current published environments and **Legacy Codex Cloud** are separate. The legacy
 environment controls GitHub/Code Review integrations. If configuring one, choose Node
-24 and use the following after this PR is merged:
+24 and use the following after this PR is merged. The inspected Universal runtime
+picker currently offers only 18/20/22; provision and verify Node 24 explicitly before
+using these commands. The existing legacy environment was left on automatic setup
+with agent internet off, while native PR review was verified successfully:
 
 ```bash
 # Setup (after installing the pinned pnpm release)
