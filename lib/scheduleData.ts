@@ -42,7 +42,7 @@ export const welcomeParty = {
     'Come and go as you please. Cute & casual attire. Food and drinks available for purchase.',
   parking: {
     description:
-      'Street parking is available nearby; follow posted signs. Free covered parking for up to 3 hours is behind the restaurant, with entry on State Street just past the patio. For longer stays, speak with the manager.',
+      'Street parking is available nearby; follow posted signs. The free covered garage behind the restaurant has limited spaces and a 3-hour maximum. Enter from State Street, just past the patio. Consider rideshare, as parking in the area can be tricky.',
     directionsUrl: 'https://www.stateandallen.com/location/state-and-allen/',
   },
   events: [],
