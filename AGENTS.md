@@ -1,126 +1,73 @@
-## Project Overview
+# Forever Fest 2026
 
-This project is a static wedding website titled "Forever Fest 2026" for Sean & Eva's wedding site.
+Sean & Eva's public wedding site: Next.js App Router, React, strict TypeScript,
+Tailwind v4, and Vercel. `package.json` and `pnpm-lock.yaml` define exact tooling.
+The Google Apps Script RSVP importer is a separate application under `scripts/rsvp-sync/`.
 
-Next.js 16 (App Router) + React 19 + TypeScript (strict) + Tailwind CSS v4 + pnpm (>=10) + Node >=24 + Vercel
+## Checkout and verification
 
-## Commands
+Run commands from the repository root. Use the Node version in `.nvmrc` and the exact pnpm
+version in `package.json#packageManager`; keep installs frozen to the lockfile.
 
-```bash
-pnpm build         # Production build
-pnpm lint          # ESLint with auto-fix (formatting lives here)
-pnpm typecheck     # TypeScript type checking
-pnpm test:e2e      # Playwright smoke tests
-pnpm validate      # lint + typecheck + e2e smoke tests (runs concurrently)
-```
+- Fresh checkout: `pnpm agent:setup` installs dependencies, Chromium, and Next types.
+  On a fresh Linux cloud/CI machine, use `pnpm agent:setup --with-deps` to install
+  Chromium's OS libraries too (requires system-package privileges).
+- Develop: `pnpm dev`. Playwright starts its own server on `127.0.0.1:3001`.
+- Check without rewriting files: `pnpm lint:check`, `pnpm typecheck`.
+  `pnpm lint` is the explicit auto-fix command; inspect its diff.
+- UI changes: `pnpm validate` runs lint, generated types/TypeScript, RSVP fixtures,
+  then the Chromium route smoke tests. Also inspect the affected UI at mobile
+  and desktop sizes: smoke tests cover navigation/headings, not every interaction.
+- Runtime/dependency/config changes: also run `pnpm build` after validation.
+  Keep build and dev/tests sequential: they share generated `.next` artifacts.
+- RSVP importer changes: read `scripts/rsvp-sync/AGENTS.md`; run `pnpm test:rsvp`.
+- Docs-only changes: verify instructions/links and `git diff --check`; app tests
+  are needed when the documented workflow itself changes.
 
-Test commands
-- Playwright smoke tests live in `tests/e2e/`.
-- `pnpm test:e2e` runs the smoke suite with Playwright.
-- `pnpm validate` runs lint, typecheck, and the e2e smoke suite.
+No secrets are needed to develop or test the site. `next/font/google` downloads
+fonts during compilation; a blocked network is not a successful build.
+For cloud setup, cache refresh, network hosts, and local Codex actions, read
+[docs/codex.md](docs/codex.md) when preparing a new agent environment.
 
-## Code Style Guidelines
+## Implementation
 
-### Imports
-- Group imports with a blank line between groups.
-- Order: external packages, internal aliases (`@/`), type-only imports, styles.
-- Use `import type` for types.
+Use Server Components by default; client boundaries are for interactivity/browser APIs.
+Reuse existing components, `cn()` and metadata helpers in `lib/`. Preserve semantic HTML,
+keyboard/focus behavior and reduced-motion handling. Use static `next/image` imports for
+local images where practical. React Compiler is enabled; introduce manual memoization
+only with evidence. Follow the existing Tailwind tokens and CSS font variables.
 
-### Formatting and Linting
-- Rely on ESLint auto-fix for quotes, spacing, and line length.
-- `no-console` is allowed in lint, but Next.js strips console calls in production builds.
+Use `type` for shapes and `import type`; keep strict types. Let ESLint own mechanical
+formatting/import ordering. Modify generated output through its source; `.next`,
+`next-env.d.ts`, reports and caches stay untracked. Keep the managed Next.js block below.
 
-### TypeScript
-- `strict` mode is on; keep types explicit.
-- Use `type` over `interface` for props and shapes.
+Project naming and export conventions:
 
-### Naming
-- Components: `PascalCase`.
-- Hooks: `useSomething` in `camelCase`.
-- Utilities/constants: `camelCase` and `SCREAMING_SNAKE_CASE`.
-- Files:
-  - Components: `kebab-case.tsx`
-  - Hooks/utils: `camelCase.ts`
-  - Next.js files/configs: lowercase
+- Components use `PascalCase`; hooks use `useSomething`; utilities use `camelCase`
+  and constants use `SCREAMING_SNAKE_CASE`.
+- Component filenames use `kebab-case.tsx`; hook/utility filenames use `camelCase`;
+  Next.js files/configs use lowercase.
+- Use named exports for reusable components and default exports for Next.js pages/layouts.
 
-### Components
-```tsx
-'use client'; // only when needed
+## Code Review Rules
 
-import { ... } from '...';
+- Event edits must keep shared schedule data, calendar exports, FAQs and invitation
+  surfaces consistent where they describe the same event. Preserve explicit attendance
+  scope and America/Chicago calendar times; flag changes that send guests to the wrong
+  place/time or invite the wrong audience, not harmless wording differences.
+- Preserve working `/rsvp-form` and `/address` redirects and safe external-link behavior.
+  Review changes to navigation, hydration/client boundaries and keyboard interaction
+  for concrete guest-facing regressions; explain the affected flow and trigger.
+- Keep private guest records and credentials out of public assets, client bundles, logs
+  and fixtures. The website links to Jotform; live spreadsheet mutations belong to the
+  separately authorized Apps Script workflow and its nested review rules.
 
-type Props = { ... };
+## Completion
 
-const CONSTANT = 123;
-
-const SubComponent = ({ prop }: { prop: string }) => ( ... );
-
-export function Component({ prop }: Props) => {
-  const [state, setState] = useState(null);
-
-  const handleClick = () => { ... };
-
-  return ( ... );
-};
-```
-
-### Exports
-- Named exports for reusable components.
-- Default exports for Next.js pages/layouts.
-
-### Server vs Client Components
-- Server Components by default.
-- Add `'use client'` for interactivity, browser APIs, or client-only libraries.
-
-### Styling
-- Tailwind CSS is the default styling system.
-- Use `cn()` from `@/lib/utils` for conditional class names.
-- Custom colors: `penn-blue`, `syracuse-orange`, `steel-pink`.
-- Custom fonts: `var(--font-league-gothic)`, `var(--font-alex-brush)`.
-
-### Next.js Conventions
-- Export `metadata` (type `Metadata`) where appropriate.
-- Prefer `next/image` static imports for key local images when practical.
-- For above-the-fold images, prefer `fetchPriority='high'` or `preload` as appropriate.
-- Load fonts via `next/font/google` with CSS variables.
-- `typedRoutes` is enabled; keep route strings valid.
-
-### Performance
-- React Compiler is enabled; avoid manual memoization unless proven necessary.
-- Use `React.lazy` + `Suspense` or `useInViewLazyLoad` for heavy UI.
-- Keep components small and data flow simple.
-
-### Error Handling
-- Prefer explicit guards and early returns over deep nesting.
-- Use typed errors in utilities; avoid throwing raw strings.
-- When dealing with async side effects in hooks, clean up in `useEffect`.
-- For missing or invalid data in pages, use Next.js error boundaries or `notFound()` when appropriate.
-
-### Accessibility
-- Use semantic HTML and aria attributes when needed (Radix components already help).
-- Ensure interactive elements are keyboard accessible.
-
-## File Organization
-
-```
-app/              # App Router pages and layouts
-components/
-  ├── home/       # Home page components
-  ├── pages/      # Page-level components
-  ├── shared/     # Reusable components
-  ├── svgs/       # SVG components
-  └── ui/         # shadcn/ui components
-hooks/            # Custom React hooks
-lib/              # Utilities, types, constants
-public/           # Static assets
-styles/           # Global CSS
-```
-
-## Additional Notes
-
-- Path alias: `@/*` -> repo root.
-- `next.config.ts` enforces build-time TypeScript safety.
-- Use `pnpm validate` before shipping UI changes.
+Preserve unrelated work. Report the behavior changed, checks actually run and outcomes,
+plus remaining failures or coverage limits. A local fixture test is not a live integration
+check. Scope publishing, live guest-data changes and other external effects to the user's
+explicit task; ordinary development/test setup needs no production credentials.
 
 <!-- BEGIN:nextjs-agent-rules -->
 
