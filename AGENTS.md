@@ -6,7 +6,7 @@ The Google Apps Script RSVP importer is a separate application under `scripts/rs
 
 ## Checkout and verification
 
-Run commands from the repository root. Use Node 24 (`.nvmrc`) and the exact pnpm
+Run commands from the repository root. Use the Node version in `.nvmrc` and the exact pnpm
 version in `package.json#packageManager`; keep installs frozen to the lockfile.
 
 - Fresh checkout: `pnpm agent:setup` installs dependencies, Chromium, and Next types.
@@ -16,7 +16,7 @@ version in `package.json#packageManager`; keep installs frozen to the lockfile.
 - Check without rewriting files: `pnpm lint:check`, `pnpm typecheck`.
   `pnpm lint` is the explicit auto-fix command; inspect its diff.
 - UI changes: `pnpm validate` runs lint, generated types/TypeScript, RSVP fixtures,
-  then all seven Chromium route smoke tests. Also inspect the affected UI at mobile
+  then the Chromium route smoke tests. Also inspect the affected UI at mobile
   and desktop sizes: smoke tests cover navigation/headings, not every interaction.
 - Runtime/dependency/config changes: also run `pnpm build` after validation.
   Keep build and dev/tests sequential: they share generated `.next` artifacts.
@@ -29,18 +29,6 @@ fonts during compilation; a blocked network is not a successful build.
 For cloud setup, cache refresh, network hosts, and local Codex actions, read
 [docs/codex.md](docs/codex.md) when preparing a new agent environment.
 
-## Where changes belong
-
-- `app/`: routes, layout, metadata, and page-local components; home lives in `app/(home)/`.
-- `lib/scheduleData.ts`: shared event details; `lib/faqData.ts`: FAQ content.
-  Calendar links also encode event times in `components/shared/calendar-embed-content.tsx`.
-- `components/shared/`: navigation, calendar, invitation, header/footer.
-  `components/ui/`: shared UI primitives; `components/svgs/`: artwork.
-- `hooks/`: browser state and lazy loading; `public/`: photos/static assets.
-- `next.config.ts`: Jotform redirects, typed routes, React Compiler, asset headers.
-- `tests/e2e/`: route smoke coverage. `scripts/rsvp-sync/`: bound spreadsheet tool,
-  not a website backend and not deployed with Next.js.
-
 ## Implementation
 
 Use Server Components by default; client boundaries are for interactivity/browser APIs.
@@ -52,6 +40,14 @@ only with evidence. Follow the existing Tailwind tokens and CSS font variables.
 Use `type` for shapes and `import type`; keep strict types. Let ESLint own mechanical
 formatting/import ordering. Modify generated output through its source; `.next`,
 `next-env.d.ts`, reports and caches stay untracked. Keep the managed Next.js block below.
+
+Project naming and export conventions:
+
+- Components use `PascalCase`; hooks use `useSomething`; utilities use `camelCase`
+  and constants use `SCREAMING_SNAKE_CASE`.
+- Component filenames use `kebab-case.tsx`; hook/utility filenames use `camelCase`;
+  Next.js files/configs use lowercase.
+- Use named exports for reusable components and default exports for Next.js pages/layouts.
 
 ## Code Review Rules
 

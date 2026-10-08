@@ -41,7 +41,7 @@ Assessed the final local edits on October 8, 2026. The repository-agent-guide ru
 | Criterion | Status | Evidence or gap |
 | --- | --- | --- |
 | Placement and scope | Pass | Root `AGENTS.md` contains common guidance; `scripts/rsvp-sync/AGENTS.md` contains only the Apps Script-specific workflow and review rules. Fresh CLI instruction loading was verified separately below. |
-| Project orientation | Pass | Updated map identifies home route groups, shared schedule/FAQ data, calendar time duplication, redirects, browser tests, and the separate spreadsheet application. |
+| Project orientation | Pass | The guide identifies the public website and separate spreadsheet application. Generic directory descriptions are omitted by owner preference; agents discover paths from the checkout. Event/calendar consistency and external-data boundaries remain explicit. |
 | Reproducible workflow | Pass | Root-relative setup checks runtime/package-manager versions, installs frozen dependencies and Chromium, and generates Next types. Local setup and complete validation passed. A fresh hosted draft also passed setup, complete validation and build, as detailed below. |
 | Runtime and dependencies | Pass | `.nvmrc` selects Node 24; setup reads exact pnpm from `package.json`; README corrects Next.js 16 and removes the absent Framer Motion claim. Linux browser library privileges are explicit. |
 | Implementation conventions | Pass | Strict TypeScript, Tailwind, typed routes, React Compiler, framework-local documentation, and generated-file constraints match checked-in configuration. |
@@ -65,7 +65,7 @@ Assessed the final local edits on October 8, 2026. The repository-agent-guide ru
 
 ### Desk review of two task paths
 
-1. **Change the RSVP link or event schedule — pass.** The root guide locates route/config, shared event constants and duplicated calendar values, directs UI validation and viewport inspection, and requires preserving approved times/audience. It acknowledges that route smoke tests do not establish timezone correctness or external-service behavior.
+1. **Change the RSVP link or event schedule — pass.** The root guide requires consistency across event data, calendar exports, FAQs and invitations, directs UI validation and viewport inspection, and preserves approved times/audience. Agents locate the relevant implementation through repository search. It acknowledges that route smoke tests do not establish timezone correctness or external-service behavior.
 2. **Change CSV party matching — pass.** The root guide routes the agent to the scoped guide/README and `pnpm test:rsvp`; scoped instructions identify preview/apply separation, invitation-scoped matching, stale-cell/invite protections, synthetic fixtures, and explicit authorization for live deployment/data changes.
 
 These are document desk reviews, not implementation of either hypothetical task. The desktop automatic setup trigger remains unverified. Actual CI, hosted checks and native review execution are recorded above; document assessment alone did not establish those results.
