@@ -1,0 +1,21 @@
+# Shared Codex desktop worktree setup and terminal actions.
+version = 1
+name = "forever-fest-2026"
+
+[setup]
+script = "pnpm agent:setup"
+
+[[actions]]
+name = "Dev server"
+icon = "tool"
+command = "pnpm dev"
+
+[[actions]]
+name = "Validate"
+icon = "tool"
+command = "pnpm validate"
+
+[[actions]]
+name = "Production build"
+icon = "tool"
+command = "pnpm build"

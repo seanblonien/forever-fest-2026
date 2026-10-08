@@ -29,6 +29,9 @@ const eslintConfig = defineConfig([
     '.vercel/**',
     'test-results/**',
     'playwright-report/**',
+    // Apps Script is exercised by pnpm test:rsvp in a Node VM, outside the
+    // website's TypeScript project and its type-aware ESLint configuration.
+    'scripts/rsvp-sync/test.mjs',
   ]),
 ]);
 

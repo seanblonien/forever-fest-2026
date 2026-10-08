@@ -7,12 +7,11 @@ Sean & Eva's wedding website for Forever Fest 2026, featuring RSVP functionality
 
 ## Tech Stack
 
-- Next.js 15
+- Next.js 16 (App Router)
 - React 19
 - TypeScript
 - Radix UI for accessible components
 - Tailwind CSS
-- Framer Motion for animations
 - ESLint
 - Vercel Analytics & Speed Insights
 - Deployed on Vercel
@@ -20,12 +19,33 @@ Sean & Eva's wedding website for Forever Fest 2026, featuring RSVP functionality
 ## Development
 
 ```sh
-# Install dependencies
-pnpm install
+# Use Node 24 (.nvmrc) and the pnpm version pinned in package.json.
+# Install dependencies, Chromium, and generated Next.js types
+pnpm agent:setup
 
 # Run development server
 pnpm dev
 
-# Run linter with auto-fix
+# Run checks without changing source files
+pnpm validate
+
+# Explicitly fix lint/formatting
 pnpm lint
+
+# Verify production compilation
+pnpm build
 ```
+
+Fresh Linux machines may need `pnpm agent:setup --with-deps` for Chromium's system
+libraries. No application secrets are needed. Builds require access to Google Fonts.
+
+## Working with agents
+
+[AGENTS.md](AGENTS.md) contains implementation guidance and Codex review rules.
+[Codex setup](docs/codex.md) covers cloud environments, desktop worktrees, network
+requirements, and verification. GitHub PRs run the same validation plus a production
+build through [Validate](.github/workflows/validate.yml).
+
+The [RSVP CSV importer](scripts/rsvp-sync/README.md) is a separate Google Apps Script
+application. `pnpm test:rsvp` uses synthetic local fixtures; it does not update the
+live spreadsheet.
