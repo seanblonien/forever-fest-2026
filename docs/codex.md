@@ -31,6 +31,7 @@ ESLint covers the website; the Apps Script VM harness is outside its typed proje
 and is validated by `pnpm test:rsvp` instead.
 
 No app secrets, real guest exports, Google credentials, or Vercel tokens are required.
+See [the chatbot operations guide](chatbot.md) for feature setup and lifecycle.
 Chat browser tests intercept the model endpoint and blank provider/Redis credentials in their server environment. Live Redis tests are separately opt-in with `node --env-file=.env.local node_modules/@playwright/test/cli.js test --config=playwright.chat-live.config.ts`; they use isolated expiring synthetic namespaces. The route smoke suite checks seven routes and headings, not external RSVP submission
 or the deployed Google Sheet. Keep those distinctions in completion reports.
 

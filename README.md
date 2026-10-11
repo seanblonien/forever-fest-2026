@@ -39,6 +39,9 @@ pnpm build
 Fresh Linux machines may need `pnpm agent:setup --with-deps` for Chromium's system
 libraries. No application secrets are needed. Builds require access to Google Fonts.
 
+The [Forever Fest Help guide](docs/chatbot.md) covers the floating chatbot, browser-local
+history, server configuration, limits, and shutdown.
+
 ## Working with agents
 
 [AGENTS.md](AGENTS.md) contains implementation guidance and Codex review rules.

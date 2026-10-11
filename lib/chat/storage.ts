@@ -5,10 +5,67 @@ import { ANSWER_LIMIT, codePointLength, messageText, QUESTION_LIMIT, utf8Size } 
 
 export const STORAGE_KEY = 'forever-fest-chat:v1';
 export const STORAGE_LIMIT = 48 * 1024;
+export const THREAD_STORAGE_KEY = 'forever-fest-chat:v2';
+const THREAD_LIMIT = 10;
+const THREAD_STORAGE_LIMIT = STORAGE_LIMIT * THREAD_LIMIT + 4096;
 const storedMessage = z.strictObject({ id: z.string().min(1).max(100), text: z.string().min(1) });
 const pairSchema = z.strictObject({ question: storedMessage, answer: storedMessage });
 const historySchema = z.strictObject({ version: z.literal(1), pairs: z.array(pairSchema).max(10) });
 export type CompletedPair = z.infer<typeof pairSchema>;
+const threadSchema = z.strictObject({
+  id: z.string().min(1).max(100),
+  title: z.string().min(1).max(80),
+  updatedAt: z.number().int().nonnegative(),
+  pairs: z.array(pairSchema).min(1).max(10),
+});
+const threadsSchema = z.strictObject({
+  version: z.literal(2),
+  activeId: z.string().min(1).max(100),
+  threads: z.array(threadSchema).max(THREAD_LIMIT),
+});
+export type ChatThread = z.infer<typeof threadSchema>;
+export type ChatHistory = z.infer<typeof threadsSchema>;
+export function newChatHistory(): ChatHistory {
+  return { version: 2, activeId: crypto.randomUUID(), threads: [] };
+}
+export function updateChatHistory(history: ChatHistory, pairs: CompletedPair[], now = Date.now()): ChatHistory {
+  const bounded = boundPairs(pairs);
+  if (bounded.length === 0)
+    return history;
+  const previous = history.threads.find((thread) => thread.id === history.activeId);
+  const thread: ChatThread = {
+    id: history.activeId,
+    title: previous?.title ?? bounded[0].question.text.slice(0, 80),
+    updatedAt: now,
+    pairs: bounded,
+  };
+  return { ...history, threads: [thread, ...history.threads.filter(({ id }) => id !== thread.id)].slice(0, THREAD_LIMIT) };
+}
+export function restoreChatHistory(raw: string | null): ChatHistory | undefined {
+  if (!raw || utf8Size(raw) > THREAD_STORAGE_LIMIT)
+    return undefined;
+  try {
+    const result = threadsSchema.safeParse(JSON.parse(raw) as unknown);
+    if (!result.success)
+      return undefined;
+    const history = result.data;
+    const ids = history.threads.map(({ id }) => id);
+    if (new Set(ids).size !== ids.length || history.threads.some((thread) =>
+      restorePairs(JSON.stringify({ version: 1, pairs: thread.pairs })).length !== thread.pairs.length))
+      return undefined;
+    return history;
+  } catch {
+    return undefined;
+  }
+}
+export function saveChatHistory(storage: Pick<Storage, 'setItem'>, history: ChatHistory): boolean {
+  try {
+    storage.setItem(THREAD_STORAGE_KEY, JSON.stringify(history));
+    return true;
+  } catch {
+    return false;
+  }
+}
 export function boundPairs(pairs: CompletedPair[]): CompletedPair[] {
   const bounded = pairs.filter(({ answer, question }) => question.text.trim() &&
     codePointLength(question.text) <= QUESTION_LIMIT && answer.text.trim() &&
@@ -45,16 +102,5 @@ export function completedPair(messages: UIMessage[]): CompletedPair | undefined 
     return undefined;
   const pair = { question: { id: question.id, text: messageText(question) }, answer: { id: answer.id, text: messageText(answer) } };
   return boundPairs([pair])[0];
-}
-export function savePairs(storage: Pick<Storage, 'setItem' | 'removeItem'>, pairs: CompletedPair[]): boolean {
-  try {
-    if (pairs.length === 0)
-      storage.removeItem(STORAGE_KEY);
-    else
-      storage.setItem(STORAGE_KEY, JSON.stringify({ version: 1, pairs: boundPairs(pairs) }));
-    return true;
-  } catch {
-    return false;
-  }
 }
 /* eslint-enable @typescript-eslint/no-magic-numbers, functional/no-loop-statements, no-loops/no-loops */

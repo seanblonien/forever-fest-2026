@@ -4,6 +4,8 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Footer } from '@/components/shared/footer';
 import { Header } from '@/components/shared/header';
 import { Navigation } from '@/components/shared/navigation';
+import { WeddingChat } from '@/components/shared/wedding-chat';
+import { chatEnabled } from '@/lib/chat/config';
 import { ThemeProvider } from '@/components/theme-provider';
 import { cn, OPEN_GRAPH_DEFAULTS, PUBLIC_SITE_BASE_URL } from '@/lib';
 import type { Metadata } from 'next';
@@ -101,6 +103,7 @@ function RootLayout({ children }: ChildrenProps) {
             </main>
 
             <Footer />
+            <WeddingChat enabled={chatEnabled()} />
             <Analytics />
             <SpeedInsights />
           </div>

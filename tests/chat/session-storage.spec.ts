@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers, functional/no-loop-statements, no-loops/no-loops, functional/no-throw-statements -- Fixtures exercise exact protocol boundaries and ordered failure cases. */
 import { expect, test } from '@playwright/test';
 import { COOKIE_NAME, networkKey, normalizeIP, resolveSession } from '../../lib/chat/session';
-import { boundPairs, completedPair, pairsToMessages, restorePairs, savePairs, STORAGE_LIMIT } from '../../lib/chat/storage';
+import { boundPairs, completedPair, newChatHistory, pairsToMessages, restoreChatHistory, restorePairs, saveChatHistory, STORAGE_LIMIT, updateChatHistory } from '../../lib/chat/storage';
 import { chicagoWindow, quotaReservation } from '../../lib/chat/limits';
 import { CHAT_ENDS_AT } from '../../lib/chat/contracts';
 import { NOW, request, TEST_ENV } from './helpers';
@@ -67,9 +67,35 @@ test('storage restores only bounded completed pairs and strips provider metadata
     expect(restorePairs(bad)).toEqual([]);
   expect(completedPair(pairsToMessages([pair(1)]))).toEqual(pair(1));
   expect(completedPair(pairsToMessages([pair(1)]).slice(0, 1))).toBeUndefined();
-  expect(savePairs({ setItem: () => {
+});
+test('thread history preserves a new empty chat and can reopen previous completed conversations after refresh', () => {
+  const first = updateChatHistory(newChatHistory(), [pair(1)], NOW);
+  const empty = { ...first, activeId: 'new-empty-chat' };
+  const stored = new Map<string, string>();
+  expect(saveChatHistory({ setItem: (key, value) => {
+    stored.set(key, value);
+  } }, empty)).toBe(true);
+  const restored = restoreChatHistory([...stored.values()][0]);
+  expect(restored).toEqual(empty);
+  expect(restored?.threads.find(({ id }) => id === restored.activeId)).toBeUndefined();
+  const reopened = { ...empty, activeId: first.activeId };
+  const updated = updateChatHistory(reopened, [pair(1), pair(2)], NOW + 1);
+  expect(updated.threads).toHaveLength(1);
+  expect(updated.threads[0].title).toBe('Where?');
+  expect(updated.threads[0].pairs).toEqual([pair(1), pair(2)]);
+});
+test('thread history retains the ten most recently updated chats and validates each stored transcript', () => {
+  let history = newChatHistory();
+  for (let index = 0; index < 12; index += 1)
+    history = updateChatHistory({ ...history, activeId: `thread-${index}` }, [pair(index)], NOW + index);
+  expect(history.threads).toHaveLength(10);
+  expect(history.threads.map(({ id }) => id)).toEqual(Array.from({ length: 10 }, (_, index) => `thread-${11 - index}`));
+  expect(restoreChatHistory(JSON.stringify(history))).toEqual(history);
+  expect(restoreChatHistory(JSON.stringify({ ...history, threads: [history.threads[0], history.threads[0]] }))).toBeUndefined();
+  expect(restoreChatHistory(JSON.stringify({ ...history, threads: [{ ...history.threads[0], pairs: [pair(1), pair(1)] }] }))).toBeUndefined();
+  expect(restoreChatHistory('{bad')).toBeUndefined();
+  expect(saveChatHistory({ setItem: () => {
     throw new Error('Blocked');
-  },
-  removeItem: () => {/* Fixture has no stored item. */} }, [pair(1)])).toBe(false);
+  } }, history)).toBe(false);
 });
 /* eslint-enable @typescript-eslint/no-magic-numbers, functional/no-loop-statements, no-loops/no-loops, functional/no-throw-statements */

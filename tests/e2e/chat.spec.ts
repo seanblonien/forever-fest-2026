@@ -63,8 +63,9 @@ test.describe('active wedding chat', () => {
     await page.setViewportSize({ width: 1280, height: 900 });
     const calls = await mockStream(page);
     await page.goto('/faqs');
+    await page.getByRole('button', { name: 'Ask about Forever Fest', exact: true }).click();
     const composer = page.getByLabel('Your question');
-    await page.getByRole('button', { name: 'What time should I arrive?' }).click();
+    await composer.fill('What time should I arrive?');
     expect(calls).toHaveLength(0);
     await composer.press('Enter');
     await expect(composer).toBeFocused();
@@ -76,54 +77,60 @@ test.describe('active wedding chat', () => {
     await expect(page.getByRole('status')).toHaveText('Answer complete.');
     expect(calls).toHaveLength(1);
     await page.reload();
+    await page.getByRole('button', { name: 'Ask about Forever Fest', exact: true }).click();
     await expect(history).toContainText('5:30 PM');
     expect(calls).toHaveLength(1);
-    await page.getByRole('navigation', { name: 'Website references' }).getByRole('link', { name: 'schedule' }).click();
+    await page.getByRole('link', { name: 'SCHEDULE', exact: true }).click();
     await expect(page.getByRole('heading', { name: 'Schedule', exact: true })).toBeVisible();
     await page.goBack();
     await expect(history).toContainText('5:30 PM');
     expect(calls).toHaveLength(1);
     await page.screenshot({ path: 'test-results/chat-desktop.png', fullPage: false });
-    await page.getByRole('button', { name: 'Clear chat' }).click();
-    await expect(history).toBeEmpty();
+    await page.getByRole('button', { name: 'New chat' }).click();
+    await expect(history).toHaveText('Hey! What can I help you with?');
     await page.reload();
-    await expect(history).toBeEmpty();
+    await page.getByRole('button', { name: 'Ask about Forever Fest', exact: true }).click();
+    await expect(history).toHaveText('Hey! What can I help you with?');
     expect(calls).toHaveLength(1);
   });
 
-  test('390px mobile Stop/Clear discard partial answers and never resume on reload', async ({ page }) => {
+  test('390px mobile Stop/New chat discard partial answers and never resume on reload', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     const calls = await mockStream(page);
     await page.goto('/faqs');
+    await page.getByRole('button', { name: 'Ask about Forever Fest', exact: true }).click();
     const composer = page.getByLabel('Your question');
     await composer.fill('What is the dress code?');
     await page.getByRole('button', { name: 'Send', exact: true }).click();
     await expect(page.getByRole('region', { name: 'Chat history' })).toContainText('Please arrive');
     await page.getByRole('button', { name: 'Stop', exact: true }).click();
-    await expect(page.getByText('Stopped or incomplete answer', { exact: true })).toBeVisible();
+    await expect(page.getByText('Answer stopped', { exact: true })).toBeVisible();
     await page.reload();
-    await expect(page.getByRole('region', { name: 'Chat history' })).toBeEmpty();
+    await page.getByRole('button', { name: 'Ask about Forever Fest', exact: true }).click();
+    await expect(page.getByRole('region', { name: 'Chat history' })).toHaveText('Hey! What can I help you with?');
     expect(calls).toHaveLength(1);
     await composer.fill('Where is the wedding?');
     await composer.press('Enter');
     await expect(page.getByRole('button', { name: 'Stop', exact: true })).toBeVisible();
-    await page.getByRole('button', { name: 'Clear chat' }).click();
-    await expect(page.getByRole('region', { name: 'Chat history' })).toBeEmpty();
-    await expect(page.getByRole('status')).toHaveText('Chat cleared.');
+    await page.getByRole('button', { name: 'New chat' }).click();
+    await expect(page.getByRole('region', { name: 'Chat history' })).toHaveText('Hey! What can I help you with?');
+    await expect(page.getByRole('status')).toHaveText('New chat started.');
     await page.screenshot({ path: 'test-results/chat-mobile.png', fullPage: false });
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   });
 
-  test('navigation during an in-progress stream discards it', async ({ page }) => {
+  test('navigation keeps the shared chat and its in-progress stream', async ({ page }) => {
     const calls = await mockStream(page);
     await page.goto('/faqs');
+    await page.getByRole('button', { name: 'Ask about Forever Fest', exact: true }).click();
     await page.getByLabel('Your question').fill('When?');
     await page.getByLabel('Your question').press('Enter');
     await expect(page.getByRole('button', { name: 'Stop', exact: true })).toBeVisible();
-    await page.getByRole('navigation', { name: 'Website references' }).getByRole('link', { name: 'travel' }).click();
+    await page.getByRole('link', { name: 'TRAVEL', exact: true }).click();
     await expect(page.getByRole('heading', { name: 'Travel', exact: true })).toBeVisible();
+    await expect(page.getByRole('status')).toHaveText('Answer complete.');
     await page.goBack();
-    await expect(page.getByRole('region', { name: 'Chat history' })).toBeEmpty();
+    await expect(page.getByRole('region', { name: 'Chat history' })).toContainText('5:30 PM');
     expect(calls).toHaveLength(1);
   });
 
@@ -141,7 +148,8 @@ test.describe('active wedding chat', () => {
     });
     const calls = await mockStream(page);
     await page.goto('/faqs');
-    await expect(page.getByText('Tab storage is unavailable.', { exact: false })).toBeVisible();
+    await page.getByRole('button', { name: 'Ask about Forever Fest', exact: true }).click();
+    await expect(page.getByLabel('Your question')).toBeEnabled();
     const composer = page.getByLabel('Your question');
     await composer.fill('Hi');
     await composer.press('Shift+Enter');
@@ -156,8 +164,8 @@ test.describe('active wedding chat', () => {
     await composer.fill('When?');
     await composer.press('Enter');
     await expect(page.getByRole('status')).toHaveText('Answer complete.');
-    await page.getByRole('button', { name: 'Clear chat' }).click();
-    await expect(page.getByRole('region', { name: 'Chat history' })).toBeEmpty();
+    await page.getByRole('button', { name: 'New chat' }).click();
+    await expect(page.getByRole('region', { name: 'Chat history' })).toHaveText('Hey! What can I help you with?');
   });
 
   test('restored history sends only last three completed pairs; output remains escaped text', async ({ page }) => {
@@ -166,6 +174,7 @@ test.describe('active wedding chat', () => {
     });
     const calls = await mockStream(page, '<img src=x onerror=alert(1)> **Text only**');
     await page.goto('/faqs');
+    await page.getByRole('button', { name: 'Ask about Forever Fest', exact: true }).click();
     await expect(page.getByRole('region', { name: 'Chat history' })).toContainText('5:30 PM');
     expect(calls).toHaveLength(0);
     await page.getByLabel('Your question').fill('Next?');
@@ -184,6 +193,7 @@ test.describe('active wedding chat', () => {
     test(`HTTP ${status} preserves FAQs and maps to safe copy`, async ({ page }) => {
       await page.route('**/api/chat', (route) => route.fulfill({ status, json: { code: status === 429 ? 'rate_limited' : 'unavailable', message: 'private provider details', resetAt: Date.now() + 60_000 } }));
       await page.goto('/faqs');
+      await page.getByRole('button', { name: 'Ask about Forever Fest', exact: true }).click();
       await page.getByLabel('Your question').fill('When?');
       await page.getByLabel('Your question').press('Enter');
       let expected = 'unavailable';
@@ -201,8 +211,9 @@ test.describe('active wedding chat', () => {
     await page.addInitScript(() => sessionStorage.setItem('forever-fest-chat:v1', '{malformed'));
     const calls = await mockStream(page);
     await page.goto('/faqs');
+    await page.getByRole('button', { name: 'Ask about Forever Fest', exact: true }).click();
     await expect(page.getByLabel('Your question')).toBeEnabled();
-    await expect(page.getByRole('region', { name: 'Chat history' })).toBeEmpty();
+    await expect(page.getByRole('region', { name: 'Chat history' })).toHaveText('Hey! What can I help you with?');
     expect(calls).toHaveLength(0);
   });
 });
@@ -232,9 +243,10 @@ test('FAQ anchors, schedule facts, and external redirects retain their behavior'
 test('after lifecycle shutdown, the unavailable panel keeps FAQs usable', async ({ page }) => {
   test.skip(Date.now() < Date.parse(CHAT_ENDS_AT), 'Runs when the actual server lifecycle has ended.');
   await page.goto('/faqs');
-  await expect(page.getByRole('region', { name: 'Ask about Forever Fest' })).toContainText('Chat is unavailable');
+  await page.getByRole('button', { name: 'Ask about Forever Fest', exact: true }).click();
+  await expect(page.getByRole('dialog', { name: 'Forever Fest Help' })).toContainText('Chat is unavailable');
   await expect(page.getByLabel('Your question')).toHaveCount(0);
-  await page.getByRole('link', { name: 'FAQs below', exact: true }).click();
+  await page.getByRole('button', { name: 'Close chat', exact: true }).click();
   await page.getByRole('button', { name: /Event Details/ }).click();
   await expect(page.getByRole('heading', { name: 'When is the wedding?' })).toBeVisible();
 });
