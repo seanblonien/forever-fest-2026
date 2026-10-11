@@ -150,7 +150,7 @@ export function WeddingChat({ enabled }: {
   function closePanel() {
     setIsOpen(false);
     setShowHistory(false);
-    launcher.current?.focus();
+    requestAnimationFrame(() => launcher.current?.focus());
   }
   useEffect(() => {
     if (!isOpen)
@@ -215,11 +215,11 @@ export function WeddingChat({ enabled }: {
     <div className='fixed right-[max(1rem,env(safe-area-inset-right))] bottom-[max(1rem,env(safe-area-inset-bottom))] z-1000 flex flex-col items-end gap-3 text-left text-white [&_button:enabled]:cursor-pointer'>
       <section
         aria-labelledby='wedding-chat-heading'
-        className={cn('relative h-[min(36rem,calc(100dvh-7rem))] w-[min(24rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-lavender-pink/30 bg-penn-blue shadow-2xl shadow-black/40', isOpen ? 'flex' : 'hidden')}
+        className={cn('fixed inset-0 h-dvh w-full flex-col overflow-hidden bg-penn-blue shadow-2xl shadow-black/40 sm:relative sm:inset-auto sm:h-[min(36rem,calc(100dvh-7rem))] sm:w-[min(24rem,calc(100vw-2rem))] sm:rounded-2xl sm:border sm:border-lavender-pink/30', isOpen ? 'flex' : 'hidden')}
         id='wedding-chat-panel'
         role='dialog'
       >
-        <div className='flex shrink-0 items-center gap-2 border-b border-white/10 bg-linear-to-r from-steel-pink/30 to-penn-blue p-4'>
+        <div className='flex shrink-0 items-center gap-1 border-b border-white/10 bg-linear-to-r from-steel-pink/30 to-penn-blue p-3 pt-[max(.75rem,env(safe-area-inset-top))] sm:gap-2 sm:p-4'>
           <span className='size-6 shrink-0 text-lavender-pink'><DiscoBallIcon /></span>
           <h2 className='mr-auto text-2xl leading-none font-league-gothic' id='wedding-chat-heading'>Forever Fest Help</h2>
           <Button
@@ -259,7 +259,7 @@ export function WeddingChat({ enabled }: {
           </Button>
         </div>
         {showHistory ? (
-          <div aria-label='Previous chats' className='absolute inset-x-3 top-18 z-10 max-h-[60%] overflow-y-auto rounded-xl border border-lavender-pink/30 bg-penn-blue p-2 shadow-xl shadow-black/40' id='wedding-chat-history' role='region'>
+          <div aria-label='Previous chats' className='absolute inset-x-3 top-[calc(3rem+max(.75rem,env(safe-area-inset-top)))] z-10 max-h-[60%] overflow-y-auto rounded-xl border border-lavender-pink/30 bg-penn-blue p-2 shadow-xl shadow-black/40 sm:top-18' id='wedding-chat-history' role='region'>
             <p className='px-3 py-2 text-xs font-semibold text-lavender-pink'>Previous chats</p>
             {history?.threads.length ? history.threads.map((thread) => (
               <button
@@ -311,7 +311,7 @@ export function WeddingChat({ enabled }: {
         <p aria-atomic='true' aria-live='polite' className={cn('text-xs text-papaya-whip', incomplete ? 'px-4 pb-3' : 'sr-only')} role='status'>{notice}</p>
         {enabled ? (
           <form
-            className='shrink-0 border-t border-white/10 p-3'
+            className='shrink-0 border-t border-white/10 p-3 pb-[max(.75rem,env(safe-area-inset-bottom))] sm:pb-3'
             onSubmit={(event) => {
               event.preventDefault();
               void submit();
@@ -368,7 +368,7 @@ export function WeddingChat({ enabled }: {
         aria-expanded={isOpen}
         aria-haspopup='dialog'
         aria-label='Ask about Forever Fest'
-        className='size-12 rounded-full border border-lavender-pink/30 bg-steel-pink p-0 text-white shadow-lg shadow-black/30 hover:bg-steel-pink/90 focus-visible:ring-lavender-pink [&_svg]:size-6'
+        className={cn('size-12 rounded-full border border-lavender-pink/30 bg-steel-pink p-0 text-white shadow-lg shadow-black/30 hover:bg-steel-pink/90 focus-visible:ring-lavender-pink [&_svg]:size-6', isOpen && 'hidden sm:inline-flex')}
         title='Ask about Forever Fest'
         type='button'
         onClick={() => {
