@@ -68,3 +68,7 @@ Final smoke usage: 3,249 input / 42 output tokens; 1.144 seconds server completi
 Final smoke usage: 3,254 input / 55 output tokens; 2.402 seconds server completion.
 
 Production deployment remained `dpl_7QD75pFhowcGx6vib9n2TrYvsDSH`; production chat environment remained empty. All live actions used protected previews.
+
+## CI lifecycle
+
+Final local validation passed 47 browserless chat tests, RSVP fixtures and 20 Chromium tests. One future-date browser fallback case is intentionally skipped before the cutoff; after cutoff it activates and interactive-chat browser cases skip. The immutable server cutoff boundary tests always run. Production build passed with the exact deployed application code. Draft [PR #7](https://github.com/seanblonien/forever-fest-2026/pull/7) contains the recorded evidence.

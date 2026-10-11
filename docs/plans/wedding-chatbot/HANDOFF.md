@@ -22,7 +22,7 @@ Use the user-prompt control for consequential questions, one at a time. Continue
 | A: checkout/tooling/content inventory | Complete | Destination main `ca0aba04cc0ddd274f92be03d045c7deb3a93c33`; feature branch `codex/wedding-chatbot`; pinned dependencies installed |
 | B: content/contracts/sessions/limits | Complete | 47 browserless tests; public content extraction; real Redis near-cap concurrency test passed |
 | C: endpoint/UI/tab history | Complete | Desktop/mobile streamed UI, Stop/Clear/history restoration and safe errors verified with mocked provider |
-| D: local regression checks | Complete | `pnpm validate`: RSVP fixtures, 47 chat contracts, 20 Chromium route/chat tests; `pnpm build` passed; desktop/mobile inspected |
+| D: local regression checks | Complete | `pnpm validate`: RSVP fixtures, 47 chat contracts, 20 Chromium route/chat tests (one future shutdown case conditionally skipped); `pnpm build` passed; desktop/mobile inspected |
 | E: services/live preview/evaluation | Complete | Both services work; 26/26 live cases passed; actual Redis concurrency, deployed 429/403/503, WAF denial/cooldown, real midnight reset and final-revision stream verified |
 | F: production-review handoff | Complete | Protected final preview and exact SHA below; [live evaluation](live-evaluation.md), [operations](operations.md); draft PR prepared for review |
 
@@ -58,9 +58,11 @@ Next action: user reviews the protected preview and draft PR, then decides wheth
 
 - All 26 live public cases passed with 84,654 input / 1,128 output tokens. Conservative pass estimate $0.01115; all evaluation and smoke probes stayed below $0.014. All answers streamed incrementally and completed normally; no wrong venue/time/attendance/cost or invented invitation status was found in this finite pass.
 - Actual Dallas midnight: exhausted prior-day session stayed 20; new session/day became 1; shared lifetime counter increased 27 to 28 on the final revision. Quotas were not cleared or namespaces changed.
-- `pnpm validate` passed with 47 chat tests and 20 Chromium tests plus RSVP fixtures; `pnpm build` passed afterward. Existing lint warnings and a pre-existing welcome-party-image eager-loading advisory do not fail validation.
+- `pnpm validate` passed with 47 chat tests and 20 Chromium tests plus RSVP fixtures, with the future shutdown case conditionally skipped; `pnpm build` passed afterward. Existing lint warnings and a pre-existing welcome-party-image eager-loading advisory do not fail validation.
 - Actual downloaded iCal export retained America/Chicago, October 17 6–11 PM, DEC on Dragon and published cost distinctions. RSVP/address redirects and FAQ filters/anchors were verified without external form submission.
 - Deterministic cutoff tests verify zero provider calls at/after the future shutdown; the actual October 19 shutdown date has not occurred. This is test evidence, not a future-date live claim.
 - OpenAI model answers are nondeterministic; the finite evaluation does not guarantee every future answer. Fixed website references and the visible AI notice remain available.
 - Production deployment remained `dpl_7QD75pFhowcGx6vib9n2TrYvsDSH`, and production chat variables remain unset. The only project-wide change was the expressly planned supplemental firewall rule, scoped to `/api/chat`.
-- Latest implementation commit above is the exact deployed application revision. The subsequent handoff/evaluation commit changes documentation only.
+- Latest implementation commit above is the exact deployed application revision. The later handoff/evaluation and lifecycle-test commits change documentation/tests only; deployed application files remain identical.
+
+Draft pull request: [#7 — Add bounded wedding FAQ chatbot](https://github.com/seanblonien/forever-fest-2026/pull/7). The initial PR validation run passed on documentation SHA `72cee978f4958f9026b28dc50dec911fd6a3471a`; the final test-only lifecycle revision triggers the same CI checks. Interactive browser cases stop after the fixed cutoff, and the unavailable-panel browser check then activates, keeping future site validation usable.
