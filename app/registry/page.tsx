@@ -1,5 +1,6 @@
 import { ExternalLink, Heart, Mail, ShoppingBag } from 'lucide-react';
 import { Metadata } from 'next';
+import { REGISTRY_DETAILS } from '@/lib/publicWeddingDetails';
 import { createPageMetadata } from '@/lib';
 
 export const metadata: Metadata = createPageMetadata({
@@ -13,8 +14,7 @@ function RegistryPage() {
       <h1 className='text-4xl md:text-6xl mb-8 font-league-gothic'>Registry</h1>
       <div className='space-y-8 text-lg md:text-xl'>
         <p>
-          {`Your presence is the greatest gift, but if you'd like to give something special, we've
-        made it easy to find the perfect present.`}
+          {REGISTRY_DETAILS.intro}
         </p>
 
         {/* Universal Registry */}
@@ -23,7 +23,7 @@ function RegistryPage() {
           <a
             aria-label='Go to MyRegistry.com registry page'
             className='inline-flex items-center justify-center gap-3 bg-white/20 hover:bg-white/30 transition-colors duration-200 rounded-lg p-6 group text-xl font-league-gothic'
-            href='https://www.myregistry.com/giftlist/forever-fest'
+            href={REGISTRY_DETAILS.url}
             rel='noopener noreferrer'
             target='_blank'
           >
@@ -40,14 +40,14 @@ function RegistryPage() {
             <h2 className='text-2xl font-league-gothic'>Mail a Gift</h2>
           </div>
           <p className='text-base md:text-lg mb-5'>
-            Cards, letters, and mailed gifts are welcome here if that is easiest for you.
+            {REGISTRY_DETAILS.mailNote}
           </p>
           <address className='not-italic inline-block rounded-lg bg-white/10 px-6 py-4 text-base md:text-lg leading-relaxed'>
-            Sean & Eva
+            {REGISTRY_DETAILS.mailingAddress[0]}
             <br />
-            9211 Garland Rd APT 3412
+            {REGISTRY_DETAILS.mailingAddress[1]}
             <br />
-            Dallas, TX 75218
+            {REGISTRY_DETAILS.mailingAddress[2]}
           </address>
         </div>
 
@@ -59,9 +59,7 @@ function RegistryPage() {
             <Heart className='w-6 h-6 text-pink-300' />
           </div>
           <p className='text-base md:text-lg'>
-            {`If you prefer not to shop online/pay fees, in-person gifts at the wedding are absolutely welcome!
-          Cards, letters, or any heartfelt gesture you'd like to share with us on our special day
-          would mean the world to us. 🫶`}
+            {REGISTRY_DETAILS.inPerson}
           </p>
         </div>
       </div>

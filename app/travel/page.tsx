@@ -1,5 +1,6 @@
 import { ExternalLink, MapPin } from 'lucide-react';
 import Image from 'next/image';
+import { HOTEL_BLOCK, HOTEL_DETAILS, TRAVEL_DETAILS } from '@/lib/publicWeddingDetails';
 import anatoleHotelImage from '@/public/hotels/anatole.jpg';
 import courtyardHotelImage from '@/public/hotels/courtyard.jpg';
 import virginHotelImage from '@/public/hotels/virgin.jpg';
@@ -23,35 +24,8 @@ type HotelOption = {
   walk: string;
 };
 
-const HOTEL_OPTIONS: HotelOption[] = [
-  {
-    tier: 'High-End',
-    name: 'Virgin Hotels Dallas',
-    walk: '18 min walk',
-    link: 'https://maps.app.goo.gl/qKtXoSY7QaZVB5C28',
-    image: virginHotelImage,
-    description: 'Design-forward stay with a lively lobby and polished rooms near the Design District.',
-    highlights: ['Walkable to venue', 'Upscale vibe', 'Great for weekend stays'],
-  },
-  {
-    tier: 'Mid-Range',
-    name: 'Hilton Anatole',
-    walk: '24 min walk',
-    link: 'https://maps.app.goo.gl/xSwBfLdxFy6mViWc9',
-    image: anatoleHotelImage,
-    description: 'Full-service hotel with classic comfort and easy rideshare access to the venue.',
-    highlights: ['Spacious rooms', 'Easy rideshare', 'Family friendly'],
-  },
-  {
-    tier: 'Value',
-    name: 'Courtyard by Marriott Dallas Medical/Market Center',
-    walk: '12 min walk',
-    link: 'https://maps.app.goo.gl/J6QdA8MgzVvNgoC87',
-    image: courtyardHotelImage,
-    description: 'Comfortable, streamlined option with the closest walk to the venue.',
-    highlights: ['Closest walk', 'Great value'],
-  },
-];
+const HOTEL_IMAGES = [virginHotelImage, anatoleHotelImage, courtyardHotelImage];
+const HOTEL_OPTIONS: HotelOption[] = HOTEL_DETAILS.map((hotel, index) => ({ ...hotel, image: HOTEL_IMAGES[index] }));
 
 // eslint-disable-next-line max-lines-per-function -- long page
 function TravelPage() {
@@ -83,7 +57,7 @@ function TravelPage() {
               </div>
               <h2 className='text-xl mb-2 font-league-gothic'>Venue Address</h2>
               <p className='mb-2'>
-                DEC on Dragon 1414 Dragon St, Dallas, TX 75207
+                {TRAVEL_DETAILS.venue}
               </p>
               <p className='mb-4'>
                 The venue is located in the
@@ -102,9 +76,7 @@ function TravelPage() {
               <p className='bg-green-600/20 border border-green-500/30 rounded-lg p-3'>
                 <strong>Great news!</strong>
                 {' '}
-                Complimentary valet is available for all guests at DEC on Dragon. Aim to arrive
-                around 5:30 PM; a little earlier is welcome. Please be seated before the ceremony
-                begins promptly at 6:00 PM.
+                {TRAVEL_DETAILS.parking}
               </p>
             </div>
           </div>
@@ -114,8 +86,7 @@ function TravelPage() {
         <section className='bg-white/10 backdrop-blur-xs rounded-lg p-6 text-left'>
           <h2 className='text-2xl mb-4 font-league-gothic text-center'>Getting to Dallas by Air</h2>
           <p className='mb-4'>
-            Dallas is served by two major airports. We recommend comparing flights to both for
-            the best price and convenience.
+            {TRAVEL_DETAILS.airports}
           </p>
 
           <div className='space-y-4'>
@@ -132,8 +103,8 @@ function TravelPage() {
                 </a>
               </h2>
               <ul className='list-disc list-inside space-y-1 ml-4'>
-                <li>A smaller airport much closer to the venue (10-15 min drive).</li>
-                <li>Primary airline: Southwest.</li>
+                <li>{TRAVEL_DETAILS.dal}</li>
+                <li>{TRAVEL_DETAILS.dalAirline}</li>
               </ul>
             </div>
 
@@ -150,8 +121,8 @@ function TravelPage() {
                 </a>
               </h2>
               <ul className='list-disc list-inside space-y-1 ml-4'>
-                <li>A large international airport with more flight options (20-30 min drive).</li>
-                <li>Primary airline: American Airlines.</li>
+                <li>{TRAVEL_DETAILS.dfw}</li>
+                <li>{TRAVEL_DETAILS.dfwAirline}</li>
               </ul>
             </div>
           </div>
@@ -164,7 +135,7 @@ function TravelPage() {
             <p className='text-white/80'>
               There is
               {' '}
-              <em>no official hotel block</em>
+              <em>{HOTEL_BLOCK}</em>
               {' '}
               for our wedding. These nearby options are walkable to the venue and are a great place
               to start.

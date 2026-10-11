@@ -1,4 +1,5 @@
 import { ArrowRight, Calendar, Heart } from 'lucide-react';
+import { RSVP_DETAILS, RSVP_INTRO } from '@/lib/publicWeddingDetails';
 import type { Metadata } from 'next';
 import { createPageMetadata } from '@/lib';
 
@@ -13,7 +14,7 @@ function RsvpPage() {
       <h1 className='text-4xl md:text-6xl mb-8 font-league-gothic'>RSVP</h1>
       <div className='space-y-8 text-lg md:text-xl'>
         <p>
-          {'We can\'t wait to celebrate with you at Forever Fest 2026! Please submit one RSVP for everyone in your invited party.'}
+          {RSVP_INTRO}
         </p>
 
         <div className='rounded-2xl border border-white/20 bg-white/10 p-6 shadow-xl shadow-penn-blue/20 backdrop-blur-xs md:p-8'>
@@ -56,9 +57,7 @@ function RsvpPage() {
             <div className='bg-white/10 rounded-lg p-4 border-l-4 border-blue-300'>
               <p className='font-semibold mb-2'>👥 Guest List</p>
               <p>
-                Only people listed on your invitation and in the party name field
-                are invited. If you have any questions or issues with your invite,
-                please reach out to us directly.
+                {RSVP_DETAILS.guestList}
               </p>
             </div>
 

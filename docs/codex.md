@@ -24,14 +24,14 @@ the smoke suite. A failed OS-library install or substituted system browser is no
 proof that the pinned Playwright suite works.
 
 `pnpm validate` is sequential and nonmutating to source: lint, generated route types
-and TypeScript, RSVP fixtures, then Chromium smoke tests. It writes ignored type/test
+and TypeScript, RSVP fixtures, browserless chatbot contract tests, then Chromium route/chat tests. It writes ignored type/test
 artifacts. `pnpm lint` intentionally applies fixes. Production build follows tests,
 because concurrent Next dev/build/type generation can interfere through `.next`.
 ESLint covers the website; the Apps Script VM harness is outside its typed project
 and is validated by `pnpm test:rsvp` instead.
 
 No app secrets, real guest exports, Google credentials, or Vercel tokens are required.
-The existing smoke suite checks seven routes and headings, not external RSVP submission
+Chat browser tests intercept the model endpoint and blank provider/Redis credentials in their server environment. Live Redis tests are separately opt-in with `node --env-file=.env.local node_modules/@playwright/test/cli.js test --config=playwright.chat-live.config.ts`; they use isolated expiring synthetic namespaces. The route smoke suite checks seven routes and headings, not external RSVP submission
 or the deployed Google Sheet. Keep those distinctions in completion reports.
 
 ## Current Codex Cloud: web, mobile, desktop
