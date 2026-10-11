@@ -124,4 +124,31 @@ test('deployed IP must be present and valid before any model work', async () => 
   expect(response.status).toBe(503);
   expect(mock.doStreamCalls).toHaveLength(0);
 });
+test('answer byte bound terminates oversized provider text without saving a full answer', async () => {
+  const mock = new MockLanguageModelV4({ doStream: () => Promise.resolve({
+    stream: simulateReadableStream({ initialDelayInMs: 0,
+      chunkDelayInMs: 0,
+      chunks: [
+        { type: 'text-start', id: 't' },
+        { type: 'text-delta', id: 't', delta: 'Short start.' },
+        { type: 'text-delta', id: 't', delta: 'x'.repeat(4097) },
+      ] }),
+  }) });
+  const response = await handleChat(request(), dependencies(mock));
+  const body = await response.text();
+  expect(body).toContain('Short start.');
+  expect(body).toContain('incomplete');
+  expect(body).not.toContain('x'.repeat(4097));
+  expect(mock.doStreamCalls[0].abortSignal?.aborted).toBe(true);
+});
+
+test('numeric usage correlation contains no conversation content', async () => {
+  const usage: unknown[] = [];
+  const response = await handleChat(request(), { ...dependencies(),
+    onUsage: (value) => {
+      usage.push(value);
+    } });
+  await response.text();
+  expect(usage).toEqual([{ requestId: response.headers.get('x-chat-request-id'), durationMs: 0, inputTokens: 10, outputTokens: 10 }]);
+});
 /* eslint-enable @typescript-eslint/no-magic-numbers, functional/no-loop-statements, no-loops/no-loops */

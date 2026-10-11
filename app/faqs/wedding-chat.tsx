@@ -246,6 +246,7 @@ export function WeddingChat({ enabled }: {
       ) : (
         <p className='mt-4'>
           Chat is unavailable. Please use the
+          {' '}
           <Link className='underline' href='/faqs#wedding-faqs'>FAQs below</Link>
           {' '}
           or contact Sean or Eva.
