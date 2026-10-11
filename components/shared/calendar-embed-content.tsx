@@ -9,7 +9,7 @@ export function CalendarEmbedContent() {
         buttonsList
         hideBackground
         buttonStyle='default'
-        description='Join us for our wedding celebration! Attire: Funky Formal'
+        description='Join us for our wedding celebration! Attire: Funky Formal. Cocktail hour drinks and reception dinner are on us. Reception drinks are available at a cash bar; guests pay only for their own drinks.'
         endDate='2026-10-17'
         endTime='23:00'
         location='DEC on Dragon, 1414 Dragon St, Dallas, TX 75207'

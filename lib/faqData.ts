@@ -83,7 +83,7 @@ export const faqs: FAQData[] = [
   {
     category: 'experience',
     question: 'Will there be drinks?',
-    answer: 'Yes! There will be a bar at the reception and the cocktail hour. The cocktail hour drinks are covered by us, but the reception will have a cash bar that you can pay for at your own discretion.',
+    answer: 'Yes! The welcome party and wedding reception both have cash bars: guests pay for their own drinks at each event. Cocktail hour drinks and reception dinner are covered by us!',
   },
   {
     category: 'experience',
