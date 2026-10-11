@@ -7,6 +7,7 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { codePointLength, messageText, QUESTION_LIMIT } from '@/lib/chat/contracts';
 import { boundPairs, completedPair, newChatHistory, pairsToMessages, restoreChatHistory, restorePairs, saveChatHistory, STORAGE_KEY, THREAD_STORAGE_KEY, updateChatHistory } from '@/lib/chat/storage';
+import { useMobileChatViewport } from '@/lib/chat/useMobileChatViewport';
 import { cn } from '@/lib/utils';
 import type { ChatHistory, ChatThread, CompletedPair } from '@/lib/chat/storage';
 
@@ -67,6 +68,8 @@ export function WeddingChat({ enabled }: {
   const historyButton = useRef<HTMLButtonElement>(null);
   const composer = useRef<HTMLTextAreaElement>(null);
   const transcript = useRef<HTMLDivElement>(null);
+  const panel = useRef<HTMLElement>(null);
+  useMobileChatViewport(isOpen, panel);
   const atBottom = useRef(true);
   const { clearError, messages, sendMessage, setMessages, status, stop } = useChat({
     transport,
@@ -155,7 +158,7 @@ export function WeddingChat({ enabled }: {
   useEffect(() => {
     if (!isOpen)
       return;
-    (enabled ? composer.current : closeButton.current)?.focus();
+    (enabled ? composer.current : closeButton.current)?.focus({ preventScroll: true });
   }, [enabled, isOpen]);
   useEffect(() => {
     if (!isOpen)
@@ -212,10 +215,11 @@ export function WeddingChat({ enabled }: {
   }
 
   return (
-    <div className='fixed right-[max(1rem,env(safe-area-inset-right))] bottom-[max(1rem,env(safe-area-inset-bottom))] z-1000 flex flex-col items-end gap-3 text-left text-white [&_button:enabled]:cursor-pointer'>
+    <div className={cn('fixed right-[max(1rem,env(safe-area-inset-right))] bottom-[max(1rem,env(safe-area-inset-bottom))] z-1000 flex flex-col items-end gap-3 text-left text-white [&_button:enabled]:cursor-pointer', isOpen && 'max-sm:inset-0 max-sm:overflow-hidden max-sm:overscroll-none max-sm:bg-penn-blue')}>
       <section
+        ref={panel}
         aria-labelledby='wedding-chat-heading'
-        className={cn('fixed inset-0 h-dvh w-full flex-col overflow-hidden bg-penn-blue shadow-2xl shadow-black/40 sm:relative sm:inset-auto sm:h-[min(36rem,calc(100dvh-7rem))] sm:w-[min(24rem,calc(100vw-2rem))] sm:rounded-2xl sm:border sm:border-lavender-pink/30', isOpen ? 'flex' : 'hidden')}
+        className={cn('fixed inset-x-0 top-[var(--chat-viewport-top,0px)] h-[var(--chat-viewport-height,100dvh)] w-full flex-col overflow-hidden overscroll-none bg-penn-blue shadow-2xl shadow-black/40 sm:relative sm:inset-auto sm:h-[min(36rem,calc(100dvh-7rem))] sm:w-[min(24rem,calc(100vw-2rem))] sm:rounded-2xl sm:border sm:border-lavender-pink/30', isOpen ? 'flex' : 'hidden')}
         id='wedding-chat-panel'
         role='dialog'
       >
@@ -259,7 +263,7 @@ export function WeddingChat({ enabled }: {
           </Button>
         </div>
         {showHistory ? (
-          <div aria-label='Previous chats' className='absolute inset-x-3 top-[calc(3rem+max(.75rem,env(safe-area-inset-top)))] z-10 max-h-[60%] overflow-y-auto rounded-xl border border-lavender-pink/30 bg-penn-blue p-2 shadow-xl shadow-black/40 sm:top-18' id='wedding-chat-history' role='region'>
+          <div aria-label='Previous chats' className='absolute inset-x-3 top-[calc(3rem+max(.75rem,env(safe-area-inset-top)))] z-10 max-h-[60%] overflow-y-auto overscroll-none rounded-xl border border-lavender-pink/30 bg-penn-blue p-2 shadow-xl shadow-black/40 sm:top-18' id='wedding-chat-history' role='region'>
             <p className='px-3 py-2 text-xs font-semibold text-lavender-pink'>Previous chats</p>
             {history?.threads.length ? history.threads.map((thread) => (
               <button
@@ -278,7 +282,7 @@ export function WeddingChat({ enabled }: {
         <div
           ref={transcript}
           aria-label='Chat history'
-          className='min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain p-4'
+          className='min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-none p-4'
           role='region'
           tabIndex={messages.length > 0 ? 0 : -1}
           onScroll={(event) => {
@@ -322,6 +326,7 @@ export function WeddingChat({ enabled }: {
               <textarea
                 ref={composer}
                 aria-describedby='wedding-chat-counter'
+                autoComplete='off'
                 className='max-h-32 min-h-12 w-full resize-none bg-transparent px-1 py-2 text-base text-white placeholder:text-white/50 focus-visible:outline-none disabled:opacity-60'
                 disabled={!restored}
                 id='wedding-chat-question'
