@@ -26,7 +26,7 @@ export function WelcomePartyAnnouncement() {
         <p className='mt-3 text-sm leading-relaxed text-white/85'>
           {welcomeParty.attendance}
           {' '}
-          Come and go as you please.
+          {welcomeParty.description}
         </p>
         <Link
           className='mt-4 inline-flex min-h-11 items-center rounded-lg border border-lavender-pink/60 px-4 py-2 font-league-gothic text-xl text-lavender-pink transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lavender-pink'

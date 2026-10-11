@@ -24,9 +24,6 @@ export function WelcomePartyInvitation() {
           src={welcomePartyInvite}
         />
       </Zoom>
-      <figcaption className='mt-2 text-center text-sm text-white/70'>
-        Select the invitation to enlarge.
-      </figcaption>
     </figure>
   );
 }

@@ -141,7 +141,7 @@ export default function SchedulePage() {
               className='inline-flex min-h-11 items-center rounded-full border border-white/20 bg-white/5 px-4 text-sm transition-colors hover:border-lavender-pink hover:text-lavender-pink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lavender-pink'
               href={`#${day.id}`}
             >
-              {day.title}
+              {day.id === welcomeParty.id ? 'Welcome Party' : day.title}
             </a>
           ))}
         </nav>

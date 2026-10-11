@@ -39,7 +39,7 @@ export const welcomeParty = {
   },
   attendance: 'All wedding guests are welcome! No separate RSVP needed.',
   description:
-    'Come and go as you please. Cute & casual attire. Food and drinks available for purchase.',
+    'Come and go as you please. Cute & casual attire. Cash bar: guests pay for their own drinks. Food is also available for purchase.',
   parking: {
     description:
       'Street parking is available nearby; follow posted signs. The free covered garage behind the restaurant has limited spaces and a 3-hour maximum. Enter from State Street, just past the patio. Consider rideshare, as parking in the area can be tricky.',
@@ -79,7 +79,7 @@ export const scheduleDays: ScheduleDay[] = [
         endTime: '7:30 PM',
         title: 'Cocktail Hour',
         description:
-          'Drinks, hors d\'oeuvres, and time to mingle.',
+          'Drinks are on us! Enjoy hors d\'oeuvres and time to mingle.',
       },
       {
         emoji: '💃',
@@ -87,7 +87,7 @@ export const scheduleDays: ScheduleDay[] = [
         endTime: '11:00 PM',
         title: 'Reception',
         description:
-          'Dinner, toasts, cake, and dancing.',
+          'Dinner, toasts, cake, and dancing. Dinner is on us! Drinks are available at a cash bar; guests pay only for their own drinks.',
       },
     ],
   },
