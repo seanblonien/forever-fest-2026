@@ -99,14 +99,8 @@ export const faqs: FAQData[] = [
   // RSVP & Guests
   {
     category: 'rsvp',
-    question: 'How do I RSVP?',
-    answer: 'Visit our RSVP page and submit one response for everyone in your invited party. The form takes about 2 minutes to complete.',
-    componentKey: 'rsvp',
-  },
-  {
-    category: 'rsvp',
-    question: 'When is the RSVP deadline?',
-    answer: 'Please submit your RSVP by Sunday, September 20, 2026.',
+    question: 'Can I still RSVP?',
+    answer: 'Our RSVP deadline was September 20, 2026. If you have not responded yet, please text or email Sean or Eva as soon as you can and we will do our best to fit you in.',
     componentKey: 'rsvp',
   },
   {

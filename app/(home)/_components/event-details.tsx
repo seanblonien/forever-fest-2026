@@ -41,7 +41,8 @@ export function EventDetails() {
           href='/faqs#where-is-the-wedding'
         >
           <div className='text-4xl'>Dallas, Texas</div>
-          <div className='text-lg opacity-80'>DEC on Dragon</div>
+          <div className='text-2xl opacity-90'>DEC on Dragon</div>
+          <div className='text-xl opacity-80'>Ceremony at 6:00 PM</div>
         </Link>
       </div>
     </div>
