@@ -85,7 +85,7 @@ async function startStream(source: ReadableStream<TextStreamPart<ToolSet>>, cont
       if (item.done || item.value.type === 'error' || item.value.type === 'abort')
         throw new ChatError(503, 'unavailable');
       buffered.push(item.value);
-      if (item.value.type === 'text-start' || item.value.type === 'text-delta')
+      if (item.value.type === 'text-delta' && item.value.text.length > 0)
         break;
       if (item.value.type === 'finish')
         throw new ChatError(503, 'unavailable');

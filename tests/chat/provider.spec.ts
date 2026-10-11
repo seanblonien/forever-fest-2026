@@ -80,7 +80,10 @@ test('request disconnect and response-body cancellation abort provider and retai
   for (const mode of ['disconnect', 'body-cancel']) {
     let admissions = 0;
     const mock = new MockLanguageModelV4({ doStream: () => Promise.resolve({ stream: new ReadableStream({
-      start(controller) {controller.enqueue({ type: 'text-start', id: 't' });},
+      start(controller) {
+        controller.enqueue({ type: 'text-start', id: 't' });
+        controller.enqueue({ type: 'text-delta', id: 't', delta: 'Partial' });
+      },
     }) }) });
     const controller = new AbortController();
     // eslint-disable-next-line unicorn/consistent-function-scoping -- Each cancellation case needs its own admission counter.
