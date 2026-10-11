@@ -1,6 +1,6 @@
 # Wedding chatbot implementation handoff
 
-Status: implementation complete locally; local verification and live preview evaluation in progress. Production launch remains pending review.
+Status: phases A–F complete. Implementation, protected preview, live evaluation and real midnight quota reset verified. Production launch remains pending explicit user review.
 
 ## Start here
 
@@ -20,11 +20,11 @@ Use the user-prompt control for consequential questions, one at a time. Continue
 | Phase | State | Evidence / next step |
 | --- | --- | --- |
 | A: checkout/tooling/content inventory | Complete | Destination main `ca0aba04cc0ddd274f92be03d045c7deb3a93c33`; feature branch `codex/wedding-chatbot`; pinned dependencies installed |
-| B: content/contracts/sessions/limits | Complete | 45 browserless tests; public content extraction; real Redis near-cap concurrency test passed |
+| B: content/contracts/sessions/limits | Complete | 47 browserless tests; public content extraction; real Redis near-cap concurrency test passed |
 | C: endpoint/UI/tab history | Complete | Desktop/mobile streamed UI, Stop/Clear/history restoration and safe errors verified with mocked provider |
-| D: local regression checks | In progress | Full validation and production build pending final results |
-| E: services/live preview/evaluation | In progress | Dedicated OpenAI project funded with enforced $5 monthly cap; Upstash free database; preview deployment/evaluation pending |
-| F: production-review handoff | In progress | Operations guide prepared; final URL/revision/evaluation pending |
+| D: local regression checks | Complete | `pnpm validate`: RSVP fixtures, 47 chat contracts, 20 Chromium route/chat tests; `pnpm build` passed; desktop/mobile inspected |
+| E: services/live preview/evaluation | Complete | Both services work; 26/26 live cases passed; actual Redis concurrency, deployed 429/403/503, WAF denial/cooldown, real midnight reset and final-revision stream verified |
+| F: production-review handoff | Complete | Protected final preview and exact SHA below; [live evaluation](live-evaluation.md), [operations](operations.md); draft PR prepared for review |
 
 
 ## Known setup state
@@ -32,7 +32,7 @@ Use the user-prompt control for consequential questions, one at a time. Continue
 - OpenAI project: Forever Fest 2026 Chatbot, `proj_hoZoaMZtHBVhJjXfhSOBpVVf`. Funded organization; auto-reload off. Enforced $5 monthly project limit, alerts at $4/$5, reloaded and verified. User created restricted Responses key with nine-day expiry and entered it privately.
 - Upstash: `forever-fest-2026-chat`, Free ($0/month), primary AWS N. Virginia, no read replicas, eviction off. Real atomic quota script tested using isolated ten-minute synthetic keys.
 - Vercel: `forever-fest-2026`, project `prj_GWi06pByklfqEATa40zYkrcGTry4`, team `team_Xb87Amsj3mC6w7GxQr9m53cS`, Hobby. Existing preview authentication retained. No existing custom firewall config/drafts; added and verified one included rule `Wedding chat burst limit` for exact `/api/chat`, 30/IP/600 seconds. No paid upgrade.
-- Credentials remain in ignored `.env.local`; feature-branch preview setup pending branch registration. Production credentials/enablement remain pending explicit review.
+- Credentials remain in ignored `.env.local`; eight variables saved only for `codex/wedding-chatbot` in Preview, with provider key/Redis token/cookie secret marked Secret. Production credentials/enablement remain pending explicit review.
 - Next.js 16.3.0 / React 19.2.8, Node 24, pnpm 11.20.0. AI SDK 7/provider 4 installed-version contracts verified.
 
 ## Ready-to-use new-chat prompt
@@ -43,12 +43,24 @@ Implement the wedding FAQ chatbot described in `docs/plans/wedding-chatbot/imple
 
 Implementation branch: `codex/wedding-chatbot`.
 
-Implementation commit: pending.
+Implementation commit: `9f75996c590b1461cd3a67d05dd17d17f34e6d36`. Original evaluated endpoint SHA: `bc14390e446f2d5928ca2e7aed7e2627b18a2718`; endpoint/facts unchanged in final commit.
 
-Preview URL and verified revision: pending.
+Preview URL: [FAQ chat](https://forever-fest-2026-mgwytu7lv-sean-bloniens-projects.vercel.app/faqs), deployment `dpl_CCcnoSwQnb9kZyW3P42ZcTSfcQ3r`, READY with verified Git metadata SHA `9f75996c590b1461cd3a67d05dd17d17f34e6d36` and target Preview. Authentication retained.
 
 Implementation continued in the current local chat.
 
-Last verified checks: planning-only documentation/links and package metadata; app tests not run in planning.
+Last verified checks: full local validation/build, real primary-Redis atomic concurrency, protected model/UI stream, 26 public evaluations, real quota denial/foreign-origin/disabled responses, actual iCal export. See [live-evaluation.md](live-evaluation.md) and [operations.md](operations.md). No live RSVP/guest-data mutations.
 
-Next action: finish validation/build, deploy protected feature-branch preview, evaluate the 26 public cases, and record final evidence. See [operations.md](operations.md).
+Next action: user reviews the protected preview and draft PR, then decides whether to launch. Merging, production credential/flag setup and promotion remain pending explicit user review. Enable/disable steps are in [operations.md](operations.md). Implementation is complete; the production decision is not a remaining engineering gate.
+
+
+## Completion evidence and limits
+
+- All 26 live public cases passed with 84,654 input / 1,128 output tokens. Conservative pass estimate $0.01115; all evaluation and smoke probes stayed below $0.014. All answers streamed incrementally and completed normally; no wrong venue/time/attendance/cost or invented invitation status was found in this finite pass.
+- Actual Dallas midnight: exhausted prior-day session stayed 20; new session/day became 1; shared lifetime counter increased 27 to 28 on the final revision. Quotas were not cleared or namespaces changed.
+- `pnpm validate` passed with 47 chat tests and 20 Chromium tests plus RSVP fixtures; `pnpm build` passed afterward. Existing lint warnings and a pre-existing welcome-party-image eager-loading advisory do not fail validation.
+- Actual downloaded iCal export retained America/Chicago, October 17 6–11 PM, DEC on Dragon and published cost distinctions. RSVP/address redirects and FAQ filters/anchors were verified without external form submission.
+- Deterministic cutoff tests verify zero provider calls at/after the future shutdown; the actual October 19 shutdown date has not occurred. This is test evidence, not a future-date live claim.
+- OpenAI model answers are nondeterministic; the finite evaluation does not guarantee every future answer. Fixed website references and the visible AI notice remain available.
+- Production deployment remained `dpl_7QD75pFhowcGx6vib9n2TrYvsDSH`, and production chat variables remain unset. The only project-wide change was the expressly planned supplemental firewall rule, scoped to `/api/chat`.
+- Latest implementation commit above is the exact deployed application revision. The subsequent handoff/evaluation commit changes documentation only.
