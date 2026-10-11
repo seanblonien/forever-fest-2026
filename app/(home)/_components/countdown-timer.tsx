@@ -1,106 +1,39 @@
 'use client';
 
-import { useSyncExternalStore } from 'react';
+import { useCurrentTime } from '@/hooks';
 
-type TimeLeft = {
-  days: number;
-  hours: number;
-  minutes: number;
-  months: number;
-  seconds: number;
+const WEDDING_DATE = '2026-10-17';
+const MS_PER_DAY = 24 * 60 * 60 * 1000;
+
+const chicagoDateFormat = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Chicago' });
+
+// Whole calendar days from "now" to the wedding date, in Central Time.
+const getDaysUntilWedding = (currentTimestamp: number): number => {
+  const todayInChicago = chicagoDateFormat.format(currentTimestamp);
+
+  return Math.round((Date.parse(WEDDING_DATE) - Date.parse(todayInChicago)) / MS_PER_DAY);
 };
 
-const INITIAL_TIME_LEFT: TimeLeft = {
-  days: 0,
-  hours: 0,
-  minutes: 0,
-  months: 0,
-  seconds: 0,
+const getCountdownMessage = (currentTimestamp: number): string => {
+  if (currentTimestamp === 0) return 'October 17, 2026';
+
+  const days = getDaysUntilWedding(currentTimestamp);
+
+  if (days < 0) return 'Thank you for celebrating with us!';
+  if (days === 0) return 'Today is the day!';
+  if (days === 1) return '1 day to go!';
+
+  return `${days} days to go!`;
 };
-
-// October 17th, 2026 at 6pm CDT
-const TARGET_TIME = new Date('2026-10-17T18:00:00-05:00').getTime();
-
-let clockTimestamp = 0;
-
-const subscribeToClock = (onStoreChange: () => void) => {
-  const updateCurrentTime = () => {
-    clockTimestamp = Date.now();
-    onStoreChange();
-  };
-
-  updateCurrentTime();
-  const timer = window.setInterval(updateCurrentTime, 1000);
-
-  return () => window.clearInterval(timer);
-};
-
-const getCurrentTime = () => clockTimestamp;
-
-const getServerTime = () => 0;
-
-const calculateTimeLeft = (currentTimestamp: number): TimeLeft => {
-  if (currentTimestamp === 0) return INITIAL_TIME_LEFT;
-
-  const difference = TARGET_TIME - currentTimestamp;
-
-  if (difference > 0) {
-    // Calculate time units using native Date math
-    const totalSeconds = Math.floor(difference / 1000);
-    const totalMinutes = Math.floor(totalSeconds / 60);
-    const totalHours = Math.floor(totalMinutes / 60);
-    const totalDays = Math.floor(totalHours / 24);
-
-    // Calculate months (approximate using 30.44 days average)
-    const months = Math.floor(totalDays / 30.44);
-
-    // Calculate remaining time units
-    const remainingDays = totalDays - Math.floor(months * 30.44);
-    const hours = totalHours - (totalDays * 24);
-    const minutes = totalMinutes - (totalHours * 60);
-    const seconds = totalSeconds - (totalMinutes * 60);
-
-    return { months, days: remainingDays, hours, minutes, seconds };
-  }
-
-  return INITIAL_TIME_LEFT;
-};
-
-function CountdownBox({
-  label,
-  value,
-}: {
-  label: string;
-  value: number;
-}) {
-  return (
-    <figure className='rounded-lg py-2 px-1 md:p-4 bg-papaya-whip text-center'>
-      <data className='block text-3xl md:text-4xl font-black text-syracuse-orange font-league-gothic' value={value}>
-        {value}
-      </data>
-      <figcaption className='text-sm md:text-base text-steel-pink font-league-gothic'>
-        {label}
-      </figcaption>
-    </figure>
-  );
-}
 
 export function CountdownTimer() {
-  const currentTimestamp = useSyncExternalStore(subscribeToClock, getCurrentTime, getServerTime);
-  const timeLeft = calculateTimeLeft(currentTimestamp);
+  const currentTimestamp = useCurrentTime();
 
   return (
-    <div className='mb-12 px-2 max-w-150 mx-auto'>
-      <p className='mb-4 text-center text-2xl md:text-3xl font-league-gothic text-papaya-whip'>
-        Countdown to October 17, 2026
-      </p>
-      <div className='grid grid-cols-5 gap-2 md:gap-4 max-w-3xl mx-auto'>
-        <CountdownBox label='MONTHS' value={timeLeft.months} />
-        <CountdownBox label='DAYS' value={timeLeft.days} />
-        <CountdownBox label='HOURS' value={timeLeft.hours} />
-        <CountdownBox label='MINUTES' value={timeLeft.minutes} />
-        <CountdownBox label='SECONDS' value={timeLeft.seconds} />
-      </div>
-    </div>
+    <p
+      className='mb-10 px-4 text-center font-league-gothic text-3xl text-papaya-whip md:text-4xl'
+    >
+      {getCountdownMessage(currentTimestamp)}
+    </p>
   );
 }
