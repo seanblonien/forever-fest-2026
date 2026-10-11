@@ -1,4 +1,4 @@
-export const HOME_DESCRIPTION = 'We\'re getting married! From the dance floor to  forever, we would love for you to join us  celebrate our love ❤️';
+export const HOME_DESCRIPTION = 'We\'re getting married! From the dance floor to forever, we would love for you to join us in celebrating our love ❤️';
 
 export const STORY_PARAGRAPHS = [
   'Eva Melendez had just moved back from LA and was looking for a Rave Fam. She had enjoyed attending the Nocturnal EDM festival in Southern California and wanted to find that same energy in Dallas. She went out to Green Light Social, a club in Deep Ellum known for dance music, to check it out. Eva spotted a tall man with an immaculate afro in the crowd and introduced herself to Jordyn Dent. Jordyn was Sean Blonien\'s roommate at the time, and he told her about the ins and outs of the rave scene in Dallas and the pre-game Sean was throwing for the Lights All Night music festival. With an invite, Eva showed up to the pre-game in Sean and Jordyn\'s Uptown apartment and quickly stood out to Sean. He knew everyone at his party except this one gorgeous new girl. After chatting for a bit, Eva left early to get to LAN, but on the way out, Sean and Eva had a small yet memorable interaction in the hallway. Eva knew Sean had the LAN map and was the man with the plan, so she was the one who asked for his number. They hugged and briefly gazed into each other\'s eyes as Sean wore a flirty, big smile. There was a hint of curiosity and romance in the air as Eva exited.',
@@ -60,9 +60,14 @@ export const TRAVEL_DETAILS = {
 
 export const HOTEL_BLOCK = 'no official hotel block';
 
-export const RSVP_INTRO = 'We can\'t wait to celebrate with you at Forever Fest 2026! Please submit one RSVP for everyone in your invited party.';
-
-export const RSVP_DETAILS = { guestList: 'Only people listed on your invitation and in the party name field are invited. If you have any questions or issues with your invite, please reach out to us directly.' };
+export const RSVP_DETAILS = {
+  status: 'RSVPs are closed',
+  deadline: 'September 20, 2026',
+  contact: 'Haven\'t responded yet, or need to change your answer? Please text or email Sean or Eva right away so we can confirm your spot.',
+  guestList: 'Only people listed on your invitation are invited. If you have questions about your invite, please reach out to us directly.',
+  confirmationSubject: 'Response received for Forever Fest 2026',
+  formInstructions: 'Reached out to us and been told to use the form?',
+};
 
 export const REGISTRY_DETAILS = {
   intro: `Your presence is the greatest gift, but if you'd like to give something special, we've

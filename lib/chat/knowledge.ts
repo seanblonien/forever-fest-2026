@@ -1,5 +1,5 @@
 import { faqs } from '../faqData';
-import { HOME_DESCRIPTION, HOTEL_BLOCK, HOTEL_DETAILS, REGISTRY_DETAILS, RSVP_DETAILS, RSVP_INTRO, STORY_PARAGRAPHS, STORY_TIMELINE, TRAVEL_DETAILS } from '../publicWeddingDetails';
+import { HOME_DESCRIPTION, HOTEL_BLOCK, HOTEL_DETAILS, REGISTRY_DETAILS, RSVP_DETAILS, STORY_PARAGRAPHS, STORY_TIMELINE, TRAVEL_DETAILS } from '../publicWeddingDetails';
 import { scheduleDays } from '../scheduleData';
 
 export const KNOWLEDGE_ROUTES = ['/', '/faqs', '/schedule', '/travel', '/rsvp', '/registry', '/our-story'] as const;
@@ -10,7 +10,7 @@ export function buildKnowledge(now: number): string {
     '/faqs': faqs.map(({ answer, question }) => ({ question, answer })),
     '/schedule': scheduleDays,
     '/travel': { ...TRAVEL_DETAILS, hotelBlock: HOTEL_BLOCK, hotels: HOTEL_DETAILS, airports: ['Dallas Love Field (DAL)', 'Dallas/Fort Worth (DFW)'], district: 'Design District of Dallas' },
-    '/rsvp': { intro: RSVP_INTRO, ...RSVP_DETAILS },
+    '/rsvp': RSVP_DETAILS,
     '/registry': REGISTRY_DETAILS,
     '/our-story': { paragraphs: STORY_PARAGRAPHS, timeline: STORY_TIMELINE },
   };
