@@ -22,7 +22,9 @@ CHAT_ENABLED=true pnpm dev
 
 ## Content inventory
 
-`lib/chat/knowledge.ts` assembles seven routes. Existing `lib/faqData.ts` and `lib/scheduleData.ts` remain authoritative. `lib/publicWeddingDetails.ts` contains the same Home, travel/hotel, RSVP, registry and story text now consumed by the original pages. Links remain normal website navigation; answers render escaped plain text.
+`lib/chat/knowledge.ts` assembles seven routes. Schedule presents times and a short overview; Travel holds entrance images, directions and parking; FAQs hold detailed practical answers, expandable menu/bar lists, coordinator contact and the shared photo album. `lib/guestInformation.ts` holds the confirmed details shared by these pages and the chatbot. `lib/publicWeddingDetails.ts` contains the Home, travel/hotel, RSVP, registry and story text consumed by the original pages. The questionnaire is authoring material and is not ingested directly. Links remain normal website navigation; answers render escaped plain text.
+
+The server corpus references canonical facts instead of repeating shared paragraphs. Repeated FAQ, timeline, hotel and menu entries use compact arrays; question-only FAQ entries use the detailed FAQ facts. Directions links stay on the website, where chat directs guests to find them. Keep the corpus below 16 KiB so a full allowed request body still fits within the 32 KiB model-text limit; measure again when adding facts. Diet labels and weather forecasts must not be inferred from menu names or old planning notes.
 
 ## Configuration
 

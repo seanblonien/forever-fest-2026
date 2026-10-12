@@ -1,10 +1,12 @@
 'use client';
 
-import { CalendarCheck, Heart, Pin, Plane } from 'lucide-react';
+import { CalendarCheck, Heart, Images, Pin, Plane } from 'lucide-react';
 import MapLinks from '@/components/map-links';
 import { CalendarEmbedDynamic } from '@/components/shared/calendar-embed-dynamic';
+import { WeddingBarMenu, WeddingMenu } from '@/components/shared/wedding-menu';
 import { useQueryParamState, useRouteHash } from '@/hooks';
 import { FAQ_CATEGORIES, faqs } from '@/lib/faqData';
+import { GUEST_CONTACT, GUEST_PHOTO_ALBUM } from '@/lib/guestInformation';
 import type { FaqCategory, FaqComponentKey } from '@/lib/faqData';
 import { CategoryTab } from './category-tab';
 import { FaqLink } from './faq-link';
@@ -17,6 +19,10 @@ const FAQ_COMPONENT_MAP: Record<FaqComponentKey, React.ReactNode> = {
   'pinterest': <FaqLink href='https://pin.it/hICCCXKqj' icon={Pin} label='Pinterest Moodboard' />,
   'rsvp': <FaqLink href='/rsvp' icon={CalendarCheck} label='Visit RSVP Page' />,
   'travel': <FaqLink href='/travel' icon={Plane} label='Visit Travel Page' />,
+  'menu': <WeddingMenu />,
+  'bar': <WeddingBarMenu />,
+  'photos': <FaqLink href={GUEST_PHOTO_ALBUM.url} icon={Images} label='Open Shared Photo Album' />,
+  'help': <a className='inline-flex min-h-11 items-center rounded-lg bg-white/20 px-4 text-lg font-league-gothic hover:bg-white/30 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lavender-pink' href={GUEST_CONTACT.phoneUrl}>Call {GUEST_CONTACT.name}</a>,
 };
 
 type FaqListProps = {

@@ -1,3 +1,5 @@
+import { GUEST_DETAILS, GUEST_TIMES } from './guestInformation';
+
 export type ScheduleEvent = {
   description?: string;
   emoji: string;
@@ -39,7 +41,7 @@ export const welcomeParty = {
   },
   attendance: 'All wedding guests are welcome! No separate RSVP needed.',
   description:
-    'Come and go as you please. Cute & casual attire. Cash bar: guests pay for their own drinks. Food is also available for purchase.',
+    `Come and go as you please. Cute & casual attire. Cash bar: guests pay for their own drinks. Food is also available for purchase. ${GUEST_DETAILS.welcomeDeparture}`,
   parking: {
     description:
       'Street parking is available nearby; follow posted signs. The free covered garage behind the restaurant has limited spaces and a 3-hour maximum. Enter from State Street, just past the patio. Consider rideshare, as parking in the area can be tricky.',
@@ -64,7 +66,7 @@ export const scheduleDays: ScheduleDay[] = [
         startTime: '5:30 PM',
         title: 'Guest Arrival',
         description:
-          'Aim for 5:30 PM; a little earlier is welcome. Complimentary valet provided.',
+          `Venue opens at ${GUEST_TIMES.doorsOpen}. Aim for 5:30 PM; complimentary valet provided.`,
       },
       {
         emoji: '💒',
@@ -87,7 +89,7 @@ export const scheduleDays: ScheduleDay[] = [
         endTime: '11:00 PM',
         title: 'Reception',
         description:
-          'Dinner, toasts, cake, and dancing. Dinner is on us! Drinks are available at a cash bar; guests pay only for their own drinks.',
+          `Dinner, toasts, cake, and dancing. Buffet dinner begins around ${GUEST_TIMES.dinner}. Dinner is on us; guests purchase reception drinks.`,
       },
     ],
   },

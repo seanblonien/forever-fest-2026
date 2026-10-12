@@ -1,3 +1,5 @@
+import { GUEST_CONTACT, GUEST_DETAILS, GUEST_PHOTO_ALBUM } from './guestInformation';
+
 export const FAQ_CATEGORIES = ['all', 'event', 'logistics', 'experience', 'rsvp'] as const;
 export type FaqCategory = (typeof FAQ_CATEGORIES)[number];
 export type FaqCategoryFilter = Exclude<FaqCategory, 'all'>;
@@ -10,7 +12,7 @@ export const CATEGORY_CONFIG: Record<FaqCategory, { emoji: string; label: string
   rsvp: { emoji: '📝', label: 'RSVP & Guests' },
 };
 
-export type FaqComponentKey = 'calendar' | 'map' | 'our-story' | 'pinterest' | 'rsvp' | 'travel';
+export type FaqComponentKey = 'calendar' | 'map' | 'our-story' | 'pinterest' | 'rsvp' | 'travel' | 'menu' | 'bar' | 'photos' | 'help';
 
 export type FAQData = {
   answer: string;
@@ -24,7 +26,7 @@ export const faqs: FAQData[] = [
   {
     category: 'event',
     question: 'Why is it called "Forever Fest"?',
-    answer: 'Festivals are at the core of Sean and Eva\'s relationship story (See "Our Story" page). Festivals and EDM culture have positively influenced Sean and Eva to be more creative, expressive, social, joyful, and connected, and so they want to bring some of that culture and energy to their wedding. "Forever Fest" is a manifestation of Sean and Eva\'s lifelong commitment together (i.e. "forever") combined with their desire to bring some of the festival/EDM culture to their wedding day (i.e. "fest").',
+    answer: `Festivals are at the core of Sean and Eva's relationship story (See "Our Story" page). Festivals and EDM culture have positively influenced Sean and Eva to be more creative, expressive, social, joyful, and connected, and so they want to bring some of that culture and energy to their wedding. "Forever Fest" is a manifestation of Sean and Eva's lifelong commitment together (i.e. "forever") combined with their desire to bring some of the festival/EDM culture to their wedding day (i.e. "fest"). ${GUEST_DETAILS.atmosphere}`,
     componentKey: 'our-story',
   },
   {
@@ -42,14 +44,15 @@ export const faqs: FAQData[] = [
   {
     category: 'event',
     question: 'What time should I arrive for the ceremony?',
-    answer: 'Aim to arrive around 5:30 PM CDT; a little earlier is welcome. Complimentary valet is provided. Please be seated before the ceremony begins promptly at 6:00 PM.',
+    answer: `${GUEST_DETAILS.arrival} Complimentary valet is provided.`,
   },
 
   // Logistics
   {
     category: 'logistics',
     question: 'What do I do for parking?',
-    answer: 'Complimentary valet is available for all guests at DEC on Dragon. Aim to arrive around 5:30 PM CDT; a little earlier is welcome. Please be seated before the ceremony begins promptly at 6:00 PM.',
+    answer: 'Complimentary valet is recommended. See Travel for entrance photos, pickup directions and parking details.',
+    componentKey: 'travel',
   },
   {
     category: 'logistics',
@@ -61,6 +64,21 @@ export const faqs: FAQData[] = [
     question: 'I am coming from out of town, where can I stay?',
     answer: 'Check out the Travel page for details and recommendations on where to stay.',
     componentKey: 'travel',
+  },
+  {
+    category: 'logistics',
+    question: 'Is the venue accessible?',
+    answer: `${GUEST_DETAILS.access} ${GUEST_DETAILS.restrooms} ${GUEST_DETAILS.assistance}`,
+  },
+  {
+    category: 'logistics',
+    question: 'What if I arrive late?',
+    answer: GUEST_DETAILS.lateArrival,
+  },
+  {
+    category: 'logistics',
+    question: 'Where do I find the welcome party group?',
+    answer: GUEST_DETAILS.welcomeLocation,
   },
 
   // Guest Experience
@@ -78,22 +96,51 @@ export const faqs: FAQData[] = [
   {
     category: 'experience',
     question: 'Will there be food at the reception?',
-    answer: 'Absolutely! We\'ve got a delicious buffet meal planned for the reception with a cocktail hour with hors d\'oeuvres as well.',
+    answer: `${GUEST_DETAILS.dinner} Two passed hors d’oeuvres are served during cocktail hour.`,
+    componentKey: 'menu',
   },
   {
     category: 'experience',
     question: 'Will there be drinks?',
-    answer: 'Yes! The welcome party and wedding reception both have cash bars: guests pay for their own drinks at each event. Cocktail hour drinks and reception dinner are covered by us!',
+    answer: `${GUEST_DETAILS.drinks} ${GUEST_DETAILS.welcomeDrinks}`,
+    componentKey: 'bar',
   },
   {
     category: 'experience',
     question: 'I have a dietary restriction, what options will be provided?',
-    answer: 'Our buffet will include allergy labels on all dishes so you can make informed choices. While we won\'t be offering alternative entrees (both main options are meat-based), there will be a variety of sides and appetizers available. If you have specific concerns, feel free to reach out and we\'ll do our best to help!',
+    answer: GUEST_DETAILS.dietary,
   },
   {
     category: 'experience',
     question: 'Can I take photos/videos during the ceremony?',
     answer: 'We will have a photographer to capture the important moments, so we politely ask to refrain from recording *until* the "I do" moment, after which you can record/take photos as much as you want. The goal is to be present in the ceremony with us, so that should be the focus. Go wild during the reception with capturing media! 📸 #ForeverFest2026',
+  },
+  {
+    category: 'experience',
+    question: 'What should I bring?',
+    answer: `${GUEST_DETAILS.clothing} ${GUEST_DETAILS.accessories} ${GUEST_DETAILS.belongings}`,
+  },
+  {
+    category: 'experience',
+    question: 'Can I step out or leave early?',
+    answer: `${GUEST_DETAILS.quietSpace} ${GUEST_DETAILS.reentry}`,
+  },
+  {
+    category: 'experience',
+    question: 'Is there an after-party?',
+    answer: GUEST_DETAILS.afterParty,
+  },
+  {
+    category: 'experience',
+    question: 'How can I share my photos with everyone?',
+    answer: `Share your favorite moments in our Google Photos album. You can also use ${GUEST_PHOTO_ALBUM.hashtag}.`,
+    componentKey: 'photos',
+  },
+  {
+    category: 'event',
+    question: 'Who can help on the wedding day?',
+    answer: `Ask the entrance greeters or venue staff for help. You can also contact our wedding coordinator, ${GUEST_CONTACT.name}, at ${GUEST_CONTACT.phone}.`,
+    componentKey: 'help',
   },
 
   // RSVP & Guests

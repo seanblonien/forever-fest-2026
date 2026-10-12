@@ -1,3 +1,5 @@
+import { GUEST_DETAILS } from './guestInformation';
+
 export const HOME_DESCRIPTION = 'We\'re getting married! From the dance floor to forever, we would love for you to join us in celebrating our love ❤️';
 
 export const STORY_PARAGRAPHS = [
@@ -50,7 +52,7 @@ export const HOTEL_DETAILS = [
 
 export const TRAVEL_DETAILS = {
   venue: 'DEC on Dragon 1414 Dragon St, Dallas, TX 75207',
-  parking: 'Complimentary valet is available for all guests at DEC on Dragon. Aim to arrive around 5:30 PM; a little earlier is welcome. Please be seated before the ceremony begins promptly at 6:00 PM.',
+  parking: GUEST_DETAILS.parking,
   airports: 'Dallas is served by two major airports. We recommend comparing flights to both for the best price and convenience.',
   dal: 'A smaller airport much closer to the venue (10-15 min drive).',
   dalAirline: 'Primary airline: Southwest.',
