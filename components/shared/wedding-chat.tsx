@@ -161,6 +161,20 @@ export function WeddingChat({ enabled }: {
     (enabled ? composer.current : closeButton.current)?.focus({ preventScroll: true });
   }, [enabled, isOpen]);
   useEffect(() => {
+    const element = composer.current;
+    if (!isOpen || !element)
+      return;
+    function resizeComposer() {
+      if (!element)
+        return;
+      element.style.height = 'auto';
+      element.style.height = `${element.scrollHeight}px`;
+    }
+    resizeComposer();
+    window.addEventListener('resize', resizeComposer);
+    return () => window.removeEventListener('resize', resizeComposer);
+  }, [enabled, /* effect dep */ input, isOpen]);
+  useEffect(() => {
     if (!isOpen)
       return;
     const onEscape = (event: KeyboardEvent) => {
@@ -322,16 +336,16 @@ export function WeddingChat({ enabled }: {
             }}
           >
             <label className='sr-only' htmlFor='wedding-chat-question'>Your question</label>
-            <div className='flex items-end gap-2 rounded-xl border border-white/20 bg-white/5 p-2 focus-within:border-lavender-pink'>
+            <div className='flex items-start gap-2 rounded-xl border border-white/20 bg-white/5 p-2 focus-within:border-lavender-pink'>
               <textarea
                 ref={composer}
                 aria-describedby='wedding-chat-counter'
                 autoComplete='off'
-                className='max-h-32 min-h-12 w-full resize-none bg-transparent px-1 py-2 text-base text-white placeholder:text-white/50 focus-visible:outline-none disabled:opacity-60'
+                className='h-11 max-h-32 min-h-11 w-full resize-none bg-transparent px-1 py-2.5 text-base text-white placeholder:text-white/50 focus-visible:outline-none disabled:opacity-60'
                 disabled={!restored}
                 id='wedding-chat-question'
                 placeholder='Ask a question…'
-                rows={2}
+                rows={1}
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
                 onKeyDown={(event) => {
@@ -344,7 +358,7 @@ export function WeddingChat({ enabled }: {
               {busy ? (
                 <Button
                   aria-label='Stop'
-                  className='shrink-0 rounded-lg bg-white/20 text-white hover:bg-white/30 focus-visible:ring-lavender-pink'
+                  className='size-11 shrink-0 rounded-lg bg-white/20 text-white hover:bg-white/30 focus-visible:ring-lavender-pink'
                   size='icon'
                   type='button'
                   onClick={() => {
@@ -356,7 +370,7 @@ export function WeddingChat({ enabled }: {
                   <Square aria-hidden='true' />
                 </Button>
               ) : (
-                <Button aria-label='Send' className='shrink-0 rounded-lg bg-steel-pink text-white hover:bg-steel-pink/80 focus-visible:ring-lavender-pink' disabled={!canSend} size='icon' type='submit'>
+                <Button aria-label='Send' className='size-11 shrink-0 rounded-lg bg-steel-pink text-white hover:bg-steel-pink/80 focus-visible:ring-lavender-pink' disabled={!canSend} size='icon' type='submit'>
                   <Send aria-hidden='true' />
                 </Button>
               )}
