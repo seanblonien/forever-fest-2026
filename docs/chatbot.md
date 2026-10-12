@@ -30,7 +30,7 @@ Use `.env.example` as the list of server-only variables; enter credentials priva
 
 For a Vercel preview, set variables only for branch `codex/wedding-chatbot` in Preview. Set `CHAT_ENABLED=true`, namespace `forever-fest-2026:preview`, and exact HTTPS origins. Exact platform-issued `VERCEL_URL` and `VERCEL_BRANCH_URL` origins are also admitted; arbitrary request host/forwarded origin values are never added. The request Origin must equal the URL origin as well.
 
-Production is a separate review decision: production credentials and `CHAT_ENABLED=true` must be set deliberately with namespace `forever-fest-2026:production` and `https://foreverfest.wedding` in allowed origins, then the reviewed branch can be deployed/promoted. Keep the verified project cap and free Redis service. Production launch has not been performed.
+Production credentials and `CHAT_ENABLED=true` must be set deliberately with namespace `forever-fest-2026:production` and `https://foreverfest.wedding` in allowed origins, then the reviewed branch can be deployed/promoted. Use a separate production cookie secret. Keep the verified project cap and free Redis service. Redeploy after changing these variables so the built interface and API receive the new configuration.
 
 ## Limits and lifecycle
 
