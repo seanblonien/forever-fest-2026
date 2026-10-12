@@ -87,10 +87,10 @@ test.describe('active wedding chat', () => {
     expect(calls).toHaveLength(1);
     await page.screenshot({ path: 'test-results/chat-desktop.png', fullPage: false });
     await page.getByRole('button', { name: 'New chat' }).click();
-    await expect(history).toHaveText('Hey! What can I help you with?');
+    await expect(history).toHaveText('Hey, festival friend! 🪩 Your Forever Fest info booth is open. Ask about arrival, outfits, food, or the weekend plans. Let’s get you ready to celebrate! ✨');
     await page.reload();
     await page.getByRole('button', { name: 'Ask about Forever Fest', exact: true }).click();
-    await expect(history).toHaveText('Hey! What can I help you with?');
+    await expect(history).toHaveText('Hey, festival friend! 🪩 Your Forever Fest info booth is open. Ask about arrival, outfits, food, or the weekend plans. Let’s get you ready to celebrate! ✨');
     expect(calls).toHaveLength(1);
   });
 
@@ -107,13 +107,13 @@ test.describe('active wedding chat', () => {
     await expect(page.getByText('Answer stopped', { exact: true })).toBeVisible();
     await page.reload();
     await page.getByRole('button', { name: 'Ask about Forever Fest', exact: true }).click();
-    await expect(page.getByRole('region', { name: 'Chat history' })).toHaveText('Hey! What can I help you with?');
+    await expect(page.getByRole('region', { name: 'Chat history' })).toHaveText('Hey, festival friend! 🪩 Your Forever Fest info booth is open. Ask about arrival, outfits, food, or the weekend plans. Let’s get you ready to celebrate! ✨');
     expect(calls).toHaveLength(1);
     await composer.fill('Where is the wedding?');
     await composer.press('Enter');
     await expect(page.getByRole('button', { name: 'Stop', exact: true })).toBeVisible();
     await page.getByRole('button', { name: 'New chat' }).click();
-    await expect(page.getByRole('region', { name: 'Chat history' })).toHaveText('Hey! What can I help you with?');
+    await expect(page.getByRole('region', { name: 'Chat history' })).toHaveText('Hey, festival friend! 🪩 Your Forever Fest info booth is open. Ask about arrival, outfits, food, or the weekend plans. Let’s get you ready to celebrate! ✨');
     await expect(page.getByRole('status')).toHaveText('New chat started.');
     await page.screenshot({ path: 'test-results/chat-mobile.png', fullPage: false });
     const hasNoHorizontalScroll = await page.evaluate(() =>
@@ -167,7 +167,7 @@ test.describe('active wedding chat', () => {
     await composer.press('Enter');
     await expect(page.getByRole('status')).toHaveText('Answer complete.');
     await page.getByRole('button', { name: 'New chat' }).click();
-    await expect(page.getByRole('region', { name: 'Chat history' })).toHaveText('Hey! What can I help you with?');
+    await expect(page.getByRole('region', { name: 'Chat history' })).toHaveText('Hey, festival friend! 🪩 Your Forever Fest info booth is open. Ask about arrival, outfits, food, or the weekend plans. Let’s get you ready to celebrate! ✨');
   });
 
   test('restored history sends only last three completed pairs; output remains escaped text', async ({ page }) => {
@@ -215,7 +215,7 @@ test.describe('active wedding chat', () => {
     await page.goto('/faqs');
     await page.getByRole('button', { name: 'Ask about Forever Fest', exact: true }).click();
     await expect(page.getByLabel('Your question')).toBeEnabled();
-    await expect(page.getByRole('region', { name: 'Chat history' })).toHaveText('Hey! What can I help you with?');
+    await expect(page.getByRole('region', { name: 'Chat history' })).toHaveText('Hey, festival friend! 🪩 Your Forever Fest info booth is open. Ask about arrival, outfits, food, or the weekend plans. Let’s get you ready to celebrate! ✨');
     expect(calls).toHaveLength(0);
   });
 });
