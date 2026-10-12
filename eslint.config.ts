@@ -29,6 +29,9 @@ const eslintConfig = defineConfig([
     '.vercel/**',
     'test-results/**',
     'playwright-report/**',
+    // Local agent state, including nested git worktrees with their own
+    // node_modules and .next output; ESLint does not read .git/info/exclude.
+    '.claude/**',
     // Apps Script is exercised by pnpm test:rsvp in a Node VM, outside the
     // website's TypeScript project and its type-aware ESLint configuration.
     'scripts/rsvp-sync/test.mjs',
