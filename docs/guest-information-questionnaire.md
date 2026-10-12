@@ -270,7 +270,7 @@ We want the wedding to feel like a festival: peace, love, unity, and respect, go
 
 Use this space for questions to check with the venue, caterer, or coordinator before we publish answers.
 
-- [ ] Bag/coat check: waiting for the venue's answer. Guests should currently plan to look after their own belongings.
+- [x] Bag/coat check: Celina confirmed on October 12 that DEC has no coat or bag check. Guests should look after their belongings.
 - [ ] Local craft beer selection: still to be confirmed.
 - [ ] Confirm the Google Photos album has Collaborate enabled if guests should be able to add their photos.
 
@@ -285,3 +285,6 @@ These decisions supersede conflicting wording in the original dictation above.
 - Consolidate the new details into existing FAQs and Travel, keeping Schedule concise. No separate Guest Guide page. All use the same confirmed data as the chatbot.
 - Shared Google Photos album: https://photos.app.goo.gl/ReFxe7pkxBrDdKHd7
 - Use general jacket/layer advice instead of publishing a fixed weather forecast.
+- Celina's October 12 reply in “Remaining Few Questions” confirms valet starts 30 minutes before the 6:00 PM event, at 5:30 PM. Earlier arrivals must self-park and check towing signs.
+- Single bathrooms are also downstairs, in the hallway with an exit sign. There are no dedicated downstairs bathroom signs; downstairs accessibility has not been specified.
+- Guests may leave and return. No coat or bag check is available.

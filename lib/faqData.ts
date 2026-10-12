@@ -1,4 +1,4 @@
-import { GUEST_CONTACT, GUEST_DETAILS, GUEST_PHOTO_ALBUM } from './guestInformation';
+import { GUEST_CONTACT, GUEST_DETAILS, GUEST_PHOTO_ALBUM, GUEST_TIMES } from './guestInformation';
 
 export const FAQ_CATEGORIES = ['all', 'event', 'logistics', 'experience', 'rsvp'] as const;
 export type FaqCategory = (typeof FAQ_CATEGORIES)[number];
@@ -49,14 +49,14 @@ export const faqs: FAQData[] = [
   {
     category: 'event',
     question: 'What time should I arrive for the ceremony?',
-    answer: `${GUEST_DETAILS.arrival} Complimentary valet is provided.`,
+    answer: `${GUEST_DETAILS.arrival} Complimentary valet starts at ${GUEST_TIMES.valetStarts}.`,
   },
 
   // Logistics
   {
     category: 'logistics',
     question: 'What do I do for parking?',
-    answer: 'Complimentary valet is recommended. See Travel for entrance photos, pickup directions and parking details.',
+    answer: `${GUEST_DETAILS.parking} See Travel for entrance photos and pickup directions.`,
     componentKey: 'travel',
   },
   {
@@ -74,6 +74,11 @@ export const faqs: FAQData[] = [
     category: 'logistics',
     question: 'Is the venue accessible?',
     answer: `${GUEST_DETAILS.access} ${GUEST_DETAILS.restrooms} ${GUEST_DETAILS.assistance}`,
+  },
+  {
+    category: 'logistics',
+    question: 'Where are the restrooms?',
+    answer: GUEST_DETAILS.restrooms,
   },
   {
     category: 'logistics',

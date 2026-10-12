@@ -66,7 +66,7 @@ export const scheduleDays: ScheduleDay[] = [
         startTime: '5:30 PM',
         title: 'Guest Arrival',
         description:
-          `Venue opens at ${GUEST_TIMES.doorsOpen}. Aim for 5:30 PM; complimentary valet provided.`,
+          `Venue opens at ${GUEST_TIMES.doorsOpen}. Aim for ${GUEST_TIMES.valetStarts}, when complimentary valet begins.`,
       },
       {
         emoji: '💒',
