@@ -2,6 +2,7 @@
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
 import { ChevronDown, Clock, Pencil, Send, Square, X } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
@@ -23,6 +24,7 @@ function DiscoBallIcon() {
 }
 
 const publicFailure = z.object({ code: z.string(), resetAt: z.number().optional() });
+const FAQ_HINT_KEY = 'forever-fest-chat:faq-hint-seen';
 async function chatFetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response> {
   const response = await fetch(input, init);
   if (response.ok)
@@ -51,6 +53,7 @@ const transport = new DefaultChatTransport({
 export function WeddingChat({ enabled }: {
   enabled: boolean;
 }) {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
   const [history, setHistory] = useState<ChatHistory | null>(null);
@@ -64,6 +67,7 @@ export function WeddingChat({ enabled }: {
   const clearing = useRef(false);
   const mounted = useRef(false);
   const launcher = useRef<HTMLButtonElement>(null);
+  const hasShownFaqHint = useRef(false);
   const closeButton = useRef<HTMLButtonElement>(null);
   const historyButton = useRef<HTMLButtonElement>(null);
   const composer = useRef<HTMLTextAreaElement>(null);
@@ -143,6 +147,33 @@ export function WeddingChat({ enabled }: {
     };
   }, [setMessages]);
   /* eslint-enable react-hooks/set-state-in-effect */
+  useEffect(() => {
+    if (!enabled || pathname !== '/faqs' || hasShownFaqHint.current)
+      return;
+    let hint: Animation | undefined;
+    // Defer consuming the session flag until after React's development effect replay.
+    const frame = requestAnimationFrame(() => {
+      hasShownFaqHint.current = true;
+      try {
+        if (sessionStorage.getItem(FAQ_HINT_KEY))
+          return;
+        sessionStorage.setItem(FAQ_HINT_KEY, 'true');
+      } catch {
+        // The ref still prevents repeat hints when browser storage is unavailable.
+      }
+      if (isOpen || window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+        return;
+      hint = launcher.current?.animate([
+        { transform: 'scale(1)', boxShadow: '0 0 0 0 rgba(252,173,231,0), 0 0 0 rgba(184,21,158,0)' },
+        { transform: 'scale(1.1)', boxShadow: '0 0 0 8px rgba(252,173,231,0.3), 0 0 28px rgba(184,21,158,0.7)' },
+        { transform: 'scale(1)', boxShadow: '0 0 0 0 rgba(252,173,231,0), 0 0 0 rgba(184,21,158,0)' },
+      ], { duration: 1200, iterations: 3, easing: 'ease-in-out' });
+    });
+    return () => {
+      cancelAnimationFrame(frame);
+      hint?.cancel();
+    };
+  }, [enabled, isOpen, pathname]);
   const busy = status === 'submitted' || status === 'streaming';
   const latestMessage = messages.at(-1);
   const showThinking = busy && !incomplete && (latestMessage?.role !== 'assistant' || !messageText(latestMessage));
@@ -172,6 +203,7 @@ export function WeddingChat({ enabled }: {
     }
     resizeComposer();
     window.addEventListener('resize', resizeComposer);
+
     return () => window.removeEventListener('resize', resizeComposer);
   }, [enabled, /* effect dep */ input, isOpen]);
   useEffect(() => {
@@ -245,8 +277,8 @@ export function WeddingChat({ enabled }: {
             className='size-9 shrink-0 rounded-full bg-transparent text-white/70 hover:bg-white/10 hover:text-white focus-visible:ring-lavender-pink'
             disabled={!enabled || !restored}
             size='icon'
-            type='button'
             title='New chat'
+            type='button'
             onClick={() => {void selectChat();}}
           >
             <Pencil aria-hidden='true' />
