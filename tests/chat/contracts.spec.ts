@@ -115,6 +115,12 @@ test('public corpus covers seven routes and current venue/attendance/cost facts'
   }
   expect(facts).not.toContain('scripts/rsvp-sync');
   expect(facts).not.toContain('OPENAI_API_KEY');
+  for (const fact of ['about 100 guests', 'partial weather protection', 'left corner near the stairs', 'EDM, rap, hip-hop, pop and R&B', 'will not take guest song requests', 'reserved for family', '10:30 PM', '45–60 business days', 'Head to the first floor', 'Return to the rooftop'])
+    expect(facts).toContain(fact);
+  expect(facts).not.toContain('comfort in any weather');
+  expect(facts).not.toContain('vibodj.app.link');
+  expect(facts).not.toContain('collaboration/');
+  expect(facts).not.toContain('Signature Certificate');
   expect(facts.includes('"photos":')).toBe(false);
 });
 test('deployment config enforces HTTPS and environment namespace separation', () => {

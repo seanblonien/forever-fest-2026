@@ -81,7 +81,7 @@ export const scheduleDays: ScheduleDay[] = [
         endTime: '7:30 PM',
         title: 'Cocktail Hour',
         description:
-          'Drinks are on us! Enjoy hors d\'oeuvres and time to mingle.',
+          'Head to the first floor for cocktail hour. Drinks are on us! Enjoy hors d\'oeuvres and time to mingle.',
       },
       {
         emoji: '💃',
@@ -89,7 +89,7 @@ export const scheduleDays: ScheduleDay[] = [
         endTime: '11:00 PM',
         title: 'Reception',
         description:
-          `Dinner, toasts, cake, and dancing. Buffet dinner begins around ${GUEST_TIMES.dinner}. Dinner is on us; guests purchase reception drinks.`,
+          `Return to the rooftop for dinner, toasts, cake, and dancing. Buffet dinner begins around ${GUEST_TIMES.dinner}. Dinner is on us; guests purchase reception drinks.`,
       },
     ],
   },

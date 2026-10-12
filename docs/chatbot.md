@@ -28,7 +28,20 @@ CHAT_ENABLED=true pnpm dev
 
 `lib/chat/knowledge.ts` assembles seven routes. Schedule presents times and a short overview; Travel holds entrance images, directions and parking; FAQs hold detailed practical answers, expandable menu/bar lists, coordinator contact and the shared photo album. `lib/guestInformation.ts` holds the confirmed details shared by these pages and the chatbot. `lib/publicWeddingDetails.ts` contains the Home, travel/hotel, RSVP, registry and story text consumed by the original pages. The questionnaire is authoring material and is not ingested directly. Links remain normal website navigation; answers render escaped plain text.
 
-The server corpus references canonical facts instead of repeating shared paragraphs. Repeated FAQ, timeline, hotel and menu entries use compact arrays; question-only FAQ entries use the detailed FAQ facts. Directions links stay on the website, where chat directs guests to find them. Keep the corpus below 16 KiB so a full allowed request body still fits within the 32 KiB model-text limit; measure again when adding facts. Diet labels and weather forecasts must not be inferred from menu names or old planning notes.
+The server corpus references canonical facts instead of repeating shared paragraphs. FAQ details, schedule events, timeline, hotel and menu entries use compact arrays. FAQ questions are retained only when their answers add facts beyond the shared details or route data; decorative schedule emoji and internal IDs are omitted. Directions links stay on the website, where chat directs guests to find them. Keep the corpus below 16 KiB so a full allowed request body still fits within the 32 KiB model-text limit; measure again when adding facts. Diet labels and weather forecasts must not be inferred from menu names or old planning notes.
+
+### One-time content review, October 12, 2026
+
+Selected guest-facing facts from planning sources were rewritten into `lib/guestInformation.ts` and `lib/scheduleData.ts` and appear in the existing FAQs and Schedule. The chatbot reads these same shared facts. This is a manual content addition, with no live Drive, Gmail, Trello, vendor-portal or Vibo connection.
+
+- About 100 guests: approved by the couple and corroborated by the Weddings Unlimited final confirmation signed October 9.
+- Rooftop weather protection: the October 17 venue agreement describes a partially protected space, not full enclosure or climate control. The FAQ no longer promises comfort in all weather or an unconfirmed indoor backup; guests should follow venue/coordinator instructions in unsafe weather.
+- First-floor cocktail hour and rooftop reception: the guest-information questionnaire, run-of-show, September 30 layout correspondence and DJ form agree on the guest flow. A conflicting location field in the vendor confirmation does not override those specific instructions.
+- Photo booth: the vendor booking, final confirmation, DJ form and venue layout correspondence confirm the booth downstairs, near the stairs. Exact guest operating hours beyond cocktail hour and print/digital sharing instructions remain unspecified.
+- Reception music and requests: the DJ form specifies EDM, rap/hip-hop, pop and R&B, party lighting and no guest song requests. The Vibo link is a host invitation and is excluded from public content.
+- Final practical details: venue correspondence confirms reserved family rows at the ceremony and dancing on the stone rooftop. The DJ form describes a planned 10:30 PM last dance and downstairs LED-stick send-off. The final confirmation estimates professional photo delivery at 45–60 business days, not a guaranteed release date.
+
+Raw documents, access links, guest identities, private contacts, spending, signatures, getting-ready addresses, playlists and choreography are excluded. Old March 28 specifications and placeholder schedules are not authoritative. The DJ form's after-party announcement has no confirmed place/time and conflicts with the couple's published guidance, so no formal after-party remains the public answer. Coat/bag check is still unconfirmed in the unanswered venue email; no new arrangement or early valet start is inferred.
 
 ## Configuration
 

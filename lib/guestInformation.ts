@@ -2,6 +2,14 @@
 export const GUEST_TIMES = { doorsOpen: '5:15 PM', dinner: '7:35 PM' };
 
 export const GUEST_DETAILS = {
+  guestCount: 'We’re celebrating with about 100 guests.',
+  weather: 'The ceremony and reception are on the rooftop. Its retractable awning offers partial weather protection, but the space is not fully enclosed or climate-controlled. Heating lamps are planned for cooler temperatures; bring an extra layer. In unsafe weather, follow venue staff and coordinator instructions; rooftop access may be restricted.',
+  ceremonySeating: 'Ceremony seating is open except for the front rows marked reserved for family. Follow the signs and entrance greeters’ directions.',
+  photoBooth: 'The photo booth is on the first floor, in the left corner near the stairs. Look for it during cocktail hour; ask staff about availability and photo sharing options.',
+  music: 'Expect a DJ-led mix of EDM, rap, hip-hop, pop and R&B, with party lighting and dancing during the reception.',
+  songRequests: 'The couple has selected the music in advance, and the DJ will not take guest song requests during the event.',
+  sendOff: 'The last dance with guests is planned for 10:30 PM, followed by a downstairs send-off using the provided LED foam sticks. Follow the DJ and coordinator’s directions. The wedding ends at 11:00 PM.',
+  professionalPhotos: 'Professional photo delivery is estimated at 45–60 business days after the wedding. A public professional gallery link has not been announced. In the meantime, share guest photos in the Forever Fest shared album.',
   entrance: 'Enter DEC on Dragon from Dragon Street, beside the valet drop-off. Look for the DEC sign on the building. Rideshare drop-off and pickup are at the same entrance: 1414 Dragon St, Dallas, TX 75207.',
   arrival: `The venue welcomes guests from ${GUEST_TIMES.doorsOpen}. Aim to arrive around 5:30 PM and be seated before the ceremony starts promptly at 6:00 PM.`,
   lateArrival: 'If you arrive after the ceremony starts, enter the venue and head upstairs. The entrance greeters can help direct you.',
