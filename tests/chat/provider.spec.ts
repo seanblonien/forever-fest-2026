@@ -16,8 +16,9 @@ test('one admitted call uses server facts, text only, reasoning/store off and no
   expect(stream).toContain('5:30 PM');
   expect(stream).toContain('[DONE]');
   expect(mock.doStreamCalls).toHaveLength(1);
-  const call = mock.doStreamCalls[0];
+  const [call] = mock.doStreamCalls;
   expect(call.maxOutputTokens).toBe(600);
+  // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
   expect(call.providerOptions?.openai).toEqual({ reasoningEffort: 'none', store: false });
   expect(call.tools).toBeUndefined();
   expect(JSON.stringify(call.prompt)).toContain('State & Allen');
@@ -69,7 +70,9 @@ test('midstream provider failure emits safe incomplete message with no retry', a
 });
 
 test('total deadline cancels a hanging initial provider without retry', async () => {
-  const mock = new MockLanguageModelV4({ doStream: () => new Promise(() => {/* Intentional provider hang. */}) });
+  const mock = new MockLanguageModelV4({
+    doStream: () => new Promise(() => {/* Intentional provider hang. */}),
+  });
   const response = await handleChat(request(), { ...dependencies(mock), deadlineMs: 30 });
   expect(response.status).toBe(503);
   expect(mock.doStreamCalls).toHaveLength(1);
@@ -79,12 +82,16 @@ test('total deadline cancels a hanging initial provider without retry', async ()
 test('request disconnect and response-body cancellation abort provider and retain admission', async () => {
   for (const mode of ['disconnect', 'body-cancel']) {
     let admissions = 0;
-    const mock = new MockLanguageModelV4({ doStream: () => Promise.resolve({ stream: new ReadableStream({
-      start(controller) {
-        controller.enqueue({ type: 'text-start', id: 't' });
-        controller.enqueue({ type: 'text-delta', id: 't', delta: 'Partial' });
-      },
-    }) }) });
+    const mock = new MockLanguageModelV4({
+      doStream: () => Promise.resolve({
+        stream: new ReadableStream({
+          start(controller) {
+            controller.enqueue({ type: 'text-start', id: 't' });
+            controller.enqueue({ type: 'text-delta', id: 't', delta: 'Partial' });
+          },
+        }),
+      }),
+    });
     const controller = new AbortController();
     // eslint-disable-next-line unicorn/consistent-function-scoping -- Each cancellation case needs its own admission counter.
     const admit = () => {
@@ -109,7 +116,11 @@ const delayedAdmission = () => new Promise<{ allowed: boolean; resetAt: number }
 
 test('deadline during storage admission cannot start a provider later', async () => {
   const mock = model();
-  const response = await handleChat(request(), { ...dependencies(mock), deadlineMs: 15, limiter: () => delayedAdmission });
+  const response = await handleChat(request(), {
+    ...dependencies(mock),
+    deadlineMs: 15,
+    limiter: () => delayedAdmission,
+  });
   expect(response.status).toBe(503);
   await new Promise((resolve) => {
     setTimeout(resolve, 50);

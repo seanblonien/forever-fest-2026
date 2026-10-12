@@ -6,6 +6,8 @@ The site-wide floating Forever Fest Help uses the direct OpenAI Responses API (`
 
 The bottom-right disco-ball launcher opens the dark blue and pink chat panel on every route. The same icon appears beside the title. Replies are escaped plain text; three animated dots appear until the first answer text arrives, with a static fallback for reduced motion. Enter sends a question; Shift+Enter inserts a newline. Stop cancels the current response, and Escape closes the history list or panel.
 
+On the first FAQ visit per browser-tab session, the closed launcher gives three brief pink glow pulses. The hint stops when chat opens or the visitor leaves FAQs, and respects reduced-motion preferences. A session-storage flag prevents repeats across reloads and FAQ category changes; if storage is unavailable, an in-memory flag lasts for the visit.
+
 Below 640 pixels wide, the open chat fills the viewport and hides the bottom launcher; the header's close button returns to the site and restores its scroll position. The page is locked while chat is open; only the transcript, history list and composer can scroll. The panel follows the visual viewport's height and offset as the mobile keyboard opens, with an opaque background behind it. Header and composer padding respect mobile safe areas. Wider screens retain the floating panel.
 
 The pencil starts a new chat; the clock opens the previous-chat list inside the panel. Completed conversations persist in this browser's local storage, including the active chat selection. Reopening history makes no provider request. Titles come from each conversation's first question. The ten most recently updated conversations are retained, with up to ten completed pairs and 48 KiB per conversation; only the last three pairs accompany a new question. Incomplete answers are never saved. Existing version-one tab history migrates on first use. If browser storage is blocked, history remains in memory for the visit.
@@ -22,7 +24,9 @@ CHAT_ENABLED=true pnpm dev
 
 ## Content inventory
 
-`lib/chat/knowledge.ts` assembles seven routes. Existing `lib/faqData.ts` and `lib/scheduleData.ts` remain authoritative. `lib/publicWeddingDetails.ts` contains the same Home, travel/hotel, RSVP, registry and story text now consumed by the original pages. Links remain normal website navigation; answers render escaped plain text.
+`lib/chat/knowledge.ts` assembles seven routes. Schedule presents times and a short overview; Travel holds entrance images, directions and parking; FAQs hold detailed practical answers, expandable menu/bar lists, coordinator contact and the shared photo album. `lib/guestInformation.ts` holds the confirmed details shared by these pages and the chatbot. `lib/publicWeddingDetails.ts` contains the Home, travel/hotel, RSVP, registry and story text consumed by the original pages. The questionnaire is authoring material and is not ingested directly. Links remain normal website navigation; answers render escaped plain text.
+
+The server corpus references canonical facts instead of repeating shared paragraphs. Repeated FAQ, timeline, hotel and menu entries use compact arrays; question-only FAQ entries use the detailed FAQ facts. Directions links stay on the website, where chat directs guests to find them. Keep the corpus below 16 KiB so a full allowed request body still fits within the 32 KiB model-text limit; measure again when adding facts. Diet labels and weather forecasts must not be inferred from menu names or old planning notes.
 
 ## Configuration
 
@@ -30,7 +34,7 @@ Use `.env.example` as the list of server-only variables; enter credentials priva
 
 For a Vercel preview, set variables only for branch `codex/wedding-chatbot` in Preview. Set `CHAT_ENABLED=true`, namespace `forever-fest-2026:preview`, and exact HTTPS origins. Exact platform-issued `VERCEL_URL` and `VERCEL_BRANCH_URL` origins are also admitted; arbitrary request host/forwarded origin values are never added. The request Origin must equal the URL origin as well.
 
-Production is a separate review decision: production credentials and `CHAT_ENABLED=true` must be set deliberately with namespace `forever-fest-2026:production` and `https://foreverfest.wedding` in allowed origins, then the reviewed branch can be deployed/promoted. Keep the verified project cap and free Redis service. Production launch has not been performed.
+Production credentials and `CHAT_ENABLED=true` must be set deliberately with namespace `forever-fest-2026:production` and `https://foreverfest.wedding` in allowed origins, then the reviewed branch can be deployed/promoted. Use a separate production cookie secret. Keep the verified project cap and free Redis service. Redeploy after changing these variables so the built interface and API receive the new configuration.
 
 ## Limits and lifecycle
 

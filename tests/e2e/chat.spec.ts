@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers, functional/no-throw-statements, functional/no-loop-statements, no-loops/no-loops -- Protocol fixtures and specified viewport dimensions. */
+/* eslint-disable @typescript-eslint/no-magic-numbers, functional/no-throw-statements, functional/no-loop-statements, no-loops/no-loops, @typescript-eslint/naming-convention -- Protocol fixtures and specified viewport dimensions. Playwright options (exact, fullPage) are library api. */
 import { expect, test } from '@playwright/test';
 import type { Page } from '@playwright/test';
 import { CHAT_ENDS_AT } from '../../lib/chat/contracts';
@@ -31,7 +31,7 @@ async function mockStream(page: Page, text?: string) {
       let url: string;
       if (typeof input === 'string') url = input;
       else if (input instanceof URL) url = input.href;
-      else url = input.url;
+      else ({ url } = input);
       if (!url.endsWith('/api/chat') || !response.ok) return response;
       const responseText = await response.text();
       const frames = responseText.split('\n\n').filter(Boolean);
@@ -116,7 +116,9 @@ test.describe('active wedding chat', () => {
     await expect(page.getByRole('region', { name: 'Chat history' })).toHaveText('Hey! What can I help you with?');
     await expect(page.getByRole('status')).toHaveText('New chat started.');
     await page.screenshot({ path: 'test-results/chat-mobile.png', fullPage: false });
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+    const hasNoHorizontalScroll = await page.evaluate(() =>
+      document.documentElement.scrollWidth <= window.innerWidth);
+    expect(hasNoHorizontalScroll).toBe(true);
   });
 
   test('navigation keeps the shared chat and its in-progress stream', async ({ page }) => {
@@ -250,4 +252,4 @@ test('after lifecycle shutdown, the unavailable panel keeps FAQs usable', async 
   await page.getByRole('button', { name: /Event Details/ }).click();
   await expect(page.getByRole('heading', { name: 'When is the wedding?' })).toBeVisible();
 });
-/* eslint-enable @typescript-eslint/no-magic-numbers, functional/no-throw-statements, functional/no-loop-statements, no-loops/no-loops */
+/* eslint-enable @typescript-eslint/no-magic-numbers, functional/no-throw-statements, functional/no-loop-statements, no-loops/no-loops, @typescript-eslint/naming-convention */

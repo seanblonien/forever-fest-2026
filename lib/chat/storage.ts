@@ -7,7 +7,7 @@ export const STORAGE_KEY = 'forever-fest-chat:v1';
 export const STORAGE_LIMIT = 48 * 1024;
 export const THREAD_STORAGE_KEY = 'forever-fest-chat:v2';
 const THREAD_LIMIT = 10;
-const THREAD_STORAGE_LIMIT = STORAGE_LIMIT * THREAD_LIMIT + 4096;
+const THREAD_STORAGE_LIMIT = (STORAGE_LIMIT * THREAD_LIMIT) + 4096;
 const storedMessage = z.strictObject({ id: z.string().min(1).max(100), text: z.string().min(1) });
 const pairSchema = z.strictObject({ question: storedMessage, answer: storedMessage });
 const historySchema = z.strictObject({ version: z.literal(1), pairs: z.array(pairSchema).max(10) });
@@ -28,7 +28,11 @@ export type ChatHistory = z.infer<typeof threadsSchema>;
 export function newChatHistory(): ChatHistory {
   return { version: 2, activeId: crypto.randomUUID(), threads: [] };
 }
-export function updateChatHistory(history: ChatHistory, pairs: CompletedPair[], now = Date.now()): ChatHistory {
+export function updateChatHistory(
+  history: ChatHistory,
+  pairs: CompletedPair[],
+  now = Date.now(),
+): ChatHistory {
   const bounded = boundPairs(pairs);
   if (bounded.length === 0)
     return history;
@@ -39,7 +43,8 @@ export function updateChatHistory(history: ChatHistory, pairs: CompletedPair[], 
     updatedAt: now,
     pairs: bounded,
   };
-  return { ...history, threads: [thread, ...history.threads.filter(({ id }) => id !== thread.id)].slice(0, THREAD_LIMIT) };
+  const others = history.threads.filter(({ id }) => id !== thread.id);
+  return { ...history, threads: [thread, ...others].slice(0, THREAD_LIMIT) };
 }
 export function restoreChatHistory(raw: string | null): ChatHistory | undefined {
   if (!raw || utf8Size(raw) > THREAD_STORAGE_LIMIT)
@@ -50,8 +55,9 @@ export function restoreChatHistory(raw: string | null): ChatHistory | undefined 
       return undefined;
     const history = result.data;
     const ids = history.threads.map(({ id }) => id);
-    if (new Set(ids).size !== ids.length || history.threads.some((thread) =>
-      restorePairs(JSON.stringify({ version: 1, pairs: thread.pairs })).length !== thread.pairs.length))
+    const hasInvalidThread = history.threads.some(({ pairs }) =>
+      restorePairs(JSON.stringify({ version: 1, pairs })).length !== pairs.length);
+    if (new Set(ids).size !== ids.length || hasInvalidThread)
       return undefined;
     return history;
   } catch {
@@ -98,9 +104,12 @@ export function pairsToMessages(pairs: CompletedPair[]): UIMessage[] {
 }
 export function completedPair(messages: UIMessage[]): CompletedPair | undefined {
   const [question, answer] = messages.slice(-2);
-  if (question?.role !== 'user' || answer?.role !== 'assistant')
+  if (messages.length < 2 || question.role !== 'user' || answer.role !== 'assistant')
     return undefined;
-  const pair = { question: { id: question.id, text: messageText(question) }, answer: { id: answer.id, text: messageText(answer) } };
+  const pair = {
+    question: { id: question.id, text: messageText(question) },
+    answer: { id: answer.id, text: messageText(answer) },
+  };
   return boundPairs([pair])[0];
 }
 /* eslint-enable @typescript-eslint/no-magic-numbers, functional/no-loop-statements, no-loops/no-loops */

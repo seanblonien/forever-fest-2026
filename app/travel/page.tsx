@@ -1,5 +1,8 @@
 import { ExternalLink, MapPin } from 'lucide-react';
 import Image from 'next/image';
+import entranceMap from '@/docs/images/dec on dragon map view.png';
+import entranceStreet from '@/docs/images/dec on dragon street view.png';
+import { GUEST_DETAILS } from '@/lib/guestInformation';
 import { HOTEL_BLOCK, HOTEL_DETAILS, TRAVEL_DETAILS } from '@/lib/publicWeddingDetails';
 import anatoleHotelImage from '@/public/hotels/anatole.jpg';
 import courtyardHotelImage from '@/public/hotels/courtyard.jpg';
@@ -25,7 +28,8 @@ type HotelOption = {
 };
 
 const HOTEL_IMAGES = [virginHotelImage, anatoleHotelImage, courtyardHotelImage];
-const HOTEL_OPTIONS: HotelOption[] = HOTEL_DETAILS.map((hotel, index) => ({ ...hotel, image: HOTEL_IMAGES[index] }));
+const HOTEL_OPTIONS: HotelOption[] = HOTEL_DETAILS
+  .map((hotel, index) => ({ ...hotel, image: HOTEL_IMAGES[index] }));
 
 // eslint-disable-next-line max-lines-per-function -- long page
 function TravelPage() {
@@ -43,18 +47,6 @@ function TravelPage() {
 
           <div className='space-y-4'>
             <div>
-              <div className='mb-4 flex justify-center'>
-                <div className='h-130 w-full overflow-hidden rounded-xl border border-white/10 bg-white/5'>
-                  <iframe
-                    allowFullScreen
-                    className='h-full w-full'
-                    loading='lazy'
-                    referrerPolicy='no-referrer-when-downgrade'
-                    src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3354.0473219456185!2d-96.8192274!3d32.79100450000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e9945e1b932f5%3A0x6a6b6e08f2a819ed!2sDEC%20on%20Dragon!5e0!3m2!1sen!2sus!4v1769299179667!5m2!1sen!2sus'
-                    title='DEC on Dragon map'
-                  />
-                </div>
-              </div>
               <h2 className='text-xl mb-2 font-league-gothic'>Venue Address</h2>
               <p className='mb-2'>
                 {TRAVEL_DETAILS.venue}
@@ -68,6 +60,17 @@ function TravelPage() {
               </p>
               <div className='flex justify-center'>
                 <MapLinks />
+              </div>
+              <p className='mt-4 text-base'>{GUEST_DETAILS.entrance}</p>
+              <div className='mt-4 grid gap-4 sm:grid-cols-2'>
+                <figure>
+                  <Image alt='Satellite map showing DEC on Dragon beside Dragon Street' className='h-auto w-full rounded-xl' sizes='(min-width: 640px) 260px, 100vw' src={entranceMap} />
+                  <figcaption className='mt-2 text-xs text-white/65'>DEC on Dragon on Dragon Street</figcaption>
+                </figure>
+                <figure>
+                  <Image alt='DEC on Dragon street entrance with the DEC sign above the doors' className='h-auto w-full rounded-xl' sizes='(min-width: 640px) 260px, 100vw' src={entranceStreet} />
+                  <figcaption className='mt-2 text-xs text-white/65'>Look for the DEC sign at the entrance</figcaption>
+                </figure>
               </div>
             </div>
 

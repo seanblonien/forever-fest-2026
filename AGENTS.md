@@ -14,7 +14,8 @@ version in `package.json#packageManager`; keep installs frozen to the lockfile.
   Chromium's OS libraries too (requires system-package privileges).
 - Develop: `pnpm dev`. Playwright starts its own server on `127.0.0.1:3001`.
 - Check without rewriting files: `pnpm lint:check`, `pnpm typecheck`.
-  `pnpm lint` is the explicit auto-fix command; inspect its diff.
+  `pnpm lint` is the explicit auto-fix command; inspect its diff. Both fail on any
+  ESLint warning, so fix warnings rather than leaving them for later.
 - UI changes: `pnpm validate` runs lint, generated types/TypeScript, RSVP fixtures,
   then the Chromium route smoke tests. Also inspect the affected UI at mobile
   and desktop sizes: smoke tests cover navigation/headings, not every interaction.

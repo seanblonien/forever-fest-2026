@@ -17,9 +17,15 @@ export type ChatDependencies = {
   limiter: (config: ChatConfig) => ChatLimiter;
   model: (config: ChatConfig) => LanguageModel;
   now?: () => number;
-  onUsage?: (usage: { durationMs: number; inputTokens: number; outputTokens: number; requestId: string }) => void;
+  onUsage?: (usage: {
+    durationMs: number;
+    inputTokens: number;
+    outputTokens: number;
+    requestId: string;
+  }) => void;
 };
 export function publicError(error: ChatError, now: number): Response {
+  /* eslint-disable @typescript-eslint/naming-convention, camelcase -- Public API error codes. */
   const messages = {
     invalid_input: 'Please send a question of up to 500 characters.',
     forbidden_origin: 'Please ask from this website.',
@@ -28,15 +34,24 @@ export function publicError(error: ChatError, now: number): Response {
     rate_limited: 'The chat limit has been reached.',
     unavailable: 'Chat is unavailable. Please use the FAQs or contact Sean or Eva.',
   };
+  /* eslint-enable @typescript-eslint/naming-convention, camelcase */
   const headers = new Headers({ 'Cache-Control': 'no-store' });
   if (error.resetAt)
     headers.set('Retry-After', String(Math.max(1, Math.ceil((error.resetAt - now) / 1000))));
-  return Response.json({ code: error.code, message: messages[error.code], ...error.resetAt ? { resetAt: error.resetAt } : {} }, { status: error.status, headers });
+  return Response.json(
+    {
+      code: error.code,
+      message: messages[error.code],
+      ...error.resetAt ? { resetAt: error.resetAt } : {},
+    },
+    { status: error.status, headers },
+  );
 }
 function abortable<T>(operation: Promise<T>, signal: AbortSignal): Promise<T> {
   signal.throwIfAborted();
   return new Promise((resolve, reject) => {
     const onAbort = () => reject(new Error('Request cancelled'));
+    // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
     signal.addEventListener('abort', onAbort, { once: true });
     operation.then(resolve, reject).finally(() => signal.removeEventListener('abort', onAbort));
   });
@@ -51,8 +66,8 @@ async function readBody(request: Request, signal: AbortSignal): Promise<unknown>
   let size = 0;
   try {
     for (;;) {
-      const { done, value } = await abortable(reader.read(), signal);
-      if (done)
+      const { done: isDone, value } = await abortable(reader.read(), signal);
+      if (isDone)
         break;
       size += value.length;
       if (size > BODY_LIMIT)
@@ -66,6 +81,7 @@ async function readBody(request: Request, signal: AbortSignal): Promise<unknown>
       offset += chunk.length;
     }
     try {
+      // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
       return JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes)) as unknown;
     } catch {
       throw new ChatError(400, 'invalid_input');
@@ -76,7 +92,11 @@ async function readBody(request: Request, signal: AbortSignal): Promise<unknown>
   }
 }
 // Wait for the first provider text before committing headers so initial failures can be HTTP 503.
-async function startStream(source: ReadableStream<TextStreamPart<ToolSet>>, controller: AbortController, cleanup: () => void) {
+async function startStream(
+  source: ReadableStream<TextStreamPart<ToolSet>>,
+  controller: AbortController,
+  cleanup: () => void,
+) {
   const reader = source.getReader();
   const buffered: TextStreamPart<ToolSet>[] = [];
   try {
@@ -97,27 +117,30 @@ async function startStream(source: ReadableStream<TextStreamPart<ToolSet>>, cont
     throw error;
   }
   let outputBytes = 0;
-  let ended = false;
+  let hasEnded = false;
   return new ReadableStream<TextStreamPart<ToolSet>>({
     async pull(destination) {
       try {
-        const next = buffered.shift();
-        const item = next ? { done: false, value: next } : await abortable(reader.read(), controller.signal);
-        if (item.done) {
-          ended = true;
-          cleanup();
-          destination.close();
-          return;
+        let value = buffered.shift();
+        if (!value) {
+          const item = await abortable(reader.read(), controller.signal);
+          if (item.done) {
+            hasEnded = true;
+            cleanup();
+            destination.close();
+            return;
+          }
+          ({ value } = item);
         }
-        if (item.value.type === 'text-delta') {
-          outputBytes += utf8Size(item.value.text);
+        if (value.type === 'text-delta') {
+          outputBytes += utf8Size(value.text);
           if (outputBytes > ANSWER_LIMIT)
             throw new Error('Output limit');
         }
-        destination.enqueue(item.value);
+        destination.enqueue(value);
       } catch {
-        if (!ended) {
-          ended = true;
+        if (!hasEnded) {
+          hasEnded = true;
           controller.abort();
           destination.enqueue({ type: 'error', error: new Error('The answer is incomplete. Please use the FAQs.') });
           destination.close();
@@ -127,14 +150,27 @@ async function startStream(source: ReadableStream<TextStreamPart<ToolSet>>, cont
       }
     },
     cancel() {
-      ended = true;
+      hasEnded = true;
       controller.abort();
       cleanup();
       void reader.cancel().catch(() => {/* Cancellation can race an already closed reader. */});
     },
   });
 }
-export async function handleChat(request: Request, dependencies: ChatDependencies): Promise<Response> {
+function assertChatRequest(request: Request, config: ChatConfig) {
+  if (request.method !== 'POST')
+    throw new ChatError(400, 'invalid_input');
+  const origin = request.headers.get('origin');
+  if (!origin || !config.origins.includes(origin) || origin !== new URL(request.url).origin)
+    throw new ChatError(403, 'forbidden_origin');
+  const mediaType = request.headers.get('content-type')?.split(';')[0].trim().toLowerCase();
+  if (mediaType !== 'application/json')
+    throw new ChatError(415, 'unsupported_content_type');
+}
+export async function handleChat(
+  request: Request,
+  dependencies: ChatDependencies,
+): Promise<Response> {
   const env = dependencies.env ?? process.env;
   const now = dependencies.now ?? Date.now;
   const started = now();
@@ -146,6 +182,7 @@ export async function handleChat(request: Request, dependencies: ChatDependencie
     return publicError(new ChatError(503, 'unavailable'), started);
   const controller = new AbortController();
   const onDisconnect = () => controller.abort();
+  // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
   request.signal.addEventListener('abort', onDisconnect, { once: true });
   if (request.signal.aborted)
     controller.abort();
@@ -156,13 +193,7 @@ export async function handleChat(request: Request, dependencies: ChatDependencie
     request.signal.removeEventListener('abort', onDisconnect);
   };
   try {
-    if (request.method !== 'POST')
-      throw new ChatError(400, 'invalid_input');
-    const origin = request.headers.get('origin');
-    if (!origin || !config.origins.includes(origin) || origin !== new URL(request.url).origin)
-      throw new ChatError(403, 'forbidden_origin');
-    if (request.headers.get('content-type')?.split(';')[0].trim().toLowerCase() !== 'application/json')
-      throw new ChatError(415, 'unsupported_content_type');
+    assertChatRequest(request, config);
     const body = await readBody(request, controller.signal);
     let messages;
     try {
@@ -170,14 +201,24 @@ export async function handleChat(request: Request, dependencies: ChatDependencie
     } catch {
       throw new ChatError(400, 'invalid_input');
     }
-    const session = resolveSession(request.headers.get('cookie'), config.cookieSecret, started, new URL(request.url).protocol === 'https:');
+    const session = resolveSession(
+      request.headers.get('cookie'),
+      config.cookieSecret,
+      started,
+      new URL(request.url).protocol === 'https:',
+    );
     issuedCookie = session.cookie;
     const { day } = chicagoWindow(started);
-    const network = networkKey(request, config.cookieSecret, day, config.deployed);
+    const network = networkKey(request, config.cookieSecret, day, config.isDeployed);
     const instructions = (dependencies.knowledge ?? buildKnowledge)(started);
-    if (utf8Size(instructions) + messages.reduce((size, message) => size + utf8Size(messageText(message)), 0) > MODEL_TEXT_LIMIT)
+    const historySize = messages
+      .reduce((size, message) => size + utf8Size(messageText(message)), 0);
+    if (utf8Size(instructions) + historySize > MODEL_TEXT_LIMIT)
       throw new ChatError(413, 'body_too_large');
-    const decision = await abortable(dependencies.limiter(config)({ session: session.id, network, now: started }), controller.signal);
+    const decision = await abortable(
+      dependencies.limiter(config)({ session: session.id, network, now: started }),
+      controller.signal,
+    );
     if (!decision.allowed)
       throw new ChatError(429, 'rate_limited', decision.resetAt);
     if (!chatEnabled(env, now()))
@@ -190,8 +231,14 @@ export async function handleChat(request: Request, dependencies: ChatDependencie
       maxOutputTokens: 600,
       maxRetries: 0,
       abortSignal: controller.signal,
+      // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
       providerOptions: { openai: { reasoningEffort: 'none', store: false } },
-      onEnd: ({ totalUsage }) => dependencies.onUsage?.({ requestId, durationMs: now() - started, inputTokens: totalUsage.inputTokens ?? 0, outputTokens: totalUsage.outputTokens ?? 0 }),
+      onEnd: ({ totalUsage }) => dependencies.onUsage?.({
+        requestId,
+        durationMs: now() - started,
+        inputTokens: totalUsage.inputTokens ?? 0,
+        outputTokens: totalUsage.outputTokens ?? 0,
+      }),
       onError: () => {/* Errors are mapped to safe HTTP/stream responses below. */},
     });
     const source = await startStream(result.stream, controller, cleanup);
@@ -200,7 +247,15 @@ export async function handleChat(request: Request, dependencies: ChatDependencie
       headers.set('Set-Cookie', session.cookie);
     return createUIMessageStreamResponse({
       headers,
-      stream: toUIMessageStream({ stream: source, generateMessageId: randomUUID, sendReasoning: false, sendSources: false, onError: () => 'The answer is incomplete. Please use the FAQs.' }),
+      stream: toUIMessageStream({
+        stream: source,
+        generateMessageId: randomUUID,
+        /* eslint-disable @typescript-eslint/naming-convention -- library api */
+        sendReasoning: false,
+        sendSources: false,
+        /* eslint-enable @typescript-eslint/naming-convention */
+        onError: () => 'The answer is incomplete. Please use the FAQs.',
+      }),
     });
   } catch (error) {
     controller.abort();

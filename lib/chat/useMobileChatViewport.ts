@@ -1,6 +1,15 @@
 import { useEffect } from 'react';
 import type { RefObject } from 'react';
 
+type LockedStyle = 'backgroundColor' | 'left' | 'overflow' | 'overscrollBehavior' | 'position' | 'top' | 'width';
+type StyleValues = Partial<Pick<CSSStyleDeclaration, LockedStyle>>;
+
+function applyStyles(style: CSSStyleDeclaration, values: StyleValues) {
+  (Object.keys(values) as LockedStyle[]).forEach((property) => {
+    style[property] = values[property] ?? '';
+  });
+}
+
 // iOS keyboards resize/pan the visual viewport independently of CSS viewport units.
 export function useMobileChatViewport(isOpen: boolean, panel: RefObject<HTMLElement | null>) {
   useEffect(() => {
@@ -31,8 +40,14 @@ export function useMobileChatViewport(isOpen: boolean, panel: RefObject<HTMLElem
         backgroundColor: root.style.backgroundColor,
       };
       // Overflow alone does not reliably lock document scrolling on iOS.
-      Object.assign(body.style, { position: 'fixed', top: `-${scrollY}px`, left: `-${scrollX}px`, width: '100%', overflow: 'hidden' });
-      Object.assign(root.style, { overflow: 'hidden', overscrollBehavior: 'none', backgroundColor: '#101048' });
+      applyStyles(body.style, {
+        position: 'fixed',
+        top: `-${scrollY}px`,
+        left: `-${scrollX}px`,
+        width: '100%',
+        overflow: 'hidden',
+      });
+      applyStyles(root.style, { overflow: 'hidden', overscrollBehavior: 'none', backgroundColor: '#101048' });
 
       const viewport = window.visualViewport;
       function updateViewport() {
@@ -50,8 +65,8 @@ export function useMobileChatViewport(isOpen: boolean, panel: RefObject<HTMLElem
         window.removeEventListener('resize', updateViewport);
         element.style.removeProperty('--chat-viewport-height');
         element.style.removeProperty('--chat-viewport-top');
-        Object.assign(body.style, bodyStyles);
-        Object.assign(root.style, rootStyles);
+        applyStyles(body.style, bodyStyles);
+        applyStyles(root.style, rootStyles);
         window.scrollTo({ left: scrollX, top: scrollY, behavior: 'instant' });
       };
     }

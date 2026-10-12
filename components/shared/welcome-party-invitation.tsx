@@ -20,6 +20,7 @@ export function WelcomePartyInvitation() {
         <Image
           alt='Welcome Party invitation honoring Sean & Eva, with pink disco balls and the Dallas skyline'
           className='block h-auto w-full rounded-lg'
+          loading='eager'
           sizes='(max-width: 474px) calc(100vw - 74px), 400px'
           src={welcomePartyInvite}
         />

@@ -73,12 +73,8 @@ export function IndividualFaq({
       </div>
       <div itemScope itemProp='acceptedAnswer' itemType='https://schema.org/Answer'>
         <p className='text-lg mb-4' itemProp='text'>{answer}</p>
+        {component && <div className='mt-4 flex justify-center'>{component}</div>}
       </div>
-      {component && (
-        <nav aria-label='Related links' className='mt-4 flex justify-center'>
-          {component}
-        </nav>
-      )}
     </article>
   );
 }

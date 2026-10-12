@@ -18,7 +18,11 @@ export const TEST_ENV: NodeJS.ProcessEnv = {
 };
 export const question = (text = 'When should I arrive?', id = 'question-1') => ({ id, role: 'user', parts: [{ type: 'text', text }] });
 export const answer = (text = 'Please arrive at 5:30 PM.', id = 'answer-1') => ({ id, role: 'assistant', parts: [{ type: 'text', text }] });
-export function request(body?: unknown, headers: Record<string, string> = {}, signal?: AbortSignal) {
+export function request(
+  body?: unknown,
+  headers: Record<string, string> = {},
+  signal?: AbortSignal,
+) {
   return new Request('http://127.0.0.1:3001/api/chat', {
     method: 'POST',
     headers: { 'origin': 'http://127.0.0.1:3001', 'content-type': 'application/json', ...headers },

@@ -23,7 +23,7 @@ export function chicagoWindow(now: number): {
   const day = dateFormat.format(now);
   // Find the next local date change, including the 23/25-hour DST days.
   let lower = now;
-  let upper = now + 27 * 60 * 60 * 1000;
+  let upper = now + (27 * 60 * 60 * 1000);
   while (upper - lower > 1) {
     const middle = Math.floor((lower + upper) / 2);
     if (dateFormat.format(middle) === day)
@@ -47,7 +47,7 @@ return {1, 0}
 `;
 export function quotaReservation(namespace: string, identity: QuotaIdentity) {
   const { day, resetAt } = chicagoWindow(identity.now);
-  const lifetimeReset = Date.parse(CHAT_ENDS_AT) + 7 * 24 * 60 * 60 * 1000;
+  const lifetimeReset = Date.parse(CHAT_ENDS_AT) + (7 * 24 * 60 * 60 * 1000);
   return {
     keys: [
       `${namespace}:day:${day}:session:${identity.session}`,
@@ -55,15 +55,31 @@ export function quotaReservation(namespace: string, identity: QuotaIdentity) {
       `${namespace}:day:${day}:site`,
       `${namespace}:lifetime:site`,
     ],
-    args: [...DAILY_CAPS, ...Array.from({ length: 3 }, () => Math.ceil(resetAt / 1000) + 3600), Math.ceil(lifetimeReset / 1000)],
+    args: [
+      ...DAILY_CAPS,
+      ...Array.from({ length: 3 }, () => Math.ceil(resetAt / 1000) + 3600),
+      Math.ceil(lifetimeReset / 1000),
+    ],
     resetAt,
     lifetimeReset,
   };
 }
 export function createLimiter(config: ChatConfig): ChatLimiter {
+  // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
   const redis = new Redis({ url: config.redisUrl, token: config.redisToken, retry: false });
-  const session = new Ratelimit({ redis, limiter: Ratelimit.fixedWindow(5, '1 m'), prefix: `${config.namespace}:burst:session`, analytics: false, ephemeralCache: false, timeout: 1500 });
-  const network = new Ratelimit({ redis, limiter: Ratelimit.fixedWindow(30, '10 m'), prefix: `${config.namespace}:burst:network`, analytics: false, ephemeralCache: false, timeout: 1500 });
+  /* eslint-disable @typescript-eslint/naming-convention -- library api */
+  const burstOptions = { redis, analytics: false, ephemeralCache: false, timeout: 1500 } as const;
+  /* eslint-enable @typescript-eslint/naming-convention */
+  const session = new Ratelimit({
+    ...burstOptions,
+    limiter: Ratelimit.fixedWindow(5, '1 m'),
+    prefix: `${config.namespace}:burst:session`,
+  });
+  const network = new Ratelimit({
+    ...burstOptions,
+    limiter: Ratelimit.fixedWindow(30, '10 m'),
+    prefix: `${config.namespace}:burst:network`,
+  });
   return quotaLimiter(config.namespace, {
     session: (id) => session.limit(id),
     network: (id) => network.limit(id),
@@ -71,15 +87,24 @@ export function createLimiter(config: ChatConfig): ChatLimiter {
   });
 }
 
+type BurstResult = {
+  reason?: string;
+  reset: number;
+  // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
+  success: boolean;
+};
 type QuotaAdapters = {
-  network: (id: string) => Promise<{ reason?: string; reset: number; success: boolean }>;
+  network: (id: string) => Promise<BurstResult>;
   reserve: (keys: string[], args: number[]) => Promise<unknown>;
-  session: (id: string) => Promise<{ reason?: string; reset: number; success: boolean }>;
+  session: (id: string) => Promise<BurstResult>;
 };
 
 export function quotaLimiter(namespace: string, adapters: QuotaAdapters): ChatLimiter {
   return async (identity) => {
-    const results = await Promise.all([adapters.session(identity.session), adapters.network(identity.network)]);
+    const results = await Promise.all([
+      adapters.session(identity.session),
+      adapters.network(identity.network),
+    ]);
     if (results.some((result) => result.reason === 'timeout'))
       throw new ChatError(503, 'unavailable');
     const denied = results.filter((result) => !result.success);
@@ -89,7 +114,10 @@ export function quotaLimiter(namespace: string, adapters: QuotaAdapters): ChatLi
     const result = await adapters.reserve(reservation.keys, reservation.args);
     if (!Array.isArray(result) || result.length !== 2 || typeof result[0] !== 'number' || (result[0] !== 0 && result[0] !== 1) || typeof result[1] !== 'number' || result[1] < 0 || result[1] > 4)
       throw new ChatError(503, 'unavailable');
-    return { allowed: result[0] === 1, resetAt: result[1] === 4 ? reservation.lifetimeReset : reservation.resetAt };
+    return {
+      allowed: result[0] === 1,
+      resetAt: result[1] === 4 ? reservation.lifetimeReset : reservation.resetAt,
+    };
   };
 }
 /* eslint-enable @typescript-eslint/no-magic-numbers, functional/no-loop-statements, no-loops/no-loops */
