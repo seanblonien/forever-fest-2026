@@ -21,5 +21,13 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
     url: 'http://127.0.0.1:3001',
+    // UI protocol mocks only. No provider/storage credentials are supplied to CI.
+    env: {
+      CHAT_ENABLED: 'true',
+      OPENAI_API_KEY: '',
+      UPSTASH_REDIS_REST_URL: '',
+      UPSTASH_REDIS_REST_TOKEN: '',
+      CHAT_COOKIE_SECRET: '',
+    },
   },
 });

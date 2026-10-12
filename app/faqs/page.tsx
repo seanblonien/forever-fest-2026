@@ -11,7 +11,7 @@ function FaqsPage() {
   return (
     <div className='w-full max-w-150 mx-auto text-center text-white pt-6 pb-12 px-2 md:px-0'>
       <h1 className='text-4xl md:text-6xl mb-6 font-league-gothic'>FAQs</h1>
-      <FaqList initialCategory='all' />
+      <div id='wedding-faqs'><FaqList initialCategory='all' /></div>
     </div>
   );
 }

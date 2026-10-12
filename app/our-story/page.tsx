@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { STORY_PARAGRAPHS, STORY_TIMELINE } from '@/lib/publicWeddingDetails';
 import { createPageMetadata } from '@/lib';
 import { TimelineItem, TimelineItemData } from './timeline-item';
 
@@ -10,24 +11,21 @@ export const metadata: Metadata = createPageMetadata({
 const timelineData: TimelineItemData[] = [
   {
     id: 1,
-    date: 'Dec 29th, 2022',
-    label: 'First night we met, Lights All Night 2022',
+    ...STORY_TIMELINE[0],
     photos: [
       { id: 1, src: '/our-story/lan-group-2022.webp', alt: 'LAN group photo 2022', isPriority: true },
     ],
   },
   {
     id: 2,
-    date: 'Feb 11th, 2023',
-    label: 'First concert together, Subtronics',
+    ...STORY_TIMELINE[1],
     photos: [
       { id: 2, src: '/our-story/subtronics-group.webp', alt: 'Subtronics group photo' },
     ],
   },
   {
     id: 3,
-    date: 'Feb 14th, 2023',
-    label: 'First date, Valentines Day',
+    ...STORY_TIMELINE[2],
     photos: [
       { id: 3, src: '/our-story/valentines-kandi.webp', alt: 'Valentines kandi bracelet' },
       { id: 4, src: '/our-story/valentines-flower.webp', alt: 'Valentines flower that is slightly wilted' },
@@ -35,56 +33,49 @@ const timelineData: TimelineItemData[] = [
   },
   {
     id: 4,
-    date: 'April 13th, 2023',
-    label: 'When Sean asked Eva to be his girlfriend',
+    ...STORY_TIMELINE[3],
     photos: [
       { id: 5, src: '/our-story/facetime-eva-smile.webp', alt: 'Facetime screenshot of Eva smiling in the afterglow' },
     ],
   },
   {
     id: 5,
-    date: 'April 23rd, 2023',
-    label: 'First "I love you", at Ubbi Dubbi',
+    ...STORY_TIMELINE[4],
     photos: [
       { id: 6, src: '/our-story/sean-eva-ubbi-dubbi.webp', alt: 'Sean and Eva selfie at Ubbi Dubbi' },
     ],
   },
   {
     id: 6,
-    date: 'May 23rd, 2023',
-    label: 'First time meeting family',
+    ...STORY_TIMELINE[5],
     photos: [
       { id: 7, src: '/our-story/sean-eva-zoo.webp', alt: 'Eva and Sean together at the zoo' },
     ],
   },
   {
     id: 7,
-    date: 'June 30th, 2023',
-    label: 'First family trip to Puerto Rico',
+    ...STORY_TIMELINE[6],
     photos: [
       { id: 8, src: '/our-story/puerto-rico-coconuts.webp', alt: 'Aubree, Eva, Sean drinking from coconuts in Puerto Rico' },
     ],
   },
   {
     id: 8,
-    date: 'Dec 10th, 2023',
-    label: 'First marathon together 🏃',
+    ...STORY_TIMELINE[7],
     photos: [
       { id: 9, src: '/our-story/marathon-medals.webp', alt: 'Sean and Eva holding medals from the marathon' },
     ],
   },
   {
     id: 9,
-    date: 'Mar 16th, 2024',
-    label: 'First camping trip together',
+    ...STORY_TIMELINE[8],
     photos: [
       { id: 10, src: '/our-story/turner-falls-hike.webp', alt: 'Sean and Eva hiking at Turner Falls' },
     ],
   },
   {
     id: 10,
-    date: 'Aug 1st, 2024',
-    label: 'Rave Life! 🕺💃',
+    ...STORY_TIMELINE[9],
     isGrid: true,
     photos: [
       { id: 11, src: '/our-story/bass-canyon-2023.webp', alt: 'Eva and Sean at Bass Canyon 2023' },
@@ -99,8 +90,7 @@ const timelineData: TimelineItemData[] = [
   },
   {
     id: 11,
-    date: 'Dec 28th, 2024',
-    label: 'Sean proposes at Lights All Night 2024 💍',
+    ...STORY_TIMELINE[10],
     photos: [
       { id: 19, src: '/our-story/lan-2024-she-said-yes.webp', alt: 'Sean and Eva with the "she said yes" totem right after the proposal in the Marauda moshpit at LAN 2024' },
       { id: 20, src: '/our-story/lan-2024-disco-kiss.webp', alt: 'Sean and Eva kissing surrounded the disco balls and mirrors with "Lights All Night" in the background at LAN 2024' },
@@ -108,8 +98,7 @@ const timelineData: TimelineItemData[] = [
   },
   {
     id: 12,
-    date: 'February 9th, 2025',
-    label: 'Engagement party celebration',
+    ...STORY_TIMELINE[11],
     photos: [
       { id: 21, src: '/our-story/blonien-family.webp', alt: 'Eva and Sean with the Blonien family' },
       { id: 24, src: '/our-story/both-families.webp', alt: 'Eva and Sean with both of their families' },
@@ -118,8 +107,7 @@ const timelineData: TimelineItemData[] = [
   },
   {
     id: 13,
-    date: 'October 17th, 2026',
-    label: '➡️ Forever Fest 2026!',
+    ...STORY_TIMELINE[12],
     dateLink: '/faqs#when-is-the-wedding',
   },
 ];
@@ -132,11 +120,11 @@ function OurStoryPage() {
       {/* How We Met Story */}
       <div className='mb-8 space-y-4'>
         <p className='text-papaya-whip leading-relaxed text-justify'>
-          {'Eva Melendez had just moved back from LA and was looking for a Rave Fam. She had enjoyed attending the Nocturnal EDM festival in Southern California and wanted to find that same energy in Dallas. She went out to Green Light Social, a club in Deep Ellum known for dance music, to check it out. Eva spotted a tall man with an immaculate afro in the crowd and introduced herself to Jordyn Dent. Jordyn was Sean Blonien\'s roommate at the time, and he told her about the ins and outs of the rave scene in Dallas and the pre-game Sean was throwing for the Lights All Night music festival. With an invite, Eva showed up to the pre-game in Sean and Jordyn\'s Uptown apartment and quickly stood out to Sean. He knew everyone at his party except this one gorgeous new girl. After chatting for a bit, Eva left early to get to LAN, but on the way out, Sean and Eva had a small yet memorable interaction in the hallway. Eva knew Sean had the LAN map and was the man with the plan, so she was the one who asked for his number. They hugged and briefly gazed into each other\'s eyes as Sean wore a flirty, big smile. There was a hint of curiosity and romance in the air as Eva exited.'}
+          {STORY_PARAGRAPHS[0]}
         </p>
 
         <p className='text-papaya-whip leading-relaxed text-justify'>
-          {'The night was young, and the interactions at Lights All Night between Sean and Eva sparked a fire that has only grown since. They briefly connected in the world of technology and EDM music. A few weeks later, Sean built the confidence to ask Eva out on a date, and the rest was history. They both discovered their values of having a growth mind set and living life to the fullest amongst many other values and beliefs synced seamlessly. Enjoy our picture story timeline revealing how the connection between these two rave bae\'s progressed. We\'re pleased to have you witness the union of our love ❣️'}
+          {STORY_PARAGRAPHS[1]}
         </p>
       </div>
 

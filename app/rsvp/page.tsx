@@ -1,4 +1,5 @@
 import { ArrowRight, Calendar } from 'lucide-react';
+import { RSVP_DETAILS } from '@/lib/publicWeddingDetails';
 import type { Metadata } from 'next';
 import { createPageMetadata } from '@/lib';
 
@@ -13,16 +14,15 @@ function RsvpPage() {
       <h1 className='text-4xl md:text-6xl mb-8 font-league-gothic'>RSVP</h1>
       <div className='space-y-8 text-lg md:text-xl'>
         <div className='rounded-2xl border border-white/20 bg-white/10 p-6 md:p-8'>
-          <h2 className='mb-3 text-3xl font-league-gothic'>RSVPs are closed</h2>
+          <h2 className='mb-3 text-3xl font-league-gothic'>{RSVP_DETAILS.status}</h2>
           <p>
             Our RSVP deadline was
             {' '}
-            <strong>September 20, 2026</strong>
+            <strong>{RSVP_DETAILS.deadline}</strong>
             . Thank you to everyone who has already responded!
           </p>
           <p className='mt-4'>
-            Haven&apos;t responded yet, or need to change your answer? Please text or
-            email Sean or Eva right away so we can confirm your spot.
+            {RSVP_DETAILS.contact}
           </p>
         </div>
 
@@ -32,7 +32,11 @@ function RsvpPage() {
             <p>
               Search your email for
               {' '}
-              <strong>&quot;Response received for Forever Fest 2026&quot;</strong>
+              <strong>
+                &quot;
+                {RSVP_DETAILS.confirmationSubject}
+                &quot;
+              </strong>
               {' '}
               and use the edit link in that email.
             </p>
@@ -40,15 +44,14 @@ function RsvpPage() {
           <div className='rounded-lg border-l-4 border-blue-300 bg-white/10 p-4'>
             <p className='mb-2 font-semibold'>👥 Guest list</p>
             <p>
-              Only people listed on your invitation are invited. If you have questions
-              about your invite, please reach out to us directly.
+              {RSVP_DETAILS.guestList}
             </p>
           </div>
         </div>
 
         <div>
           <p className='mb-3 text-sm text-white/75'>
-            Reached out to us and been told to use the form?
+            {RSVP_DETAILS.formInstructions}
           </p>
           <a
             aria-label='Open the RSVP form (opens in a new tab)'
