@@ -105,7 +105,7 @@ function ChatTranscript({
     >
       {messages.length === 0 ? (
         <p className='max-w-[90%] rounded-2xl rounded-tl-sm bg-white/10 p-3 text-sm leading-relaxed'>
-          {enabled ? 'Hey! What can I help you with?' : 'Chat is unavailable. Please contact Sean or Eva.'}
+          {enabled ? 'Your Forever Fest info booth. Ask about arrival, outfits, food, or the weekend plans.' : 'Chat is unavailable. Please contact Sean or Eva.'}
         </p>
       ) : null}
       {messages.map((message, index) => message.role === 'assistant' && !messageText(message)
