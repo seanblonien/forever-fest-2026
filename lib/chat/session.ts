@@ -6,7 +6,12 @@ import { CHAT_ENDS_AT, ChatError } from './contracts';
 export const COOKIE_NAME = 'forever-fest-chat';
 const sign = (value: string, secret: string): string => createHmac('sha256', secret)
   .update(`cookie:v1:${value}`).digest('base64url');
-export function resolveSession(cookie: string | null, secret: string, now: number, secure: boolean) {
+export function resolveSession(
+  cookie: string | null,
+  secret: string,
+  now: number,
+  isSecure: boolean,
+) {
   const candidate = cookie?.split(';').map((part) => part.trim())
     .find((part) => part.startsWith(`${COOKIE_NAME}=`))?.slice(COOKIE_NAME.length + 1);
   const pieces = candidate?.split('.') ?? [];
@@ -26,7 +31,14 @@ export function resolveSession(cookie: string | null, secret: string, now: numbe
   const newPayload = `${newId}.${now}.${expires}`;
   return {
     id: newId,
-    cookie: `${COOKIE_NAME}=${newPayload}.${sign(newPayload, secret)}; HttpOnly; SameSite=Lax; Path=/; Expires=${new Date(expires).toUTCString()}${secure ? '; Secure' : ''}`,
+    cookie: [
+      `${COOKIE_NAME}=${newPayload}.${sign(newPayload, secret)}`,
+      'HttpOnly',
+      'SameSite=Lax',
+      'Path=/',
+      `Expires=${new Date(expires).toUTCString()}`,
+      ...isSecure ? ['Secure'] : [],
+    ].join('; '),
   };
 }
 export function normalizeIP(address: string): string | undefined {
@@ -38,17 +50,27 @@ export function normalizeIP(address: string): string | undefined {
   if (normalized.startsWith('::ffff:')) {
     const segments = normalized.slice(7).split(':');
     if (segments.length === 2) {
-      const bytes = segments.flatMap((part) => [Math.floor(Number.parseInt(part, 16) / 256), Number.parseInt(part, 16) % 256]);
+      const bytes = segments.flatMap((part) => {
+        const value = Number.parseInt(part, 16);
+        return [Math.floor(value / 256), value % 256];
+      });
       return bytes.join('.');
     }
   }
   return normalized;
 }
-export function networkKey(request: Request, secret: string, day: string, deployed: boolean): string {
+export function networkKey(
+  request: Request,
+  secret: string,
+  day: string,
+  isDeployed: boolean,
+): string {
   const host = new URL(request.url).hostname;
-  const local = !deployed && ['localhost', '127.0.0.1', '[::1]'].includes(host);
-  const forwarded = deployed ? normalizeIP(request.headers.get('x-vercel-forwarded-for') ?? '') : undefined;
-  const ip = local ? '127.0.0.1' : forwarded;
+  const isLocal = !isDeployed && ['localhost', '127.0.0.1', '[::1]'].includes(host);
+  const forwarded = isDeployed
+    ? normalizeIP(request.headers.get('x-vercel-forwarded-for') ?? '')
+    : undefined;
+  const ip = isLocal ? '127.0.0.1' : forwarded;
   if (!ip)
     throw new ChatError(503, 'unavailable');
   return createHmac('sha256', secret).update(`network:v1:${day}:${ip}`).digest('hex');

@@ -21,7 +21,7 @@ export const requestSchema = z.strictObject({ messages: z.array(message).min(1).
     if (messages.length % 2 !== 1)
       context.addIssue({ code: 'custom', message: 'Incomplete history' });
     messages.forEach((item, index) => {
-      const { text } = item.parts[0];
+      const [{ text }] = item.parts;
       const expectedRole = index % 2 === 0 ? 'user' : 'assistant';
       if (item.role !== expectedRole || !text.trim() || (item.role === 'user'
         ? codePointLength(text.trim()) > QUESTION_LIMIT

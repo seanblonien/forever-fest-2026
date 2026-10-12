@@ -5,12 +5,14 @@ import { ChevronDown, Clock, Pencil, Send, Square, X } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { z } from 'zod';
+import type { RefObject } from 'react';
 import { Button } from '@/components/ui/button';
 import { codePointLength, messageText, QUESTION_LIMIT } from '@/lib/chat/contracts';
 import { boundPairs, completedPair, newChatHistory, pairsToMessages, restoreChatHistory, restorePairs, saveChatHistory, STORAGE_KEY, THREAD_STORAGE_KEY, updateChatHistory } from '@/lib/chat/storage';
 import { useMobileChatViewport } from '@/lib/chat/useMobileChatViewport';
 import { cn } from '@/lib/utils';
 import type { ChatHistory, ChatThread, CompletedPair } from '@/lib/chat/storage';
+import type { UIMessage } from 'ai';
 
 function DiscoBallIcon() {
   return (
@@ -49,6 +51,156 @@ const transport = new DefaultChatTransport({
     body: { messages: messages.slice(-7).map((message) => ({ id: message.id, role: message.role, parts: [{ type: 'text', text: messageText(message) }] })) },
   }),
 });
+type ChatHistoryMenuProps = {
+  history: ChatHistory | null;
+  onSelect: (thread: ChatThread) => void;
+};
+function ChatHistoryMenu({ history, onSelect }: ChatHistoryMenuProps) {
+  return (
+    <div aria-label='Previous chats' className='absolute inset-x-3 top-[calc(3rem+max(.75rem,env(safe-area-inset-top)))] z-10 max-h-[60%] overflow-y-auto overscroll-none rounded-xl border border-lavender-pink/30 bg-penn-blue p-2 shadow-xl shadow-black/40 sm:top-18' id='wedding-chat-history' role='region'>
+      <p className='px-3 py-2 text-xs font-semibold text-lavender-pink'>Previous chats</p>
+      {history?.threads.length ? history.threads.map((thread) => (
+        <button
+          key={thread.id}
+          aria-current={thread.id === history.activeId ? 'true' : undefined}
+          className={cn('block w-full rounded-lg px-3 py-2 text-left hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-lavender-pink', thread.id === history.activeId ? 'bg-white/10' : '')}
+          type='button'
+          onClick={() => onSelect(thread)}
+        >
+          <span className='block truncate text-sm'>{thread.title}</span>
+          <span className='mt-1 block text-xs text-white/50'>{new Date(thread.updatedAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</span>
+        </button>
+      )) : <p className='px-3 py-2 text-sm text-white/60'>No previous chats yet.</p>}
+    </div>
+  );
+}
+
+type ChatTranscriptProps = {
+  enabled: boolean;
+  isIncomplete: boolean;
+  messages: UIMessage[];
+  onScrollPosition: (isAtBottom: boolean) => void;
+  showThinking: boolean;
+  transcriptRef: RefObject<HTMLDivElement | null>;
+};
+function ChatTranscript({
+  enabled,
+  isIncomplete,
+  messages,
+  onScrollPosition,
+  showThinking,
+  transcriptRef,
+}: ChatTranscriptProps) {
+  return (
+    <div
+      ref={transcriptRef}
+      aria-label='Chat history'
+      className='min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-none p-4'
+      role='region'
+      tabIndex={messages.length > 0 ? 0 : -1}
+      onScroll={(event) => {
+        const element = event.currentTarget;
+        onScrollPosition(element.scrollHeight - element.scrollTop - element.clientHeight < 48);
+      }}
+    >
+      {messages.length === 0 ? (
+        <p className='max-w-[90%] rounded-2xl rounded-tl-sm bg-white/10 p-3 text-sm leading-relaxed'>
+          {enabled ? 'Hey! What can I help you with?' : 'Chat is unavailable. Please contact Sean or Eva.'}
+        </p>
+      ) : null}
+      {messages.map((message, index) => message.role === 'assistant' && !messageText(message)
+        ? null
+        : (
+            <div key={message.id} className={cn('w-fit max-w-[90%] rounded-2xl p-3', message.role === 'user' ? 'ml-auto rounded-tr-sm bg-steel-pink' : 'rounded-tl-sm bg-white/10')}>
+              <span className='sr-only'>{message.role === 'user' ? 'You: ' : 'Forever Fest Help: '}</span>
+              <p className='whitespace-pre-wrap wrap-anywhere text-sm leading-relaxed'>{messageText(message)}</p>
+              {isIncomplete && index === messages.length - 1 && message.role === 'assistant' ? <p className='mt-2 text-xs text-papaya-whip'>Answer stopped</p> : null}
+            </div>
+          ))}
+      {showThinking ? (
+        <div aria-hidden='true' className='flex w-fit gap-1.5 rounded-2xl rounded-tl-sm bg-white/10 px-4 py-4' data-testid='chat-thinking'>
+          <span className='size-1.5 rounded-full bg-lavender-pink motion-safe:animate-bounce' />
+          <span className='size-1.5 rounded-full bg-lavender-pink motion-safe:animate-bounce [animation-delay:150ms]' />
+          <span className='size-1.5 rounded-full bg-lavender-pink motion-safe:animate-bounce [animation-delay:300ms]' />
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+type ChatComposerProps = {
+  canSend: boolean;
+  composerRef: RefObject<HTMLTextAreaElement | null>;
+  input: string;
+  isBusy: boolean;
+  isRestored: boolean;
+  length: number;
+  onInput: (value: string) => void;
+  onStop: () => void;
+  onSubmit: () => void;
+};
+function ChatComposer({
+  canSend,
+  composerRef,
+  input,
+  isBusy,
+  isRestored,
+  length,
+  onInput,
+  onStop,
+  onSubmit,
+}: ChatComposerProps) {
+  return (
+    <form
+      className='shrink-0 border-t border-white/10 p-3 pb-[max(.75rem,env(safe-area-inset-bottom))] sm:pb-3'
+      onSubmit={(event) => {
+        event.preventDefault();
+        onSubmit();
+      }}
+    >
+      <label className='sr-only' htmlFor='wedding-chat-question'>Your question</label>
+      <div className='flex items-start gap-2 rounded-xl border border-white/20 bg-white/5 p-2 focus-within:border-lavender-pink'>
+        <textarea
+          ref={composerRef}
+          aria-describedby='wedding-chat-counter'
+          autoComplete='off'
+          className='h-11 max-h-32 min-h-11 w-full resize-none bg-transparent px-1 py-2.5 text-base text-white placeholder:text-white/50 focus-visible:outline-none disabled:opacity-60'
+          disabled={!isRestored}
+          id='wedding-chat-question'
+          placeholder='Ask a question…'
+          rows={1}
+          value={input}
+          onChange={(event) => onInput(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing && event.keyCode !== 229) {
+              event.preventDefault();
+              onSubmit();
+            }
+          }}
+        />
+        {isBusy ? (
+          <Button
+            aria-label='Stop'
+            className='size-11 shrink-0 rounded-lg bg-white/20 text-white hover:bg-white/30 focus-visible:ring-lavender-pink'
+            size='icon'
+            type='button'
+            onClick={onStop}
+          >
+            <Square aria-hidden='true' />
+          </Button>
+        ) : (
+          <Button aria-label='Send' className='size-11 shrink-0 rounded-lg bg-steel-pink text-white hover:bg-steel-pink/80 focus-visible:ring-lavender-pink' disabled={!canSend} size='icon' type='submit'>
+            <Send aria-hidden='true' />
+          </Button>
+        )}
+      </div>
+      <p className={length > QUESTION_LIMIT ? 'mt-2 text-xs text-orange-200' : 'sr-only'} id='wedding-chat-counter'>
+        {length > QUESTION_LIMIT ? 'Please keep your question within 500 characters.' : 'Up to 500 characters. Enter to send; Shift+Enter for a new line.'}
+      </p>
+    </form>
+  );
+}
+
 // eslint-disable-next-line max-lines-per-function -- Keep the tab lifecycle and its single panel together.
 export function WeddingChat({ enabled }: {
   enabled: boolean;
@@ -58,9 +210,9 @@ export function WeddingChat({ enabled }: {
   const [showHistory, setShowHistory] = useState(false);
   const [history, setHistory] = useState<ChatHistory | null>(null);
   const [input, setInput] = useState('');
-  const [restored, setRestored] = useState(false);
+  const [isRestored, setIsRestored] = useState(false);
   const [notice, setNotice] = useState('');
-  const [incomplete, setIncomplete] = useState(false);
+  const [isIncomplete, setIsIncomplete] = useState(false);
   const pairs = useRef<CompletedPair[]>([]);
   const savedHistory = useRef<ChatHistory | null>(null);
   const sending = useRef(false);
@@ -81,15 +233,15 @@ export function WeddingChat({ enabled }: {
       sending.current = false;
       if (!mounted.current || clearing.current)
         return;
-      const complete = !isAbort && !isError && !isDisconnect && finishReason === 'stop';
-      setIncomplete(!complete);
+      const isComplete = !isAbort && !isError && !isDisconnect && finishReason === 'stop';
+      setIsIncomplete(!isComplete);
       setNotice((previous) => {
-        if (complete) return 'Answer complete.';
+        if (isComplete) return 'Answer complete.';
         if (isError || isDisconnect) return previous;
 
         return 'Answer stopped or incomplete. Please use the FAQs.';
       });
-      const pair = complete ? completedPair(finished) : undefined;
+      const pair = isComplete ? completedPair(finished) : undefined;
       if (pair) {
         pairs.current = boundPairs([...pairs.current, pair]);
         if (savedHistory.current)
@@ -100,7 +252,7 @@ export function WeddingChat({ enabled }: {
       sending.current = false;
       if (!mounted.current || clearing.current)
         return;
-      setIncomplete(true);
+      setIsIncomplete(true);
       // Stream error text is generated by our server; network/parser errors use a fixed fallback.
       setNotice(error.message.startsWith('The chat limit') || error.message.startsWith('Chat is unavailable') ||
         error.message.startsWith('This question')
@@ -140,7 +292,7 @@ export function WeddingChat({ enabled }: {
     setHistory(initial);
     pairs.current = initial.threads.find(({ id }) => id === initial.activeId)?.pairs ?? [];
     setMessages(pairsToMessages(pairs.current));
-    setRestored(true);
+    setIsRestored(true);
 
     return () => {
       mounted.current = false;
@@ -169,26 +321,30 @@ export function WeddingChat({ enabled }: {
         { transform: 'scale(1)', boxShadow: '0 0 0 0 rgba(252,173,231,0), 0 0 0 rgba(184,21,158,0)' },
       ], { duration: 1200, iterations: 3, easing: 'ease-in-out' });
     });
+
     return () => {
       cancelAnimationFrame(frame);
       hint?.cancel();
     };
   }, [enabled, isOpen, pathname]);
-  const busy = status === 'submitted' || status === 'streaming';
+  const isBusy = status === 'submitted' || status === 'streaming';
   const latestMessage = messages.at(-1);
-  const showThinking = busy && !incomplete && (latestMessage?.role !== 'assistant' || !messageText(latestMessage));
+  const showThinking = isBusy && !isIncomplete && (latestMessage?.role !== 'assistant' || !messageText(latestMessage));
   useEffect(() => {
+    // eslint-disable-next-line react-you-might-not-need-an-effect/no-event-handler -- Scroll after new messages render.
     if (isOpen && atBottom.current && transcript.current)
       transcript.current.scrollTop = transcript.current.scrollHeight;
-  }, [messages, isOpen, showThinking]);
+  }, [isOpen, /* effect dep */ messages, /* effect dep */ showThinking]);
   function closePanel() {
     setIsOpen(false);
     setShowHistory(false);
     requestAnimationFrame(() => launcher.current?.focus());
   }
   useEffect(() => {
+    // eslint-disable-next-line react-you-might-not-need-an-effect/no-event-handler -- Focus once the opened panel is visible.
     if (!isOpen)
       return;
+    // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
     (enabled ? composer.current : closeButton.current)?.focus({ preventScroll: true });
   }, [enabled, isOpen]);
   useEffect(() => {
@@ -205,7 +361,7 @@ export function WeddingChat({ enabled }: {
     window.addEventListener('resize', resizeComposer);
 
     return () => window.removeEventListener('resize', resizeComposer);
-  }, [enabled, /* effect dep */ input, isOpen]);
+  }, [isOpen, /* effect dep */ enabled, /* effect dep */ input]);
   useEffect(() => {
     if (!isOpen)
       return;
@@ -223,7 +379,8 @@ export function WeddingChat({ enabled }: {
     return () => document.removeEventListener('keydown', onEscape);
   }, [isOpen, showHistory]);
   const length = codePointLength(input);
-  const canSend = enabled && restored && !busy && length <= QUESTION_LIMIT && Boolean(input.trim());
+  const canSend = enabled && isRestored && !isBusy && length <= QUESTION_LIMIT &&
+    Boolean(input.trim());
   async function submit() {
     if (!canSend || sending.current)
       return;
@@ -232,7 +389,7 @@ export function WeddingChat({ enabled }: {
     setShowHistory(false);
     clearError();
     setMessages(pairsToMessages(pairs.current));
-    setIncomplete(false);
+    setIsIncomplete(false);
     setNotice('Getting an answer…');
     const text = input.trim();
     setInput('');
@@ -251,7 +408,7 @@ export function WeddingChat({ enabled }: {
     setMessages(pairsToMessages(pairs.current));
     clearError();
     setInput('');
-    setIncomplete(false);
+    setIsIncomplete(false);
     setNotice(thread ? 'Chat reopened.' : 'New chat started.');
     persistHistory({ ...savedHistory.current, activeId: thread?.id ?? crypto.randomUUID() });
     setShowHistory(false);
@@ -275,7 +432,7 @@ export function WeddingChat({ enabled }: {
           <Button
             aria-label='New chat'
             className='size-9 shrink-0 rounded-full bg-transparent text-white/70 hover:bg-white/10 hover:text-white focus-visible:ring-lavender-pink'
-            disabled={!enabled || !restored}
+            disabled={!enabled || !isRestored}
             size='icon'
             title='New chat'
             type='button'
@@ -289,11 +446,11 @@ export function WeddingChat({ enabled }: {
             aria-expanded={showHistory}
             aria-label='Previous chats'
             className='size-9 shrink-0 rounded-full bg-transparent text-white/70 hover:bg-white/10 hover:text-white focus-visible:ring-lavender-pink'
-            disabled={!restored}
+            disabled={!isRestored}
             size='icon'
             title='Previous chats'
             type='button'
-            onClick={() => setShowHistory((previous) => !previous)}
+            onClick={() => setShowHistory((wasShown) => !wasShown)}
           >
             <Clock aria-hidden='true' />
           </Button>
@@ -309,108 +466,35 @@ export function WeddingChat({ enabled }: {
           </Button>
         </div>
         {showHistory ? (
-          <div aria-label='Previous chats' className='absolute inset-x-3 top-[calc(3rem+max(.75rem,env(safe-area-inset-top)))] z-10 max-h-[60%] overflow-y-auto overscroll-none rounded-xl border border-lavender-pink/30 bg-penn-blue p-2 shadow-xl shadow-black/40 sm:top-18' id='wedding-chat-history' role='region'>
-            <p className='px-3 py-2 text-xs font-semibold text-lavender-pink'>Previous chats</p>
-            {history?.threads.length ? history.threads.map((thread) => (
-              <button
-                key={thread.id}
-                aria-current={thread.id === history.activeId ? 'true' : undefined}
-                className={cn('block w-full rounded-lg px-3 py-2 text-left hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-lavender-pink', thread.id === history.activeId ? 'bg-white/10' : '')}
-                type='button'
-                onClick={() => {void selectChat(thread);}}
-              >
-                <span className='block truncate text-sm'>{thread.title}</span>
-                <span className='mt-1 block text-xs text-white/50'>{new Date(thread.updatedAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</span>
-              </button>
-            )) : <p className='px-3 py-2 text-sm text-white/60'>No previous chats yet.</p>}
-          </div>
+          <ChatHistoryMenu history={history} onSelect={(thread) => {void selectChat(thread);}} />
         ) : null}
-        <div
-          ref={transcript}
-          aria-label='Chat history'
-          className='min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-none p-4'
-          role='region'
-          tabIndex={messages.length > 0 ? 0 : -1}
-          onScroll={(event) => {
-            const element = event.currentTarget;
-            atBottom.current = element.scrollHeight - element.scrollTop - element.clientHeight < 48;
+        <ChatTranscript
+          enabled={enabled}
+          isIncomplete={isIncomplete}
+          messages={messages}
+          showThinking={showThinking}
+          transcriptRef={transcript}
+          onScrollPosition={(isAtBottom) => {
+            atBottom.current = isAtBottom;
           }}
-        >
-          {messages.length === 0 ? (
-            <p className='max-w-[90%] rounded-2xl rounded-tl-sm bg-white/10 p-3 text-sm leading-relaxed'>
-              {enabled ? 'Hey! What can I help you with?' : 'Chat is unavailable. Please contact Sean or Eva.'}
-            </p>
-          ) : null}
-          {messages.map((message, index) => message.role === 'assistant' && !messageText(message)
-            ? null
-            : (
-                <div key={message.id} className={cn('w-fit max-w-[90%] rounded-2xl p-3', message.role === 'user' ? 'ml-auto rounded-tr-sm bg-steel-pink' : 'rounded-tl-sm bg-white/10')}>
-                  <span className='sr-only'>{message.role === 'user' ? 'You: ' : 'Forever Fest Help: '}</span>
-                  <p className='whitespace-pre-wrap wrap-anywhere text-sm leading-relaxed'>{messageText(message)}</p>
-                  {incomplete && index === messages.length - 1 && message.role === 'assistant' ? <p className='mt-2 text-xs text-papaya-whip'>Answer stopped</p> : null}
-                </div>
-              ))}
-          {showThinking ? (
-            <div aria-hidden='true' className='flex w-fit gap-1.5 rounded-2xl rounded-tl-sm bg-white/10 px-4 py-4' data-testid='chat-thinking'>
-              <span className='size-1.5 rounded-full bg-lavender-pink motion-safe:animate-bounce' />
-              <span className='size-1.5 rounded-full bg-lavender-pink motion-safe:animate-bounce [animation-delay:150ms]' />
-              <span className='size-1.5 rounded-full bg-lavender-pink motion-safe:animate-bounce [animation-delay:300ms]' />
-            </div>
-          ) : null}
-        </div>
-        <p aria-atomic='true' aria-live='polite' className={cn('text-xs text-papaya-whip', incomplete ? 'px-4 pb-3' : 'sr-only')} role='status'>{notice}</p>
+        />
+        <p aria-atomic='true' aria-live='polite' className={cn('text-xs text-papaya-whip', isIncomplete ? 'px-4 pb-3' : 'sr-only')} role='status'>{notice}</p>
         {enabled ? (
-          <form
-            className='shrink-0 border-t border-white/10 p-3 pb-[max(.75rem,env(safe-area-inset-bottom))] sm:pb-3'
-            onSubmit={(event) => {
-              event.preventDefault();
-              void submit();
+          <ChatComposer
+            canSend={canSend}
+            composerRef={composer}
+            input={input}
+            isBusy={isBusy}
+            isRestored={isRestored}
+            length={length}
+            onInput={setInput}
+            onStop={() => {
+              setIsIncomplete(true);
+              setNotice('Answer stopped.');
+              void stop();
             }}
-          >
-            <label className='sr-only' htmlFor='wedding-chat-question'>Your question</label>
-            <div className='flex items-start gap-2 rounded-xl border border-white/20 bg-white/5 p-2 focus-within:border-lavender-pink'>
-              <textarea
-                ref={composer}
-                aria-describedby='wedding-chat-counter'
-                autoComplete='off'
-                className='h-11 max-h-32 min-h-11 w-full resize-none bg-transparent px-1 py-2.5 text-base text-white placeholder:text-white/50 focus-visible:outline-none disabled:opacity-60'
-                disabled={!restored}
-                id='wedding-chat-question'
-                placeholder='Ask a question…'
-                rows={1}
-                value={input}
-                onChange={(event) => setInput(event.target.value)}
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing && event.keyCode !== 229) {
-                    event.preventDefault();
-                    void submit();
-                  }
-                }}
-              />
-              {busy ? (
-                <Button
-                  aria-label='Stop'
-                  className='size-11 shrink-0 rounded-lg bg-white/20 text-white hover:bg-white/30 focus-visible:ring-lavender-pink'
-                  size='icon'
-                  type='button'
-                  onClick={() => {
-                    setIncomplete(true);
-                    setNotice('Answer stopped.');
-                    void stop();
-                  }}
-                >
-                  <Square aria-hidden='true' />
-                </Button>
-              ) : (
-                <Button aria-label='Send' className='size-11 shrink-0 rounded-lg bg-steel-pink text-white hover:bg-steel-pink/80 focus-visible:ring-lavender-pink' disabled={!canSend} size='icon' type='submit'>
-                  <Send aria-hidden='true' />
-                </Button>
-              )}
-            </div>
-            <p className={length > QUESTION_LIMIT ? 'mt-2 text-xs text-orange-200' : 'sr-only'} id='wedding-chat-counter'>
-              {length > QUESTION_LIMIT ? 'Please keep your question within 500 characters.' : 'Up to 500 characters. Enter to send; Shift+Enter for a new line.'}
-            </p>
-          </form>
+            onSubmit={() => {void submit();}}
+          />
         ) : null}
       </section>
       <Button

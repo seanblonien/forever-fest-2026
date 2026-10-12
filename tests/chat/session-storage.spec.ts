@@ -51,7 +51,7 @@ test('lifetime keys survive deployments and day/session changes; namespaces sepa
   expect(first.keys[0]).not.toBe(next.keys[0]);
   expect(first.args.slice(0, 4)).toEqual([20, 120, 500, 5000]);
   expect(first.keys[3]).not.toBe(quotaReservation('forever-fest-2026:production', { session: 'one', network: 'one', now: NOW }).keys[3]);
-  expect(first.lifetimeReset).toBe(Date.parse(CHAT_ENDS_AT) + 7 * 86_400_000);
+  expect(first.lifetimeReset).toBe(Date.parse(CHAT_ENDS_AT) + (7 * 86_400_000));
 });
 const pair = (index: number) => ({ question: { id: `q${index}`, text: 'Where?' }, answer: { id: `a${index}`, text: 'DEC on Dragon.' } });
 test('storage restores only bounded completed pairs and strips provider metadata', () => {
@@ -91,8 +91,11 @@ test('thread history retains the ten most recently updated chats and validates e
   expect(history.threads).toHaveLength(10);
   expect(history.threads.map(({ id }) => id)).toEqual(Array.from({ length: 10 }, (_, index) => `thread-${11 - index}`));
   expect(restoreChatHistory(JSON.stringify(history))).toEqual(history);
-  expect(restoreChatHistory(JSON.stringify({ ...history, threads: [history.threads[0], history.threads[0]] }))).toBeUndefined();
-  expect(restoreChatHistory(JSON.stringify({ ...history, threads: [{ ...history.threads[0], pairs: [pair(1), pair(1)] }] }))).toBeUndefined();
+  const [thread] = history.threads;
+  const duplicateThreads = { ...history, threads: [thread, thread] };
+  expect(restoreChatHistory(JSON.stringify(duplicateThreads))).toBeUndefined();
+  const duplicatePairs = { ...history, threads: [{ ...thread, pairs: [pair(1), pair(1)] }] };
+  expect(restoreChatHistory(JSON.stringify(duplicatePairs))).toBeUndefined();
   expect(restoreChatHistory('{bad')).toBeUndefined();
   expect(saveChatHistory({ setItem: () => {
     throw new Error('Blocked');

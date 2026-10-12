@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers, functional/no-loop-statements, no-loops/no-loops -- Exact quota boundary fixtures. */
+/* eslint-disable @typescript-eslint/no-magic-numbers, functional/no-loop-statements, no-loops/no-loops, @typescript-eslint/naming-convention -- Exact quota boundary fixtures. Upstash results use `success`. */
 import { expect, test } from '@playwright/test';
 import { quotaLimiter } from '../../lib/chat/limits';
 import { NOW } from './helpers';
@@ -45,4 +45,4 @@ test('invalid Redis results fail closed and lifetime exhaustion has lifetime res
   const limit = quotaLimiter('test', { session: pass, network: pass, reserve: () => Promise.resolve([0, 4]) });
   expect(await limit({ session: 's', network: 'n', now: NOW })).toEqual({ allowed: false, resetAt: Date.parse('2026-10-26T05:00:00Z') });
 });
-/* eslint-enable @typescript-eslint/no-magic-numbers, functional/no-loop-statements, no-loops/no-loops */
+/* eslint-enable @typescript-eslint/no-magic-numbers, functional/no-loop-statements, no-loops/no-loops, @typescript-eslint/naming-convention */

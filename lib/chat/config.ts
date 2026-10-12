@@ -5,7 +5,7 @@ import { CHAT_ENDS_AT } from './contracts';
 export type ChatConfig = {
   apiKey: string;
   cookieSecret: string;
-  deployed: boolean;
+  isDeployed: boolean;
   namespace: string;
   origins: string[];
   redisToken: string;
@@ -28,17 +28,19 @@ export function readConfig(env: NodeJS.ProcessEnv = process.env): ChatConfig | u
   if (!result.success)
     return undefined;
   const value = result.data;
-  const deployed = env.VERCEL === '1' || env.NODE_ENV === 'production';
+  const isDeployed = env.VERCEL === '1' || env.NODE_ENV === 'production';
   const configuredOrigins = value.CHAT_ALLOWED_ORIGINS.split(',').map((origin) => origin.trim());
   // Exact platform-issued URLs let protected previews work without trusting request headers.
   const platformOrigins = env.VERCEL === '1'
-    ? [env.VERCEL_URL, env.VERCEL_BRANCH_URL].filter((host): host is string => Boolean(host) && /^[a-z0-9-]+\.vercel\.app$/.test(host ?? '')).map((host) => `https://${host}`)
+    ? [env.VERCEL_URL, env.VERCEL_BRANCH_URL]
+        .filter((host): host is string => Boolean(host) && /^[a-z0-9-]+\.vercel\.app$/.test(host ?? ''))
+        .map((host) => `https://${host}`)
     : [];
   const origins = [...new Set([...configuredOrigins, ...platformOrigins])];
   try {
     if (origins.some((origin) => {
       const url = new URL(origin);
-      return url.origin !== origin || (deployed
+      return url.origin !== origin || (isDeployed
         ? url.protocol !== 'https:'
         : !['http:', 'https:'].includes(url.protocol));
     }))
@@ -57,7 +59,7 @@ export function readConfig(env: NodeJS.ProcessEnv = process.env): ChatConfig | u
     cookieSecret: value.CHAT_COOKIE_SECRET,
     namespace: value.CHAT_QUOTA_NAMESPACE,
     origins,
-    deployed,
+    isDeployed,
   };
 }
 /* eslint-enable @typescript-eslint/no-magic-numbers */

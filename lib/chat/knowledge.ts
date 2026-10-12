@@ -1,8 +1,8 @@
+import type { FaqComponentKey } from '../faqData';
 import { faqs } from '../faqData';
 import { GUEST_CONTACT, GUEST_DETAILS, GUEST_PHOTO_ALBUM, WEDDING_BAR_MENU, WEDDING_MENU } from '../guestInformation';
 import { HOME_DESCRIPTION, HOTEL_BLOCK, HOTEL_DETAILS, REGISTRY_DETAILS, RSVP_DETAILS, STORY_PARAGRAPHS, STORY_TIMELINE, TRAVEL_DETAILS } from '../publicWeddingDetails';
 import { scheduleDays } from '../scheduleData';
-import type { FaqComponentKey } from '../faqData';
 
 export const KNOWLEDGE_ROUTES = ['/', '/faqs', '/schedule', '/travel', '/rsvp', '/registry', '/our-story'] as const;
 const FAQ_FACT_ROUTES: Partial<Record<FaqComponentKey, string>> = { calendar: '/schedule', map: '/travel', travel: '/travel' };

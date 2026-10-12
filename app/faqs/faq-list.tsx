@@ -22,7 +22,11 @@ const FAQ_COMPONENT_MAP: Record<FaqComponentKey, React.ReactNode> = {
   'menu': <WeddingMenu />,
   'bar': <WeddingBarMenu />,
   'photos': <FaqLink href={GUEST_PHOTO_ALBUM.url} icon={Images} label='Open Shared Photo Album' />,
-  'help': <a className='inline-flex min-h-11 items-center rounded-lg bg-white/20 px-4 text-lg font-league-gothic hover:bg-white/30 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lavender-pink' href={GUEST_CONTACT.phoneUrl}>Call {GUEST_CONTACT.name}</a>,
+  'help': (
+    <a className='inline-flex min-h-11 items-center rounded-lg bg-white/20 px-4 text-lg font-league-gothic hover:bg-white/30 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lavender-pink' href={GUEST_CONTACT.phoneUrl}>
+      {`Call ${GUEST_CONTACT.name}`}
+    </a>
+  ),
 };
 
 type FaqListProps = {

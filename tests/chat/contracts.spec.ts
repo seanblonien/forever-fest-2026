@@ -25,6 +25,7 @@ const invalidBodies = [
   { messages: [question(), answer('x'.repeat(4097)), question('Next', 'q2')] },
   { messages: [question(), answer(), question('Next')] },
   { messages: [question()], model: 'other' },
+  // eslint-disable-next-line @typescript-eslint/naming-convention -- unknown-field fixture
   { messages: [{ ...question(), extra: true }] },
   { messages: [{ ...question(), parts: [{ type: 'text', text: 'hi', state: 'done' }] }] },
   { messages: Array.from({ length: 9 }, (_, index) => index % 2 ? answer('hi', String(index)) : question('hi', String(index))) },
@@ -86,7 +87,12 @@ test('disabled/missing config/cutoff do no limiter or provider work', async () =
     [{ ...TEST_ENV, CHAT_ENDS_AT: '2027-01-01T00:00:00Z' }, NOW],
   ] as const) {
     const mock = model();
-    const response = await handleChat(request(), { ...dependencies(mock), env, now: () => time, limiter: mustNotAccess });
+    const response = await handleChat(request(), {
+      ...dependencies(mock),
+      env,
+      now: () => time,
+      limiter: mustNotAccess,
+    });
     expect(response.status).toBe(503);
     expect(mock.doStreamCalls).toHaveLength(0);
   }

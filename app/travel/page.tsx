@@ -28,7 +28,8 @@ type HotelOption = {
 };
 
 const HOTEL_IMAGES = [virginHotelImage, anatoleHotelImage, courtyardHotelImage];
-const HOTEL_OPTIONS: HotelOption[] = HOTEL_DETAILS.map((hotel, index) => ({ ...hotel, image: HOTEL_IMAGES[index] }));
+const HOTEL_OPTIONS: HotelOption[] = HOTEL_DETAILS
+  .map((hotel, index) => ({ ...hotel, image: HOTEL_IMAGES[index] }));
 
 // eslint-disable-next-line max-lines-per-function -- long page
 function TravelPage() {
