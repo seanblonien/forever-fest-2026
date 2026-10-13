@@ -1,4 +1,4 @@
-import { GUEST_CONTACT, GUEST_DETAILS, GUEST_PHOTO_ALBUM } from './guestInformation';
+import { GUEST_CONTACT, GUEST_DETAILS, GUEST_PHOTO_ALBUM, GUEST_TIMES } from './guestInformation';
 
 export const FAQ_CATEGORIES = ['all', 'event', 'logistics', 'experience', 'rsvp'] as const;
 export type FaqCategory = (typeof FAQ_CATEGORIES)[number];
@@ -25,6 +25,11 @@ export const faqs: FAQData[] = [
   // Event Details
   {
     category: 'event',
+    question: 'How many guests will be at the wedding?',
+    answer: GUEST_DETAILS.guestCount,
+  },
+  {
+    category: 'event',
     question: 'Why is it called "Forever Fest"?',
     answer: `Festivals are at the core of Sean and Eva's relationship story (See "Our Story" page). Festivals and EDM culture have positively influenced Sean and Eva to be more creative, expressive, social, joyful, and connected, and so they want to bring some of that culture and energy to their wedding. "Forever Fest" is a manifestation of Sean and Eva's lifelong commitment together (i.e. "forever") combined with their desire to bring some of the festival/EDM culture to their wedding day (i.e. "fest"). ${GUEST_DETAILS.atmosphere}`,
     componentKey: 'our-story',
@@ -44,20 +49,20 @@ export const faqs: FAQData[] = [
   {
     category: 'event',
     question: 'What time should I arrive for the ceremony?',
-    answer: `${GUEST_DETAILS.arrival} Complimentary valet is provided.`,
+    answer: `${GUEST_DETAILS.arrival} Complimentary valet starts at ${GUEST_TIMES.valetStarts}.`,
   },
 
   // Logistics
   {
     category: 'logistics',
     question: 'What do I do for parking?',
-    answer: 'Complimentary valet is recommended. See Travel for entrance photos, pickup directions and parking details.',
+    answer: `${GUEST_DETAILS.parking} See Travel for entrance photos and pickup directions.`,
     componentKey: 'travel',
   },
   {
     category: 'logistics',
     question: 'Are the ceremony and reception indoors or outdoors?',
-    answer: 'Our ceremony and reception will take place on the rooftop of DEC on Dragon, an outdoor venue designed for comfort in any weather. It features a retractable roof for open-air enjoyment on clear days, with the option to close it for rain. Heating lamps will also be provided for cooler temperatures. Rest assured, we\'ve planned with the venue to ensure a wonderful celebration, come rain or shine!',
+    answer: GUEST_DETAILS.weather,
   },
   {
     category: 'logistics',
@@ -72,6 +77,11 @@ export const faqs: FAQData[] = [
   },
   {
     category: 'logistics',
+    question: 'Where are the restrooms?',
+    answer: GUEST_DETAILS.restrooms,
+  },
+  {
+    category: 'logistics',
     question: 'What if I arrive late?',
     answer: GUEST_DETAILS.lateArrival,
   },
@@ -82,6 +92,26 @@ export const faqs: FAQData[] = [
   },
 
   // Guest Experience
+  {
+    category: 'experience',
+    question: 'Where should I sit for the ceremony?',
+    answer: GUEST_DETAILS.ceremonySeating,
+  },
+  {
+    category: 'experience',
+    question: 'Where is the photo booth?',
+    answer: GUEST_DETAILS.photoBooth,
+  },
+  {
+    category: 'experience',
+    question: 'What music will be played, and can I request a song?',
+    answer: `${GUEST_DETAILS.music} ${GUEST_DETAILS.songRequests}`,
+  },
+  {
+    category: 'experience',
+    question: 'What happens at the end of the night?',
+    answer: GUEST_DETAILS.sendOff,
+  },
   {
     category: 'experience',
     question: 'Should I keep and wear my original festival wristband?',
@@ -133,7 +163,7 @@ export const faqs: FAQData[] = [
   {
     category: 'experience',
     question: 'How can I share my photos with everyone?',
-    answer: `Share your favorite moments in our Google Photos album. You can also use ${GUEST_PHOTO_ALBUM.hashtag}.`,
+    answer: `Share your favorite moments in our Google Photos album. You can also use ${GUEST_PHOTO_ALBUM.hashtag}. ${GUEST_DETAILS.professionalPhotos}`,
     componentKey: 'photos',
   },
   {

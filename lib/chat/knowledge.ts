@@ -1,13 +1,10 @@
-import type { FaqComponentKey } from '../faqData';
 import { faqs } from '../faqData';
 import { GUEST_CONTACT, GUEST_DETAILS, GUEST_PHOTO_ALBUM, WEDDING_BAR_MENU, WEDDING_MENU } from '../guestInformation';
 import { HOME_DESCRIPTION, HOTEL_BLOCK, HOTEL_DETAILS, REGISTRY_DETAILS, RSVP_DETAILS, STORY_PARAGRAPHS, STORY_TIMELINE, TRAVEL_DETAILS } from '../publicWeddingDetails';
 import { scheduleDays } from '../scheduleData';
 
 export const KNOWLEDGE_ROUTES = ['/', '/faqs', '/schedule', '/travel', '/rsvp', '/registry', '/our-story'] as const;
-const FAQ_FACT_ROUTES: Partial<Record<FaqComponentKey, string>> = { calendar: '/schedule', map: '/travel', travel: '/travel' };
-const FAQ_DETAIL_COMPONENTS = new Set<FaqComponentKey>(['menu', 'bar', 'photos', 'help']);
-// Include shared paragraphs once, while keeping the questions that guests ask.
+// Include shared paragraphs once, retaining every FAQ's additional answer text.
 function withoutSharedDetails(text: string | undefined): string | undefined {
   return text ? Object.values(GUEST_DETAILS).reduce((remaining, detail) => remaining.replaceAll(detail, ''), text).trim() || undefined : undefined;
 }
@@ -18,26 +15,36 @@ export function buildKnowledge(now: number): string {
   const corpus = {
     '/': HOME_DESCRIPTION,
     '/faqs': {
-      questions: faqs.map(({ answer, componentKey, question }) => {
-        const route = componentKey ? FAQ_FACT_ROUTES[componentKey] : undefined;
-        if (route)
-          return [question, `See ${route} facts.`];
-        if (componentKey && FAQ_DETAIL_COMPONENTS.has(componentKey))
-          return [question];
+      // Answers describe their subject; omit question labels, never component-backed facts.
+      answers: faqs.flatMap(({ answer }) => {
         const remaining = withoutSharedDetails(answer);
-        return remaining ? [question, remaining] : [question];
+        return remaining ? [remaining] : [];
       }),
-      details: faqDetails,
+      details: Object.values(faqDetails),
       menu: WEDDING_MENU.map(({ course, dishes }) => [course, ...dishes]),
       barMenu: WEDDING_BAR_MENU,
-      coordinator: { name: GUEST_CONTACT.name, phone: GUEST_CONTACT.phone },
-      sharedAlbum: GUEST_PHOTO_ALBUM,
+      coordinator: [GUEST_CONTACT.name, GUEST_CONTACT.phone],
+      sharedAlbum: Object.values(GUEST_PHOTO_ALBUM),
     },
-    '/schedule': scheduleDays.map((day) => ({ ...day, venue: day.venue ? { name: day.venue.name, address: day.venue.address } : undefined, parking: day.parking?.description })),
+    // Day rows: date, title, time, attendance, description, venue, parking, events.
+    '/schedule': scheduleDays.map(({ attendance, date: eventDate, description, events, parking: eventParking, time, title, venue }) => [
+      eventDate,
+      title,
+      time,
+      attendance,
+      description,
+      venue ? [venue.name, venue.address] : undefined,
+      eventParking?.description,
+      // Keep guest facts; omit decorative emoji, internal IDs and repeated field names.
+      events.length > 0
+        ? events.map(({ description: eventDescription, endTime, startTime, title: eventTitle }) =>
+            [eventTitle, startTime, endTime, eventDescription])
+        : undefined,
+    ]),
     '/travel': { ...TRAVEL_DETAILS, entrance, parking, hotelBlock: HOTEL_BLOCK, hotels: HOTEL_DETAILS.map(({ description, highlights, link, name, tier, walk }) => [tier, name, walk, description, ...highlights, link]), airports: ['Dallas Love Field (DAL)', 'Dallas/Fort Worth (DFW)'], district: 'Design District of Dallas' },
-    '/rsvp': RSVP_DETAILS,
-    '/registry': REGISTRY_DETAILS,
-    '/our-story': { paragraphs: STORY_PARAGRAPHS, timeline: STORY_TIMELINE.map(({ date: eventDate, label }) => [eventDate, label]) },
+    '/rsvp': Object.values(RSVP_DETAILS),
+    '/registry': Object.values(REGISTRY_DETAILS),
+    '/our-story': [STORY_PARAGRAPHS, STORY_TIMELINE.map(({ date: eventDate, label }) => [eventDate, label])],
   };
   return `Forever Fest Help: Sean/Eva's warm, inclusive festival host. ONLY published facts below.
 Today: ${date}. All times: America/Chicago (Dallas).
