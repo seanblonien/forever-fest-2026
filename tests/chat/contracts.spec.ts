@@ -123,6 +123,11 @@ test('public corpus covers seven routes and current venue/attendance/cost facts'
   expect(facts).not.toContain('Signature Certificate');
   expect(facts.includes('"photos":')).toBe(false);
 });
+test('component-backed FAQs retain unique published facts', () => {
+  const facts = buildKnowledge(NOW);
+  for (const fact of ['Two passed hors d’oeuvres are served during cocktail hour.', 'Ask the entrance greeters or venue staff for help.'])
+    expect.soft(facts.includes(fact), fact).toBe(true);
+});
 test('deployment config enforces HTTPS and environment namespace separation', () => {
   expect(readConfig({ ...TEST_ENV, VERCEL: '1' })).toBeUndefined();
   expect(readConfig({ ...TEST_ENV, VERCEL: '1', CHAT_ALLOWED_ORIGINS: 'https://preview.example', VERCEL_ENV: 'production' })).toBeUndefined();
