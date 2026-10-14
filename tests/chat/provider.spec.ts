@@ -5,7 +5,7 @@ import { simulateReadableStream } from 'ai';
 import { handleChat } from '../../lib/chat/handleChat';
 import { dependencies, model, NOW, request, TEST_ENV } from './helpers';
 
-test('one admitted call uses server facts, text only, reasoning/store off and no tools', async () => {
+test('one admitted call uses server facts, text only, stored responses, reasoning off and no tools', async () => {
   const mock = model();
   const response = await handleChat(request(), dependencies(mock));
   expect(response.status).toBe(200);
@@ -18,12 +18,49 @@ test('one admitted call uses server facts, text only, reasoning/store off and no
   expect(mock.doStreamCalls).toHaveLength(1);
   const [call] = mock.doStreamCalls;
   expect(call.maxOutputTokens).toBe(600);
-  // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
-  expect(call.providerOptions?.openai).toEqual({ reasoningEffort: 'none', store: false });
+  expect(call.providerOptions?.openai).toEqual({
+    reasoningEffort: 'none',
+    // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
+    store: true,
+    metadata: { app: 'forever-fest', environment: 'development' },
+  });
   expect(call.tools).toBeUndefined();
   expect(JSON.stringify(call.prompt)).toContain('State & Allen');
   expect(JSON.stringify(call.prompt)).toContain('untrusted conversation');
 });
+
+for (const environment of ['preview', 'production']) {
+  test(`stored responses identify the ${environment} deployment`, async () => {
+    const mock = model();
+    const response = await handleChat(new Request('https://example.vercel.app/api/chat', {
+      method: 'POST',
+      headers: {
+        'origin': 'https://example.vercel.app',
+        'content-type': 'application/json',
+        'x-vercel-forwarded-for': '192.0.2.1',
+      },
+      body: JSON.stringify({ messages: [{ id: 'q', role: 'user', parts: [{ type: 'text', text: 'When should I arrive?' }] }] }),
+    }), {
+      ...dependencies(mock),
+      env: {
+        ...TEST_ENV,
+        VERCEL: '1',
+        NODE_ENV: 'production',
+        VERCEL_ENV: environment,
+        CHAT_QUOTA_NAMESPACE: `forever-fest-2026:${environment}`,
+        CHAT_ALLOWED_ORIGINS: 'https://example.vercel.app',
+      },
+    });
+    expect(response.status).toBe(200);
+    await response.text();
+    expect(mock.doStreamCalls).toHaveLength(1);
+    expect(mock.doStreamCalls[0].providerOptions?.openai).toMatchObject({
+      // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
+      store: true,
+      metadata: { app: 'forever-fest', environment },
+    });
+  });
+}
 
 test('daily/burst denial and storage failure call no model; limit returns actual reset', async () => {
   for (const limiter of [

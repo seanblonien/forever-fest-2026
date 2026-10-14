@@ -1,6 +1,6 @@
 # Forever Fest Help
 
-The site-wide floating Forever Fest Help uses the direct OpenAI Responses API (`gpt-6-luna`, reasoning off, `store:false`, no tools, no retries). Only published wedding content enters its server-owned corpus. No guest list or RSVP importer is accessed.
+The site-wide floating Forever Fest Help uses the direct OpenAI Responses API (`gpt-6-luna`, reasoning off, `store:true`, no tools, no retries). Responses are stored for review in the OpenAI dashboard. Request metadata includes `app: forever-fest` and `environment: production`, `preview` or `development`, using `VERCEL_ENV` when present and the deployed/local runtime otherwise. Only published wedding content enters its server-owned corpus. No guest list or RSVP importer is accessed.
 
 ## Guest interface and history
 

@@ -231,8 +231,15 @@ export async function handleChat(
       maxOutputTokens: 600,
       maxRetries: 0,
       abortSignal: controller.signal,
-      // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
-      providerOptions: { openai: { reasoningEffort: 'none', store: false } },
+      providerOptions: { openai: {
+        reasoningEffort: 'none',
+        // eslint-disable-next-line @typescript-eslint/naming-convention -- library api
+        store: true,
+        metadata: {
+          app: 'forever-fest',
+          environment: env.VERCEL_ENV ?? (config.isDeployed ? 'production' : 'development'),
+        },
+      } },
       onEnd: ({ totalUsage }) => dependencies.onUsage?.({
         requestId,
         durationMs: now() - started,
