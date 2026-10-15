@@ -76,9 +76,12 @@ test.describe('active wedding chat', () => {
     await expect(history).toContainText('5:30 PM');
     await expect(page.getByRole('status')).toHaveText('Answer complete.');
     expect(calls).toHaveLength(1);
+    await expect(history.locator(':scope > p').first()).toContainText('Hey, festival friend!');
+    expect(calls[0]).toMatchObject({ messages: [{ role: 'user', parts: [{ type: 'text', text: 'What time should I arrive?' }] }] });
     await page.reload();
     await page.getByRole('button', { name: 'Ask about Forever Fest', exact: true }).click();
     await expect(history).toContainText('5:30 PM');
+    await expect(history.locator(':scope > p').first()).toContainText('Hey, festival friend!');
     expect(calls).toHaveLength(1);
     await page.getByRole('link', { name: 'SCHEDULE', exact: true }).click();
     await expect(page.getByRole('heading', { name: 'Schedule', exact: true })).toBeVisible();
@@ -92,6 +95,12 @@ test.describe('active wedding chat', () => {
     await page.getByRole('button', { name: 'Ask about Forever Fest', exact: true }).click();
     await expect(history).toHaveText('Hey, festival friend! 🪩 Your Forever Fest info booth is open. Ask about arrival, outfits, food, or the weekend plans. Let’s get you ready to celebrate! ✨');
     expect(calls).toHaveLength(1);
+    await page.getByRole('button', { name: 'Previous chats', exact: true }).click();
+    await page.getByRole('region', { name: 'Previous chats', exact: true }).getByRole('button', { name: /What time should I arrive/ }).click();
+    await expect(history).toContainText('5:30 PM');
+    await expect(history.locator(':scope > p').first()).toContainText('Hey, festival friend!');
+    await expect(history.getByText(/Hey, festival friend!/)).toHaveCount(1);
+    expect(calls).toHaveLength(1);
   });
 
   test('390px mobile Stop/New chat discard partial answers and never resume on reload', async ({ page }) => {
@@ -103,6 +112,7 @@ test.describe('active wedding chat', () => {
     await composer.fill('What is the dress code?');
     await page.getByRole('button', { name: 'Send', exact: true }).click();
     await expect(page.getByRole('region', { name: 'Chat history' })).toContainText('Please arrive');
+    await expect(page.getByRole('region', { name: 'Chat history' }).locator(':scope > p').first()).toContainText('Hey, festival friend!');
     await page.getByRole('button', { name: 'Stop', exact: true }).click();
     await expect(page.getByText('Answer stopped', { exact: true })).toBeVisible();
     await page.reload();
